@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/resturant/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/resturant/app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/beyondcode/laravel-dump-server" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/dnoegel/php-xdg-base-dir" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/doctrine/instantiator" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/dragonmantank/cron-expression" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/erusev/parsedown" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/fideloper/proxy" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/filp/whoops" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/fzaninotto/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/jakub-onderka/php-console-color" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/jakub-onderka/php-console-highlighter" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/laravel/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/laravel/tinker" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/league/flysystem" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/mockery/mockery" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/nesbot/carbon" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/nunomaduro/collision" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/opis/closure" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phar-io/manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpspec/prophecy" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpunit/php-file-iterator" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpunit/php-text-template" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpunit/php-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpunit/php-token-stream" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/psy/psysh" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/code-unit-reverse-lookup" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/environment" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/global-state" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/resource-operations" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/swiftmailer/swiftmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/debug" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/http-foundation" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/polyfill-iconv" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/polyfill-intl-idn" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/polyfill-php72" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/polyfill-php73" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/translation" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/translation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/theseer/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/tijsverkoyen/css-to-inline-styles" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/resturant/vendor/webmozart/assert" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
