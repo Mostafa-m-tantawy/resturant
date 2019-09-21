@@ -18,10 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->string('bar_code')->nullable();
             $table->string('reorder_point')->nullable();
-            $table->integer('product_type_id')->nullable(); //stockable --non stockable --service
-            $table->integer('category_id');
-            $table->integer('unit_id');
-            $table->integer('supplier_id');
+            $table->unsignedInteger('product_type_id'); //stockable --non stockable --service
+            $table->unsignedInteger('unit_id');
+            $table->unsignedInteger('supplier_id');
             $table->timestamps();
         });
     }

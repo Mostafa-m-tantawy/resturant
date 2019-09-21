@@ -14,7 +14,7 @@ class SupplierController extends Controller
     public function allSupplier()
     {
         $suppliers = Supplier::all();
-        return view('user.admin.supplier.all-supplier',[
+        return view('frontend.supplier.all-supplier',[
             'suppliers'         =>          $suppliers
         ]);
     }

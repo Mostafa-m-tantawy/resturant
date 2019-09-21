@@ -15,10 +15,9 @@ class CreatePursesTable extends Migration
     {
         Schema::create('purses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('supplier_id');
+            $table->unsignedInteger('supplier_id');
             $table->unsignedInteger('restaurant_id');
-            $table->double('purses_value');
-            $table->integer('user_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

@@ -15,12 +15,12 @@ class CreatePursesPaymentsTable extends Migration
     {
         Schema::create('purses_payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('supplier_id');
-            $table->integer('purse_id')->nullable();
             $table->double('payment_amount');
             $table->string('payment_method');
             $table->string('image');
-            $table->integer('user_id');
+            $table->unsignedInteger('supplier_id');
+            $table->unsignedInteger('purse_id')->nullable();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

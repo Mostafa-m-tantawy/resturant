@@ -18,11 +18,11 @@ class CreateOfficeExpansesTable extends Migration
             $table->string('title');
             $table->double('amount');
             $table->string('method');
-            $table->integer('user_id');
             $table->string('file_id');
             $table->string('payment_method');
             $table->unsignedInteger('restaurant_id');
--
+            $table->unsignedInteger('user_id');
+
             $table->timestamps();
         });
     }

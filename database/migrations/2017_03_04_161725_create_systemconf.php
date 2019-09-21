@@ -17,6 +17,7 @@ class CreateSystemconf extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('value')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->timestamps();
         });
 

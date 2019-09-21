@@ -15,7 +15,7 @@ class createuploadedfilestable extends Migration {
 		Schema::create('files', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('filable_type');
-			$table->integer('filable_id')->unsigned();
+			$table->unsignedInteger('filable_id');
 			$table->string('url');
 			$table->timestamps();
 		});

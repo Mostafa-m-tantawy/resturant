@@ -16,7 +16,7 @@ class CreateSuppliersTable extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->increments('id');
             $table->double('start_balance')->nullable();
-            $table->integer('user_id')->nullable();;
+            $table->unsignedInteger('user_id')->nullable();;
             $table->timestamps();
         });
     }

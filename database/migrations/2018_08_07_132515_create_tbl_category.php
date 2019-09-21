@@ -13,22 +13,15 @@ class CreateTblCategory extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function(Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('categoriable_type');
             $table->integer('categoriable_id')->unsigned();
-            $table->integer('parent_id');
+            $table->unsignedInteger('parent_id');
             $table->timestamps();
         });
-
-
-        Schema::table('dishes', function(Blueprint $table)
-        {
-            $table->integer('category_id')->nullable();
-        });
     }
-
     /**
      * Reverse the migrations.
      *
