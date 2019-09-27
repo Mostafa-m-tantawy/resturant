@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSystemconf extends Migration
+class CreateTableUploadfiles extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +13,13 @@ class CreateSystemconf extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('systemconfs',function(Blueprint $table){
+        Schema::create('upload_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable();
-            $table->string('value')->nullable();
-            $table->unsignedInteger('user_id')->nullable();
+            $table->string('filable_type');
+            $table->unsignedInteger('filable_id');
+            $table->string('url');
             $table->timestamps();
         });
-
-
     }
 
     /**
@@ -31,6 +29,6 @@ class CreateSystemconf extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('upload_files');
     }
 }

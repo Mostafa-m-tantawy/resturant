@@ -11,6 +11,38 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.supplier.all-supplier');
-});
+Route::get('/','HomeController@index');
+Route::resource('supplier','SupplierController');
+
+Route::any  ('product/create/{supplier_id}',    'ProductController@products');
+Route::post ('product/update/{supplier_id}',     'ProductController@updateProduct');
+Route::get  ('product/delete/{supplier_id}',     'ProductController@deleteProduct');
+
+
+Route::resource('unit','UnitController');
+Route::get('unit/delete/{id}','UnitController@destroy');
+Route::post ('unit/update',     'UnitController@update');
+
+
+Route::get ('purchase',     'PursesController@addPurchase');
+Route::get ('purchase/index',     'PursesController@index');
+Route::get('/get-unit-of-product/{id}','PursesController@getUnitOfProduct');
+Route::post('/save-purses','PursesController@savePurses');
+Route::get('purchase/show/{id}','PursesController@editPurses');
+Route::post('save-purses-product/{id}','PursesController@savePursesProduct');
+Route::get('deleted-purses-product/{id}','PursesController@deletePursesProduct');
+
+
+
+
+Route::post('new_payment','PursesController@deletePursesProduct')->name('payment.create');
+
+
+
+
+
+Route::post('states','SupplierController@states');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

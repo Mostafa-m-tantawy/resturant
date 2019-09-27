@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Purse;
-use App\PursesPayment;
 use App\PursesProduct;
+use App\Restaurant;
 use App\Supplier;
 use App\Unit;
 use Illuminate\Http\Request;
@@ -17,14 +17,14 @@ class PursesController extends Controller
      * Show new purses form
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function addPurses()
+    public function addPurchase()
     {
-        $products = Product::orderBy('product_name')->get();
-        $suppliers = Supplier::where('status',1)->get();
-        $unit = Unit::where('status',1)->get();
-        return view('user.admin.stock.purses.new-purses',[
+        $products = Product::orderBy('name')->get();
+        $suppliers = Supplier::all();
+        $units = Unit::all();
+        return view('frontend.purchase.new-purses',[
             'products'          =>      $products,
-            'units'             =>      $unit,
+            'units'             =>      $units,
             'suppliers'         =>      $suppliers
         ]);
     }
@@ -34,10 +34,10 @@ class PursesController extends Controller
      * All purses
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function allPurses()
+    public function index()
     {
         $purses = Purse::all();
-        return view('user.admin.stock.purses.all-purses',[
+        return view('frontend.purchase.index',[
             'purses'            =>      $purses
         ]);
     }
@@ -50,11 +50,11 @@ class PursesController extends Controller
     public function editPurses($id)
     {
         $purses = Purse::findOrFail($id);
-        $products = Product::orderBy('product_name')->get();
-        $suppliers = Supplier::where('status',1)->get();
-        $unit = Unit::where('status',1)->get();
+        $products = Product::orderBy('name')->get();
+        $suppliers = Supplier::all();
+        $unit = Unit::all();
 
-        return view('user.admin.stock.purses.edit-purses',[
+        return view('frontend.purchase.edit-purses',[
             'products'          =>      $products,
             'units'             =>      $unit,
             'suppliers'         =>      $suppliers,
@@ -68,45 +68,68 @@ class PursesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function savePurses(Request $request)
-    {
 
+    public function savePurses(Request $request)
+    {//        $validator = Validator::make($request->all(), [
+//            'image' => 'nullable|image',
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return response()->json(['Image is required'], 422);
+//
+//        }
+
+        $user=  auth()->user();
         $purses = new Purse();
-        $purses->purses_id = rand(1000,5000).auth()->user()->id;
         $purses->supplier_id = $request->get('supplier_id');
-        $purses->purses_value = 10;
-        $purses->is_payed = 0;
-        $purses->user_id = auth()->user()->id;
-        if($purses->save()){
-            foreach ($request->get('purses') as $purse){
-                $product = $purse['product'];
-                $unit = $purse['unit'];
+        $purses->user_id = $user->id;
+        $purses->restaurant_id = $user->id;
+//        if ($request->hasFile('image')) {
+//            $images = $request->file('image');
+//            $filename_images = date("dmY-his") . $images->getClientOriginalName();
+//            $fulllink_images = 'media/images/library';
+//            Storage::disk('tenant')->put($fulllink_images . '/' . $filename_images, file_get_contents($images), 'public');
+//            $purses->image = $fulllink_images . '/' . $filename_images;
+//
+//        }
+        if($purses->save()) {
+            foreach (json_decode($request->get('purses')) as $purse) {
+
+                $product = $purse->product;
+                $unit = $purse->unit;
                 $pursesProduct = new PursesProduct();
                 $pursesProduct->purse_id = $purses->id;
-                $pursesProduct->product_id = $product['productId'];
-                $pursesProduct->quantity = $purse['quantity'];
-                $pursesProduct->unit_price = $unit['unitPrice'];
-                $pursesProduct->child_unit_price = $unit['childUnit'];
-                $pursesProduct->gross_price = $pursesProduct->quantity * $pursesProduct->unit_price;
-                if($pursesProduct->save()){
-                    continue;
-                }else{
-                    PursesProduct::where('purses_id',$purses->id)->delete();
+                $pursesProduct->product_id = $product->productId;
+                $pursesProduct->quantity = $purse->quantity;
+                $pursesProduct->unit_price = $unit->unitPrice;
+                $pursesProduct->vat_value =($pursesProduct->quantity * $pursesProduct->unit_price)*($product->vat/100);
+
+                if ($pursesProduct->save()) {
+//                    $producttocook=Product::find($product->productId);
+//                    if($producttocook->iscookable){
+//                        foreach ($producttocook->prepareRecipes as $recipe) {
+//
+//                            $cookedProduct = new CookedProduct();
+//                            $cookedProduct->cookable_id = $product->productId;
+//                            $cookedProduct->cookable_type = 'App\Product';
+//                            $cookedProduct->product_id = $recipe->product_id;
+//                            $cookedProduct->quantity = $recipe->unit_needed * $purse->quantity;
+//                            $cookedProduct->save();
+//                        }
+//                    }
+                } else {
+                    PursesProduct::where('purses_id', $purses->id)->delete();
                     Purse::destroy($purse->id);
-                    return response()->json('Internal Serer Error',500);
+                    return response()->json('Internal Serer Error', 500);
                 }
             }
-            if($request->get('payment') != 0){
-                $pursesPayment = new PursesPayment();
-                $pursesPayment->payment_amount = $request->get('payment');
-                $pursesPayment->supplier_id = $purses->supplier_id;
-                $pursesPayment->purse_id = $purses->id;
-                $pursesPayment->user_id = auth()->user()->id;
-                $pursesPayment->save();
-            }
+//            $vat= Systemconf::where('name','RESTAURANT_VAT_PERCENTAGE')->first()->value;
+//            $purses->vat= $purses->pursesProducts->sum('gross_price')*($vat/100);
+//            $purses->save();
+
             return response()->json('Ok',200);
         }else{
-            return response()->json('Internal Server Error',419);
+            return response()->json('Internal Server Error',422);
         }
     }
 
@@ -188,7 +211,7 @@ class PursesController extends Controller
     public function deletePursesProduct($id)
     {
         PursesProduct::destroy($id);
-        return redirect()->back()->with('delete_success','Purses product has been deleted successfully');
+        return redirect()->back();
     }
 
     /**
@@ -197,16 +220,14 @@ class PursesController extends Controller
      * @param $purses_id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function savePursesProduct(Request $request,$purses_id)
+    public function savePursesProduct(Request $request,$id)
     {
-
         $pursesProduct = new PursesProduct();
-        $pursesProduct->purse_id = $purses_id;
+        $pursesProduct->purse_id = $id;
         $pursesProduct->product_id = $request->get('product_id');
         $pursesProduct->quantity = $request->get('quantity');
         $pursesProduct->unit_price = $request->get('unit_price');
-        $pursesProduct->child_unit_price = $request->get('child_unit_price');
-        $pursesProduct->gross_price = $pursesProduct->quantity * $pursesProduct->unit_price;
+        $pursesProduct->vat_value = $request->get('vat');
         if($pursesProduct->save()){
             return redirect()->back();
         }

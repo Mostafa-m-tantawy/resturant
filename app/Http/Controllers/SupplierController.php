@@ -2,99 +2,133 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
+use App\Country;
+use App\Phone;
+use App\State;
 use App\Supplier;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SupplierController extends Controller
 {
     /**
-     * Show all supplier
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function allSupplier()
+    public function index()
     {
-        $suppliers = Supplier::all();
-        return view('frontend.supplier.all-supplier',[
-            'suppliers'         =>          $suppliers
-        ]);
+        $suppliers=Supplier::all();
+        return  view('frontend.supplier.index')->with(compact('suppliers'));
+        //
     }
 
     /**
-     * Add new supplier
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function addSupplier()
+    public function create()
     {
-        return view('user.admin.supplier.add-supplier');
+        //
+        $countries=Country::all();
+        return view('frontend.supplier.create')->with(compact('countries'));
     }
 
     /**
-     * Edit supplier info
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function editSupplier($id)
+    public function store(Request $request)
     {
-        $supplier = Supplier::findOrFail($id);
-        return view('user.admin.supplier.edit-supplier',[
-            'supplier'          =>          $supplier
-        ]);
-    }
+        $user=new User ;
+        $user->email=$request->email;
+        $user->name=$request->name;
+        $user->password=Hash::make($request->password);
+        $user->save();
 
-    public function deleteSupplier($id)
-    {
+        $supplier=new Supplier();
+        $supplier->start_balance	=$request->balance;
+        $supplier->user_id=$user->id;
+        $supplier->save();
 
-    }
+      foreach ($request->phone_g as $item){
+          $phone=new Phone();
+          $phone->phone=$item['phone'];
+        $phone->type=$item['type'];
+        $phone->user_id=$user->id;;
+        $phone->save();
 
-    /**
-     * Save supplier
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function saveSupplier(Request $request)
-    {
-        $supplier = new Supplier();
-        $supplier->name = $request->get('name');
-        $supplier->email = $request->get('email');
-        $supplier->phone = $request->get('phone');
-        $supplier->address = $request->get('address');
-        $supplier->status = 1;
-        $supplier->user_id = auth()->user()->id;
-        if($supplier->save()){
-            return response()->json('Ok',200);
-        }
-    }
+      }
+      foreach ($request->address_g as $item){
+          if(isset($item['address'])) {
+              $address = new Address();
+              $address->address = $item['address'];
+              if (isset($item['city']))
+                  $address->city_id = $item['city'];
+              $address->user_id = $user->id;;
+              $address->save();
+          }
+      }
 
-    /**
-     * Update supplier
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function updateSupplier(Request $request,$id)
-    {
-        $supplier = Supplier::findOrFail($id);
-        $supplier->name = $request->get('name');
-        $supplier->email = $request->get('email');
-        $supplier->phone = $request->get('phone');
-        $supplier->address = $request->get('address');
-        $supplier->status = $request->get('status') == 'on' ? 1 : 0;
-        $supplier->user_id = auth()->user()->id;
-        if($supplier->save()){
-            return response()->json('Ok',200);
-        }
+
+
+        //
     }
 
     /**
-     * View supplier view details
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function viewSupplier($id)
+    public function show($id)
     {
-        $supplier = Supplier::findOrFail($id);
-        return view('user.admin.supplier.view-supplier',[
-            'supplier'      =>      $supplier
-        ]);
+        $payments=[];
+        $supplier=user::find(5);
+        return  view('frontend.supplier.show')->with(compact('payments','supplier'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    } public function states(Request $request)
+    {
+$cities=State::where('country_id',$request->id)->get();
+        return response()->json($cities,200);
+        //
     }
 }

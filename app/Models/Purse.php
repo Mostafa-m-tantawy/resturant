@@ -3,6 +3,7 @@ namespace App;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Purse extends Model
 {
@@ -21,9 +22,28 @@ class Purse extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class,'restaurant_id');
+    }
 
     public function pursesPayments()
     {
         return $this->hasMany(PursesPayment::class);
+    }
+
+    public function gettotalAttribute()
+    {
+        return $this->pursesProducts->sum(function($t){
+            return ($t->quantity * $t->unit_price)+$t->vat_value;
+        });
+
+
+    }
+    public function getvatAttribute()
+    {
+        return $this->pursesProducts->sum('vat_value');
+
+
     }
 }

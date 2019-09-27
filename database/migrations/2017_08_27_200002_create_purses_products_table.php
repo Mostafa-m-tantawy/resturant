@@ -19,6 +19,7 @@ class CreatePursesProductsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->double('quantity');
             $table->double('unit_price');
+            $table->double('vat_value');
             $table->timestamps();
         });
     }

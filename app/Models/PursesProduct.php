@@ -15,5 +15,10 @@ class PursesProduct extends Model
     {
         return $this->belongsTo(Purse::class);
     }
+    public function getTotalAttribute()
+    {
+        return ($this ->quantity * $this->unit_price)+$this->vat_value;
 
+
+    }
 }

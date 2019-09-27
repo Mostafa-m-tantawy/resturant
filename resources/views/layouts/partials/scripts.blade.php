@@ -22,6 +22,7 @@
 </script>
 
 <!-- end::Global Config -->
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
 
 <!--begin:: Global Mandatory Vendors -->
 <script src="{{asset('/vendors/general/jquery/dist/jquery.js')}}" type="text/javascript"></script>
@@ -97,11 +98,20 @@
 
 <!--begin::Page Vendors(used by this page) -->
 <script src="{{asset('/vendors/custom/fullcalendar/fullcalendar.bundle.js')}}" type="text/javascript"></script>
-<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>
+{{--<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>--}}
 <script src="{{asset('/vendors/custom/gmaps/gmaps.js')}}" type="text/javascript"></script>
 
 <!--end::Page Vendors -->
 
 <!--begin::Page Scripts(used by this page) -->
 <script src="{{asset('/js/demo1/pages/dashboard.js')}}" type="text/javascript"></script>
+<script src=" {{asset('js/datatable/jquery.dataTables.min.js')}} "></script>
+<script src="{{asset('js/datatable/dataTables.buttons.min.js')}}   "></script>
+<script src=" {{asset('js/datatable/buttons.flash.min.js')}}     "></script>
+<script src=" {{asset('js/datatable/jszip.min.js')}}     "></script>
+<script src=" {{asset('js/datatable/pdfmake.min.js')}}     "></script>
+<script src=" {{asset('js/datatable/vfs_fonts.js')}}     ">   </script>
+<script src=" {{asset('js/datatable/buttons.html5.min.js')}}     ">     </script>
+<script src=" {{asset('js/datatable/buttons.print.min.js')}}     ">     </script>
+
 @yield('scripts')

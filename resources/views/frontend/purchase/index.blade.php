@@ -94,9 +94,9 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                New Purchase
                             </a>
                         </div>
                     </div>
@@ -110,19 +110,27 @@
                        width="100%">
                     <thead>
                     <tr>
-                        <th> ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
+                        <th>Purchase ID</th>
+                        <th>Restaurant name</th>
+                        <th>Supplier Name</th>
+                        <th>Total price</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($suppliers as $supplier)
+                    @foreach($purses as $purchase)
                         <tr>
-                            <td>{{$supplier->id}}</td>
-                            <td>{{$supplier->user->name}}</td>
-                            <td>{{$supplier->user->email}}</td>
-                            <td><a href="{{url('product/create/'.$supplier->id)}}">add products<i class="la la-edit"></i></a></td>
+                            <td>{{$purchase->id}}</td>
+                            <td>{{$purchase->restaurant->user->name}}</td>
+                            <td>{{$purchase->supplier->user->name}}</td>
+                            <td>{{$purchase->total}}</td>
+
+                            <td>
+                                <a title="Show" href="{{url('purchase/show/'.$purchase->id)}}"> <i  class="fa fa-book-open"></i></a>
+
+{{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
+{{--                                                                                                     class="flaticon-delete"></i></a>--}}
+                            </td>
                         </tr>
                     @endforeach
 
@@ -150,3 +158,27 @@
     </script>
 
 @stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
