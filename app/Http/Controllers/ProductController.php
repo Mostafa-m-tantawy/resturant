@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Supplier;
 use App\Unit;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,7 @@ class ProductController extends Controller
     public function products(Request $request, $supplier_id)
     {
         if ($request->product_g) {
+            $supplier_id=Supplier::find($supplier_id)->user->id;
             foreach ($request->product_g as $newproduct) {
                 $product = new Product();
                 $product->name = $newproduct['name'];
@@ -36,7 +38,8 @@ class ProductController extends Controller
 
 
     public function updateProduct(Request $request, $supplier_id)
-    {
+    {            $supplier_id=Supplier::find($supplier_id)->user->id;
+
         $product = Product::find($request->id);
         $product->name = $request->name;
         $product->barcode = $request->barcode;

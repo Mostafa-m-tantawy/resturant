@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Supplier extends Model
 {
-    public function purses()
+    public function purchases()
     {
         return $this->hasMany(Purse::class);
     }
 
     public function payment()
     {
-        return $this->hasMany(PursesPayment::class);
+        return $this->hasMany(Payment::class,'receiver_id');
     }
 
     public function user()

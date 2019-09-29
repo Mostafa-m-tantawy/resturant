@@ -18,9 +18,9 @@ class CreatePaymentsTable extends Migration
             $table->double              ('payment_amount');
             $table->string              ('payment_method');
             $table->unsignedInteger     ('sender_id');
-            $table->string              ('sender_type');
+//            $table->string              ('sender_type');
             $table->unsignedInteger     ('receiver_id');
-            $table->string              ('receiver_type');
+//            $table->string              ('receiver_type');
             $table->string              ('note')->nullable();
             $table->date                ('due_date')->nullable();
             $table->timestamps();

@@ -29,10 +29,10 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
-                                <i class="la la-plus"></i>
-                                New Record
-                            </a>
+{{--                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">--}}
+{{--                                <i class="la la-plus"></i>--}}
+{{--                                New Record--}}
+{{--                            </a>--}}
                         </div>
                     </div>
                 </div>
@@ -94,6 +94,7 @@
                         <div class="col-2">unit</div>
                         <div class="col-2">barcode</div>
                         <div class="col-2">reorder</div>
+                        <div class="col-2">vat</div>
                         <div class="col-2">
                             <a href="javascript:;" data-repeater-create=""
                                               class="btn btn-bold btn-sm btn-label-brand pull-right">
@@ -115,7 +116,9 @@
                                                         </div>
                                 <div class="col-2"><input type="text"  class="form-control" name="reorder"
                                                          ></div>
-
+                                <div class="col-2">
+                                    <input type="number" class="form-control" name="vat" >
+                                </div>
                                 <div class="col-2" style=" display: flex;
   justify-content: center;
   align-items: center">
@@ -167,11 +170,11 @@
                                 <div class="col-12">
 
                                     <label>unit</label>
-
+                                    <select name="unit" class="form-control">
                                     @foreach($units as $unit )
                                         <option value="{{$unit->id}}">{{$unit->unit}}</option>
                                     @endforeach
-                                </div>
+</select>                        </div>
                                 <div class="col-12">
                                     <label>barcode</label>
                                     <input type="text" class="form-control" name="barcode" >

@@ -27,7 +27,7 @@
                                             <option
                                                 value=""> {{ trans('main.select') }}  {{ trans('main.one') }}</option>
                                             @foreach($suppliers as $supplier)
-                                                <option value="{{$supplier->id}}">{{$supplier->user->name}}</option>
+                                                <option value="{{$supplier->user->id}}">{{$supplier->user->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

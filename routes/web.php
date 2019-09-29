@@ -14,6 +14,9 @@
 Route::get('/','HomeController@index');
 Route::resource('supplier','SupplierController');
 
+Route::post ('address/update',     'SupplierController@updateAddress');
+Route::post ('phone/update',     'SupplierController@updatePhone');
+
 Route::any  ('product/create/{supplier_id}',    'ProductController@products');
 Route::post ('product/update/{supplier_id}',     'ProductController@updateProduct');
 Route::get  ('product/delete/{supplier_id}',     'ProductController@deleteProduct');
@@ -35,7 +38,8 @@ Route::get('deleted-purses-product/{id}','PursesController@deletePursesProduct')
 
 
 
-Route::post('new_payment','PursesController@deletePursesProduct')->name('payment.create');
+Route::post('payment/store','PaymentController@savePayment')->name('payment.create');
+Route::get('purchase/delete/{id}','PaymentController@deletePayment')->name('payment.delete');
 
 
 

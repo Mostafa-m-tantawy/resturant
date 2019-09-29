@@ -70,15 +70,7 @@ class PursesController extends Controller
      */
 
     public function savePurses(Request $request)
-    {//        $validator = Validator::make($request->all(), [
-//            'image' => 'nullable|image',
-//        ]);
-//
-//        if ($validator->fails()) {
-//            return response()->json(['Image is required'], 422);
-//
-//        }
-
+    {
         $user=  auth()->user();
         $purses = new Purse();
         $purses->supplier_id = $request->get('supplier_id');
@@ -167,41 +159,6 @@ class PursesController extends Controller
         return response()->json($purses);
     }
 
-    /**
-     * show purses payment view
-     * @param $purses_id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function pursesPayment($purses_id)
-    {
-        $purses = Purse::findOrFail($purses_id);
-        return view('user.admin.stock.purses.purses-payment',[
-            'purses'        =>      $purses
-        ]);
-    }
-
-    /**
-     * Purses payment store
-     * @param Request $request
-     * @param $purses_id
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function savePursesPayment(Request $request,$purses_id)
-    {
-        $purses = Purse::findOrFail($purses_id);
-        if($request->get('payment') > $purses->pursesProducts->sum('gross_price') - $purses->pursesPayments->sum('payment_amount')){
-            return redirect()->back()->withErrors(['msg'=>'You cannot make payment more then the due']);
-        }else{
-            $pursesPayment = new PursesPayment();
-            $pursesPayment->payment_amount = $request->get('payment');
-            $pursesPayment->supplier_id = $purses->supplier_id;
-            $pursesPayment->purse_id = $purses->id;
-            $pursesPayment->user_id = auth()->user()->id;
-            if($pursesPayment->save()){
-                return redirect()->back();
-            }
-        }
-    }
 
     /**
      * Delete purses product

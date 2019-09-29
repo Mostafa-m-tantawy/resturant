@@ -336,8 +336,8 @@
                                             </div>
                                             <span class="form-text text-muted">Please enter your address</span>
                                         </div>
-                                        <div data-repeater-list="" class="col-lg-12">
-                                            <div data-repeater-item class="row kt-margin-b-10">
+                                        <div  class="col-lg-12">
+                                            <div  class="row kt-margin-b-10">
                                                 <div class="col-lg-5">
                                                     <label>Country</label>
                                                         <select class="form-control country"name="country" onchange="changecity(this)">
@@ -409,6 +409,8 @@
             success:function(data){
                 // $('#cityoption').html('');
                 // console.log(  $(select).parent().parent().find(' .col-lg-5:nth-child(2) select ').html('ssssss'));
+                $(select).parent().parent().find(' .col-lg-5:nth-child(2) select').empty();
+
                 for (var i=0;i<data.length;i++){
                     $(select).parent().parent().find(' .col-lg-5:nth-child(2) select').append('           ' +
                         '<option value="'+data[i].id+'">'+data[i].name+'</option>');

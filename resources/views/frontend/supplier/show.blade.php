@@ -96,542 +96,75 @@
         <!-- begin:: Content -->
         <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
-            <!--Begin:: Portlet-->
-            <div class="kt-portlet">
-                <div class="kt-portlet__body">
-                    <div class="kt-widget kt-widget--user-profile-3">
-                        <div class="kt-widget__top">
-                            <div class="kt-widget__media">
-                                <img src="./assets/media/users/100_12.jpg" alt="image">
-                            </div>
-                            <div
-                                class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-bolder kt-font-light kt-hidden">
-                                JM
-                            </div>
-                            <div class="kt-widget__content">
-                                <div class="kt-widget__head">
-                                    <div class="kt-widget__user">
-                                        <a href="#" class="kt-widget__username">
-                                            David Smith
-                                        </a>
-                                        <span
-                                            class="kt-badge kt-badge--bolder kt-badge kt-badge--inline kt-badge--unified-success">Customer</span>
-                                        <div class="dropdown dropdown-inline kt-margin-l-5" data-toggle="kt-tooltip-"
-                                             title="Change label" data-placement="right">
-                                            <a href="#" class="btn btn-clean btn-sm btn-icon" data-toggle="dropdown"
-                                               aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-caret-down"></i>
-                                            </a>
-                                            <div
-                                                class="dropdown-menu dropdown-menu-md dropdown-menu-fit dropdown-menu-right">
-                                                <ul class="kt-nav">
-                                                    <li class="kt-nav__head">
-                                                        Choose label:
-                                                        <i class="flaticon2-information" data-toggle="kt-tooltip"
-                                                           data-placement="right" title="Click to learn more..."></i>
-                                                    </li>
-                                                    <li class="kt-nav__separator">
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link" data-toggle="status-change"
-                                                           data-status="1">
-                                                            <span class="kt-nav__link-text"><span
-                                                                    class="kt-badge kt-badge--unified-success kt-badge--inline kt-badge--lg kt-badge--bold">Customer</span></span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link" data-toggle="status-change"
-                                                           data-status="2">
-                                                            <span class="kt-nav__link-text"><span
-                                                                    class="kt-badge kt-badge--unified-danger kt-badge--inline kt-badge--lg kt-badge--bold">Partner</span></span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link" data-toggle="status-change"
-                                                           data-status="3">
-                                                            <span class="kt-nav__link-text"><span
-                                                                    class="kt-badge kt-badge--unified-warning kt-badge--inline kt-badge--lg kt-badge--bold">Supplier</span></span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link" data-toggle="status-change"
-                                                           data-status="4">
-                                                            <span class="kt-nav__link-text"><span
-                                                                    class="kt-badge kt-badge--unified-info kt-badge--inline kt-badge--lg kt-badge--bold">On Hold</span></span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link" data-toggle="status-change"
-                                                           data-status="4">
-                                                            <span class="kt-nav__link-text"><span
-                                                                    class="kt-badge kt-badge--unified-brand kt-badge--inline kt-badge--lg kt-badge--bold">Staff</span></span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__separator">
-                                                    </li>
-                                                    <li class="kt-nav__foot">
-                                                        <a class="btn btn-clean btn-bold btn-sm" href="#"><i
-                                                                class="flaticon2-add-1 kt-icon-sm"></i> Add new</a>
-                                                        <a class="btn btn-clean btn-bold btn-sm kt-hidden" href="#"
-                                                           data-toggle="kt-tooltip" data-placement="right"
-                                                           title="Click to learn more...">Learn more</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="kt-widget__action">
-                                        <a href="#" class="btn btn-label-brand btn-sm btn-upper">Contact</a>
-                                        <div class="dropdown dropdown-inline">
-                                            <a href="#" class="btn btn-brand btn-sm btn-upper dropdown-toggle"
-                                               data-toggle="dropdown">
-                                                Export
-                                            </a>
-                                            <div
-                                                class="dropdown-menu dropdown-menu-fit dropdown-menu-md dropdown-menu-right">
-
-                                                <!--begin::Nav-->
-                                                <ul class="kt-nav">
-                                                    <li class="kt-nav__head">
-                                                        Export Options
-                                                        <i class="flaticon2-information" data-toggle="kt-tooltip"
-                                                           data-placement="right" title="Click to learn more..."></i>
-                                                    </li>
-                                                    <li class="kt-nav__separator"></li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link">
-                                                            <i class="kt-nav__link-icon flaticon2-drop"></i>
-                                                            <span class="kt-nav__link-text">Activity</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link">
-                                                            <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-                                                            <span class="kt-nav__link-text">FAQ</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link">
-                                                            <i class="kt-nav__link-icon flaticon2-link"></i>
-                                                            <span class="kt-nav__link-text">Settings</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__item">
-                                                        <a href="#" class="kt-nav__link">
-                                                            <i class="kt-nav__link-icon flaticon2-new-email"></i>
-                                                            <span class="kt-nav__link-text">Support</span>
-                                                            <span class="kt-nav__link-badge">
-																				<span
-                                                                                    class="kt-badge kt-badge--success">5</span>
-																			</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="kt-nav__separator"></li>
-                                                    <li class="kt-nav__foot">
-                                                        <a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade
-                                                            plan</a>
-                                                        <a class="btn btn-clean btn-bold btn-sm" href="#"
-                                                           data-toggle="kt-tooltip" data-placement="right"
-                                                           title="Click to learn more...">Learn more</a>
-                                                    </li>
-                                                </ul>
-
-                                                <!--end::Nav-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="kt-widget__subhead">
-                                    <a href="#"><i class="flaticon2-new-email"></i>david.s@loop.com</a>
-                                    <a href="#"><i class="flaticon2-calendar-3"></i>PR Manager </a>
-                                    <a href="#"><i class="flaticon2-placeholder"></i>Melbourne</a>
-                                </div>
-                                <div class="kt-widget__info">
-                                    <div class="kt-widget__desc">
-                                        I distinguish three main text objektive could be merely to inform people.
-                                        <br> A second could be persuade people.You want people to bay objective
-                                    </div>
-                                    <div class="kt-widget__progress">
-                                        <div class="kt-widget__text">
-                                            Goals
-                                        </div>
-                                        <div class="progress" style="height: 5px;width: 100%;">
-                                            <div class="progress-bar kt-bg-success" role="progressbar"
-                                                 style="width: 65%;" aria-valuenow="65" aria-valuemin="0"
-                                                 aria-valuemax="100"></div>
-                                        </div>
-                                        <div class="kt-widget__stats">
-                                            45%
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="kt-widget__bottom kt-hidden">
-                            <div class="kt-widget__item">
-                                <div class="kt-widget__icon">
-                                    <i class="flaticon-piggy-bank"></i>
-                                </div>
-                                <div class="kt-widget__details">
-                                    <span class="kt-widget__title">Earnings</span>
-                                    <span class="kt-widget__value"><span>$</span>249,500</span>
-                                </div>
-                            </div>
-                            <div class="kt-widget__item">
-                                <div class="kt-widget__icon">
-                                    <i class="flaticon-confetti"></i>
-                                </div>
-                                <div class="kt-widget__details">
-                                    <span class="kt-widget__title">Expances</span>
-                                    <span class="kt-widget__value"><span>$</span>164,700</span>
-                                </div>
-                            </div>
-                            <div class="kt-widget__item">
-                                <div class="kt-widget__icon">
-                                    <i class="flaticon-pie-chart"></i>
-                                </div>
-                                <div class="kt-widget__details">
-                                    <span class="kt-widget__title">Net</span>
-                                    <span class="kt-widget__value"><span>$</span>782,300</span>
-                                </div>
-                            </div>
-                            <div class="kt-widget__item">
-                                <div class="kt-widget__icon">
-                                    <i class="flaticon-file-2"></i>
-                                </div>
-                                <div class="kt-widget__details">
-                                    <span class="kt-widget__title">73 Tasks</span>
-                                    <a href="#" class="kt-widget__value kt-font-brand">View</a>
-                                </div>
-                            </div>
-                            <div class="kt-widget__item">
-                                <div class="kt-widget__icon">
-                                    <i class="flaticon-chat-1"></i>
-                                </div>
-                                <div class="kt-widget__details">
-                                    <span class="kt-widget__title">648 Comments</span>
-                                    <a href="#" class="kt-widget__value kt-font-brand">View</a>
-                                </div>
-                            </div>
-                            <div class="kt-widget__item">
-                                <div class="kt-widget__icon">
-                                    <i class="flaticon-network"></i>
-                                </div>
-                                <div class="kt-widget__details">
-                                    <div class="kt-section__content kt-section__content--solid">
-                                        <div class="kt-badge kt-badge__pics">
-                                            <a href="#" class="kt-badge__pic" data-toggle="kt-tooltip" data-skin="brand"
-                                               data-placement="top" title="" data-original-title="John Myer">
-                                                <img src="./assets/media/users/100_7.jpg" alt="image">
-                                            </a>
-                                            <a href="#" class="kt-badge__pic" data-toggle="kt-tooltip" data-skin="brand"
-                                               data-placement="top" title="" data-original-title="Alison Brandy">
-                                                <img src="./assets/media/users/100_3.jpg" alt="image">
-                                            </a>
-                                            <a href="#" class="kt-badge__pic" data-toggle="kt-tooltip" data-skin="brand"
-                                               data-placement="top" title="" data-original-title="Selina Cranson">
-                                                <img src="./assets/media/users/100_2.jpg" alt="image">
-                                            </a>
-                                            <a href="#" class="kt-badge__pic" data-toggle="kt-tooltip" data-skin="brand"
-                                               data-placement="top" title="" data-original-title="Luke Walls">
-                                                <img src="./assets/media/users/100_13.jpg" alt="image">
-                                            </a>
-                                            <a href="#" class="kt-badge__pic" data-toggle="kt-tooltip" data-skin="brand"
-                                               data-placement="top" title="" data-original-title="Micheal York">
-                                                <img src="./assets/media/users/100_4.jpg" alt="image">
-                                            </a>
-                                            <a href="#" class="kt-badge__pic kt-badge__pic--last kt-font-brand">
-                                                +7
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--End:: Portlet-->
             <div class="row">
                 <div class="col-xl-4">
 
-                    <!--Begin:: Portlet-->
-                    <div class="kt-portlet kt-portlet--head-noborder">
-                        <div class="kt-portlet__head">
-                            <div class="kt-portlet__head-label">
-                                <h3 class="kt-portlet__head-title  kt-font-danger">
-                                    Important Notice
-                                </h3>
-                            </div>
-                            <div class="kt-portlet__head-toolbar">
-                                <span
-                                    class="kt-badge kt-badge--bolder kt-badge kt-badge--inline kt-badge--danger">Now</span>
-                            </div>
-                        </div>
-                        <div class="kt-portlet__body kt-portlet__body--fit-top">
-                            <div class="kt-section kt-section--space-sm">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s.
-                            </div>
-                            <div class="kt-section kt-section--last">
-                                <a href="#" class="btn btn-brand btn-sm btn-bold"><i class=""></i> Set up</a>&nbsp;
-                                <a href="#" class="btn btn-clean btn-sm btn-bold">Dismiss</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--End:: Portlet-->
 
                     <!--Begin:: Portlet-->
                     <div class="kt-portlet">
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    Deals
+                                    Supplier
                                 </h3>
                             </div>
-                            <div class="kt-portlet__head-toolbar">
-                                <a href="#" class="btn btn-clean btn-sm btn-bold" data-toggle="dropdown">
-                                    <i class="flaticon2-add-1 kt-icon-sm"></i> Add deal
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
 
-                                    <!--begin::Nav-->
-                                    <ul class="kt-nav">
-                                        <li class="kt-nav__head">
-                                            Add new deal
-                                            <i class="flaticon2-information" data-toggle="kt-tooltip"
-                                               data-placement="right" title="Click to learn more..."></i>
-                                        </li>
-                                        <li class="kt-nav__separator"></li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-drop"></i>
-                                                <span class="kt-nav__link-text">New Deal</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-                                                <span class="kt-nav__link-text">New Lead</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-link"></i>
-                                                <span class="kt-nav__link-text">Change Settings</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-new-email"></i>
-                                                <span class="kt-nav__link-text">Reports</span>
-                                                <span class="kt-nav__link-badge">
-																	<span class="kt-badge kt-badge--success">5</span>
-																</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__separator"></li>
-                                        <li class="kt-nav__foot">
-                                            <a class="btn btn-label-danger btn-bold btn-sm" href="#">Manage deals</a>
-                                            <a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip"
-                                               data-placement="right" title="Click to learn more...">Learn more</a>
-                                        </li>
-                                    </ul>
-
-                                    <!--end::Nav-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="kt-portlet__body">
-                            <div class="kt-section kt-section--space-md">
-                                <div class="kt-widget24 kt-widget24--solid">
-                                    <div class="kt-widget24__details">
-                                        <div class="kt-widget24__info">
-                                            <a href="#" class="kt-widget24__title" title="Click to edit">
-                                                Hardware Purchase
-                                            </a>
-                                            <span class="kt-widget24__desc">
-																Web & database servers
-															</span>
-                                        </div>
-                                        <span class="kt-widget24__stats kt-font-brand">
-															$340,050
-														</span>
-                                    </div>
-                                    <div class="progress progress--sm">
-                                        <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 15%;"
-                                             aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="kt-widget24__action">
-														<span class="kt-widget24__change">
-															Due date
-														</span>
-                                        <span class="kt-widget24__number">
-															20 Apr, 2019
-														</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="kt-section kt-section--space-md">
-                                <div class="kt-widget24 kt-widget24--solid">
-                                    <div class="kt-widget24__details">
-                                        <div class="kt-widget24__info">
-                                            <a href="#" class="kt-widget24__title" title="Click to edit">
-                                                eCommerce Solution
-                                            </a>
-                                            <span class="kt-widget24__desc">
-																Zara Retails Shop
-															</span>
-                                        </div>
-                                        <span class="kt-widget24__stats kt-font-success">
-															$1,5M
-														</span>
-                                    </div>
-                                    <div class="progress progress--sm">
-                                        <div class="progress-bar kt-bg-success" role="progressbar" style="width: 45%;"
-                                             aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="kt-widget24__action">
-														<span class="kt-widget24__change">
-															Launch Date
-														</span>
-                                        <span class="kt-widget24__number">
-															1 Sep, 2021
-														</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="kt-section kt-section--last">
-                                <a href="#" class="btn btn-label-brand btn-sm btn-bold"><i class=""></i> See all
-                                    deals</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--End:: Portlet-->
-
-                    <!--Begin:: Portlet-->
-                    <div class="kt-portlet">
-                        <div class="kt-portlet__head">
-                            <div class="kt-portlet__head-label">
-                                <h3 class="kt-portlet__head-title">
-                                    Company
-                                </h3>
-                            </div>
-                            <div class="kt-portlet__head-toolbar">
-                                <a href="#" class="btn btn-clean btn-sm btn-bold" data-toggle="dropdown">
-                                    <i class="flaticon2-gear"></i> Export
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
-
-                                    <!--begin::Nav-->
-                                    <ul class="kt-nav">
-                                        <li class="kt-nav__head">
-                                            Company Settings
-                                            <i class="flaticon2-information" data-toggle="kt-tooltip"
-                                               data-placement="right" title="Click to learn more..."></i>
-                                        </li>
-                                        <li class="kt-nav__separator"></li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-drop"></i>
-                                                <span class="kt-nav__link-text">Update Details</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-                                                <span class="kt-nav__link-text">New Staff</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-link"></i>
-                                                <span class="kt-nav__link-text">New Owner</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon flaticon2-new-email"></i>
-                                                <span class="kt-nav__link-text">Reports</span>
-                                                <span class="kt-nav__link-badge">
-																	<span class="kt-badge kt-badge--success">5</span>
-																</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__separator"></li>
-                                        <li class="kt-nav__foot">
-                                            <a class="btn btn-label-danger btn-bold btn-sm" href="#">Manage company</a>
-                                            <a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip"
-                                               data-placement="right" title="Click to learn more...">Learn more</a>
-                                        </li>
-                                    </ul>
-
-                                    <!--end::Nav-->
-                                </div>
-                            </div>
                         </div>
                         <div class="kt-form kt-form--label-right">
                             <div class="kt-portlet__body">
                                 <div class="form-group form-group-xs row">
-                                    <label class="col-4 col-form-label">Name:</label>
-                                    <div class="col-8">
-                                        <span class="form-control-plaintext kt-font-bolder">Loop Inc.</span>
+                                    <label class="col-3 col-form-label">Name:</label>
+                                    <div class="col-7">
+                                        <span
+                                            class="form-control-plaintext kt-font-bolder">{{$supplier->user->name}}</span>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-xs row">
-                                    <label class="col-4 col-form-label">Location:</label>
-                                    <div class="col-8">
-                                        <span class="form-control-plaintext kt-font-bolder">London, UK.</span>
+                                    <label class="col-3 col-form-label">email:</label>
+                                    <div class="col-7">
+                                        <span
+                                            class="form-control-plaintext kt-font-bolder">{{$supplier->user->email}}</span>
                                     </div>
                                 </div>
-                                <div class="form-group form-group-xs row">
-                                    <label class="col-4 col-form-label">Revenue:</label>
-                                    <div class="col-8">
-                                        <span class="form-control-plaintext"><span
-                                                class="kt-font-bolder">345,000M</span> &nbsp;<span
-                                                class="kt-badge kt-badge--inline kt-badge--danger kt-badge--bold">Q4, 2019</span></span>
+
+                                @foreach($supplier->user->phones as $phone)
+                                    <div class="form-group form-group-xs row">
+                                        <label class="col-3 col-form-label">{{$phone->type}}:</label>
+                                        <div class="col-7">
+                                            <span class="form-control-plaintext kt-font-bolder">{{$phone->phone}}</span>
+                                        </div>
+                                        <div class="col-1">
+                                            <a><i style="color: red" class="flaticon-delete"></i></a>
+                                        </div>
+                                        <div class="col-1">
+                                            <a data-toggle="modal" data-target=".update_phone"
+                                               data-id="{{$phone->id}}" data-phone="{{$phone->phone}}"
+                                               data-type="{{$phone->type}}"><i class="flaticon-edit-1"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group form-group-xs row">
-                                    <label class="col-4 col-form-label">Phone:</label>
-                                    <div class="col-8">
-                                        <span class="form-control-plaintext kt-font-bolder">+456 7890456</span>
+                                @endforeach
+
+                                @foreach($supplier->user->addresses as $address)
+                                    <div class="form-group form-group-xs row">
+                                        <label class="col-3 col-form-label"> Address{{$loop->index+1}}:</label>
+                                        <div class="col-7">
+                                        <span class="form-control-plaintext kt-font-bolder">
+                                            {{$address->address}} / {{($address->city)?$address->city->name:''}}</span>
+                                        </div>
+                                        <div class="col-1">
+                                            <a><i style="color: red" class="flaticon-delete"></i></a>
+                                        </div>
+                                        <div class="col-1">
+                                            <a data-toggle="modal" data-target=".update_address"
+                                               data-id="{{$address->id}}" data-address="{{$address->address}}"><i
+                                                    class="flaticon-edit-1"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group form-group-xs row">
-                                    <label class="col-4 col-form-label">Email:</label>
-                                    <div class="col-8">
-														<span class="form-control-plaintext kt-font-bolder">
-															<a href="#">info@loop.com</a>
-														</span>
-                                    </div>
-                                </div>
-                                <div class="form-group form-group-xs row">
-                                    <label class="col-4 col-form-label">Website:</label>
-                                    <div class="col-8">
-														<span class="form-control-plaintext kt-font-bolder">
-															<a href="#">www.loop.com</a>
-														</span>
-                                    </div>
-                                </div>
-                                <div class="form-group form-group-xs row">
-                                    <label class="col-4 col-form-label">Contact Person:</label>
-                                    <div class="col-8">
-														<span class="form-control-plaintext kt-font-bolder">
-															<a href="#">Nick Bold</a>
-														</span>
-                                    </div>
-                                </div>
+                                @endforeach
+
+
                             </div>
-                            <div class="kt-portlet__foot">
-                                <div class="kt-form__actions kt-space-between">
-                                    <a href="#" class="btn btn-label-brand btn-sm btn-bold">Manage company</a>
-                                    <a href="#" class="btn btn-clean btn-sm btn-bold">Learn more</a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
@@ -666,9 +199,9 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_4"
+                                        <a class="nav-link" data-toggle="tab" href="#kt_apps_supplier_purchases"
                                            role="tab">
-                                            <i class="flaticon2-user-outline-symbol"></i> Account
+                                            <i class="flaticon2-user-outline-symbol"></i> Purchases
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -680,7 +213,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="kt-portlet__body" >
+                        <div class="kt-portlet__body">
                             <div class="tab-content kt-margin-t-20">
 
                                 <!--Begin:: Tab Content-->
@@ -1338,118 +871,200 @@
 
                                 <!--Begin:: Tab Content-->
                                 <div class="tab-pane" id="kt_apps_contacts_view_tab_3" role="tabpanel">
-                                    <form class="kt-form kt-form--label-right" action="">
-                                        <div class="kt-form__body">
-                                            <div class="kt-section kt-section--first">
-                                                <div class="kt-section__body">
-                                                    <div class="row">
-                                                        <label class="col-xl-3"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <h3 class="kt-section__title kt-section__title-sm">Personal
-                                                                Info:</h3>
-                                                        </div>
-                                                    </div>
+                                    <form class="kt-form kt-form--label-right" method="post"
+                                          action="{{route('supplier.update')}}">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <div class="kt-portlet__body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3>Personal Information</h3>
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Photo</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="kt-avatar kt-avatar--outline"
-                                                                 id="kt_apps_user_add_avatar">
-                                                                <div class="kt-avatar__holder"></div>
-                                                                <label class="kt-avatar__upload"
-                                                                       data-toggle="kt-tooltip" title=""
-                                                                       data-original-title="Change avatar">
-                                                                    <i class="fa fa-pen"></i>
-                                                                    <input type="file" name="profile_avatar"
-                                                                           accept=".png, .jpg, .jpeg">
-                                                                </label>
-                                                                <span class="kt-avatar__cancel" data-toggle="kt-tooltip"
-                                                                      title="" data-original-title="Cancel avatar">
-																					<i class="fa fa-times"></i>
-																				</span>
-                                                            </div>
+                                                        <div class="col-12">
+                                                            <label>Full Name:</label>
+                                                            <input type="text" required name="name" class="form-control"
+                                                                   placeholder="Enter full name" value="{{$supplier->name}}">
+                                                            <span class="form-text text-muted">Please enter your full name</span>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">First
-                                                            Name</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <input class="form-control" type="text" value="Nick">
+                                                        <div class="col-12">
+                                                            <label class="">Email:</label>
+                                                            <input type="email" required name="email"
+                                                                   value="{{$supplier->email}}" class="form-control" placeholder="Enter email">
+                                                            <span
+                                                                class="form-text text-muted">Please enter your email</span>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Last
-                                                            Name</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <input class="form-control" type="text" value="Bold">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Company
-                                                            Name</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <input class="form-control" type="text" value="Loop Inc.">
-                                                            <span class="form-text text-muted">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label class="col-xl-3"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <h3 class="kt-section__title kt-section__title-sm">Contact
-                                                                Info:</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Contact
-                                                            Phone</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend"><span
-                                                                        class="input-group-text"><i
-                                                                            class="la la-phone"></i></span></div>
-                                                                <input type="text" class="form-control"
-                                                                       value="+35278953712" placeholder="Phone"
-                                                                       aria-describedby="basic-addon1">
-                                                            </div>
-                                                            <span class="form-text text-muted">We'll never share your email with anyone else.</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Email
-                                                            Address</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend"><span
-                                                                        class="input-group-text"><i
-                                                                            class="la la-at"></i></span></div>
-                                                                <input type="text" class="form-control"
-                                                                       value="nick.bold@loop.com" placeholder="Email"
-                                                                       aria-describedby="basic-addon1">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group form-group-last row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Company
-                                                            Site</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control"
-                                                                       placeholder="Username" value="loop">
-                                                                <div class="input-group-append"><span
-                                                                        class="input-group-text">.com</span></div>
-                                                            </div>
+                                                        <div class="col-12">
+                                                            <label>Start Balance :</label>
+                                                            <input type="number" step='0.01' name="balance"
+                                                                   value="{{$supplier->balance}}"class="form-control">
+                                                            <span  class="form-text text-muted">Please enter start balance</span>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-6" id="kt_repeater_1">
+                                                    <h3>Contact Information<a href="javascript:;"
+                                                                              data-repeater-create=""
+                                                                              class="btn btn-bold btn-sm btn-label-brand pull-right">
+                                                            <i class="la la-plus"></i> Add
+                                                        </a></h3>
+                                                    <div class="repeater" class="form-group  row">
+                                                        <div data-repeater-list="phone_g" class="col-lg-12">
+                                                            <br>
+                                                            @foreach($supplier->user->phones as $phone)
+                                                                <div class="form-group form-group-xs row">
+                                                                    <label class="col-3 col-form-label">{{$phone->type}}:</label>
+                                                                    <div class="col-7">
+                                                                        <span class="form-control-plaintext kt-font-bolder">{{$phone->phone}}</span>
+                                                                    </div>
+                                                                    <div class="col-1"><a><i style="color: red" class="flaticon-delete"></i></a>
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        <a data-toggle="modal"
+                                                                           data-target=".update_phone"
+                                                                           data-id="{{$phone->id}}"
+                                                                           data-phone="{{$phone->phone}}"
+                                                                           data-type="{{$phone->type}}"><i
+                                                                                class="flaticon-edit-1"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach                                                             <br>
+                                                            <br>
+                                                            <div data-repeater-item class="row kt-margin-b-10">
+
+
+
+
+
+                                                                <div class="col-lg-5">
+                                                                    <label>Phone</label>
+
+                                                                    <div class="input-group">
+
+                                                                        <input type="text" required
+                                                                               class="form-control form-control-danger"
+                                                                               name="phone" placeholder="012**********">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-5">
+                                                                    <label>Type</label>
+
+                                                                    <div class=" form-group input-group">
+
+                                                                        <input type="text" required
+                                                                               class="form-control form-control-danger"
+                                                                               name="type" placeholder="Ex: office">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-2" style=" display: flex;
+  justify-content: center;
+  align-items: center">
+                                                                    <a href="javascript:;" data-repeater-delete=""
+                                                                       class="btn btn-danger btn-icon">
+                                                                        <i class="la la-remove"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6" id="kt_repeater_2" class="repeater">
+                                                    <h3>Addresses Information<a href="javascript:;"
+                                                                                data-repeater-create=""
+                                                                                class="btn btn-bold btn-sm btn-label-brand pull-right">
+                                                            <i class="la la-plus"></i> Add
+                                                        </a></h3>
+                                                    <br>
+                                                    @foreach($supplier->user->addresses as $address)
+                                                        <div class="form-group form-group-xs row">
+                                                            <label class="col-3 col-form-label">
+                                                                Address{{$loop->index+1}}:</label>
+                                                            <div class="col-7">
+                                                                        <span class="form-control-plaintext kt-font-bolder">
+                                            {                   {{   $address->address}} / {{($address->city)?$address->city->name:''}}</span>
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <a><i style="color: red"
+                                                                      class="flaticon-delete"></i></a>
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <a data-toggle="modal"
+                                                                   data-target=".update_address"
+                                                                   data-id="{{$address->id}}"
+                                                                   data-address="{{$address->address}}"><i
+                                                                        class="flaticon-edit-1"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+
+                                                    <br>
+
+                                                    <div data-repeater-list="address_g">
+                                                        <div class="form-group form-group-last row" data-repeater-item>
+                                                                <div class="col-lg-12">
+                                                                    <label>Address:</label>
+                                                                    <div class="kt-input-icon kt-input-icon--right">
+                                                                        <input type="text" name="address"
+                                                                               class="form-control"
+                                                                               required
+                                                                               placeholder="Enter your address">
+                                                                        <span
+                                                                            class="kt-input-icon__icon kt-input-icon__icon--right"><span><i
+                                                                                    class="la la-map-marker"></i></span></span>
+                                                                    </div>
+                                                                    <span class="form-text text-muted">Please enter your address</span>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="row kt-margin-b-10">
+                                                                        <div class="col-lg-5">
+                                                                            <label>Country</label>
+                                                                            <select class="form-control country"
+                                                                                    name="country"
+                                                                                    onchange="changecity(this)">
+                                                                                <option value="00">Select Country
+                                                                                </option>
+                                                                                @foreach($countries as $country)
+                                                                                    <option
+                                                                                        value="{{$country->id}}">{{$country->name}}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <label>City</label>
+
+                                                                            <select class="form-control" name="city">
+                                                                                <option value="00">Select City</option>
+
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-lg-2" style=" display: flex;
+  justify-content: center;
+  align-items: center">
+                                                                            <a href="javascript:;"
+                                                                               data-repeater-delete=""
+                                                                               class="btn btn-danger btn-icon">
+                                                                                <i class="la la-remove"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
-                                        <div
-                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                                        <div class="kt-form__actions">
-                                            <div class="row">
-                                                <div class="col-xl-3"></div>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <a href="#" class="btn btn-label-brand btn-bold">Save changes</a>
-                                                    <a href="#" class="btn btn-clean btn-bold">Cancel</a>
+                                        <div class="kt-portlet__foot">
+                                            <div class="kt-form__actions">
+                                                <div class="row">
+                                                    <div class="col-lg-4"></div>
+                                                    <div class="col-lg-8">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1458,806 +1073,73 @@
 
                                 <!--End:: Tab Content-->
 
-                                <!--Begin:: Tab Content-->
-                                <div class="tab-pane" id="kt_apps_contacts_view_tab_4" role="tabpanel">
-                                    <form class="kt-form kt-form--label-right">
-                                        <div class="kt-form__body">
-                                            <div class="alert alert-solid-danger alert-bold fade show kt-margin-b-20"
-                                                 role="alert">
-                                                <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
-                                                <div class="alert-text">Configure user passwords to expire periodically.
-                                                    <br>Users will need warning that their passwords are going to
-                                                    expire, or they might inadvertently get locked out of the system!
-                                                </div>
-                                                <div class="alert-close">
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true"><i class="la la-close"></i></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="kt-section">
-                                                <div class="kt-section__body">
-                                                    <div class="row">
-                                                        <label class="col-xl-3"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <h3 class="kt-section__title kt-section__title-sm">
-                                                                Account:</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Username</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div
-                                                                class="kt-spinner kt-spinner--sm kt-spinner--success kt-spinner--right kt-spinner--input">
-                                                                <input class="form-control" type="text" value="nick84">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Email
-                                                            Address</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend"><span
-                                                                        class="input-group-text"><i
-                                                                            class="la la-at"></i></span></div>
-                                                                <input type="text" class="form-control"
-                                                                       value="nick.watson@loop.com" placeholder="Email"
-                                                                       aria-describedby="basic-addon1">
-                                                            </div>
-                                                            <span class="form-text text-muted">Email will not be publicly displayed. <a
-                                                                    href="#" class="kt-link">Learn more</a>.</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Language</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <select class="form-control">
-                                                                <option>Select Language...</option>
-                                                                <option value="id">Bahasa Indonesia - Indonesian
-                                                                </option>
-                                                                <option value="msa">Bahasa Melayu - Malay</option>
-                                                                <option value="ca">Català - Catalan</option>
-                                                                <option value="cs">Čeština - Czech</option>
-                                                                <option value="da">Dansk - Danish</option>
-                                                                <option value="de">Deutsch - German</option>
-                                                                <option value="en" selected="">English</option>
-                                                                <option value="en-gb">English UK - British English
-                                                                </option>
-                                                                <option value="es">Español - Spanish</option>
-                                                                <option value="eu">Euskara - Basque (beta)</option>
-                                                                <option value="fil">Filipino</option>
-                                                                <option value="fr">Français - French</option>
-                                                                <option value="ga">Gaeilge - Irish (beta)</option>
-                                                                <option value="gl">Galego - Galician (beta)</option>
-                                                                <option value="hr">Hrvatski - Croatian</option>
-                                                                <option value="it">Italiano - Italian</option>
-                                                                <option value="hu">Magyar - Hungarian</option>
-                                                                <option value="nl">Nederlands - Dutch</option>
-                                                                <option value="no">Norsk - Norwegian</option>
-                                                                <option value="pl">Polski - Polish</option>
-                                                                <option value="pt">Português - Portuguese</option>
-                                                                <option value="ro">Română - Romanian</option>
-                                                                <option value="sk">Slovenčina - Slovak</option>
-                                                                <option value="fi">Suomi - Finnish</option>
-                                                                <option value="sv">Svenska - Swedish</option>
-                                                                <option value="vi">Tiếng Việt - Vietnamese</option>
-                                                                <option value="tr">Türkçe - Turkish</option>
-                                                                <option value="el">Ελληνικά - Greek</option>
-                                                                <option value="bg">Български език - Bulgarian</option>
-                                                                <option value="ru">Русский - Russian</option>
-                                                                <option value="sr">Српски - Serbian</option>
-                                                                <option value="uk">Українська мова - Ukrainian</option>
-                                                                <option value="he">עִבְרִית - Hebrew</option>
-                                                                <option value="ur">اردو - Urdu (beta)</option>
-                                                                <option value="ar">العربية - Arabic</option>
-                                                                <option value="fa">فارسی - Persian</option>
-                                                                <option value="mr">मराठी - Marathi</option>
-                                                                <option value="hi">हिन्दी - Hindi</option>
-                                                                <option value="bn">বাংলা - Bangla</option>
-                                                                <option value="gu">ગુજરાતી - Gujarati</option>
-                                                                <option value="ta">தமிழ் - Tamil</option>
-                                                                <option value="kn">ಕನ್ನಡ - Kannada</option>
-                                                                <option value="th">ภาษาไทย - Thai</option>
-                                                                <option value="ko">한국어 - Korean</option>
-                                                                <option value="ja">日本語 - Japanese</option>
-                                                                <option value="zh-cn">简体中文 - Simplified Chinese</option>
-                                                                <option value="zh-tw">繁體中文 - Traditional Chinese
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Time
-                                                            Zone</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <select class="form-control">
-                                                                <option data-offset="-39600"
-                                                                        value="International Date Line West">(GMT-11:00)
-                                                                    International Date Line West
-                                                                </option>
-                                                                <option data-offset="-39600" value="Midway Island">
-                                                                    (GMT-11:00) Midway Island
-                                                                </option>
-                                                                <option data-offset="-39600" value="Samoa">(GMT-11:00)
-                                                                    Samoa
-                                                                </option>
-                                                                <option data-offset="-36000" value="Hawaii">(GMT-10:00)
-                                                                    Hawaii
-                                                                </option>
-                                                                <option data-offset="-28800" value="Alaska">(GMT-08:00)
-                                                                    Alaska
-                                                                </option>
-                                                                <option data-offset="-25200"
-                                                                        value="Pacific Time (US &amp; Canada)">
-                                                                    (GMT-07:00) Pacific Time (US &amp; Canada)
-                                                                </option>
-                                                                <option data-offset="-25200" value="Tijuana">(GMT-07:00)
-                                                                    Tijuana
-                                                                </option>
-                                                                <option data-offset="-25200" value="Arizona">(GMT-07:00)
-                                                                    Arizona
-                                                                </option>
-                                                                <option data-offset="-21600"
-                                                                        value="Mountain Time (US &amp; Canada)">
-                                                                    (GMT-06:00) Mountain Time (US &amp; Canada)
-                                                                </option>
-                                                                <option data-offset="-21600" value="Chihuahua">
-                                                                    (GMT-06:00) Chihuahua
-                                                                </option>
-                                                                <option data-offset="-21600" value="Mazatlan">
-                                                                    (GMT-06:00) Mazatlan
-                                                                </option>
-                                                                <option data-offset="-21600" value="Saskatchewan">
-                                                                    (GMT-06:00) Saskatchewan
-                                                                </option>
-                                                                <option data-offset="-21600" value="Central America">
-                                                                    (GMT-06:00) Central America
-                                                                </option>
-                                                                <option data-offset="-18000"
-                                                                        value="Central Time (US &amp; Canada)">
-                                                                    (GMT-05:00) Central Time (US &amp; Canada)
-                                                                </option>
-                                                                <option data-offset="-18000" value="Guadalajara">
-                                                                    (GMT-05:00) Guadalajara
-                                                                </option>
-                                                                <option data-offset="-18000" value="Mexico City">
-                                                                    (GMT-05:00) Mexico City
-                                                                </option>
-                                                                <option data-offset="-18000" value="Monterrey">
-                                                                    (GMT-05:00) Monterrey
-                                                                </option>
-                                                                <option data-offset="-18000" value="Bogota">(GMT-05:00)
-                                                                    Bogota
-                                                                </option>
-                                                                <option data-offset="-18000" value="Lima">(GMT-05:00)
-                                                                    Lima
-                                                                </option>
-                                                                <option data-offset="-18000" value="Quito">(GMT-05:00)
-                                                                    Quito
-                                                                </option>
-                                                                <option data-offset="-14400"
-                                                                        value="Eastern Time (US &amp; Canada)">
-                                                                    (GMT-04:00) Eastern Time (US &amp; Canada)
-                                                                </option>
-                                                                <option data-offset="-14400" value="Indiana (East)">
-                                                                    (GMT-04:00) Indiana (East)
-                                                                </option>
-                                                                <option data-offset="-14400" value="Caracas">(GMT-04:00)
-                                                                    Caracas
-                                                                </option>
-                                                                <option data-offset="-14400" value="La Paz">(GMT-04:00)
-                                                                    La Paz
-                                                                </option>
-                                                                <option data-offset="-14400" value="Georgetown">
-                                                                    (GMT-04:00) Georgetown
-                                                                </option>
-                                                                <option data-offset="-10800"
-                                                                        value="Atlantic Time (Canada)">(GMT-03:00)
-                                                                    Atlantic Time (Canada)
-                                                                </option>
-                                                                <option data-offset="-10800" value="Santiago">
-                                                                    (GMT-03:00) Santiago
-                                                                </option>
-                                                                <option data-offset="-10800" value="Brasilia">
-                                                                    (GMT-03:00) Brasilia
-                                                                </option>
-                                                                <option data-offset="-10800" value="Buenos Aires">
-                                                                    (GMT-03:00) Buenos Aires
-                                                                </option>
-                                                                <option data-offset="-9000" value="Newfoundland">
-                                                                    (GMT-02:30) Newfoundland
-                                                                </option>
-                                                                <option data-offset="-7200" value="Greenland">
-                                                                    (GMT-02:00) Greenland
-                                                                </option>
-                                                                <option data-offset="-7200" value="Mid-Atlantic">
-                                                                    (GMT-02:00) Mid-Atlantic
-                                                                </option>
-                                                                <option data-offset="-3600" value="Cape Verde Is.">
-                                                                    (GMT-01:00) Cape Verde Is.
-                                                                </option>
-                                                                <option data-offset="0" value="Azores">(GMT) Azores
-                                                                </option>
-                                                                <option data-offset="0" value="Monrovia">(GMT)
-                                                                    Monrovia
-                                                                </option>
-                                                                <option data-offset="0" value="UTC">(GMT) UTC</option>
-                                                                <option data-offset="3600" value="Dublin">(GMT+01:00)
-                                                                    Dublin
-                                                                </option>
-                                                                <option data-offset="3600" value="Edinburgh">(GMT+01:00)
-                                                                    Edinburgh
-                                                                </option>
-                                                                <option data-offset="3600" value="Lisbon">(GMT+01:00)
-                                                                    Lisbon
-                                                                </option>
-                                                                <option data-offset="3600" value="London">(GMT+01:00)
-                                                                    London
-                                                                </option>
-                                                                <option data-offset="3600" value="Casablanca">
-                                                                    (GMT+01:00) Casablanca
-                                                                </option>
-                                                                <option data-offset="3600" value="West Central Africa">
-                                                                    (GMT+01:00) West Central Africa
-                                                                </option>
-                                                                <option data-offset="7200" value="Belgrade">(GMT+02:00)
-                                                                    Belgrade
-                                                                </option>
-                                                                <option data-offset="7200" value="Bratislava">
-                                                                    (GMT+02:00) Bratislava
-                                                                </option>
-                                                                <option data-offset="7200" value="Budapest">(GMT+02:00)
-                                                                    Budapest
-                                                                </option>
-                                                                <option data-offset="7200" value="Ljubljana">(GMT+02:00)
-                                                                    Ljubljana
-                                                                </option>
-                                                                <option data-offset="7200" value="Prague">(GMT+02:00)
-                                                                    Prague
-                                                                </option>
-                                                                <option data-offset="7200" value="Sarajevo">(GMT+02:00)
-                                                                    Sarajevo
-                                                                </option>
-                                                                <option data-offset="7200" value="Skopje">(GMT+02:00)
-                                                                    Skopje
-                                                                </option>
-                                                                <option data-offset="7200" value="Warsaw">(GMT+02:00)
-                                                                    Warsaw
-                                                                </option>
-                                                                <option data-offset="7200" value="Zagreb">(GMT+02:00)
-                                                                    Zagreb
-                                                                </option>
-                                                                <option data-offset="7200" value="Brussels">(GMT+02:00)
-                                                                    Brussels
-                                                                </option>
-                                                                <option data-offset="7200" value="Copenhagen">
-                                                                    (GMT+02:00) Copenhagen
-                                                                </option>
-                                                                <option data-offset="7200" value="Madrid">(GMT+02:00)
-                                                                    Madrid
-                                                                </option>
-                                                                <option data-offset="7200" value="Paris">(GMT+02:00)
-                                                                    Paris
-                                                                </option>
-                                                                <option data-offset="7200" value="Amsterdam">(GMT+02:00)
-                                                                    Amsterdam
-                                                                </option>
-                                                                <option data-offset="7200" value="Berlin">(GMT+02:00)
-                                                                    Berlin
-                                                                </option>
-                                                                <option data-offset="7200" value="Bern">(GMT+02:00)
-                                                                    Bern
-                                                                </option>
-                                                                <option data-offset="7200" value="Rome">(GMT+02:00)
-                                                                    Rome
-                                                                </option>
-                                                                <option data-offset="7200" value="Stockholm">(GMT+02:00)
-                                                                    Stockholm
-                                                                </option>
-                                                                <option data-offset="7200" value="Vienna">(GMT+02:00)
-                                                                    Vienna
-                                                                </option>
-                                                                <option data-offset="7200" value="Cairo">(GMT+02:00)
-                                                                    Cairo
-                                                                </option>
-                                                                <option data-offset="7200" value="Harare">(GMT+02:00)
-                                                                    Harare
-                                                                </option>
-                                                                <option data-offset="7200" value="Pretoria">(GMT+02:00)
-                                                                    Pretoria
-                                                                </option>
-                                                                <option data-offset="10800" value="Bucharest">
-                                                                    (GMT+03:00) Bucharest
-                                                                </option>
-                                                                <option data-offset="10800" value="Helsinki">(GMT+03:00)
-                                                                    Helsinki
-                                                                </option>
-                                                                <option data-offset="10800" value="Kiev">(GMT+03:00)
-                                                                    Kiev
-                                                                </option>
-                                                                <option data-offset="10800" value="Kyiv">(GMT+03:00)
-                                                                    Kyiv
-                                                                </option>
-                                                                <option data-offset="10800" value="Riga">(GMT+03:00)
-                                                                    Riga
-                                                                </option>
-                                                                <option data-offset="10800" value="Sofia">(GMT+03:00)
-                                                                    Sofia
-                                                                </option>
-                                                                <option data-offset="10800" value="Tallinn">(GMT+03:00)
-                                                                    Tallinn
-                                                                </option>
-                                                                <option data-offset="10800" value="Vilnius">(GMT+03:00)
-                                                                    Vilnius
-                                                                </option>
-                                                                <option data-offset="10800" value="Athens">(GMT+03:00)
-                                                                    Athens
-                                                                </option>
-                                                                <option data-offset="10800" value="Istanbul">(GMT+03:00)
-                                                                    Istanbul
-                                                                </option>
-                                                                <option data-offset="10800" value="Minsk">(GMT+03:00)
-                                                                    Minsk
-                                                                </option>
-                                                                <option data-offset="10800" value="Jerusalem">
-                                                                    (GMT+03:00) Jerusalem
-                                                                </option>
-                                                                <option data-offset="10800" value="Moscow">(GMT+03:00)
-                                                                    Moscow
-                                                                </option>
-                                                                <option data-offset="10800" value="St. Petersburg">
-                                                                    (GMT+03:00) St. Petersburg
-                                                                </option>
-                                                                <option data-offset="10800" value="Volgograd">
-                                                                    (GMT+03:00) Volgograd
-                                                                </option>
-                                                                <option data-offset="10800" value="Kuwait">(GMT+03:00)
-                                                                    Kuwait
-                                                                </option>
-                                                                <option data-offset="10800" value="Riyadh">(GMT+03:00)
-                                                                    Riyadh
-                                                                </option>
-                                                                <option data-offset="10800" value="Nairobi">(GMT+03:00)
-                                                                    Nairobi
-                                                                </option>
-                                                                <option data-offset="10800" value="Baghdad">(GMT+03:00)
-                                                                    Baghdad
-                                                                </option>
-                                                                <option data-offset="14400" value="Abu Dhabi">
-                                                                    (GMT+04:00) Abu Dhabi
-                                                                </option>
-                                                                <option data-offset="14400" value="Muscat">(GMT+04:00)
-                                                                    Muscat
-                                                                </option>
-                                                                <option data-offset="14400" value="Baku">(GMT+04:00)
-                                                                    Baku
-                                                                </option>
-                                                                <option data-offset="14400" value="Tbilisi">(GMT+04:00)
-                                                                    Tbilisi
-                                                                </option>
-                                                                <option data-offset="14400" value="Yerevan">(GMT+04:00)
-                                                                    Yerevan
-                                                                </option>
-                                                                <option data-offset="16200" value="Tehran">(GMT+04:30)
-                                                                    Tehran
-                                                                </option>
-                                                                <option data-offset="16200" value="Kabul">(GMT+04:30)
-                                                                    Kabul
-                                                                </option>
-                                                                <option data-offset="18000" value="Ekaterinburg">
-                                                                    (GMT+05:00) Ekaterinburg
-                                                                </option>
-                                                                <option data-offset="18000" value="Islamabad">
-                                                                    (GMT+05:00) Islamabad
-                                                                </option>
-                                                                <option data-offset="18000" value="Karachi">(GMT+05:00)
-                                                                    Karachi
-                                                                </option>
-                                                                <option data-offset="18000" value="Tashkent">(GMT+05:00)
-                                                                    Tashkent
-                                                                </option>
-                                                                <option data-offset="19800" value="Chennai">(GMT+05:30)
-                                                                    Chennai
-                                                                </option>
-                                                                <option data-offset="19800" value="Kolkata">(GMT+05:30)
-                                                                    Kolkata
-                                                                </option>
-                                                                <option data-offset="19800" value="Mumbai">(GMT+05:30)
-                                                                    Mumbai
-                                                                </option>
-                                                                <option data-offset="19800" value="New Delhi">
-                                                                    (GMT+05:30) New Delhi
-                                                                </option>
-                                                                <option data-offset="19800" value="Sri Jayawardenepura">
-                                                                    (GMT+05:30) Sri Jayawardenepura
-                                                                </option>
-                                                                <option data-offset="20700" value="Kathmandu">
-                                                                    (GMT+05:45) Kathmandu
-                                                                </option>
-                                                                <option data-offset="21600" value="Astana">(GMT+06:00)
-                                                                    Astana
-                                                                </option>
-                                                                <option data-offset="21600" value="Dhaka">(GMT+06:00)
-                                                                    Dhaka
-                                                                </option>
-                                                                <option data-offset="21600" value="Almaty">(GMT+06:00)
-                                                                    Almaty
-                                                                </option>
-                                                                <option data-offset="21600" value="Urumqi">(GMT+06:00)
-                                                                    Urumqi
-                                                                </option>
-                                                                <option data-offset="23400" value="Rangoon">(GMT+06:30)
-                                                                    Rangoon
-                                                                </option>
-                                                                <option data-offset="25200" value="Novosibirsk">
-                                                                    (GMT+07:00) Novosibirsk
-                                                                </option>
-                                                                <option data-offset="25200" value="Bangkok">(GMT+07:00)
-                                                                    Bangkok
-                                                                </option>
-                                                                <option data-offset="25200" value="Hanoi">(GMT+07:00)
-                                                                    Hanoi
-                                                                </option>
-                                                                <option data-offset="25200" value="Jakarta">(GMT+07:00)
-                                                                    Jakarta
-                                                                </option>
-                                                                <option data-offset="25200" value="Krasnoyarsk">
-                                                                    (GMT+07:00) Krasnoyarsk
-                                                                </option>
-                                                                <option data-offset="28800" value="Beijing">(GMT+08:00)
-                                                                    Beijing
-                                                                </option>
-                                                                <option data-offset="28800" value="Chongqing">
-                                                                    (GMT+08:00) Chongqing
-                                                                </option>
-                                                                <option data-offset="28800" value="Hong Kong">
-                                                                    (GMT+08:00) Hong Kong
-                                                                </option>
-                                                                <option data-offset="28800" value="Kuala Lumpur">
-                                                                    (GMT+08:00) Kuala Lumpur
-                                                                </option>
-                                                                <option data-offset="28800" value="Singapore">
-                                                                    (GMT+08:00) Singapore
-                                                                </option>
-                                                                <option data-offset="28800" value="Taipei">(GMT+08:00)
-                                                                    Taipei
-                                                                </option>
-                                                                <option data-offset="28800" value="Perth">(GMT+08:00)
-                                                                    Perth
-                                                                </option>
-                                                                <option data-offset="28800" value="Irkutsk">(GMT+08:00)
-                                                                    Irkutsk
-                                                                </option>
-                                                                <option data-offset="28800" value="Ulaan Bataar">
-                                                                    (GMT+08:00) Ulaan Bataar
-                                                                </option>
-                                                                <option data-offset="32400" value="Seoul">(GMT+09:00)
-                                                                    Seoul
-                                                                </option>
-                                                                <option data-offset="32400" value="Osaka">(GMT+09:00)
-                                                                    Osaka
-                                                                </option>
-                                                                <option data-offset="32400" value="Sapporo">(GMT+09:00)
-                                                                    Sapporo
-                                                                </option>
-                                                                <option data-offset="32400" value="Tokyo">(GMT+09:00)
-                                                                    Tokyo
-                                                                </option>
-                                                                <option data-offset="32400" value="Yakutsk">(GMT+09:00)
-                                                                    Yakutsk
-                                                                </option>
-                                                                <option data-offset="34200" value="Darwin">(GMT+09:30)
-                                                                    Darwin
-                                                                </option>
-                                                                <option data-offset="34200" value="Adelaide">(GMT+09:30)
-                                                                    Adelaide
-                                                                </option>
-                                                                <option data-offset="36000" value="Canberra">(GMT+10:00)
-                                                                    Canberra
-                                                                </option>
-                                                                <option data-offset="36000" value="Melbourne">
-                                                                    (GMT+10:00) Melbourne
-                                                                </option>
-                                                                <option data-offset="36000" value="Sydney">(GMT+10:00)
-                                                                    Sydney
-                                                                </option>
-                                                                <option data-offset="36000" value="Brisbane">(GMT+10:00)
-                                                                    Brisbane
-                                                                </option>
-                                                                <option data-offset="36000" value="Hobart">(GMT+10:00)
-                                                                    Hobart
-                                                                </option>
-                                                                <option data-offset="36000" value="Vladivostok">
-                                                                    (GMT+10:00) Vladivostok
-                                                                </option>
-                                                                <option data-offset="36000" value="Guam">(GMT+10:00)
-                                                                    Guam
-                                                                </option>
-                                                                <option data-offset="36000" value="Port Moresby">
-                                                                    (GMT+10:00) Port Moresby
-                                                                </option>
-                                                                <option data-offset="36000" value="Solomon Is.">
-                                                                    (GMT+10:00) Solomon Is.
-                                                                </option>
-                                                                <option data-offset="39600" value="Magadan">(GMT+11:00)
-                                                                    Magadan
-                                                                </option>
-                                                                <option data-offset="39600" value="New Caledonia">
-                                                                    (GMT+11:00) New Caledonia
-                                                                </option>
-                                                                <option data-offset="43200" value="Fiji">(GMT+12:00)
-                                                                    Fiji
-                                                                </option>
-                                                                <option data-offset="43200" value="Kamchatka">
-                                                                    (GMT+12:00) Kamchatka
-                                                                </option>
-                                                                <option data-offset="43200" value="Marshall Is.">
-                                                                    (GMT+12:00) Marshall Is.
-                                                                </option>
-                                                                <option data-offset="43200" value="Auckland">(GMT+12:00)
-                                                                    Auckland
-                                                                </option>
-                                                                <option data-offset="43200" value="Wellington">
-                                                                    (GMT+12:00) Wellington
-                                                                </option>
-                                                                <option data-offset="46800" value="Nuku'alofa">
-                                                                    (GMT+13:00) Nuku'alofa
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group form-group-last row">
-                                                        <label
-                                                            class="col-xl-3 col-lg-3 col-form-label">Communication</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="kt-checkbox-inline">
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox" checked=""> Email
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox" checked=""> SMS
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox"> Phone
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
-                                            <div class="kt-section kt-section--first">
-                                                <div class="kt-section__body">
-                                                    <div class="row">
-                                                        <label class="col-xl-3"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <h3 class="kt-section__title kt-section__title-sm">
-                                                                Security:</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Login
-                                                            verification</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <button type="button"
-                                                                    class="btn btn-label-brand btn-bold btn-sm kt-margin-t-5 kt-margin-b-5">
-                                                                Setup login verification
-                                                            </button>
-                                                            <span class="form-text text-muted">
-																				After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised.
-																				<a href="#"
-                                                                                   class="kt-link">Learn more</a>.
-																			</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Password reset
-                                                            verification</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="kt-checkbox-single">
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox"> Require personal information
-                                                                    to reset your password.
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                            <span class="form-text text-muted">
-																				For extra security, this requires you to confirm your email or phone number when you reset your password.
-																				<a href="#"
-                                                                                   class="kt-link">Learn more</a>.
-																			</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row kt-margin-t-10 kt-margin-b-10">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <button type="button"
-                                                                    class="btn btn-label-danger btn-bold btn-sm kt-margin-t-5 kt-margin-b-5">
-                                                                Deactivate your account ?
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                                        <div class="kt-form__actions">
-                                            <div class="row">
-                                                <div class="col-xl-3"></div>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <a href="#" class="btn btn-label-brand btn-bold">Save changes</a>
-                                                    <a href="#" class="btn btn-clean btn-bold">Cancel</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
                                 <!--End:: Tab Content-->
 
                                 <!--Begin:: Tab Content-->
-                                <div class="tab-pane" id="kt_apps_contacts_view_tab_5" role="tabpanel">
-                                    <form class="kt-form kt-form--label-right">
-                                        <div class="kt-form__body">
-                                            <div class="kt-section kt-section--first">
-                                                <div class="kt-section__body">
-                                                    <div class="row">
-                                                        <label class="col-xl-3"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <h3 class="kt-section__title kt-section__title-sm">Setup
-                                                                Email Notification:</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group form-group-sm row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Email
-                                                            Notification</label>
-                                                        <div class="col-lg-9 col-xl-6">
-																			<span class="kt-switch">
-																				<label>
-																					<input type="checkbox"
-                                                                                           checked="checked"
-                                                                                           name="email_notification_1">
-																					<span></span>
-																				</label>
-																			</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group form-group-last row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Send Copy To
-                                                            Personal Email</label>
-                                                        <div class="col-lg-9 col-xl-6">
-																			<span class="kt-switch">
-																				<label>
-																					<input type="checkbox"
-                                                                                           name="email_notification_2">
-																					<span></span>
-																				</label>
-																			</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                <div class="tab-pane" id="kt_apps_supplier_purchases" role="tabpanel">
+
+                                    <div class="kt-portlet__body" style="padding: unset">
+
+                                        <div class="kt-portlet__head kt-portlet__head--lg">
+                                            <div class="kt-portlet__head-label">
+										<span class="kt-portlet__head-icon">
+											<i class="kt-font-brand flaticon2-line-chart"></i>
+										</span>
+                                                <h3 class="kt-portlet__head-title">
+                                                    Multiple Controls
+                                                </h3>
                                             </div>
-                                            <div
-                                                class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
-                                            <div class="kt-section kt-section--first">
-                                                <div class="kt-section__body">
-                                                    <div class="row">
-                                                        <label class="col-xl-3"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <h3 class="kt-section__title kt-section__title-sm">Activity
-                                                                Related Emails:</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">When To
-                                                            Email</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="kt-checkbox-list">
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox"> You have new notifications.
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox"> You're sent a direct message
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox" checked="checked"> Someone
-                                                                    adds you as a connection
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group form-group-last row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">When To Escalate
-                                                            Emails</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="kt-checkbox-list">
-                                                                <label class="kt-checkbox kt-checkbox--brand">
-                                                                    <input type="checkbox"> Upon new order.
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox kt-checkbox--brand">
-                                                                    <input type="checkbox"> New membership approval
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox kt-checkbox--brand">
-                                                                    <input type="checkbox" checked="checked"> Member
-                                                                    registration
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
-                                            <div class="kt-section kt-section--first">
-                                                <div class="kt-section__body">
-                                                    <div class="row">
-                                                        <label class="col-xl-3"></label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <h3 class="kt-section__title kt-section__title-sm">Updates
-                                                                From Keenthemes:</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Email You
-                                                            With</label>
-                                                        <div class="col-lg-9 col-xl-6">
-                                                            <div class="kt-checkbox-list">
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox"> News about Metronic product
-                                                                    and feature updates
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox"> Tips on getting more out of
-                                                                    Keen
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox" checked="checked"> Things you
-                                                                    missed since you last logged into Keen
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox" checked="checked"> News about
-                                                                    Metronic on partner products and other services
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-checkbox">
-                                                                    <input type="checkbox" checked="checked"> Tips on
-                                                                    Metronic business products
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                            <div class="kt-portlet__head-toolbar">
+                                                <div class="kt-portlet__head-wrapper">
+                                                    <div class="kt-portlet__head-actions">
+
+                                                        <a href="{{url('purchase')}}"
+                                                           class="btn btn-brand btn-elevate btn-icon-sm"
+                                                           data-toggle="modal" data-target=".new_payment"><i
+                                                                class="la la-plus"></i>
+                                                            New Purchase
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--begin: Datatable -->
                                         <div
                                             class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                                        <div class="kt-form__actions">
-                                            <div class="row">
-                                                <div class="col-xl-3"></div>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <a href="#" class="btn btn-label-brand btn-bold">Save changes</a>
-                                                    <a href="#" class="btn btn-clean btn-bold">Cancel</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        <table id="datatable-responsive"
+                                               class="table table-striped table-bordered dt-responsive  nowrap "
+                                               cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>Purchase ID</th>
+                                                <th>Restaurant name</th>
+                                                <th>Supplier Name</th>
+                                                <th>Total price</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($supplier->purchases as $purchase)
+                                                <tr>
+                                                    <td>{{$purchase->id}}</td>
+                                                    <td>{{$purchase->restaurant->user->name}}</td>
+                                                    <td>{{$purchase->supplier->user->name}}</td>
+                                                    <td>{{$purchase->total}}</td>
+
+                                                    <td>
+                                                        <a title="Show" href="{{url('purchase/show/'.$purchase->id)}}">
+                                                            <i class="fa fa-book-open"></i></a>
+
+                                                        {{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
+                                                        {{--                                                                                                     class="flaticon-delete"></i></a>--}}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
                                 </div>
 
                                 <!--End:: Tab Content--> <!--Begin:: Tab Content-->
@@ -2278,8 +1160,10 @@
                                                 <div class="kt-portlet__head-wrapper">
                                                     <div class="kt-portlet__head-actions">
 
-                                                        <a href="{{route('payment.create')}}" class="btn btn-brand btn-elevate btn-icon-sm"
-                                                               data-toggle="modal" data-target=".new_payment" ><i class="la la-plus"></i>
+                                                        <a href="{{route('payment.create')}}"
+                                                           class="btn btn-brand btn-elevate btn-icon-sm"
+                                                           data-toggle="modal" data-target=".new_payment"><i
+                                                                class="la la-plus"></i>
                                                             New Payment
                                                         </a>
                                                     </div>
@@ -2287,51 +1171,59 @@
                                             </div>
                                         </div>
                                         <!--begin: Datatable -->
-                                        <div    class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                                    <table id="datatable-responsive"
+                                        <div
+                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
+                                        <table id="datatable-responsive"
                                                class="table table-striped table-bordered dt-responsive  nowrap "
-                                               cellspacing="0" width="100%"
-                                        >
+                                               cellspacing="0" width="100%">
                                             <thead>
                                             <tr>
                                                 <th> ID</th>
-                                                <th>Name</th>
-                                                <th>unit</th>
-                                                <th>barcode</th>
-                                                <th>reorder point</th>
-                                                <th>vat</th>
+                                                <th>Sender Id</th>
+                                                <th>Sender name</th>
+                                                <th>amount</th>
+                                                <th>method</th>
+                                                <th>due date</th>
                                                 <th>action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($payments as $payment)
+                                            @foreach($supplier->payment as $payment)
 
 
-{{--                                                <tr>--}}
-{{--                                                    <td>{{$payment->id}}</td>--}}
-{{--                                                    <td>{{$payment->name}}</td>--}}
-{{--                                                    --}}{{--                    <td>{{$product->unit->name}}</td>--}}
-{{--                                                    <td>1</td>--}}
-{{--                                                    <td>{{$payment->barcode}}</td>--}}
-{{--                                                    <td>{{$payment->reorder_point}}</td>--}}
-{{--                                                    <td>{{$payment->vat}}</td>--}}
-{{--                                                    <td>--}}
-{{--                                                        <a title="update"--}}
-{{--                                                           data-toggle="modal" data-target=".bd-example-modal-lg"--}}
-{{--                                                           data-id="{{$product->id}}" data-name="{{$product->name}}"--}}
-{{--                                                           data-unit="1"--}}
-{{--                                                           data-barcode="{{$product->barcode}}"--}}
-{{--                                                           data-vat="{{$product->vat}}"--}}
-{{--                                                           data-reorder="{{$product->reorder_point}}"><i--}}
-{{--                                                                class="flaticon-edit-1"></i>--}}
-{{--                                                        </a>--}}
-{{--                                                        <a title="delete"--}}
-{{--                                                           href="{{url('product/delete/'.$product->id)}}"> <i--}}
-{{--                                                                style="color: red"--}}
-{{--                                                                class="flaticon-delete"></i></a>--}}
-{{--                                                    </td>--}}
+                                                <tr>
+                                                    <td>{{$payment->id}}</td>
+                                                    <td>{{$payment->sender->id}}</td>
+                                                    <td>{{$payment->sender->name}}</td>
+                                                    <td>{{$payment->payment_amount}}</td>
+                                                    <td>{{$payment->payment_method}}</td>
+                                                    <td>{{$payment->due_date}}</td>
+                                                    <td><a title="delete"
+                                                           href="{{url('purchase/delete/'.$payment->id)}}">
+                                                            <i style="color: red" class="flaticon-delete"></i></a>
+                                                    </td>
+                                                {{--                                                    --}}{{--                    <td>{{$product->unit->name}}</td>--}}
+                                                {{--                                                    <td>1</td>--}}
+                                                {{--                                                    <td>{{$payment->barcode}}</td>--}}
+                                                {{--                                                    <td>{{$payment->reorder_point}}</td>--}}
+                                                {{--                                                    <td>{{$payment->vat}}</td>--}}
+                                                {{--                                                    <td>--}}
+                                                {{--                                                        <a title="update"--}}
+                                                {{--                                                           data-toggle="modal" data-target=".bd-example-modal-lg"--}}
+                                                {{--                                                           data-id="{{$product->id}}" data-name="{{$product->name}}"--}}
+                                                {{--                                                           data-unit="1"--}}
+                                                {{--                                                           data-barcode="{{$product->barcode}}"--}}
+                                                {{--                                                           data-vat="{{$product->vat}}"--}}
+                                                {{--                                                           data-reorder="{{$product->reorder_point}}"><i--}}
+                                                {{--                                                                class="flaticon-edit-1"></i>--}}
+                                                {{--                                                        </a>--}}
+                                                {{--                                                        <a title="delete"--}}
+                                                {{--                                                           href="{{url('product/delete/'.$product->id)}}"> <i--}}
+                                                {{--                                                                style="color: red"--}}
+                                                {{--                                                                class="flaticon-delete"></i></a>--}}
+                                                {{--                                                    </td>--}}
 
-{{--                                                </tr>--}}
+                                                {{--                                                </tr>--}}
                                             @endforeach
                                             {{--                {{dd($products)}}--}}
 
@@ -2342,29 +1234,28 @@
                                     </div>
 
 
+                                    <div
+                                        class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
 
-                                <div
-                                    class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
+                                    <div class="kt-form__actions">
 
-                                <div class="kt-form__actions">
-
+                                    </div>
+                                    </form>
                                 </div>
-                                </form>
-                            </div>
 
-                            <!--End:: Tab Content-->
+                                <!--End:: Tab Content-->
+                            </div>
                         </div>
                     </div>
+
+                    <!--End:: Portlet-->
                 </div>
 
-                <!--End:: Portlet-->
+
             </div>
-
-
         </div>
-    </div>
 
-    <!-- end:: Content -->
+        <!-- end:: Content -->
     </div>
 
 
@@ -2376,7 +1267,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{url('payment.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('payment/store')}}" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title">Update Product</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -2393,10 +1284,9 @@
                                     <label for=""
                                            class=" control-label"> {{ trans('main.current') }}  {{ trans('main.due') }}</label>
                                     <div>
-                                        <input type="text" readonly class="form-control" id="currentDue">
-                                        <input type="hidden" name="sender_id" value="{{Auth::user()->id}}" >
-                                        <input type="hidden" name="receiver_id" value="" >
-                                        {{--  value="{{$totalPursesAmount -$totalPursesPayment}}">--}}
+                                        {{--                                        <input type="text" readonly class="form-control" id="currentDue">--}}
+                                        <input type="hidden" name="sender_id" value="{{Auth::user()->id}}">
+                                        <input type="hidden" name="receiver_id" value="{{$supplier->user->id}}">
                                     </div>
                                 </div>
 
@@ -2420,8 +1310,16 @@
 
                                 </div>
                                 <div class="form-group col-12">
+                                    <label
+                                        class=" control-label">  {{ trans('main.note') }}
+                                        :</label>
+                                    <input type="text" name="note"
+                                           class="form-control" id="note">
+
+                                </div>
+                                <div class="form-group col-12">
                                     <label class=control-label">{{ trans('main.file') }} :</label>
-                                    <input type="file" name="image" class="form-control">
+                                    <input type="file" name="file" class="form-control">
 
 
                                 </div>
@@ -2434,11 +1332,192 @@
                         <div class="col-12 pull-left">
                             <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">supmit</button>
                         </div>
-                    </div>                    </form>
+                    </div>
+                </form>
 
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade update_phone" id="update_phone" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="{{url('phone/update')}}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update Phone</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        @csrf
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>id</label>
+                                    <input type="text" readonly class="form-control" name="id">
+                                </div>
+                                <div class="col-12">
+                                    <label>phone</label>
+                                    <input type="text" class="form-control" name="phone">
+                                </div>
+                                <div class="col-12">
+
+                                    <label>type</label>
+                                    <input type="text" class="form-control" name="type">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-12 pull-left">
+                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">supmit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade update_address" id="update_address" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="{{url('address/update')}}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update phone</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        @csrf
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>id</label>
+                                    <input type="text" readonly class="form-control" name="id">
+                                </div>
+                                <div class="col-12">
+                                    <label>name</label>
+                                    <input type="text" class="form-control" name="address">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row kt-margin-b-10">
+                                        <div class="col-lg-5">
+                                            <label>Country</label>
+                                            <select class="form-control country" name="country"
+                                                    onchange="changecity(this)">
+                                                <option value="00">Select Country</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <label>City</label>
+
+                                            <select class="form-control" name="city_id">
+                                                <option value="00">Select City</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-2" style=" display: flex;
+  justify-content: center;
+  align-items: center">
+                                            <a href="javascript:;" data-repeater-delete=""
+                                               class="btn btn-danger btn-icon">
+                                                <i class="la la-remove"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-12 pull-left">
+                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">supmit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2459,24 +1538,50 @@
     <script src="{{asset('js/demo1/pages/crud/forms/widgets/form-repeater.js')}}" type="text/javascript"></script>
 
     <script>
+        function changecity(select) {
+
+
+            $.ajax('{{url('/')}}/states', {
+                method: 'post',
+                data: {_token: '{{@csrf_token()}}', id: $(select).val()},
+                dataType: 'JSON',
+                success: function (data) {
+                    // $('#cityoption').html('');
+                    // console.log(  $(select).parent().parent().find(' .col-lg-5:nth-child(2) select ').html('ssssss'));
+                    $(select).parent().parent().find(' .col-lg-5:nth-child(2) select').empty()
+                    for (var i = 0; i < data.length; i++) {
+                        $(select).parent().parent().find(' .col-lg-5:nth-child(2) select').append('           ' +
+                            '<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    }
+                },
+                error: function () {
+                    alert('There is an error  exist make sure you are  log in ');
+                }
+            });
+        }
+
         $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
             return $(value).val();
         };
         $(document).ready(function () {
-            // $('#updatemodel').on('show.bs.modal', function (e) {
-            //     var Id = $(e.relatedTarget).data('id');
-            //     var name = $(e.relatedTarget).data('name');
-            //     var unit = $(e.relatedTarget).data('unit');
-            //     var reorder = $(e.relatedTarget).data('reorder');
-            //     var barcode = $(e.relatedTarget).data('barcode');
-            //     var vat = $(e.relatedTarget).data('vat');
-            //     $(e.currentTarget).find('input[name="id"]').val(Id);
-            //     $(e.currentTarget).find('input[name="name"]').val(name);
-            //     $(e.currentTarget).find('select[name="unit"]').val(unit);
-            //     $(e.currentTarget).find('input[name="reorder"]').val(reorder);
-            //     $(e.currentTarget).find('input[name="barcode"]').val(barcode);
-            //     $(e.currentTarget).find('input[name="vat"]').val(vat);
-            // });
+            $('#update_address').on('show.bs.modal', function (e) {
+                var Id = $(e.relatedTarget).data('id');
+                var address = $(e.relatedTarget).data('address');
+
+                $(e.currentTarget).find('input[name="id"]').val(Id);
+                $(e.currentTarget).find('input[name="address"]').val(address);
+            });
+            $('#update_phone').on('show.bs.modal', function (e) {
+
+                var Id = $(e.relatedTarget).data('id');
+                var phone = $(e.relatedTarget).data('phone');
+                var type = $(e.relatedTarget).data('type');
+                $(e.currentTarget).find('input[name="id"]').val(Id);
+                $(e.currentTarget).find('input[name="phone"]').val(phone);
+                $(e.currentTarget).find('input[name="type"]').val(type);
+            });
+
+
             $("#datatable-responsive").DataTable({
                 order: [0, 'desc'],
                 dom: 'Bfrtip',

@@ -10,6 +10,8 @@ use App\Supplier;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class SupplierController extends Controller
 {
@@ -51,10 +53,17 @@ class SupplierController extends Controller
         $user->password=Hash::make($request->password);
         $user->save();
 
+
+//
+//        $role = Role::create(['name' => 'writer']);
+//        $permission = Permission::create(['name' => 'edit articles']);
+
+        $user->assignRole('writer');
         $supplier=new Supplier();
         $supplier->start_balance	=$request->balance;
         $supplier->user_id=$user->id;
         $supplier->save();
+
 
       foreach ($request->phone_g as $item){
           $phone=new Phone();
@@ -88,9 +97,15 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        $payments=[];
-        $supplier=user::find(5);
-        return  view('frontend.supplier.show')->with(compact('payments','supplier'));
+        $supplier=User::find($id);
+        $supplier=$supplier->supplier;
+
+        $payments=$supplier->payment;
+        $countries=Country::all();
+//        dd($supplier);
+
+        return  view('frontend.supplier.show')
+            ->with(compact('payments','supplier','countries'));
     }
 
     /**
@@ -113,7 +128,42 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user=User::findOrFail($id) ;
+        $user->email=$request->email;
+        $user->name=$request->name;
+        $user->save();
+
+
+//
+//        $role = Role::create(['name' => 'writer']);
+//        $permission = Permission::create(['name' => 'edit articles']);
+
+        $user->assignRole('writer');
+        $supplier=$user->supplier;
+        $supplier->start_balance	=$request->balance;
+        $supplier->save();
+
+
+        foreach ($request->phone_g as $item){
+            $phone=new Phone();
+            $phone->phone=$item['phone'];
+            $phone->type=$item['type'];
+            $phone->user_id=$user->id;;
+            $phone->save();
+
+        }
+        foreach ($request->address_g as $item){
+            if(isset($item['address'])) {
+                $address = new Address();
+                $address->address = $item['address'];
+                if (isset($item['city']))
+                    $address->city_id = $item['city'];
+                $address->user_id = $user->id;;
+                $address->save();
+            }
+        }
+
+
     }
 
     /**
@@ -125,10 +175,31 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         //
-    } public function states(Request $request)
+    }
+
+    public function states(Request $request)
     {
-$cities=State::where('country_id',$request->id)->get();
+        $cities=State::where('country_id',$request->id)->get();
         return response()->json($cities,200);
+        //
+    }
+
+    public function updateAddress(Request $request)
+    {
+        $address            =Address::findOrFail($request->id);
+        $address->address   =$request->address;
+        $address->city_id   =$request->city_id;
+        $address->save();
+        return redirect()->back();
+        //
+    }
+    public function updatePhone(Request $request)
+    {
+        $phone            =Phone::findOrFail($request->id);
+        $phone->phone     =$request->phone;
+        $phone->type      =$request->type;
+        $phone->save();
+        return redirect()->back();
         //
     }
 }
