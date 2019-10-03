@@ -12,4 +12,19 @@ class Restaurant extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function purchases()
+    {
+        return $this->hasMany(Purse::class,'restaurant_id','user_id');
+    }
+
+    public function paySupplier()
+    {
+        return $this->hasMany(Payment::class,'sender_id','user_id');
+    }
+    public function branches()
+    {
+        return $this->hasMany(Restaurant::class,'parent_id','user_id');
+    }
+//
+
 }

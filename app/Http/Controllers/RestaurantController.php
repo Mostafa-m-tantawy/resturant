@@ -1,0 +1,209 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Address;
+use App\Country;
+use App\Phone;
+use App\Restaurant;
+use App\State;
+use App\Supplier;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+class RestaurantController extends Controller
+{
+    public function index()
+    {
+        $branches = Restaurant::where('parent_id', Auth::user()->id)->get();
+        $mainRestaurant = Restaurant::where('user_id', Auth::user()->id)->first();
+//dd($mainRestaurant);
+        return view('frontend.restaurant.index')->with(compact('branches', 'mainRestaurant'));
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        $countries = Country::all();
+        return view('frontend.restaurant.create')->with(compact('countries'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = new User;
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+
+//
+//        $role = Role::create(['name' => 'writer']);
+//        $permission = Permission::create(['name' => 'edit articles']);
+        if ($request->branch == 'on') {
+            $restaurant = new Restaurant;
+            $restaurant->user_id = $user->id;
+            $restaurant->parent_id = Auth::user()->id;
+            $restaurant->save();
+        } else {
+            $restaurant = new Restaurant;
+            $restaurant->user_id = $user->id;
+            $restaurant->save();
+        }
+        $user->assignRole('writer');
+        $supplier = new Supplier();
+        $supplier->user_id = $user->id;
+        $supplier->save();
+
+
+        foreach ($request->phone_g as $item) {
+            $phone = new Phone();
+            $phone->phone = $item['phone'];
+            $phone->type = $item['type'];
+            $phone->user_id = $user->id;;
+            $phone->save();
+
+        }
+        foreach ($request->address_g as $item) {
+            if (isset($item['address'])) {
+                $address = new Address();
+                $address->address = $item['address'];
+                if (isset($item['city']))
+                    $address->city_id = $item['city'];
+                $address->user_id = $user->id;;
+                $address->save();
+            }
+        }
+        return redirect()->back();
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+
+        $restaurant = $user->restaurant;
+        $countries = Country::all();
+//        dd($restaurant->paySupplier);
+        return view('frontend.restaurant.show')
+            ->with(compact('restaurant', 'countries'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->save();
+
+
+//
+//        $role = Role::create(['name' => 'writer']);
+//        $permission = Permission::create(['name' => 'edit articles']);
+
+        $user->assignRole('writer');
+        $supplier = $user->supplier;
+        $supplier->start_balance = $request->balance;
+        $supplier->save();
+
+        if (is_array($request->phone_g))
+            foreach ($request->phone_g as $item) {
+                $phone = new Phone();
+                $phone->phone = $item['phone'];
+                $phone->type = $item['type'];
+                $phone->user_id = $user->id;;
+                $phone->save();
+
+            }
+        if (is_array($request->phone_g))
+            foreach ($request->address_g as $item) {
+                if (isset($item['address'])) {
+                    $address = new Address();
+                    $address->address = $item['address'];
+                    if (isset($item['city']))
+                        $address->city_id = $item['city'];
+                    $address->user_id = $user->id;;
+                    $address->save();
+                }
+            }
+
+        return redirect()->back();
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    public function states(Request $request)
+    {
+        $cities = State::where('country_id', $request->id)->get();
+        return response()->json($cities, 200);
+        //
+    }
+
+    public function updateAddress(Request $request)
+    {
+        $address = Address::findOrFail($request->id);
+        $address->address = $request->address;
+        $address->city_id = $request->city_id;
+        $address->save();
+        return redirect()->back();
+        //
+    }
+
+    public function updatePhone(Request $request)
+    {
+        $phone = Phone::findOrFail($request->id);
+        $phone->phone = $request->phone;
+        $phone->type = $request->type;
+        $phone->save();
+        return redirect()->back();
+        //
+    }
+}

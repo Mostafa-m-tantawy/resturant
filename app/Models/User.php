@@ -47,4 +47,7 @@ class User extends Authenticatable
     public function supplier(){
         return $this->hasOne(Supplier::class);
     }
+    public function restaurant(){
+        return $this->hasOne(Restaurant::class);
+    }
 }

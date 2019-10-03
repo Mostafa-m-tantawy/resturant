@@ -23,6 +23,7 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers=Supplier::all();
+//        dd($suppliers);
         return  view('frontend.supplier.index')->with(compact('suppliers'));
         //
     }
@@ -83,6 +84,7 @@ class SupplierController extends Controller
               $address->save();
           }
       }
+        return redirect()->back();
 
 
 
@@ -143,7 +145,7 @@ class SupplierController extends Controller
         $supplier->start_balance	=$request->balance;
         $supplier->save();
 
-
+if(is_array( $request->phone_g))
         foreach ($request->phone_g as $item){
             $phone=new Phone();
             $phone->phone=$item['phone'];
@@ -152,6 +154,7 @@ class SupplierController extends Controller
             $phone->save();
 
         }
+        if(is_array( $request->phone_g))
         foreach ($request->address_g as $item){
             if(isset($item['address'])) {
                 $address = new Address();
@@ -163,6 +166,7 @@ class SupplierController extends Controller
             }
         }
 
+        return redirect()->back();
 
     }
 

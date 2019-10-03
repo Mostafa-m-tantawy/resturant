@@ -24,7 +24,7 @@ class Purse extends Model
     }
     public function restaurant()
     {
-        return $this->belongsTo(Restaurant::class,'restaurant_id');
+        return $this->belongsTo(Restaurant::class,'restaurant_id','user_id');
     }
 
     public function pursesPayments()

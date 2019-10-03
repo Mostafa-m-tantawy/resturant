@@ -17,6 +17,10 @@ Route::resource('supplier','SupplierController');
 Route::post ('address/update',     'SupplierController@updateAddress');
 Route::post ('phone/update',     'SupplierController@updatePhone');
 
+
+
+Route::resource('restaurant','RestaurantController');
+
 Route::any  ('product/create/{supplier_id}',    'ProductController@products');
 Route::post ('product/update/{supplier_id}',     'ProductController@updateProduct');
 Route::get  ('product/delete/{supplier_id}',     'ProductController@deleteProduct');
@@ -28,7 +32,7 @@ Route::post ('unit/update',     'UnitController@update');
 
 
 Route::get ('purchase',     'PursesController@addPurchase');
-Route::get ('purchase/index',     'PursesController@index');
+//Route::get ('purchase/index',     'PursesController@index');
 Route::get('/get-unit-of-product/{id}','PursesController@getUnitOfProduct');
 Route::post('/save-purses','PursesController@savePurses');
 Route::get('purchase/show/{id}','PursesController@editPurses');
