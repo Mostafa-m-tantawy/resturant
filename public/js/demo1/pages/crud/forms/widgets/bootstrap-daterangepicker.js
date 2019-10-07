@@ -1,7 +1,7 @@
 // Class definition
 
 var KTBootstrapDaterangepicker = function () {
-    
+
     // Private functions
     var demos = function () {
         // minimum setup
@@ -96,7 +96,7 @@ var KTBootstrapDaterangepicker = function () {
                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             }
         }, function(start, end, label) {
-            $('#kt_daterangepicker_6 .form-control').val( start.format('MM/DD/YYYY') + ' / ' + end.format('MM/DD/YYYY'));
+            $('#kt_daterangepicker_6 .form-control').val( start.format('YYYY-MM-DD') + ' / ' + end.format('YYYY-MM-DD'));
         });
     }
 
@@ -126,13 +126,13 @@ var KTBootstrapDaterangepicker = function () {
             cancelClass: 'btn-secondary'
         }, function(start, end, label) {
             $('#kt_daterangepicker_3_validate .form-control').val( start.format('YYYY-MM-DD') + ' / ' + end.format('YYYY-MM-DD'));
-        });        
+        });
     }
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
             validationDemos();
         }
     };

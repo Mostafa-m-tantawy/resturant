@@ -1,11 +1,11 @@
 // Class definition
 
 var KTBootstrapMaxlength = function () {
-    
+
     // Private functions
     var demos = function () {
         // minimum setup
-        $('#kt_maxlength_1').maxlength({
+        $('#kt_maxlength_1').max({
             warningClass: "kt-badge kt-badge--warning kt-badge--rounded kt-badge--inline",
             limitReachedClass: "kt-badge kt-badge--success kt-badge--rounded kt-badge--inline"
         });
@@ -118,7 +118,7 @@ var KTBootstrapMaxlength = function () {
     return {
         // public functions
         init: function() {
-            demos();  
+            demos();
         }
     };
 }();

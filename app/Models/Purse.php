@@ -10,7 +10,7 @@ class Purse extends Model
 
     public function supplier()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Supplier::class,'supplier_id');
     }
 
     public function pursesProducts()
@@ -24,7 +24,7 @@ class Purse extends Model
     }
     public function restaurant()
     {
-        return $this->belongsTo(Restaurant::class,'restaurant_id','user_id');
+        return $this->belongsTo(Restaurant::class,'restaurant_id');
     }
 
     public function pursesPayments()

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePursesProductsTable extends Migration
+class CreateReturndetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePursesProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('purses_products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('purse_id');
+        Schema::create('returndetails', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('return_header_id');
             $table->unsignedInteger('product_id');
-            $table->double('quantity');
-            $table->double('unit_price');
+            $table->double('quantity')->nullable();;
+            $table->double('unit_price')->nullable();;
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreatePursesProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purses_products');
+        Schema::dropIfExists('returndetails');
     }
 }

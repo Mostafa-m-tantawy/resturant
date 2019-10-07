@@ -26,7 +26,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{route('department.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 New Record
                             </a>
@@ -44,21 +44,28 @@
             <tr>
                 <th> ID</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Products</th>
+                <th>description</th>
                 <th>profile</th>
+{{--                <th>delete</th>--}}
             </tr>
             </thead>
             <tbody>
-           @foreach($suppliers as $supplier)
+           @foreach($departments as $department)
                <tr>
-                    <td>{{$supplier->id}}</td>
-                    <td>{{$supplier->user->name}}</td>
-                    <td>{{$supplier->user->email}}</td>
+                    <td>{{$department->id}}</td>
+                    <td>{{$department->name}}</td>
+                    <td>{{$department->description}}</td>
                    <td>
-                       <a href="{{url('product/create/'.$supplier->id)}}" title="products"> <span>Products</span><i  class="la la-edit" style="font-size: 25px;"></i></a>
-                      </td><td><a href="{{url('supplier/'.$supplier->id)}}"title="profile">
-                       <span>Profile</span><i class="socicon-persona"style=" padding:5px; top:10px;font-size: 25px;"></i></a></td>
+                       <a href="{{url('department/'.$department->id)}}" title="products">
+                           <span>Profile</span>
+                           <i  class="la la-edit" style="font-size: 25px;"></i></a>
+                      </td>
+{{--                   <td>--}}
+{{--                       <a title="products" data-toggle="modal" data-target=".delete_department"--}}
+{{--                          data-id="{{$department->id}}" >--}}
+{{--                           <span>Profile</span>--}}
+{{--                           <i  class="la la-edit" style="font-size: 25px;"></i></a>--}}
+{{--                      </td>--}}
             </tr>
                @endforeach
 

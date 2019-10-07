@@ -22,7 +22,7 @@ class UnitController extends Controller
         }
 
         $units = Unit::all();
-        return view('frontend.supplier.units.units')->with(compact('units'));
+        return view('frontend.units.units')->with(compact('units'));
 
     }
 

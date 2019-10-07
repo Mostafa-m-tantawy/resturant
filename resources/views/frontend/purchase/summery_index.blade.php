@@ -1,6 +1,6 @@
 @extends('layouts.welcome')
 @section('head')
-    <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @stop
 @section('content')
     <!-- begin:: Content -->
@@ -26,9 +26,9 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                New Purchase
                             </a>
                         </div>
                     </div>
@@ -42,40 +42,26 @@
                        width="100%">
                     <thead>
                     <tr>
-                        <th> ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Type</th>
-                        <th>profile</th>
+                        <th>Purchase ID</th>
+                        <th>Restaurant name</th>
+                        <th>Supplier Name</th>
+                        <th>Total price</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($purses as $purchase)
+                        <tr>
+                            <td>{{$purchase->id}}</td>
+                            <td>{{$purchase->restaurant->user->name}}</td>
+                            <td>{{$purchase->supplier->user->name}}</td>
+                            <td>{{$purchase->total}}</td>
 
-                    @if($mainRestaurant)
-                        <tr>
-                            <td>{{$mainRestaurant->id}}</td>
-                            <td>{{$mainRestaurant->user->name}}</td>
-                            <td>{{$mainRestaurant->user->email}}</td>
-                            <td>Main Office</td>
                             <td>
-                                <a href="{{url('restaurant/'.$mainRestaurant->id)}}" title="profile">
-                                    <span>Profile</span>
-                                    <i class="socicon-persona" style=" padding:5px; top:10px;font-size: 25px;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @endif
-                    @foreach($branches as $branche)
-                        <tr>
-                            <td>{{$branche->id}}</td>
-                            <td>{{$branche->user->name}}</td>
-                            <td>{{$branche->user->email}}</td>
-                            <td>Branch</td>
-                            <td>
-                                <a href="{{url('restaurant/'.$branche->id)}}" title="profile">
-                                    <span>Profile</span>
-                                    <i class="socicon-persona" style=" padding:5px; top:10px;font-size: 25px;"></i>
-                                </a>
+                                <a title="Show" href="{{url('purchase/show/'.$purchase->id)}}"> <i  class="fa fa-book-open"></i></a>
+
+{{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
+{{--                                                                                                     class="flaticon-delete"></i></a>--}}
                             </td>
                         </tr>
                     @endforeach
@@ -98,10 +84,33 @@
                 order: [0, 'desc'],
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'excel', 'pdf', 'print'
+                    'copy', 'excel', 'pdf','print'
                 ],
-            });
-        })
+            });  })
     </script>
 
 @stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

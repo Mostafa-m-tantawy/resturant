@@ -55,11 +55,6 @@ class SupplierController extends Controller
         $user->save();
 
 
-//
-//        $role = Role::create(['name' => 'writer']);
-//        $permission = Permission::create(['name' => 'edit articles']);
-
-        $user->assignRole('writer');
         $supplier=new Supplier();
         $supplier->start_balance	=$request->balance;
         $supplier->user_id=$user->id;
@@ -99,12 +94,10 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        $supplier=User::find($id);
-        $supplier=$supplier->supplier;
-
+        $supplier=Supplier::findOrFail($id);
         $payments=$supplier->payment;
         $countries=Country::all();
-//        dd($supplier);
+
 
         return  view('frontend.supplier.show')
             ->with(compact('payments','supplier','countries'));
@@ -130,33 +123,29 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::findOrFail($id) ;
+
+        $supplier=Supplier::findOrFail($id);
+        $supplier->start_balance	=$request->balance;
+        $supplier->save();
+
+        $user=$supplier->user ;
         $user->email=$request->email;
         $user->name=$request->name;
         $user->save();
 
 
-//
-//        $role = Role::create(['name' => 'writer']);
-//        $permission = Permission::create(['name' => 'edit articles']);
-
-        $user->assignRole('writer');
-        $supplier=$user->supplier;
-        $supplier->start_balance	=$request->balance;
-        $supplier->save();
-
-if(is_array( $request->phone_g))
-        foreach ($request->phone_g as $item){
-            $phone=new Phone();
-            $phone->phone=$item['phone'];
-            $phone->type=$item['type'];
-            $phone->user_id=$user->id;;
-            $phone->save();
-
-        }
         if(is_array( $request->phone_g))
-        foreach ($request->address_g as $item){
-            if(isset($item['address'])) {
+            foreach ($request->phone_g as $item){
+                $phone=new Phone();
+                $phone->phone=$item['phone'];
+                $phone->type=$item['type'];
+                $phone->user_id=$user->id;;
+                $phone->save();
+
+            }
+        if(is_array( $request->phone_g))
+            foreach ($request->address_g as $item){
+                if(isset($item['address'])) {
                 $address = new Address();
                 $address->address = $item['address'];
                 if (isset($item['city']))

@@ -9,8 +9,10 @@ use App\ProductType;
 use App\PursesProduct;
 use App\Recipe;
 use App\Unit;
+use App\User;
 use Hyn\Tenancy\Environment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
@@ -22,14 +24,54 @@ class StockController extends Controller
      * Current stock
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function allStock()
+    public function index(Request $request)
     {
-        $items = Product::all();
-        $product_type = ProductType::all();
-        return view('user.admin.stock.all-item', [
-            'items' => $items,
-            'product_types' => $product_type
-        ]);
+        $from  =null;
+        $to    =null;
+        $method=null;
+        if( $request->isMethod('post')){
+            $method=$request->price_math_method;
+
+        if($request->price_math_method!='last_price'){
+
+            // lenght 10 date = (01/01/2001) =10
+            $from   =substr($request->rangeofdate,0,10);
+            // start  13 date = (01/01/2001 */*)=13
+            $to     =substr($request->rangeofdate,13,10);
+        }
+
+        $restaurant_id=Auth::user()->restaurant->id;
+
+        $products=Product::whereHas('purchasedProduct',function ($q)use($restaurant_id){
+
+            $q->whereHas('purse',function ($qq)use($restaurant_id){
+
+                $qq->where('restaurant_id',$restaurant_id);
+            });
+        })->get();
+            return view('frontend.stock.index')->with(compact('products','from','to','method'));
+
+        }
+        return view('frontend.stock.index')->with(compact('from','to','method'));;
+
+
+
+
+
+    }
+    /**
+     * Current stock
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function assign()
+    {
+       $products=Product::whereHas('purchasedProduct',function ($q){
+           $q->whereHas('purse',function ($qq){
+              $qq->where('restaurant_id',Auth::user()->retaurant->id);
+           });
+       })->get();
+
+        return view('user.admin.stock.all-item')->with(compact('products'));
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Restaurant;
 use App\Supplier;
 use App\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PursesController extends Controller
 {
@@ -34,10 +35,19 @@ class PursesController extends Controller
      * All purses
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function SummeryIndex()
     {
-        $purses = Purse::all();
-        return view('frontend.purchase.index',[
+        $purses = Purse::where('restaurant_id',Auth::user()->restaurant->id)->get();
+        return view('frontend.purchase.summery_index',[
+            'purses'            =>      $purses
+        ]);
+    }
+    public function detailedIndex()
+    {
+
+        $purses = Purse::where('restaurant_id',Auth::user()->restaurant->id)->get();
+
+        return view('frontend.purchase.detailed_index',[
             'purses'            =>      $purses
         ]);
     }
@@ -50,7 +60,8 @@ class PursesController extends Controller
     public function editPurses($id)
     {
         $purses = Purse::findOrFail($id);
-        $products = Product::orderBy('name')->get();
+        $products=$purses->supplier->products;
+
         $suppliers = Supplier::all();
         $unit = Unit::all();
 
@@ -75,7 +86,7 @@ class PursesController extends Controller
         $purses = new Purse();
         $purses->supplier_id = $request->get('supplier_id');
         $purses->user_id = $user->id;
-        $purses->restaurant_id = $user->id;
+        $purses->restaurant_id = $user->restaurant->id;
 //        if ($request->hasFile('image')) {
 //            $images = $request->file('image');
 //            $filename_images = date("dmY-his") . $images->getClientOriginalName();
@@ -94,7 +105,6 @@ class PursesController extends Controller
                 $pursesProduct->product_id = $product->productId;
                 $pursesProduct->quantity = $purse->quantity;
                 $pursesProduct->unit_price = $unit->unitPrice;
-                $pursesProduct->vat_value =($pursesProduct->quantity * $pursesProduct->unit_price)*($product->vat/100);
 
                 if ($pursesProduct->save()) {
 //                    $producttocook=Product::find($product->productId);
@@ -184,7 +194,6 @@ class PursesController extends Controller
         $pursesProduct->product_id = $request->get('product_id');
         $pursesProduct->quantity = $request->get('quantity');
         $pursesProduct->unit_price = $request->get('unit_price');
-        $pursesProduct->vat_value = $request->get('vat');
         if($pursesProduct->save()){
             return redirect()->back();
         }
@@ -195,16 +204,13 @@ class PursesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deletePurses($id)
+
+
+    public function supplierProducts($id)
     {
-        $purses = Purse::findOrFail($id);
-        PursesProduct::where('purse_id',$purses->id)->delete();
-        PursesPayment::where('purse_id',$purses->id)->delete();
-        if($purses->delete()){
-            return redirect()->back()->with('delete_success','Purses has been deleted successfully');
-        }else{
-            return redirect()->back()->with('delete_error','Purses cannot delete');
-        }
+        $products=Supplier::find($id)->products;
+        return response()->json($products,200);
+
     }
 
 

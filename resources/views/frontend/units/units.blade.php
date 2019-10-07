@@ -2,9 +2,6 @@
 @section('head')
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
-@section('header')
-
-@stop
 
 @section('content')
     <!-- begin:: Content -->

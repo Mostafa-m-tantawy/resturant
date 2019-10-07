@@ -89,10 +89,10 @@
                     </div>
 
                     <!--begin::Form-->
-                    <form class="kt-form kt-form--label-right" method="post" action="{{route('supplier.store')}}">
+                    <form class="kt-form kt-form--label-right" method="post" action="{{route('department.store')}}">
                       @csrf  <div class="kt-portlet__body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <h3>Personal Information</h3>
                                     <div class="form-group row">
                                         <div class="col-12">
@@ -101,106 +101,11 @@
                                             <span class="form-text text-muted">Please enter your full name</span>
                                         </div>
                                         <div class="col-12">
-                                            <label class="">Email:</label>
-                                            <input type="email"required name="email" class="form-control" placeholder="Enter email">
+                                            <label class="">description :</label>
+                                            <input type="text" name="description" class="form-control" placeholder="Enter description">
                                             <span class="form-text text-muted">Please enter your email</span>
                                         </div>
-                                        <div class="col-12">
-                                            <label>Password :</label>
-                                            <input type="password" required name="password" class="form-control" placeholder="********">
-                                            <span class="form-text text-muted">Please enter password</span>
-                                        </div>
-                                        <div class="col-12">
-                                            <label>Start Balance :</label>
-                                            <input type="number" step='0.01' name="balance" class="form-control">
-                                            <span class="form-text text-muted">Please enter start balance</span>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-4" id="kt_repeater_1">
-                                    <h3>Contact Information<a href="javascript:;" data-repeater-create="" class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                            <i class="la la-plus"></i> Add
-                                        </a></h3>
-                                        <div class="repeater" class="form-group  row">
-                                            <div data-repeater-list="phone_g" class="col-lg-12">
-                                                <div data-repeater-item class="row kt-margin-b-10">
-                                                    <div class="col-lg-5">
-                                                        <label>Phone</label>
-
-                                                        <div class="input-group">
-
-                                                            <input type="text" required class="form-control form-control-danger" name="phone" placeholder="012**********">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-5">
-                                                        <label>Type</label>
-
-                                                        <div class=" form-group input-group">
-
-                                                            <input type="text" required class="form-control form-control-danger"name="type" placeholder="Ex: office">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-2" style=" display: flex;
-  justify-content: center;
-  align-items: center">
-                                                        <a href="javascript:;" data-repeater-delete="" class="btn btn-danger btn-icon">
-                                                            <i class="la la-remove"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                </div>
-
-                                <div class="col-md-4" id="kt_repeater_2"class="repeater">
-                                    <h3>Addresses Information<a href="javascript:;" data-repeater-create="" class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                            <i class="la la-plus"></i> Add
-                                        </a></h3>
-                                    <div data-repeater-list="address_g">
-                                    <div class="form-group form-group-last row"  data-repeater-item>
-
-                                        <div class="col-lg-12">
-                                            <label>Address:</label>
-                                            <div class="kt-input-icon kt-input-icon--right">
-                                                <input type="text" name="address" class="form-control"
-                                                      required placeholder="Enter your address">
-                                                <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i
-                                                            class="la la-map-marker"></i></span></span>
-                                            </div>
-                                            <span class="form-text text-muted">Please enter your address</span>
-                                        </div>
-                                        <div  class="col-lg-12">
-                                            <div  class="row kt-margin-b-10">
-                                                <div class="col-lg-5">
-                                                    <label>Country</label>
-                                                        <select class="form-control country"name="country" onchange="changecity(this)">
-                                                            <option value="00">Select Country</option>
-                                                           @foreach($countries as $country)
-                                                                <option value="{{$country->id}}">{{$country->name}}</option>
-@endforeach
-                                                        </select>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <label>City</label>
-
-                                                        <select class="form-control" name="city">
-                                                            <option value="00">Select City</option>
-
-                                                        </select>
-                                                </div>
-                                                <div class="col-lg-2" style=" display: flex;
-  justify-content: center;
-  align-items: center">
-                                                    <a href="javascript:;" data-repeater-delete="" class="btn btn-danger btn-icon">
-                                                        <i class="la la-remove"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
                                     </div>
                                 </div>
 

@@ -19,21 +19,34 @@
                                 {{csrf_field()}}
                                 <div class="row">
                                     <div class="form-group col-4">
-                                           <label for="" class=" control-label">  {{ trans('main.supplier') }}</label>
-                                        <select name="supplier_id" id="supplier_id" class="form-control " required>
+                                        <label for=""
+                                               class=" control-label">  {{ trans('main.assign') }} {{ trans('main.type') }}</label>
+                                        <select name="type" id="type" class="form-control " required>
                                             <option
                                                 value=""> {{ trans('main.select') }}  {{ trans('main.one') }}</option>
-                                            @foreach($suppliers as $supplier)
-                                                <option value="{{$supplier->id}}">{{$supplier->user->name}}</option>
-                                            @endforeach
+                                            <option value="branch"> {{ trans('main.branch') }} </option>
+                                            <option value="department"> {{ trans('main.department') }} </option>
+
                                         </select>
                                     </div>
+                                    <div class="form-group col-4">
+                                        <label for=""
+                                               class=" control-label">  {{ trans('main.assign') }} {{ trans('main.to') }}</label>
+                                        <select name="assignable_id" id="assignable_id" class="form-control " required>
 
+                                        </select>
+                                    </div>
                                     <div class="form-group col-4">
                                         <label for=""
                                                class=" control-label"> {{ trans('main.select') }}  {{ trans('main.product') }}</label>
-                                        <select name="product_id" id="product" class="form-control" required>
-
+                                        <select name="product" id="product" class="form-control" required>
+                                            <option value=""> {{ trans('main.select') }}   {{ trans('main.product') }} </option>
+                                            @foreach( $products as $product)
+                                                @if($product->quantityAvailable)
+                                                    <option value="{{$product->id}}"
+                                                            data-quantity="{{$product->quantity}}">{{$product->name}}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -42,40 +55,13 @@
                                                for="example-email"> {{ trans('main.quantity') }} (
                                             <span class="input-group-addon" id="unit"> </span>) </label>
                                         <div class="input-group ">
-                                            <input type="text" id="quantity" name="quantity"
-                                                   class="form-control"
-                                                   placeholder="Quantity">
-                                         </div>
+                                            <input type="number" required id="quantity" name="quantity"
+                                                   class="form-control" maxlength="12" min="0"
+                                            >
+                                        </div>
                                     </div>
 
 
-                                    <div class="form-group col-4">
-                                        <label class=" control-label"
-                                               for="example-email"> {{ trans('main.unit') }}  {{ trans('main.price') }}
-                                            :</label>
-                                        <input type="number" min="1" name="unit_price" class="form-control"
-                                               placeholder="Unit Price"
-                                               parsley-trigger="change" maxlength="50" required id="unitPrice">
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <label for=""
-                                               class=" control-label"> {{ trans('main.child') }}  {{ trans('main.unit') }}  {{ trans('main.price') }}
-                                        (    <span class="input-group-addon" id="child_unit"> </span>)</label>
-
-                                            <input disabled type="text" id="child_unit_price" name="quantity"
-                                                   class="form-control"
-                                                   placeholder="Child Unit Price">
-
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                            <label class=" control-label" for="example-email"> {{ trans('main.gross') }}  {{ trans('main.price') }}</label>
-                                            <input disabled type="number" min="1" name="product_name"
-                                                   class="form-control" placeholder="Gross Price" required id="grossPrice">
-
-
-                                    </div>
 
                                     <div class="form-group col-12">
                                         <label class="col-md-2 control-label"></label>
@@ -91,17 +77,16 @@
 
                             <div class="p-20">
                                 <div class="table-responsive">
-                                    <table class="table m-0">
+                                    <table id="datatable-responsive"
+                                           class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th> {{ trans('main.supplier') }}</th>
+                                            <th> {{ trans('main.assign') }} {{ trans('main.type') }}</th>
+                                            <th> {{ trans('main.assign') }} {{ trans('main.to') }}</th>
                                             <th> {{ trans('main.product') }}</th>
-                                            <th width="100px"> {{ trans('main.quantity') }}</th>
-                                            <th width="150px">Unit Price</th>
-                                            <th> {{ trans('main.child') }}  {{ trans('main.unit') }}  {{ trans('main.price') }}</th>
-                                            <th> {{ trans('main.gross') }}  {{ trans('main.price') }}</th>
-                                            <th width="95px"> {{ trans('main.action') }}</th>
+                                            <th > {{ trans('main.quantity')}}</th>
+                                            <th > {{ trans('main.action') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody id="pursesDetailsRender">
@@ -127,8 +112,7 @@
 
 @section('scripts')
 
-    <script src="{{ url('/app_js/PursesController.js') }}"></script>
-
+    <script src="{{ url('/app_js/AssignController.js') }}"></script>
 
 
 @endsection

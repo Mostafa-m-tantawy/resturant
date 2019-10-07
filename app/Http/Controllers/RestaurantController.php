@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Country;
 use App\Phone;
+use App\Purse;
 use App\Restaurant;
 use App\State;
 use App\Supplier;
@@ -100,9 +101,8 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-
-        $restaurant = $user->restaurant;
+        $restaurant = Restaurant::find($id);
+//dd($restaurant->purchases[0]->restaurant->user);
         $countries = Country::all();
 //        dd($restaurant->paySupplier);
         return view('frontend.restaurant.show')
@@ -129,20 +129,12 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $restaurant=Restaurant::findOrFail($id);
+        $user = $restaurant->user;
         $user->email = $request->email;
         $user->name = $request->name;
         $user->save();
 
-
-//
-//        $role = Role::create(['name' => 'writer']);
-//        $permission = Permission::create(['name' => 'edit articles']);
-
-        $user->assignRole('writer');
-        $supplier = $user->supplier;
-        $supplier->start_balance = $request->balance;
-        $supplier->save();
 
         if (is_array($request->phone_g))
             foreach ($request->phone_g as $item) {
@@ -206,4 +198,24 @@ class RestaurantController extends Controller
         return redirect()->back();
         //
     }
+    public function stock(Request $request,$id)
+    {
+        $purchases=Purse::where('restaurant_id',$id)->get();
+       $from  =null;
+       $to    =null;
+        $method=$request->price_math_method;
+        if($request->price_math_method!='last_price'){
+
+            // lenght 10 date = (01/01/2001) =10
+            $from   =substr($request->rangeofdate,0,10);
+            // start  13 date = (01/01/2001 */*)=13
+            $to     =substr($request->rangeofdate,13,10);
+        }
+
+//        return redirect('restaurant/'.$id.'?from='.$from.'&to='.$to.'&method='.$method.'#kt_apps_stock_of_branch');
+        return redirect('restaurant/'.$id.'#kt_apps_stock_of_branch')->with(compact('purchases','method','from','to'));
+
+    }
+
+
 }

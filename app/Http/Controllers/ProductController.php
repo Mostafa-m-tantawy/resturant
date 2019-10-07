@@ -30,7 +30,7 @@ class ProductController extends Controller
 
         $products = Product::where('supplier_id', $supplier_id)->get();
         $units=Unit::all();
-        return view('frontend.supplier.products.products')
+        return view('frontend.products.products')
             ->with(compact('units','products', 'supplier_id'));
     }
 

@@ -26,9 +26,9 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                New Purchase
                             </a>
                         </div>
                     </div>
@@ -42,42 +42,31 @@
                        width="100%">
                     <thead>
                     <tr>
-                        <th> ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Type</th>
-                        <th>profile</th>
+                        <th>Purchase ID</th>
+                        <th>Restaurant name</th>
+                        <th>Supplier Name</th>
+                        <th> product</th>
+                        <th> quantity</th>
+                        <th> price</th>
+                        <th> vat</th>
+                        <th> Total</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($purses as $purchase)
+                        @foreach($purchase->pursesProducts as $product)
+                            <tr>
+                                <td>{{$purchase ->id}}</td>
+                                <td>{{$purchase ->restaurant->user->name}}</td>
+                                <td>{{$purchase ->supplier->user->name}}</td>
+                                <td>{{$product  ->product->name}}</td>
+                                <td>{{$product  ->quantity}}</td>
+                                <td>{{$product  ->unit_price}}</td>
+                                <td>{{$product  ->vat}}</td>
+                                <td>{{number_format(($product->unit_price*$product->quantity)+$product->vat,2)}}</td>
 
-                    @if($mainRestaurant)
-                        <tr>
-                            <td>{{$mainRestaurant->id}}</td>
-                            <td>{{$mainRestaurant->user->name}}</td>
-                            <td>{{$mainRestaurant->user->email}}</td>
-                            <td>Main Office</td>
-                            <td>
-                                <a href="{{url('restaurant/'.$mainRestaurant->id)}}" title="profile">
-                                    <span>Profile</span>
-                                    <i class="socicon-persona" style=" padding:5px; top:10px;font-size: 25px;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @endif
-                    @foreach($branches as $branche)
-                        <tr>
-                            <td>{{$branche->id}}</td>
-                            <td>{{$branche->user->name}}</td>
-                            <td>{{$branche->user->email}}</td>
-                            <td>Branch</td>
-                            <td>
-                                <a href="{{url('restaurant/'.$branche->id)}}" title="profile">
-                                    <span>Profile</span>
-                                    <i class="socicon-persona" style=" padding:5px; top:10px;font-size: 25px;"></i>
-                                </a>
-                            </td>
-                        </tr>
+                            </tr>
+                        @endforeach
                     @endforeach
 
                     </tbody>
@@ -105,3 +94,27 @@
     </script>
 
 @stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
