@@ -14,10 +14,10 @@ class CreateTablePhones extends Migration
     public function up()
     {
         Schema::create('phones', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('phone');
             $table->string('type');
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

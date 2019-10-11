@@ -57,13 +57,28 @@ Route::get('assign/create','AssignController@CreateAssign');
 Route::post('/get-assignable/{id}','AssignController@getAssignable');
 Route::post('/save-assign','AssignController@saveAssign');
 
+// -------------------------  payment  --------------------------------
 
 Route::post('payment/store','PaymentController@savePayment')->name('payment.create');
 Route::get('purchase/delete/{id}','PaymentController@deletePayment')->name('payment.delete');
 
+//--------------------- refund-------------------------
+Route::get ('refund','RefundController@index')->name('refund.index');
+Route::get ('refund/create','RefundController@newRefund')->name('refund.create');
+Route::post('/save-refund','RefundController@saveRefund')->name('refund.store');;
+Route::get('refund/delete/{id}','RefundController@deleteRefund')->name('refund.delete');;
 
 
+//--------------------- ruined-------------------------
+Route::get ('ruined','RuinedController@index')->name('ruined.index');
+Route::get ('ruined/create','RuinedController@newRuined')->name('ruined.create');
+Route::post('/get-assignable-ruined/{id}','RuinedController@getAssignable');
+Route::post('ruined-products','RuinedController@ruinedProducts');
+Route::post('get-product-cost/{id}','RuinedController@getProductCost');
+Route::post('/save-ruined','RuinedController@saveRuined')->name('ruined.store');;
 
+// -----------------expenses ----------------------------
+Route::resource ('expenses','ExpensesController');
 
 Route::post('states','SupplierController@states');
 

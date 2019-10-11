@@ -23,8 +23,16 @@ class AssignController extends Controller
             $q->whereHas('purse',function ($qq)use($restaurant){
                 $qq->where('restaurant_id',$restaurant->id);
             });
-        })->get();
-//        dd($products[0]->quantityavailable);
+        })-> OrWhereHas('assignDetails',function ($q)use ($restaurant){
+        $q->whereHas('assignHeader',function ($qq)use($restaurant){
+            $qq->where('assignable_id',Auth ::user()->restaurant->id)->where('assignable_type','App\Restaurant');
+        });
+
+
+    })->get();
+
+
+
         return view('frontend.assign.create-assign')->with(compact('restaurant','products'));
 
     }

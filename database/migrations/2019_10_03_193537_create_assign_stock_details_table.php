@@ -14,9 +14,9 @@ class CreateAssignStockDetailsTable extends Migration
     public function up()
     {
         Schema::create('assign_stock_details', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('assign_stock_id');
-            $table->unsignedInteger('product_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('assign_stock_id');
+            $table->unsignedBigInteger('product_id');
             $table->double('quantity');
             $table->double('unit_price')->nullable();;
             $table->timestamps();

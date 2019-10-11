@@ -14,9 +14,9 @@ class CreatePursesProductsTable extends Migration
     public function up()
     {
         Schema::create('purses_products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('purse_id');
-            $table->unsignedInteger('product_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('purse_id');
+            $table->unsignedBigInteger('product_id');
             $table->double('quantity');
             $table->double('unit_price');
             $table->timestamps();

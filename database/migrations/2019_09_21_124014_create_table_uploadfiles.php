@@ -14,9 +14,9 @@ class CreateTableUploadfiles extends Migration
     public function up()
     {
         Schema::create('upload_files', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('filable_type');
-            $table->unsignedInteger('filable_id');
+            $table->unsignedBigInteger('filable_id');
             $table->string('url');
             $table->timestamps();
         });

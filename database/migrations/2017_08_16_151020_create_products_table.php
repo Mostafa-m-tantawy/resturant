@@ -14,13 +14,13 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('barcode')->nullable();
             $table->string('reorder_point')->nullable();
-            $table->unsignedInteger('product_type_id'); //stockable --non stockable --service
-            $table->unsignedInteger('unit_id');
-            $table->unsignedInteger('supplier_id');
+            $table->unsignedBigInteger('product_type_id'); //stockable --non stockable --service
+            $table->unsignedBigInteger('unit_id');
+            $table->unsignedBigInteger('supplier_id');
             $table->integer('vat')->nullable();
             $table->timestamps();
         });

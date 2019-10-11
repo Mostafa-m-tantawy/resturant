@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRuindDetailsTable extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateRuindDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ruined_details', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('ruined_header_id');
-            $table->unsignedInteger('product_id');
-            $table->double('quantity')->nullable();
-            $table->double('unit_price')->nullable();
+            $table->unsignedBigInteger('restaurant_id');
+            $table->double              ('payment_amount');
+            $table->string              ('payment_method');
+            $table->date                ('due_date')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateRuindDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ruind_details');
+        Schema::dropIfExists('expenses');
     }
 }

@@ -42,6 +42,7 @@ var KTBootstrapDaterangepicker = function () {
             applyClass: 'btn-primary',
             cancelClass: 'btn-secondary'
         }, function(start, end, label) {
+
             $('#kt_daterangepicker_3 .form-control').val( start.format('YYYY-MM-DD') + ' / ' + end.format('YYYY-MM-DD'));
         });
 
@@ -97,6 +98,7 @@ var KTBootstrapDaterangepicker = function () {
             }
         }, function(start, end, label) {
             $('#kt_daterangepicker_6 .form-control').val( start.format('YYYY-MM-DD') + ' / ' + end.format('YYYY-MM-DD'));
+            $('#kt_daterangepicker_6 .form-control').trigger('change')
         });
     }
 

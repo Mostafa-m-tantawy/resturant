@@ -1,0 +1,106 @@
+@extends('layouts.welcome')
+@section('content')
+    <!-- begin:: Content -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+										<span class="kt-portlet__head-icon">
+											<i class="kt-font-brand flaticon2-line-chart"></i>
+										</span>
+                    <h3 class="kt-portlet__head-title">
+                        Multiple Controls
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            &nbsp;
+                            <a href="{{route('expenses.index')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>
+                               All expenses
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                3 Columns Form Layout
+                            </h3>
+                        </div>
+                    </div>
+
+                    <!--begin::Form-->
+                    <form class="kt-form kt-form--label-right" method="post" action="{{route('expenses.store')}}">
+                      @csrf  <div class="kt-portlet__body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Personal Information</h3>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <label>Payment Method</label>
+                                         <select id="payment_method" class="form-control" name="payment_method">
+                                             <option value="0"> Select Method</option>
+                                             <option value="cash">Cash </option>
+                                             <option value="check">Check </option>
+                                         </select>
+                                          </div>
+                                        <div class="col-12"id="duedate"  style="display: none">
+                                            <label class="">Due Date</label>
+                                            <input type="date"  name="duedate" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="">Payment Amount</label>
+                                            <input type="number" required name="payment_amount" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label>Note :</label>
+                                            <input type="text" required name="note" class="form-control" >
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-4"></div>
+                                    <div class="col-lg-8">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--end::Form-->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+@stop
+@section('scripts')
+
+    <script>
+$('document').ready(function () {
+    $('#payment_method').change(function () {
+        $('#duedate').css('display','none');
+       if($(this).val()=='check'){
+           $('#duedate').css('display','unset');
+
+       }
+    })
+});
+</script>
+@stop

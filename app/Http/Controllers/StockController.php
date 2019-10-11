@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\CookedProduct;
-use App\DishPrice;
 use App\Product;
 use App\ProductType;
 use App\PursesProduct;
@@ -223,118 +221,6 @@ class StockController extends Controller
     }
 // I defined  $notFound_units as protected field becouse of excel function
     protected $notFound_units = [];
-
-    public function storeBatchstock(Request $request)
-    {
-
-//        $validation = $request->validate([
-//            'excel' => 'required|mimes:xls,xlt,xla,xlsx,xltx,xlsm,xltm,xlam,xlsb',
-//            'images' => 'required|mimes:zip'
-//        ]);
-
-        $tenancy = app(Environment::class);
-
-        if ($request->hasFile('excel')) {
-
-            $excel = $request->file('excel');
-            $filename = date("dmY-his") . $excel->getClientOriginalName();
-            $fulllink = 'media/imports/library';
-            Storage::disk('tenant')->put($fulllink . '/' . $filename, file_get_contents($excel), 'public');
-
-            if ($request->hasFile('images')) {
-                $images = $request->file('images');
-                $filename_images = date("dmY-his") . $images->getClientOriginalName();
-                $fulllink_images = 'media/images/library';
-                Storage::disk('tenant')->put($fulllink_images . '/' . $filename_images, file_get_contents($images), 'public');
-            }
-
-//extract from zip file images
-            $zip = new ZipArchive();
-            if ($zip->open(storage_path('app/tenancy/tenants/' . $tenancy->hostname()->website->uuid . '/' . $fulllink_images . '/' . $filename_images)) === TRUE) {
-                $zip->extractTo(storage_path('app/tenancy/tenants/' . $tenancy->hostname()->website->uuid . '/' . $fulllink_images));
-                $zip->close();
-            }
-//retrive 2 sheets of one file
-            Excel::load(storage_path('app/tenancy/tenants/' . $tenancy->hostname()->website->uuid . '/' . $fulllink . '/' . $filename), function ($reader) {
-
-                for ($i = 0; $i < count($reader->all()); $i++) {
-                    if ($reader->all()[$i]->getTitle() == 'units') {
-                        foreach ($reader->all()[$i] as $item) {
-                            if ($item->unit_name) {
-                                $unit = Unit::where( function ( $q2 ) use ( $item ) {
-                                    $q2->whereRaw( 'LOWER(`unit`) like ?', array( $item->unit_name ) );
-                                })->first();
-                                if (!$unit) {
-                                    $unit = new Unit();
-                                    $unit->unit = $item->unit_name;
-                                    $unit->child_unit = $item->child_unit;
-                                    $unit->convert_rate = $item->convert;
-                                    $unit->status = 1;
-                                    $unit->user_id = auth()->user()->id;
-                                    $unit->save();
-                                }
-                            }
-                        }
-                    } else if ($reader->all()[$i]->getTitle() == 'items') {
-
-                        $j = 1;
-                        foreach ($reader->all()[$i] as $item) {
-
-                            $product_type = ProductType::where('product_type', $item->product_name)->first();
-                            $unit = Unit::where( function ( $q2 ) use ( $item ) {
-                                    $q2->whereRaw( 'LOWER(`unit`) like ?', strtolower( $item->unit_name ) );
-                                })->first();
-//                            where('unit', $item->unit_name)->first();
-
-                            if ($unit) {
-
-                                if (!$product_type) {
-                                    $product_type = new ProductType();
-                                    $product_type->product_type = $item->product_name;
-                                    $product_type->user_id = auth()->user()->id;
-                                    $product_type->status = 1;
-                                    $product_type->save();
-                                }
-                                $itemm = new Product();
-
-                                $itemm->product_name = $item->name;
-                                $itemm->unit_id = $unit->id;
-                                $itemm->product_type_id = $product_type->id;
-
-                                if($item->image)
-                                    $itemm->thumbnail = 'media/images/library/'.$item->image;
-                                else
-                                    $itemm->thumbnail = 'img/no image.jpeg';
-
-                                $itemm->threshold =$item->threshold;
-                                $itemm->user_id = auth()->user()->id;
-                                $itemm->save();
-
-
-                            } else {
-
-                                $this->notFound_units[] = ['index' => $j, 'unit' => $item->unit_name];
-
-                            }
-                            $j++;
-                        }
-                    }
-                }
-
-
-            });
-
-
-        }
-
-        if (count($this->notFound_units) > 0) {
-            $notFound_units = $this->notFound_units;
-            return view('user.admin.stock.batch-stock')->with(compact('notFound_units'));
-        } else {
-
-            return redirect('all-item');
-        }
-    }
 
     public function downloadstocksample()
     {

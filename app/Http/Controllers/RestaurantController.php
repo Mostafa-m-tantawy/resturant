@@ -52,9 +52,7 @@ class RestaurantController extends Controller
         $user->save();
 
 
-//
-//        $role = Role::create(['name' => 'writer']);
-//        $permission = Permission::create(['name' => 'edit articles']);
+
         if ($request->branch == 'on') {
             $restaurant = new Restaurant;
             $restaurant->user_id = $user->id;
@@ -65,12 +63,6 @@ class RestaurantController extends Controller
             $restaurant->user_id = $user->id;
             $restaurant->save();
         }
-        $user->assignRole('writer');
-        $supplier = new Supplier();
-        $supplier->user_id = $user->id;
-        $supplier->save();
-
-
         foreach ($request->phone_g as $item) {
             $phone = new Phone();
             $phone->phone = $item['phone'];

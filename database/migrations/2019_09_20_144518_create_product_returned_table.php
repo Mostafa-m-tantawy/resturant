@@ -14,9 +14,10 @@ class CreateProductReturnedTable extends Migration
     public function up()
     {
         Schema::create('refund_products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('product_id');
-            $table->unsignedInteger('supplier_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->double('quantity');
             $table->double('unit_price');
             $table->string('note')->nullable();

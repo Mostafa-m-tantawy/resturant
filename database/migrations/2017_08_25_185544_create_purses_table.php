@@ -14,10 +14,10 @@ class CreatePursesTable extends Migration
     public function up()
     {
         Schema::create('purses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('supplier_id');
-            $table->unsignedInteger('restaurant_id');
-            $table->unsignedInteger('user_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

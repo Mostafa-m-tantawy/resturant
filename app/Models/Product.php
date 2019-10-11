@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
+    protected $appends = ['quantity','quantity_available'];
 
     public function unit()
     {
@@ -25,6 +26,14 @@ class Product extends Model
     public function assignDetails()
     {
         return $this->hasMany(AssignStockDetails::class);
+    }
+    public function refund()
+    {
+        return $this->hasMany(RefundProduct::class);
+    }
+ public function ruined()
+    {
+        return $this->hasMany(RuinedProduct::class);
     }
 
     //check out if quantity more than 0
@@ -49,12 +58,21 @@ class Product extends Model
         $assign_to_me=$this->assignDetails()->whereHas('assignHeader',function ($q){
             $q->where('assignable_id',Auth ::user()->restaurant->id)->where('assignable_type','App\Restaurant');
         });;;
+        $refund=$this->refund()->where('restaurant_id',Auth ::user()->restaurant->id);
+
+        $ruind=$this->ruined()->whereHas('ruinedHeader',function ($q){
+            $q->where('ruinedable_id',Auth ::user()->restaurant->id)->where('ruinedable_type','App\Restaurant');
+        });;;
+
 
         $purchased_quantity= $purchases->sum('quantity');
         $assign_to_otherquantity= $assign_to_other->sum('quantity');
         $assign_to_me_quantity= $assign_to_me->sum('quantity');
-
-        $totalquantity=$purchased_quantity-$assign_to_otherquantity+$assign_to_me_quantity;
+        $refund_quantity=$refund->sum('quantity');
+        $ruind_quantity=$ruind->sum('quantity');
+//        if($this->id==6)
+//            dd($refund_quantity);
+        $totalquantity=$purchased_quantity-$ruind_quantity-$assign_to_otherquantity+$assign_to_me_quantity-$refund_quantity;
         return $totalquantity;
     }
     //
@@ -68,6 +86,10 @@ class Product extends Model
         });
         return $assign_to_me->sum('quantity');;
     }
+
+
+
+
     /// price with 2 method last_price && avg_price
     /// between dates if method avrege price
  public function price($method,$from,$to)

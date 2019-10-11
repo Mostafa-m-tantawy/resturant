@@ -14,9 +14,9 @@ class CreateAssignStocksTable extends Migration
     public function up()
     {
         Schema::create('assign_stocks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('restaurant_id');
-            $table->unsignedInteger('assignable_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('assignable_id');
             $table->string('assignable_type');
             $table->string('price_math_method')->nullable();;
             $table->date('math_start_date')->nullable();

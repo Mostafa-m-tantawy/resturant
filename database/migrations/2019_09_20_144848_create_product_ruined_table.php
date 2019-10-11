@@ -15,8 +15,10 @@ class CreateProductRuinedTable extends Migration
     {
         Schema::create('ruined_products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('product_id');
+            $table->unsignedBigInteger('ruined_header_id');
+            $table->unsignedBigInteger('product_id');
             $table->double('quantity');
+           $table->double('price_unit')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
         });

@@ -14,12 +14,12 @@ class CreatePaymentsTable extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->increments          ('id');
+            $table->bigIncrements          ('id');
             $table->double              ('payment_amount');
             $table->string              ('payment_method');
-            $table->unsignedInteger     ('sender_id');
+            $table->unsignedBigInteger     ('sender_id');
 //            $table->string              ('sender_type');
-            $table->unsignedInteger     ('receiver_id');
+            $table->unsignedBigInteger     ('receiver_id');
 //            $table->string              ('receiver_type');
             $table->string              ('note')->nullable();
             $table->date                ('due_date')->nullable();
