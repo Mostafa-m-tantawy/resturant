@@ -266,6 +266,10 @@ $('#cost').val(parseFloat(data));
          * Append value on purse object from form data
          * @type {{pursesId: string, supplier: {supplierId: (*), supplierName: (*)}, product: {productId: (*), productName: (*)}, quantity: (*), unit: {unitId: string, unitName: string, childUnit: number, convertRate: *, unitPrice: (*)}, grossPrice: (*)}}
          */
+        if ( !form[0].checkValidity()){
+            form[0].reportValidity();
+
+        }else{
         purse = {
             price_math_method: clicked_price_math_method,
             rangeofdate: clicked_rangeofdate,
@@ -298,6 +302,7 @@ $('#cost').val(parseFloat(data));
         $("#cost").val('');
         $("#from_stock").val('');
         $("#type").val('');
+        }
     });
 
     /**

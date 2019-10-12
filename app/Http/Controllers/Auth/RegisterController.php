@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Country;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,8 +29,14 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
+
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+        return view('register')->with(compact('countries'));
+    }
     /**
      * Create a new controller instance.
      *

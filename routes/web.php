@@ -85,3 +85,9 @@ Route::post('states','SupplierController@states');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'RestaurantController@dashboard')->name('dashboard');
+Route::get('/logout', function (){
+    Auth::logout();
+    return redirect(route('home'));
+});
+//Route::get('/register', 'HomeController@register')->name('register');

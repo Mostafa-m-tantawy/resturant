@@ -12,32 +12,6 @@ var purses = [];
 
 // Class definition
 
-var KTBootstrapMaxlength = function () {
-
-    // Private functions
-    var demos = function () {
-        // minimum setup
-        // always show
-        $('#quantity').maxlength({
-            alwaysShow: true,
-            threshold: 5,
-            warningClass: "kt-badge kt-badge--primary kt-badge--rounded kt-badge--inline",
-            limitReachedClass: "kt-badge kt-badge--brand kt-badge--rounded kt-badge--inline"
-        });
-
-    }
-
-    return {
-        // public functions
-        init: function() {
-            demos();
-        }
-    };
-}();
-
-jQuery(document).ready(function() {
-    KTBootstrapMaxlength.init();
-});
 
 $(document).ready(function () {
 
@@ -172,6 +146,10 @@ $(document).ready(function () {
          * Append value on purse object from form data
          * @type {{pursesId: string, supplier: {supplierId: (*), supplierName: (*)}, product: {productId: (*), productName: (*)}, quantity: (*), unit: {unitId: string, unitName: string, childUnit: number, convertRate: *, unitPrice: (*)}, grossPrice: (*)}}
          */
+        if ( !form[0].checkValidity()){
+            form[0].reportValidity();
+
+        }else{
         purse = {
             assign_type: clicked_assign_type,
             assign_to: clicked_assign_to,
@@ -195,7 +173,7 @@ $(document).ready(function () {
 
         //Set default value of all field except supplier in to form
         $("#quantity").val(0);
-        $("#product").val('');
+        $("#product").val('');}
     });
 
     /**

@@ -104,13 +104,9 @@ $(document).ready(function () {
 
         //unit price is fixed to cost of recioes if has recipe
         var selected = $(this).find('option:selected');
-        if (selected.data('iscookable') != undefined) {
-            $('#unitPrice').val(selected.data('cost'));
-            $('#unitPrice').prop("disabled", true);
-            $('#quantity').prop("max", selected.data('quantityavailable'));
-
+        if (selected.data('quantity') > 0) {
+            $('#quantity').prop("max", selected.data('quantity'));
         }
-
         $.get('/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
             $("#unit").text(data.unit.unit);
@@ -145,7 +141,10 @@ $(document).ready(function () {
          * Append value on purse object from form data
          * @type {{pursesId: string, supplier: {supplierId: (*), supplierName: (*)}, product: {productId: (*), productName: (*)}, quantity: (*), unit: {unitId: string, unitName: string, childUnit: number, convertRate: *, unitPrice: (*)}, grossPrice: (*)}}
          */
-        purse = {
+        if ( !form[0].checkValidity()){
+            form[0].reportValidity();
+
+        }else{   purse = {
             supplier: {
                 supplierId: $("#supplier_id").val(),
                 supplierName: $("#supplier_id option:selected").text()
@@ -180,6 +179,7 @@ $(document).ready(function () {
         $("#grossPrice").val(0);
         $("#product").val('');
         $("#note").val('');
+        }
     });
 
     /**
