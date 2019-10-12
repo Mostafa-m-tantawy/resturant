@@ -89,7 +89,7 @@
                             </h3>
                             <span class="kt-switch kt-switch--lg">
 																	<label>
-																		<input type="checkbox" checked="checked" name="branch">
+																		<input type="checkbox" readonly checked="checked" name="branch">
 																		<span></span>
 																	</label>
 																</span>

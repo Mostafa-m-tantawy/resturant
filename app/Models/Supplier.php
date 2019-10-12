@@ -4,6 +4,7 @@ namespace App;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Supplier extends Model
 {
@@ -25,4 +26,32 @@ class Supplier extends Model
     {
         return $this->hasMany(Product::class)->orderBy('name');
     }
+    public function refunds()
+    {
+        return $this->hasMany(RefundProduct::class);
+    }
+
+    public function getGrossPurchasesAttribute(){
+        $total=0;
+        $purchases=$this->purchases;
+        foreach ($purchases->where('restaurant_id',Auth::user()->restaurant->id) as $purchase) {
+
+            $total+=$purchase->pursesProducts->sum(function($t){
+                return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+            });;
+        }//->total;
+    return $total;
+    }
+    public function getGrossPaymentsAttribute(){
+        $total=   $this->payment->where('sender_id',Auth::user()->restaurant->id)->sum('payment_amount');
+    return $total;
+    }
+    public function getGrossRefundsAttribute(){
+
+        $total=   $this->refunds->where('restaurant_id',Auth::user()->restaurant->id)->sum(function($t){
+            return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+        });
+    return $total;
+    }
 }
+

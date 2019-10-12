@@ -17,8 +17,7 @@ class PursesProduct extends Model
     }
     public function getTotalAttribute()
     {
-        return ($this ->quantity * $this->unit_price)+$this->vat_value;
-
+        return ($this ->quantity * $this->unit_price)+($this->quantity * $this->unit_price)*($this->product->vat/100);
 
     }
 }

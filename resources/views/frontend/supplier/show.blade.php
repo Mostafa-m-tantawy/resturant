@@ -101,6 +101,51 @@
                     </div>
 
                     <!--End:: Portlet-->
+
+
+
+
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    Financial receivables
+                                </h3>
+                            </div>
+
+                        </div>  <div class="kt-portlet__body">
+                            <div class="kt-widget1 kt-widget1--fit">
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Purchases</h3>
+                                        <span class="kt-widget1__desc">Restaurant gross  purchases</span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-brand">+${{number_format($supplier->GrossPurchases,2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Returns  </h3>
+                                        <span class="kt-widget1__desc">Restaurant gross return to supplier </span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-danger">-${{number_format($supplier->GrossRefunds,2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Payment</h3>
+                                        <span class="kt-widget1__desc">Restaurant gross payment</span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-danger">-${{number_format($supplier->GrossPayments,2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Dept</h3>
+                                        <span class="kt-widget1__desc">Restaurant  dept</span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-success">${{number_format($supplier->GrossPurchases-$supplier->GrossRefunds-$supplier->GrossPayments,2)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -465,7 +510,7 @@
                                                 <tr>
                                                     <td>{{$payment->id}}</td>
                                                     <td>{{$payment->sender->id}}</td>
-                                                    <td>{{$payment->sender->name}}</td>
+                                                    <td>{{$payment->sender->user->name}}</td>
                                                     <td>{{$payment->payment_amount}}</td>
                                                     <td>{{$payment->payment_method}}</td>
                                                     <td>{{$payment->due_date}}</td>
@@ -557,7 +602,7 @@
                                     <div>
                                         {{--                                        <input type="text" readonly class="form-control" id="currentDue">--}}
                                         <input type="hidden" name="sender_id" value="{{Auth::user()->restaurant->id}}">
-                                        <input type="hidden" name="receiver_id" value="{{$supplier->user->id}}">
+                                        <input type="hidden" name="receiver_id" value="{{$supplier->id}}">
                                     </div>
                                 </div>
 
