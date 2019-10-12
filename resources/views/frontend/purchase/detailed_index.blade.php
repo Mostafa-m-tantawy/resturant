@@ -62,8 +62,8 @@
                                 <td>{{$product  ->product->name}}</td>
                                 <td>{{$product  ->quantity}}</td>
                                 <td>{{$product  ->unit_price}}</td>
-                                <td>{{$product  ->vat}}</td>
-                                <td>{{number_format(($product->unit_price*$product->quantity)+$product->vat,2)}}</td>
+                                <td>{{($product  ->quantity*$product  ->unit_price)*( $product  ->product->vat/100)}}</td>
+                                <td>{{number_format(($product->unit_price*$product->quantity)+($product  ->quantity*$product  ->unit_price)*( $product  ->product->vat/100),2)}}</td>
 
                             </tr>
                         @endforeach

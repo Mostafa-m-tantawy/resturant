@@ -43,7 +43,7 @@ $(document).ready(function () {
                     success: function (data) {
                         $('#product').html('');
 
-                        // console.log(data[0].name);
+                        console.log(data);
                         // var options = '';//'<option value="">select Supplier</option>';
                         $('<option ></option>').val('').text('select product').appendTo('#product');
 
@@ -103,12 +103,7 @@ $(document).ready(function () {
 
         //unit price is fixed to cost of recioes if has recipe
         var selected = $(this).find('option:selected');
-        if (selected.data('iscookable') != undefined) {
-            $('#unitPrice').val(selected.data('cost'));
-            $('#unitPrice').prop("disabled", true);
-            $('#quantity').prop("max", selected.data('quantityavailable'));
 
-        }
 
         $.get('/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
@@ -139,48 +134,56 @@ $(document).ready(function () {
      */
     var form = $("#purses");
     form.on('submit', function (e) {
+
         e.preventDefault();
-        // //console.log('Form Submit');
+        if ( !form[0].checkValidity()){
+            form[0].reportValidity();
+
+        }else{
+            purse = {
+                supplier: {
+                    supplierId: $("#supplier_id").val(),
+                    supplierName: $("#supplier_id option:selected").text()
+                },
+                product: {
+                    productId: $("#product").val(),
+                    productName: $("#product option:selected").text(),
+                    vat: ($("#product option:selected").data('vat')) ? $("#product option:selected").data('vat') : 0
+                },
+                quantity: $("#quantity").val(),
+                unit: {
+                    unitId: unitId,
+                    unitName: unitName,
+                    childUnit: ($("#unitPrice").val() / convertion_rate).toFixed(2),
+                    convertRate: convertion_rate,
+                    unitPrice: $("#unitPrice").val()
+                },
+                grossPrice: $("#grossPrice").val()
+            }
+
+            //push purse object to purses array
+            purses.push(purse);
+
+            //Call render function to render purses list
+            $("#pursesDetailsRender").empty();
+            $(this).renderHtml(purses);
+
+            //Set default value of all field except supplier in to form
+            $("#quantity").val(0);
+            $("#unitPrice").val(0);
+            $("#child_unit_price").val(0);
+            $("#grossPrice").val(0);
+            $("#product").val('');
+        }
+        // $form[0].checkValidity();
+        //  console.log($form[0]);
         // //console.log($("#supplier_id").val());
 
         /**
          * Append value on purse object from form data
          * @type {{pursesId: string, supplier: {supplierId: (*), supplierName: (*)}, product: {productId: (*), productName: (*)}, quantity: (*), unit: {unitId: string, unitName: string, childUnit: number, convertRate: *, unitPrice: (*)}, grossPrice: (*)}}
          */
-        purse = {
-            supplier: {
-                supplierId: $("#supplier_id").val(),
-                supplierName: $("#supplier_id option:selected").text()
-            },
-            product: {
-                productId: $("#product").val(),
-                productName: $("#product option:selected").text(),
-                vat: ($("#product option:selected").data('vat')) ? $("#product option:selected").data('vat') : 0
-            },
-            quantity: $("#quantity").val(),
-            unit: {
-                unitId: unitId,
-                unitName: unitName,
-                childUnit: ($("#unitPrice").val() / convertion_rate).toFixed(2),
-                convertRate: convertion_rate,
-                unitPrice: $("#unitPrice").val()
-            },
-            grossPrice: $("#grossPrice").val()
-        }
 
-        //push purse object to purses array
-        purses.push(purse);
-
-        //Call render function to render purses list
-        $("#pursesDetailsRender").empty();
-        $(this).renderHtml(purses);
-
-        //Set default value of all field except supplier in to form
-        $("#quantity").val(0);
-        $("#unitPrice").val(0);
-        $("#child_unit_price").val(0);
-        $("#grossPrice").val(0);
-        $("#product").val('');
     });
 
     /**

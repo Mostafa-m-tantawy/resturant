@@ -62,6 +62,8 @@ class RestaurantController extends Controller
             $restaurant = new Restaurant;
             $restaurant->user_id = $user->id;
             $restaurant->save();
+            Auth::login($user);
+
         }
         foreach ($request->phone_g as $item) {
             $phone = new Phone();
@@ -209,5 +211,9 @@ class RestaurantController extends Controller
 
     }
 
+    public function dashboard()
+    {
+        return view('frontend.dashboard');
+    }
 
 }
