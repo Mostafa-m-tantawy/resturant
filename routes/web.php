@@ -15,6 +15,7 @@ Route::get('/','HomeController@index');
 
 Route::post ('address/update',     'SupplierController@updateAddress');
 Route::post ('phone/update',     'SupplierController@updatePhone');
+Route::post ('delete/address-phones',     'SupplierController@deleteAddressPhones');
 
 
 // -------------------------restaurant  routes--------------------------------

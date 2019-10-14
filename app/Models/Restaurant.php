@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Restaurant extends Model
 {
@@ -29,8 +30,35 @@ class Restaurant extends Model
     {
         return $this->hasMany(Department::class);
     }
+   public function refunds()
+    {
+        return $this->hasMany(RefundProduct::class);
+    }
 
 
+    public function getGrossPurchasesAttribute(){
+        $total=0;
+        $purchases=$this->purchases;
+        foreach ($purchases as $purchase) {
+
+            $total+=$purchase->pursesProducts->sum(function($t){
+                return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+            });;
+        }//->total;
+        return $total;
+    }
+    public function getGrossPaymentsAttribute(){
+        $total=   $this->paySupplier->sum('payment_amount');
+        return $total;
+    }
+
+    public function getGrossRefundsAttribute(){
+
+        $total=   $this->refunds->sum(function($t){
+            return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+        });
+        return $total;
+    }
 //
 
 }

@@ -15,7 +15,7 @@ class RefundController extends Controller
 {
     public function index()
     {
-        $refunds=RefundProduct::all();
+        $refunds=RefundProduct::where('restaurant_id',Auth::user()->restaurant->id)->get();
 
         return view('frontend.refund.index',[
             'refunds'         =>      $refunds

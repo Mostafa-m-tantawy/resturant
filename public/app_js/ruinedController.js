@@ -18,7 +18,7 @@ $(document).ready(function () {
      * It will take the current supplier id for further use
      */
     $("#price_math_method").on('change', function (e) {
-console.log( $(this).val());
+// console.log( $(this).val());
         if (purses.length != 0) {
             if (clicked_price_math_method != '') {
                 $(this).val(clicked_price_math_method);
@@ -35,7 +35,7 @@ console.log( $(this).val());
 
 
     $("#rangeofdate").on('change', function (e) {
-        console.log( $(this).val());
+        // console.log( $(this).val());
 
         if (purses.length != 0) {
             if (clicked_rangeofdate != '') {
@@ -84,7 +84,7 @@ console.log( $(this).val());
                     processData: false,
                     contentType: false,
                     success: function (data) {
-                        console.log(data);
+                        // console.log(data);
                         if (clicked_ruined_type == 'restaurant') {
                             $('#from_stock').html('');
                             $('<option ></option>').val('').text('select product').appendTo('#from_stock');
@@ -149,24 +149,24 @@ console.log( $(this).val());
                     processData: false,
                     contentType: false,
                     success: function (data) {
-                        var productlist=false;
-                        console.log(data)
+                        // var productlist=false;
+                        // console.log(data)
                         $('#product').html('');
 
                         $('<option ></option>').val('').text('select product').appendTo('#product');
 
                         $.each(data, function (i, item) {
-                        if(item.quantity_available) {
+                        // if(item.quantity_available) {
                             $('<option data-vat="' + item.vat + '" data-quantity="' + item.quantity + '"></option>').val(item.id).text(item.name).appendTo('#product');
-                            productlist = true;
-                        }});
-                      if( productlist==false){
-                          Swal.fire({
-                              type: 'error',
-                              title: 'Oops...',
-                              text: 'there is no items in list',
-                          })
-                      }
+                            // productlist = true;
+                        // }});
+                      // if( productlist==false){
+                      //     Swal.fire({
+                      //         type: 'error',
+                      //         title: 'Oops...',
+                      //         text: 'there is no items in list',
+                      //     })
+                      })
                     },
                     error: function (data) {
                         if (data['status'] == 422) {
@@ -198,9 +198,7 @@ console.log( $(this).val());
 
         //unit price is fixed to cost of recioes if has recipe
         var selected = $(this).find('option:selected');
-        if (selected.data('quantity') > 0) {
-            $('#quantity').prop("max", selected.data('quantity'));
-        }
+
 
         $.get('/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
@@ -216,6 +214,8 @@ console.log( $(this).val());
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
         formdata.append("price_math_method", clicked_price_math_method);
         formdata.append("rangeofdate",clicked_rangeofdate );
+        formdata.append("ruined_type",clicked_ruined_type );
+        formdata.append("ruined_from",clicked_ruind_from );
 
         $.ajax({
             url: '/get-product-cost/' + $(this).val(),
@@ -225,7 +225,9 @@ console.log( $(this).val());
             contentType: false,
             success: function (data) {
                 console.log(data);
-$('#cost').val(parseFloat(data));
+                   $('#quantity').prop("max", parseFloat(data[1]));
+
+$('#cost').val(parseFloat(data[0]));
             },
             error: function (data) {
                 if (data['status'] == 422) {
@@ -401,7 +403,7 @@ $('#cost').val(parseFloat(data));
 
         var formdata = new FormData();
         var json_arr = JSON.stringify(purses);
-console.log(purses)
+// console.log(purses)
 
         if ($('#img').prop('files').length > 0) {
             var file = $('#img').prop('files')[0];

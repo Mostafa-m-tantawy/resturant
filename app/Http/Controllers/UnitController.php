@@ -44,16 +44,19 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        foreach ($request->unit_g as $newunit) {
-            $uint = new Unit();
-            $uint->unit = $newunit['unit'];
-            $uint->child_unit = $newunit['child_unit'];
-            $uint->convert_rate = $newunit['convert_rate'];
+        $request->validate([
+            'unit' => ['required', 'string','unique:units'],
+            'child_unit' => ['required', 'string' ],
+            'convert_rate' => ['required', 'numeric' ],
 
+        ]);
+            $uint = new Unit();
+            $uint->unit = $request->unit;
+            $uint->child_unit = $request->child_unit;
+            $uint->convert_rate = $request->convert_rate;
             $uint->save();
 
-        }
+
         return redirect('unit');
     }
 
@@ -88,8 +91,13 @@ class UnitController extends Controller
      */
     public function update(Request $request)
     {
-        //
-        $uint =  Unit::find($request->id);
+        $request->validate([
+            'unit' => ['required', 'string','unique:units,unit,'.$request->id],
+            'child_unit' => ['required', 'string' ],
+            'convert_rate' => ['required', 'numeric' ],
+
+        ]);
+        $uint =Unit::find($request->id);
         $uint->unit = $request->unit;
         $uint->child_unit = $request->child_unit;
         $uint->convert_rate = $request->convert_rate;

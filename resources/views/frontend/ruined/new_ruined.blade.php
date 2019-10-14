@@ -73,12 +73,7 @@
                                                class=" control-label"> {{ trans('main.select') }}  {{ trans('main.product') }}</label>
                                         <select name="product" id="product" class="form-control" required>
                                             <option value=""> {{ trans('main.select') }}   {{ trans('main.product') }} </option>
-{{--                                            @foreach( $products as $product)--}}
-{{--                                                @if($product->quantityAvailable)--}}
-{{--                                                    <option value="{{$product->id}}"--}}
-{{--                                                            data-quantity="{{$product->quantity}}">{{$product->name}}</option>--}}
-{{--                                                @endif--}}
-{{--                                            @endforeach--}}
+
                                         </select>
                                     </div>
 

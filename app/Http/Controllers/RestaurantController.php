@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\Country;
+use App\Http\Requests\createNewRestaurantRequest;
 use App\Phone;
 use App\Purse;
 use App\Restaurant;
@@ -18,10 +19,10 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $branches = Restaurant::where('parent_id', Auth::user()->id)->get();
-        $mainRestaurant = Restaurant::where('user_id', Auth::user()->id)->first();
-//dd($mainRestaurant);
-        return view('frontend.restaurant.index')->with(compact('branches', 'mainRestaurant'));
+//        $branches = Restaurant::where('parent_id', Auth::user()->id)->get();
+//        $mainRestaurant = Restaurant::where('user_id', Auth::user()->id)->first();
+////dd($mainRestaurant);
+//        return view('frontend.restaurant.index')->with(compact('branches', 'mainRestaurant'));
         //
     }
 
@@ -45,6 +46,15 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'confirmed'],
+            'phone_g.*.phone'=> ['required'],
+            'phone_g.*.type'=> ['required'],
+            'address_g.*.address'=> ['required'],
+            ]);
+
         $user = new User;
         $user->email = $request->email;
         $user->name = $request->name;
@@ -53,27 +63,23 @@ class RestaurantController extends Controller
 
 
 
-        if ($request->branch == 'on') {
-            $restaurant = new Restaurant;
-            $restaurant->user_id = $user->id;
-            $restaurant->parent_id = Auth::user()->id;
-            $restaurant->save();
-        } else {
             $restaurant = new Restaurant;
             $restaurant->user_id = $user->id;
             $restaurant->save();
             Auth::login($user);
 
+       if($request->phone_g)
+       {
+           foreach ($request->phone_g as $item) {
+           $phone = new Phone();
+           $phone->phone = $item['phone'];
+           $phone->type = $item['type'];
+           $phone->user_id = $user->id;;
+           $phone->save();
+       }
         }
-        foreach ($request->phone_g as $item) {
-            $phone = new Phone();
-            $phone->phone = $item['phone'];
-            $phone->type = $item['type'];
-            $phone->user_id = $user->id;;
-            $phone->save();
-
-        }
-        foreach ($request->address_g as $item) {
+        if($request->address_g){
+            foreach ($request->address_g as $item) {
             if (isset($item['address'])) {
                 $address = new Address();
                 $address->address = $item['address'];
@@ -82,8 +88,9 @@ class RestaurantController extends Controller
                 $address->user_id = $user->id;;
                 $address->save();
             }
+            }
         }
-        return redirect()->back();
+        return redirect(route('dashboard'));
 
     }
 
@@ -125,7 +132,16 @@ class RestaurantController extends Controller
     {
         $restaurant=Restaurant::findOrFail($id);
         $user = $restaurant->user;
-        $user->email = $request->email;
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255','unique:users,name,'.$user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
+            'phone_g.*.phone'=> ['required'],
+            'phone_g.*.type'=> ['required'],
+            'address_g.*.address'=> ['required'],  ]);
+
+
+       $user->email = $request->email;
         $user->name = $request->name;
         $user->save();
 

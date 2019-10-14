@@ -18,22 +18,16 @@
                                   enctype="multipart/form-data" data-parsley-validate novalidate>
                                 {{csrf_field()}}
                                 <div class="row">
-                                    <div class="form-group col-4">
-                                        <label for=""
-                                               class=" control-label">  {{ trans('main.assign') }} {{ trans('main.type') }}</label>
-                                        <select name="type" id="type" class="form-control " required>
-                                            <option
-                                                value=""> {{ trans('main.select') }}  {{ trans('main.one') }}</option>
-                                            <option value="branch"> {{ trans('main.branch') }} </option>
-                                            <option value="department"> {{ trans('main.department') }} </option>
 
-                                        </select>
-                                    </div>
                                     <div class="form-group col-4">
                                         <label for=""
                                                class=" control-label">  {{ trans('main.assign') }} {{ trans('main.to') }}</label>
                                         <select name="assignable_id" id="assignable_id" class="form-control " required>
+                                            <option value=""> {{ trans('main.select') }}   {{ trans('main.department') }} </option>
+                                            @foreach($restaurant->departments as $department )
+                                                <option value="{{$department->id}}">{{$department->name}} </option>
 
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group col-4">

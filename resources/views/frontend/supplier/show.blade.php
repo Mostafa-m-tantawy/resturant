@@ -5,25 +5,7 @@
 @section('content')
     <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
 
-        <!-- begin:: Content Head -->
-        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
-            <div class="kt-subheader__main">
-                <h3 class="kt-subheader__title">
-                    View Contact
-                </h3>
-                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
-                <div class="kt-subheader__group" id="kt_subheader_search">
-									<span class="kt-subheader__desc" id="kt_subheader_total">
-										Sandra Stone </span>
-                </div>
-            </div>
-            <div class="kt-subheader__toolbar">
-                <a href="#" class="btn btn-default btn-bold">
-                    Back </a>
-            </div>
-        </div>
 
-        <!-- end:: Content Head -->
 
         <!-- begin:: Content -->
         <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
@@ -66,7 +48,9 @@
                                             <span class="form-control-plaintext kt-font-bolder">{{$phone->phone}}</span>
                                         </div>
                                         <div class="col-1">
-                                            <a><i style="color: red" class="flaticon-delete"></i></a>
+                                            <a data-toggle="modal" data-target=".delete"
+                                               data-model_type="phone" data-model_id="{{$phone->id}}">
+                                                <i style="color: red" class="flaticon-delete"></i></a>
                                         </div>
                                         <div class="col-1">
                                             <a data-toggle="modal" data-target=".update_phone"
@@ -84,7 +68,8 @@
                                             {{$address->address}} / {{($address->city)?$address->city->name:''}}</span>
                                         </div>
                                         <div class="col-1">
-                                            <a><i style="color: red" class="flaticon-delete"></i></a>
+                                            <a data-toggle="modal" data-target=".delete"
+                                               data-model_type="address" data-model_id="{{$address->id}}"><i style="color: red" class="flaticon-delete"></i></a>
                                         </div>
                                         <div class="col-1">
                                             <a data-toggle="modal" data-target=".update_address"
@@ -193,6 +178,15 @@
                                         <div class="kt-portlet__body">
                                             <div class="row">
                                                 <div class="col-md-12">
+                                                    @if ($errors->any())
+                                                        <div class="alert alert-danger">
+                                                            <ul>
+                                                                @foreach ($errors->all() as $error)
+                                                                    <li>{{ $error }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    @endif
                                                     <h3>Personal Information</h3>
                                                     <div class="form-group row">
                                                         <div class="col-12">
@@ -233,7 +227,9 @@
                                                                     <div class="col-7">
                                                                         <span class="form-control-plaintext kt-font-bolder">{{$phone->phone}}</span>
                                                                     </div>
-                                                                    <div class="col-1"><a><i style="color: red" class="flaticon-delete"></i></a>
+                                                                    <div class="col-1"><a
+                                                                            data-toggle="modal" data-target=".delete"
+                                                                            data-model_type="phone" data-model_id="{{$phone->id}}"><i style="color: red" class="flaticon-delete"></i></a>
                                                                     </div>
                                                                     <div class="col-1">
                                                                         <a data-toggle="modal"
@@ -302,7 +298,8 @@
                                                               {{   $address->address}} / {{($address->city)?$address->city->name:''}}</span>
                                                             </div>
                                                             <div class="col-1">
-                                                                <a><i style="color: red"
+                                                                <a data-toggle="modal" data-target=".delete"
+                                                                   data-model_type="address" data-model_id="{{$address->id}}"><i style="color: red"
                                                                       class="flaticon-delete"></i></a>
                                                             </div>
                                                             <div class="col-1">
@@ -659,6 +656,7 @@
 
     @include('.frontend.modals.update-address')
     @include('.frontend.modals.update-phone')
+    @include('.frontend.modals.delete')
 
 
 
@@ -696,6 +694,14 @@
             return $(value).val();
         };
         $(document).ready(function () {
+            $('#delete').on('show.bs.modal', function (e) {
+                var Id = $(e.relatedTarget).data('model_id');
+                var type = $(e.relatedTarget).data('model_type');
+                $(e.currentTarget).find('.model_type').html(type);
+                $(e.currentTarget).find('input[name="id"]').val(Id);
+                $(e.currentTarget).find('input[name="type"]').val(type);
+            });
+
             $('#update_address').on('show.bs.modal', function (e) {
                 var Id = $(e.relatedTarget).data('id');
                 var address = $(e.relatedTarget).data('address');

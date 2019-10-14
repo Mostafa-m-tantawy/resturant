@@ -68,10 +68,10 @@
                             class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
-                            <li class="kt-menu__item " aria-haspopup="true"><a href="{{route('restaurant.index')}}"
+                            <li class="kt-menu__item " aria-haspopup="true"><a href="{{route('restaurant.show',[Auth::user()->restaurant->id])}}"
                                                                                class="kt-menu__link "><i
                                         class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
-                                        class="kt-menu__link-text">Branches</span></a></li>
+                                        class="kt-menu__link-text">profile</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true"><a href="{{'stock/index'}}"
                                                                                class="kt-menu__link "><i
                                         class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
