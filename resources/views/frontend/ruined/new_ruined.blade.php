@@ -83,7 +83,7 @@
                                             <span class="input-group-addon" id="unit"> </span>) </label>
                                         <div class="input-group ">
                                             <input type="number" required id="quantity" name="quantity"
-                                                   class="form-control" maxlength="12" min="0"
+                                                   class="form-control" step="0.01" min="0"
                                             >
                                         </div>
                                     </div>

@@ -5,6 +5,14 @@ var convertion_rate;
 var clicked_supplier_id = 0;
 
 
+function checkQuantityForAdd(product_id) {
+    var quantity=0;
+    for (var i=0;i<purses.length;i++){
+        if(purses[i].product.productId==product_id)
+            quantity+=parseFloat(purses[i].quantity);
+    }
+    return quantity;
+};
 $(document).ready(function () {
 
     /**
@@ -52,10 +60,6 @@ $(document).ready(function () {
                              $('<option data-vat="'+item.vat+'" data-quantity="'+item.quantity+'"></option>').val(item.id).text(item.name).appendTo('#product');
 
                         });
-                        // for (var i = 0; i < data.lenght; i++) {
-                        //     options += '<option data-vat="' + data[i].vat + '" value="' + data[i].id + '">' + data[i].name + '</option>';
-                        // }
-                        // $('#product').append(options);
 
                     },
                     error: function (data) {
@@ -104,10 +108,14 @@ $(document).ready(function () {
 
         //unit price is fixed to cost of recioes if has recipe
         var selected = $(this).find('option:selected');
-        if (selected.data('quantity') > 0) {
-            $('#quantity').prop("max", selected.data('quantity'));
+
+        var quantityassigned=selected.data('quantity')-checkQuantityForAdd(productId);
+
+        if (parseFloat(quantityassigned) >= 0) {
+            $('#quantity').prop("max", quantityassigned);
+
         }
-        $.get('/get-unit-of-product/' + productId, function (data) {
+      $.get('/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
             $("#unit").text(data.unit.unit);
             convertion_rate = data.unit.convert_rate;
@@ -152,7 +160,8 @@ $(document).ready(function () {
             product: {
                 productId: $("#product").val(),
                 productName: $("#product option:selected").text(),
-                vat: ($("#product option:selected").data('vat')) ? $("#product option:selected").data('vat') : 0
+                vat: ($("#product option:selected").data('vat')) ? $("#product option:selected").data('vat') : 0,
+                quantityAvailable: $("#product option:selected").data('quantity'),
             },
             quantity: $("#quantity").val(),
             unit: {
@@ -245,24 +254,6 @@ $(document).ready(function () {
                     $("<th>", {text: "Total :", class: "text-right"}),
                     $("<th>", {text: total.toFixed(2)})
                 ),
-                // $("<tr>").append('<th colspan="5"></th>' +
-                //     '<th class="text-right"> Payment Method :</th>' +
-                //     '<th>  <select id="payment_method" class="form-control"  name="payment_method">'+
-                //     '<option value="cash">cash </option>'+
-                //     '<option value="check">check</option>'+
-                //     '  </select></th>'),
-                // $("<tr>").append(
-                //     $("<th>",{colspan:5}),
-                //     $("<th>", {text: "Payment :",class:"text-right"}),
-                //     $("<input/>",{type:"number",
-                //         value:"0", min:"0", style:"width: 120px",class:"form-control",
-                //         id:"payment",
-                //         onChange:"$(this).changeDuePayment("+total+")",
-                //         onkeyup:"$(this).changeDuePayment("+total+")",
-                //         onwheel:"$(this).changeDuePayment("+total+")"
-                //     })
-                // ),
-
                 $("<tr>").append(
                     $("<th>", {colspan: 5}),
                     $("<th>", {text: "scan image:", class: "text-right"}),
@@ -313,11 +304,49 @@ $(document).ready(function () {
      * Update unit price of purses list
      * @param index
      */
-    $.fn.updateUnitPrice = function (index) {
-        purses[index].unit.unitPrice = this.val();
-        $("#pursesDetailsRender").empty();
-        $(this).renderHtml(purses);
+    $.fn.updateQuantity = function (index) {
+        var quantityassigned=this.checkQuantityForUpdate(index);
+        quantityassigned=parseFloat( purses[index].product.quantityAvailable)
+            -parseFloat(quantityassigned) -parseFloat(this.val());
+        if(quantityassigned >=0){
+            purses[index].quantity = this.val();
+            $("#pursesDetailsRender").empty();
+            $(this).renderHtml(purses);
+
+            var quantityassignedd=purses[index].product.quantityAvailable-checkQuantityForAdd(purses[index].product.productId);
+
+            $('#quantity').prop("max", quantityassignedd);
+
+        }else {
+            this.val(purses[index].quantity);
+
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'quantity not enough',
+            })
+        }
+        //     console.log(this.checkQuantityForUpdate(index));
+
     };
+
+
+    /**
+     * Update quantity of purses list
+     * @param index
+     */
+    $.fn.checkQuantityForUpdate = function (index) {
+
+        var quantity=0;
+        for (var i=0;i<purses.length;i++){
+            if(purses[i].product.productId==purses[index].product.productId && i!=index)
+                quantity+=parseFloat(purses[i].quantity);
+        }
+        // console.log(quantity);
+
+        return quantity;
+    };
+
 
     /**
      * Calculate due after pay

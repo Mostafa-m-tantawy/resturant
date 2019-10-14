@@ -11,6 +11,14 @@ var unitId = '';
 var unitName = '';
 var purses = [];
 
+function checkQuantityForAdd(product_id) {
+    var quantity=0;
+    for (var i=0;i<purses.length;i++){
+        if(purses[i].product.productId==product_id)
+            quantity+=parseFloat(purses[i].quantity);
+    }
+    return quantity;
+};
 
 $(document).ready(function () {
 
@@ -225,7 +233,19 @@ $(document).ready(function () {
             contentType: false,
             success: function (data) {
                 console.log(data);
-                   $('#quantity').prop("max", parseFloat(data[1]));
+                var quantityassigned=parseFloat(data[1])-checkQuantityForAdd(productId);
+
+                if (parseFloat(quantityassigned) >= 0) {
+                    $('#quantity').prop("max", quantityassigned);
+
+                }else{
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'There is no items to make it ruined!',
+                    })
+                }
+                // $('#quantity').prop("max", parseFloat(data[1]));
 
 $('#cost').val(parseFloat(data[0]));
             },
@@ -281,6 +301,7 @@ $('#cost').val(parseFloat(data[0]));
             product: {
                 productId: $("#product").val(),
                 productName: $("#product option:selected").text(),
+                quantityAvailable: $("#product option:selected").data('quantity'),
             },
             quantity: $("#quantity").val(),
             unit_cost: $("#cost").val(),
@@ -299,11 +320,10 @@ $('#cost').val(parseFloat(data[0]));
         $(this).renderHtml(purses);
 
         //Set default value of all field except supplier in to form
+        $("#product").val('');
         $("#quantity").val(0);
         $("#note").val('');
         $("#cost").val('');
-        $("#from_stock").val('');
-        $("#type").val('');
         }
     });
 
@@ -389,11 +409,41 @@ $('#cost').val(parseFloat(data[0]));
      * @param index
      */
     $.fn.updateQuantity = function (index) {
-        purses[index].quantity = this.val();
-        $("#pursesDetailsRender").empty();
-        $(this).renderHtml(purses);
+        var quantityassigned=this.checkQuantityForUpdate(index);
+
+        //quantity from available - added to ruined products except this  item  - new quantity
+        quantityassigned=parseFloat( purses[index].product.quantityAvailable)
+            -parseFloat(quantityassigned) -parseFloat(this.val());
+
+        if(quantityassigned >=0){
+            purses[index].quantity = this.val();
+            $("#pursesDetailsRender").empty();
+            $(this).renderHtml(purses);
+
+            var quantityassignedd=purses[index].product.quantityAvailable-checkQuantityForAdd(purses[index].product.productId);
+            $('#quantity').prop("max", quantityassignedd);
+        }else {
+            this.val(purses[index].quantity);
+
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'quantity not enough',
+            })
+        }
     };
 
+    $.fn.checkQuantityForUpdate = function (index) {
+
+        var quantity=0;
+        for (var i=0;i<purses.length;i++){
+            if(purses[i].product.productId==purses[index].product.productId && i!=index)
+                quantity+=parseFloat(purses[i].quantity);
+        }
+        // console.log(quantity);
+
+        return quantity;
+    };
 
     /**
      * Calculate due after pay

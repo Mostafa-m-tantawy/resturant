@@ -53,9 +53,9 @@
                                         <label class=" control-label"
                                                for="example-email"> {{ trans('main.unit') }}  {{ trans('main.price') }}
                                             :</label>
-                                        <input type="number" min="1" name="unit_price" class="form-control"
+                                        <input type="number" step="0.01" min="0" name="unit_price" class="form-control"
                                                placeholder="Unit Price"
-                                               parsley-trigger="change" maxlength="50" required id="unitPrice">
+                                               parsley-trigger="change" required id="unitPrice">
                                     </div>
 
                                     <div class="form-group col-4">
@@ -64,7 +64,7 @@
                                         (    <span class="input-group-addon" id="child_unit"> </span>)</label>
 
                                             <input disabled type="text" id="child_unit_price" name="quantity"
-                                                   class="form-control"
+                                                   class="form-control" step="0.01" min="0"
                                                    placeholder="Child Unit Price">
 
                                     </div>
