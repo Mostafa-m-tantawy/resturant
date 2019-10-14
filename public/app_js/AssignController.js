@@ -12,16 +12,46 @@ var purses = [];
 // Class definition
 
 
+/**
+ * sum quantity assigned of purses list
+ * @param product_id
+ */
+function checkQuantityForAdd(product_id) {
+    var quantity=0;
+    for (var i=0;i<purses.length;i++){
+        if(purses[i].product.productId==product_id)
+            quantity+=parseFloat(purses[i].quantity);
+    }
+    return quantity;
+};
+
+
 $(document).ready(function () {
 
     /**
      * It will take the current supplier id for further use
      */
 
-    $("#assignable_id").on('change', function (e) {
+    $("#assignable_id").on('click', function (e) {
         clicked_assign_to = $(this).val();
     });
+    $("#assignable_id").on('change', function () {
 
+
+        if (purses.length != 0) {
+            if (clicked_assign_to != 0) {
+                $(this).val(clicked_assign_to);
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Cannot add multiple department in a assign!',
+                })
+            }
+
+
+            }
+
+    });
 
     $("#quantity").on('keyup', function (e) {
         //console.log("Change");
@@ -37,8 +67,11 @@ $(document).ready(function () {
 
         //unit price is fixed to cost of recioes if has recipe
         var selected = $(this).find('option:selected');
-        if (selected.data('quantity') > 0) {
-            $('#quantity').prop("max", selected.data('quantity'));
+        var quantityassigned=selected.data('quantity')-checkQuantityForAdd(productId);
+
+        if (parseFloat(quantityassigned) >= 0) {
+            $('#quantity').prop("max", quantityassigned);
+
         }
 
         $.get('/get-unit-of-product/' + productId, function (data) {
@@ -78,8 +111,10 @@ $(document).ready(function () {
          * Append value on purse object from form data
          * @type {{pursesId: string, supplier: {supplierId: (*), supplierName: (*)}, product: {productId: (*), productName: (*)}, quantity: (*), unit: {unitId: string, unitName: string, childUnit: number, convertRate: *, unitPrice: (*)}, grossPrice: (*)}}
          */
+
         if ( !form[0].checkValidity()){
             form[0].reportValidity();
+
 
         }else{
         purse = {
@@ -88,6 +123,7 @@ $(document).ready(function () {
             product: {
                 productId: $("#product").val(),
                 productName: $("#product option:selected").text(),
+                quantityAvailable: $("#product option:selected").data('quantity'),
             },
             quantity: $("#quantity").val(),
             unit: {
@@ -159,7 +195,7 @@ $(document).ready(function () {
                     $("<th>", {colspan: 4}),
                     $("<th>").append(
                         $("<button>", {
-                            text: "Confirm Purses",
+                            text: "Confirm Assignment",
                             class: "btn btn-brand btn-elevate btn-icon-sm",
                             onClick: '$(this).confirmPurses()'
                         })
@@ -184,9 +220,46 @@ $(document).ready(function () {
      * @param index
      */
     $.fn.updateQuantity = function (index) {
-        purses[index].quantity = this.val();
-        $("#pursesDetailsRender").empty();
-        $(this).renderHtml(purses);
+        var quantityassigned=this.checkQuantityForUpdate(index);
+        quantityassigned=parseFloat( purses[index].product.quantityAvailable)
+            -parseFloat(quantityassigned) -parseFloat(this.val());
+        if(quantityassigned >=0){
+            purses[index].quantity = this.val();
+            $("#pursesDetailsRender").empty();
+            $(this).renderHtml(purses);
+
+            var quantityassignedd=purses[index].product.quantityAvailable-checkQuantityForAdd(purses[index].product.productId);
+
+                $('#quantity').prop("max", quantityassignedd);
+
+        }else {
+              this.val(purses[index].quantity);
+
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'quantity not enough',
+            })
+        }
+        //     console.log(this.checkQuantityForUpdate(index));
+
+    };
+
+
+    /**
+     * Update quantity of purses list
+     * @param index
+     */
+    $.fn.checkQuantityForUpdate = function (index) {
+
+        var quantity=0;
+        for (var i=0;i<purses.length;i++){
+            if(purses[i].product.productId==purses[index].product.productId && i!=index)
+                quantity+=parseFloat(purses[i].quantity);
+        }
+        // console.log(quantity);
+
+        return quantity;
     };
 
 

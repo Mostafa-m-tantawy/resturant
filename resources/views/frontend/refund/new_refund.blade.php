@@ -43,7 +43,7 @@
                                             <span class="input-group-addon" id="unit"> </span>) </label>
                                         <div class="input-group ">
                                             <input type="text" id="quantity" name="quantity"
-                                                   class="form-control"
+                                                   class="form-control"step="0.01" min="0"
                                                    placeholder="Quantity">
                                         </div>
                                     </div>

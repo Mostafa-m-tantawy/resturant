@@ -47,7 +47,7 @@
                                         <label class=" control-label" for="example-email">
                                             {{ trans('main.quantity') }} (<span class="input-group-addon"
                                                                                 id="unit"> {{ trans('main.unit') }}</span>)</label>
-                                        <input type="text" id="quantity" name="quantity"
+                                        <input type="text" id="quantity" name="quantity" step="0.01" min="0"
                                                class="form-control" placeholder="Quantity">
 
                                     </div>

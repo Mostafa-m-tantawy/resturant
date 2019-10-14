@@ -102,6 +102,13 @@
                             <div class="kt-widget1 kt-widget1--fit">
                                 <div class="kt-widget1__item">
                                     <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Starting Balance</h3>
+                                        <span class="kt-widget1__desc">Supplier starting balance </span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-brand">+${{number_format($supplier->start_balance,2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
                                         <h3 class="kt-widget1__title">Purchases</h3>
                                         <span class="kt-widget1__desc">Restaurant gross  purchases</span>
                                     </div>
@@ -126,7 +133,7 @@
                                         <h3 class="kt-widget1__title">Dept</h3>
                                         <span class="kt-widget1__desc">Restaurant  dept</span>
                                     </div>
-                                    <span class="kt-widget1__number kt-font-success">${{number_format($supplier->GrossPurchases-$supplier->GrossRefunds-$supplier->GrossPayments,2)}}</span>
+                                    <span class="kt-widget1__number kt-font-success">${{number_format($supplier->start_balance+$supplier->GrossPurchases-$supplier->GrossRefunds-$supplier->GrossPayments,2)}}</span>
                                 </div>
                             </div>
                         </div>

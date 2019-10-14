@@ -47,7 +47,7 @@
                                         <label class=" control-label" for="example-email">
                                             {{ trans('main.quantity') }} (<span class="input-group-addon"
                                                                                 id="unit"> {{ trans('main.unit') }}</span>)</label>
-                                        <input type="text" id="quantity" name="quantity"
+                                        <input type="text" id="quantity" name="quantity"step="0.01" min="0"
                                                class="form-control" placeholder="Quantity">
 
                                     </div>
@@ -114,7 +114,7 @@
                                             <th width="150px"> {{ trans('main.unit') }}  {{ trans('main.price') }}</th>
                                             <th> {{ trans('main.vat') }}</th>
                                             <th> {{ trans('main.gross') }}  {{ trans('main.price') }}</th>
-                                            <th width="95px"> {{ trans('main.action') }}</th>
+{{--                                            <th width="95px"> {{ trans('main.action') }}</th>--}}
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -130,13 +130,13 @@
                                                 <th>{{($product->vat_value)?$product->vat_value:0}} </th>
                                                 <th>{{$product->total}} </th>
 
-                                                <td>
-                                                    @if(($purses->pursesProducts->count()) >= 1)
-                                                        <a href="{{url('deleted-purses-product/'.$product->id)}}">
-                                                            <i style="color: red" class="flaticon-delete"></i>
-                                                        </a>
-                                                    @endif
-                                                </td>
+{{--                                                <td>--}}
+{{--                                                    @if(($purses->pursesProducts->count()) >= 1)--}}
+{{--                                                        <a href="{{url('deleted-purses-product/'.$product->id)}}">--}}
+{{--                                                            <i style="color: red" class="flaticon-delete"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    @endif--}}
+{{--                                                </td>--}}
 
                                             </tr>
                                         @endforeach
