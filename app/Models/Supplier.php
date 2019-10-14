@@ -10,12 +10,12 @@ class Supplier extends Model
 {
     public function purchases()
     {
-        return $this->hasMany(Purse::class);
+        return $this->hasMany(Purse::class)->where('restaurant_id',Auth::user()->restaurant->id);
     }
 
     public function payment()
     {
-        return $this->hasMany(Payment::class,'receiver_id');
+        return $this->hasMany(Payment::class,'receiver_id')->where('sender_id',Auth::user()->restaurant->id);
     }
 
     public function user()
@@ -34,7 +34,7 @@ class Supplier extends Model
     public function getGrossPurchasesAttribute(){
         $total=0;
         $purchases=$this->purchases;
-        foreach ($purchases->where('restaurant_id',Auth::user()->restaurant->id) as $purchase) {
+        foreach ($purchases as $purchase) {
 
             $total+=$purchase->pursesProducts->sum(function($t){
                 return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
@@ -43,7 +43,7 @@ class Supplier extends Model
     return $total;
     }
     public function getGrossPaymentsAttribute(){
-        $total=   $this->payment->where('sender_id',Auth::user()->restaurant->id)->sum('payment_amount');
+        $total=   $this->payment->sum('payment_amount');
     return $total;
     }
     public function getGrossRefundsAttribute(){

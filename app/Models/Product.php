@@ -49,19 +49,35 @@ class Product extends Model
     //return quantity
     public function getQuantityAttribute()
     {
-   $purchases=$this->purchasedProduct()->whereHas('purse',function ($q){
-       $q->where('restaurant_id',Auth ::user()->restaurant->id);
-   });
-        $assign_to_other=$this->assignDetails()->whereHas('assignHeader',function ($q){
-            $q->where('restaurant_id',Auth ::user()->restaurant->id);
-        });;
-        $assign_to_me=$this->assignDetails()->whereHas('assignHeader',function ($q){
-            $q->where('assignable_id',Auth ::user()->restaurant->id)->where('assignable_type','App\Restaurant');
-        });;;
-        $refund=$this->refund()->where('restaurant_id',Auth ::user()->restaurant->id);
+        return $this->quantityAvailable(Auth::user()->restaurant);
+    }
+    // quantity assign_to_me
 
-        $ruind=$this->ruined()->whereHas('ruinedHeader',function ($q){
-            $q->where('ruinedable_id',Auth ::user()->restaurant->id)->where('ruinedable_type','App\Restaurant');
+    public function AssignQuantity($assignable)
+    {
+    $assign_to_me=$this->assignDetails()->whereHas('assignHeader',function ($q)use($assignable){
+            $q->where('assignable_id',$assignable->id)->where('assignable_type',get_class($assignable));
+        });
+        return $assign_to_me->sum('quantity');;
+    }
+
+
+    public function quantityAvailable($model)
+    {
+
+        $purchases=$this->purchasedProduct()->whereHas('purse',function ($q)use($model){
+            $q->where('restaurant_id',$model->id);
+        });
+        $assign_to_other=$this->assignDetails()->whereHas('assignHeader',function ($q)use($model){
+            $q->where('restaurant_id',$model->id);
+        });;
+        $assign_to_me=$this->assignDetails()->whereHas('assignHeader',function ($q)use($model){
+            $q->where('assignable_id',$model->id)->where('assignable_type',get_class($model));
+        });;;
+        $refund=$this->refund()->where('restaurant_id',$model->id);
+
+        $ruind=$this->ruined()->whereHas('ruinedHeader',function ($q)use($model){
+            $q->where('ruinedable_id',$model->id)->where('ruinedable_type',get_class($model));
         });;;
 
 
@@ -75,20 +91,6 @@ class Product extends Model
         $totalquantity=$purchased_quantity-$ruind_quantity-$assign_to_otherquantity+$assign_to_me_quantity-$refund_quantity;
         return $totalquantity;
     }
-    //
-    //
-    // quantity assign_to_me
-
-    public function AssignQuantity($assignable)
-    {
-    $assign_to_me=$this->assignDetails()->whereHas('assignHeader',function ($q)use($assignable){
-            $q->where('assignable_id',$assignable->id)->where('assignable_type',get_class($assignable));
-        });
-        return $assign_to_me->sum('quantity');;
-    }
-
-
-
 
     /// price with 2 method last_price && avg_price
     /// between dates if method avrege price
@@ -112,6 +114,30 @@ class Product extends Model
 
 
 
+    public function departmentquantity($type,$from)
+    {
+
+
+
+
+        if($type=='restaurant'){
+            return $this->quantity;
+        }elseif($type=='department'){
+$department=Department::find($from);
+            $assign_to_me=$this->assignDetails()->whereHas('assignHeader',function ($q)use($department){
+                $q->where('assignable_id',$department->id)->where('assignable_type',get_class($department));
+            });;;
+
+            $ruind=$this->ruined()->whereHas('ruinedHeader',function ($q)use($department){
+                $q->where('ruinedable_id',$department->id)->where('ruinedable_type',get_class($department));
+            });;;
+            $assign_to_me_quantity= $assign_to_me->sum('quantity');
+            $ruind_quantity=$ruind->sum('quantity');
+
+            $totalquantity=-$ruind_quantity+$assign_to_me_quantity;
+            return $totalquantity;
+        }
+    }
 
 
 

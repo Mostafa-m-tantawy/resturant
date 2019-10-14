@@ -5,25 +5,6 @@
 @section('content')
     <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
 
-        <!-- begin:: Content Head -->
-        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
-            <div class="kt-subheader__main">
-                <h3 class="kt-subheader__title">
-                    View Contact
-                </h3>
-                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
-                <div class="kt-subheader__group" id="kt_subheader_search">
-									<span class="kt-subheader__desc" id="kt_subheader_total">
-										Sandra Stone </span>
-                </div>
-            </div>
-            <div class="kt-subheader__toolbar">
-                <a href="#" class="btn btn-default btn-bold">
-                    Back </a>
-            </div>
-        </div>
-
-        <!-- end:: Content Head -->
 
         <!-- begin:: Content -->
         <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
@@ -66,7 +47,8 @@
                                             <span class="form-control-plaintext kt-font-bolder">{{$phone->phone}}</span>
                                         </div>
                                         <div class="col-1">
-                                            <a><i style="color: red" class="flaticon-delete"></i></a>
+                                            <a data-toggle="modal" data-target=".delete"
+                                               data-model_type="phone" data-model_id="{{$phone->id}}"><i style="color: red" class="flaticon-delete"></i></a>
                                         </div>
                                         <div class="col-1">
                                             <a data-toggle="modal" data-target=".update_phone"
@@ -84,7 +66,8 @@
                                             {{$address->address}} / {{($address->city)?$address->city->name:''}}</span>
                                         </div>
                                         <div class="col-1">
-                                            <a><i style="color: red" class="flaticon-delete"></i></a>
+                                            <a data-toggle="modal" data-target=".delete"
+                                               data-model_type="address" data-model_id="{{$address->id}}"><i style="color: red" class="flaticon-delete"></i></a>
                                         </div>
                                         <div class="col-1">
                                             <a data-toggle="modal" data-target=".update_address"
@@ -97,6 +80,47 @@
 
                             </div>
 
+                        </div>
+                    </div>
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    Financial receivables
+                                </h3>
+                            </div>
+
+                        </div>  <div class="kt-portlet__body">
+                            <div class="kt-widget1 kt-widget1--fit">
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Purchases</h3>
+                                        <span class="kt-widget1__desc">Restaurant gross  purchases</span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-brand">+${{number_format($restaurant->GrossPurchases,2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Returns  </h3>
+                                        <span class="kt-widget1__desc">Restaurant gross return to supplier </span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-danger">-${{number_format($restaurant->GrossRefunds,2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Payment</h3>
+                                        <span class="kt-widget1__desc">Restaurant gross payment</span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-danger">-${{number_format($restaurant->GrossPayments,2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">Dept</h3>
+                                        <span class="kt-widget1__desc">Restaurant  dept</span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-success">${{number_format($restaurant->GrossPurchases-$restaurant->GrossRefunds-$restaurant->GrossPayments,2)}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -119,24 +143,6 @@
                                             <i class="flaticon2-calendar-3"></i> Personal
                                         </a>
                                     </li>
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link" data-toggle="tab" href="#kt_apps_stock_of_branch"--}}
-{{--                                           role="tab">--}}
-{{--                                            <i class="flaticon2-user-outline-symbol"></i> Branch Stock--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link" data-toggle="tab" href="#kt_apps_assign_to_branch"--}}
-{{--                                           role="tab">--}}
-{{--                                            <i class="flaticon2-user-outline-symbol"></i>Assign Branch--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link" data-toggle="tab" href="#kt_apps_supplier_purchases"--}}
-{{--                                           role="tab">--}}
-{{--                                            <i class="flaticon2-user-outline-symbol"></i> Purchases--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#kt_apps_supplier_payments"
                                            role="tab">
@@ -196,7 +202,9 @@
                                                                         <span
                                                                             class="form-control-plaintext kt-font-bolder">{{$phone->phone}}</span>
                                                                     </div>
-                                                                    <div class="col-1"><a><i style="color: red"
+                                                                    <div class="col-1"><a
+                                                                            data-toggle="modal" data-target=".delete"
+                                                                            data-model_type="phone" data-model_id="{{$phone->id}}"><i style="color: red"
                                                                                              class="flaticon-delete"></i></a>
                                                                     </div>
                                                                     <div class="col-1">
@@ -264,7 +272,8 @@
                                                               {{   $address->address}} / {{($address->city)?$address->city->name:''}}</span>
                                                             </div>
                                                             <div class="col-1">
-                                                                <a><i style="color: red"
+                                                                <a data-toggle="modal" data-target=".delete"
+                                                                   data-model_type="address" data-model_id="{{$address->id}}"><i style="color: red"
                                                                       class="flaticon-delete"></i></a>
                                                             </div>
                                                             <div class="col-1">
@@ -348,262 +357,6 @@
                                         </div>
                                     </form>
                                 </div>
-                                <!--End:: Tab Content-->
-
-
-{{--                                <!--Begin:: Tab Content-->--}}
-
-{{--                                <div class="tab-pane" id="kt_apps_stock_of_branch" role="tabpanel">--}}
-
-{{--                                    <div class="kt-portlet__body" style="padding: unset">--}}
-
-{{--                                        <div class="kt-portlet__head kt-portlet__head--lg">--}}
-{{--                                            <div class="kt-portlet__head-label">--}}
-{{--										<span class="kt-portlet__head-icon">--}}
-{{--											<i class="kt-font-brand flaticon2-line-chart"></i>--}}
-{{--										</span>--}}
-{{--                                                <h3 class="kt-portlet__head-title">--}}
-{{--                                                    Multiple Controls--}}
-{{--                                                    @if(session('method')) {{session('method')}}@endif--}}
-{{--                                                    --}}{{--                                                    Multiple Controls {{ app('request')->input('from') }}--}}
-
-{{--                                                    --}}{{--                                                    Multiple Controls {{ $method }}--}}
-
-{{--                                                </h3>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="kt-portlet__head-toolbar">--}}
-{{--                                                <div class="kt-portlet__head-wrapper">--}}
-{{--                                                    <div class="kt-portlet__head-actions">--}}
-
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <!--begin: separator -->--}}
-{{--                                        <div--}}
-{{--                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>--}}
-{{--                                        <!--end: separator -->--}}
-{{--                                        <form method="post" action="{{route('restaurant.stock',[Auth::user()->id])}}">--}}
-{{--                                            @csrf--}}
-{{--                                            <div class="row">--}}
-{{--                                                <div class="form-group col-5">--}}
-{{--                                                    <label class="col-form-label ">price Math Method </label>--}}
-
-{{--                                                    <select id="price_math_method" name='price_math_method'--}}
-{{--                                                            class="form-control">--}}
-{{--                                                        <option value="last_price">Last Purchased Price</option>--}}
-{{--                                                        <option value="avg_price">Average price</option>--}}
-{{--                                                    </select>--}}
-{{--                                                </div>--}}
-
-{{--                                                <div class="form-group col-md-5 " id="stock_range_date"--}}
-{{--                                                     style="display:none;">--}}
-{{--                                                    <label class="col-form-label ">Date Range </label>--}}
-
-{{--                                                    <div class='input-group pull-right' id='kt_daterangepicker_6'>--}}
-{{--                                                        <input type='text' class="form-control" readonly--}}
-{{--                                                               name="rangeofdate" placeholder="Select date range"/>--}}
-{{--                                                        <div class="input-group-append">--}}
-{{--                                                            <span class="input-group-text"><i--}}
-{{--                                                                    class="la la-calendar-check-o"></i></span>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                </div>--}}
-{{--                                                <div class="form-group col-2" style="align-self: flex-end">--}}
-{{--                                                    <input type="submit" value="Generate" class="btn btn-primary">--}}
-{{--                                                </div>--}}
-
-
-{{--                                            </div>--}}
-{{--                                        </form>--}}
-
-{{--                                        <!--begin: separator -->--}}
-{{--                                        <div--}}
-{{--                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>--}}
-{{--                                        <!--end: separator -->--}}
-
-
-{{--                                        <span>cost Math Method</span><span>start Math date</span><span>start end date</span>--}}
-
-{{--                                        <!--begin: Datatable -->--}}
-
-{{--                                        @if(session('purchases'))--}}
-{{--                                            <table id="datatable-responsive2"--}}
-{{--                                                   class="table table-striped table-bordered dt-responsive  nowrap "--}}
-{{--                                                   cellspacing="0" width="100%">--}}
-{{--                                                <thead>--}}
-{{--                                                <tr>--}}
-{{--                                                    <th>Purchase ID</th>--}}
-{{--                                                    <th>supplier</th>--}}
-{{--                                                    <th>product</th>--}}
-{{--                                                    <th>quantity</th>--}}
-{{--                                                    <th>cost</th>--}}
-{{--                                                </tr>--}}
-{{--                                                </thead>--}}
-{{--                                                <tbody>--}}
-
-{{--                                                @foreach(session('purchases') as $purchase )--}}
-{{--                                                    @foreach($purchase->pursesProducts as $product )--}}
-{{--                                                        <tr>--}}
-{{--                                                            <td>{{$purchase->id}}</td>--}}
-{{--                                                            <td>{{$purchase->supplier->name}}</td>--}}
-{{--                                                            <td>{{$product->product->name}}</td>--}}
-{{--                                                            <td>{{$product->quantity}}</td>--}}
-{{--                                                            <td>{{$product->unit_price}}</td>--}}
-{{--                                                        </tr>--}}
-{{--                                                    @endforeach--}}
-{{--                                                @endforeach--}}
-
-{{--                                                </tbody>--}}
-{{--                                            </table>--}}
-
-{{--                                        @endif--}}
-
-{{--                                    </div>--}}
-
-
-{{--                                    <div--}}
-{{--                                        class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>--}}
-
-{{--                                    <div class="kt-form__actions">--}}
-
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <!--End:: Tab Content-->--}}
-
-
-{{--                                <!--Begin:: Tab Content-->--}}
-
-{{--                                <div class="tab-pane" id="kt_apps_assign_to_branch" role="tabpanel">--}}
-
-{{--                                    <div class="kt-portlet__body" style="padding: unset">--}}
-
-{{--                                        <div class="kt-portlet__head kt-portlet__head--lg">--}}
-{{--                                            <div class="kt-portlet__head-label">--}}
-{{--										<span class="kt-portlet__head-icon">--}}
-{{--											<i class="kt-font-brand flaticon2-line-chart"></i>--}}
-{{--										</span>--}}
-{{--                                                <h3 class="kt-portlet__head-title">--}}
-{{--                                                    Multiple Controls--}}
-{{--                                                </h3>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="kt-portlet__head-toolbar">--}}
-{{--                                                <div class="kt-portlet__head-wrapper">--}}
-{{--                                                    <div class="kt-portlet__head-actions">--}}
-
-
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <!--begin: Datatable -->--}}
-{{--                                        <div--}}
-{{--                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>--}}
-
-{{--                                    </div>--}}
-
-
-{{--                                    <div--}}
-{{--                                        class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>--}}
-
-{{--                                    <div class="kt-form__actions">--}}
-
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <!--End:: Tab Content-->--}}
-
-
-{{--                                <!--Begin:: Tab Content-->--}}
-{{--                                <div class="tab-pane" id="kt_apps_supplier_purchases" role="tabpanel">--}}
-
-{{--                                    <div class="kt-portlet__body" style="padding: unset">--}}
-
-{{--                                        <div class="kt-portlet__head kt-portlet__head--lg">--}}
-{{--                                            <div class="kt-portlet__head-label">--}}
-{{--										<span class="kt-portlet__head-icon">--}}
-{{--											<i class="kt-font-brand flaticon2-line-chart"></i>--}}
-{{--										</span>--}}
-{{--                                                <h3 class="kt-portlet__head-title">--}}
-{{--                                                    Multiple Controls--}}
-{{--                                                </h3>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="kt-portlet__head-toolbar">--}}
-{{--                                                <div class="kt-portlet__head-wrapper">--}}
-{{--                                                    <div class="kt-portlet__head-actions">--}}
-
-{{--                                                        <a href="{{url('purchase/create')}}"--}}
-{{--                                                           class="btn btn-brand btn-elevate btn-icon-sm">--}}
-{{--                                                            <i class="la la-plus"></i>--}}
-{{--                                                            New Purchase--}}
-{{--                                                        </a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <!--begin: Datatable -->--}}
-{{--                                        <div--}}
-{{--                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>--}}
-{{--                                        <table id="datatable-responsive"--}}
-{{--                                               class="table table-striped table-bordered dt-responsive  nowrap "--}}
-{{--                                               cellspacing="0" width="100%">--}}
-{{--                                            <thead>--}}
-{{--                                            <tr>--}}
-{{--                                                <th>Purchase ID</th>--}}
-{{--                                                <th>Restaurant name</th>--}}
-{{--                                                <th>Supplier Name</th>--}}
-{{--                                                <th>Total price</th>--}}
-{{--                                                <th>Actions</th>--}}
-{{--                                            </tr>--}}
-{{--                                            </thead>--}}
-{{--                                            <tbody>--}}
-
-{{--                                            @foreach($restaurant->purchases as $purchase)--}}
-{{--                                                <tr>--}}
-{{--                                                    <td>{{$purchase->id}}</td>--}}
-{{--                                                    <td>{{$purchase->restaurant->user->name}}</td>--}}
-{{--                                                    <td>{{$purchase->supplier->user->name}}</td>--}}
-{{--                                                    <td>{{$purchase->total}}</td>--}}
-
-{{--                                                    <td>--}}
-{{--                                                        <a title="Show" href="{{url('purchase/show/'.$purchase->id)}}">--}}
-{{--                                                            <i class="fa fa-book-open"></i></a>--}}
-
-{{--                                                        --}}{{--                                                                                        <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
-{{--                                                        --}}{{--                                                                                                                                                             class="flaticon-delete"></i></a>--}}
-{{--                                                    </td>--}}
-{{--                                                </tr>--}}
-{{--                                            @endforeach--}}
-
-{{--                                            @if($restaurant->branches )--}}
-{{--                                                @foreach($restaurant->branches as $branch)--}}
-{{--                                                    @foreach($branch->purchases as $purchase)--}}
-{{--                                                        <tr>--}}
-{{--                                                            <td>{{$purchase->id}}</td>--}}
-{{--                                                            <td>{{$purchase->restaurant->user->name}}</td>--}}
-{{--                                                            <td>{{$purchase->supplier->user->name}}</td>--}}
-{{--                                                            <td>{{$purchase->total}}</td>--}}
-
-{{--                                                            <td>--}}
-{{--                                                                <a title="Show"--}}
-{{--                                                                   href="{{url('purchase/show/'.$purchase->id)}}">--}}
-{{--                                                                    <i class="fa fa-book-open"></i></a>--}}
-
-{{--                                                            </td>--}}
-{{--                                                        </tr>--}}
-{{--                                                    @endforeach--}}
-{{--                                                @endforeach--}}
-{{--                                            @endif--}}
-{{--                                            </tbody>--}}
-{{--                                        </table>--}}
-
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <!--End:: Tab Content-->--}}
-
 
                                 <!--Begin:: Tab Content-->
                                 <div class="tab-pane" id="kt_apps_supplier_payments" role="tabpanel">
@@ -664,27 +417,6 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            @if($restaurant->branches )
-                                                @foreach($restaurant->branches as $branch)
-                                                    @foreach($branch->paySupplier as $payment)
-
-                                                        <tr>
-                                                            <td>{{$payment->id}}</td>
-                                                            <td>{{$payment->sender->id}}</td>
-                                                            <td>{{$payment->sender->user->name}}</td>
-                                                            <td>{{$payment->receiver->user->name}}</td>
-                                                            <td>{{$payment->payment_amount}}</td>
-                                                            <td>{{$payment->payment_method}}</td>
-                                                            <td>{{$payment->due_date}}</td>
-                                                            <td><a title="delete"
-                                                                   href="{{url('purchase/delete/'.$payment->id)}}">
-                                                                    <i style="color: red"
-                                                                       class="flaticon-delete"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endforeach
-                                            @endif
 
 
                                             </tbody>
@@ -723,6 +455,7 @@
 
     @include('.frontend.modals.update-address')
     @include('.frontend.modals.update-phone')
+    @include('.frontend.modals.delete')
 
 
 @stop
@@ -769,7 +502,13 @@
                 if ($(this).val() == 'avg_price')
                     $('#stock_range_date').css('display', 'block');
             });
-
+            $('#delete').on('show.bs.modal', function (e) {
+                var Id = $(e.relatedTarget).data('model_id');
+                var type = $(e.relatedTarget).data('model_type');
+                $(e.currentTarget).find('.model_type').html(type);
+                $(e.currentTarget).find('input[name="id"]').val(Id);
+                $(e.currentTarget).find('input[name="type"]').val(type);
+            });
             $('#update_address').on('show.bs.modal', function (e) {
                 var Id = $(e.relatedTarget).data('id');
                 var address = $(e.relatedTarget).data('address');

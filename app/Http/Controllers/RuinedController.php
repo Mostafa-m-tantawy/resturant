@@ -83,7 +83,7 @@ class RuinedController extends Controller
                     $qq->where('assignable_id',$department->id)->where('assignable_type', 'App\Department');
                 });
             })->get();
-
+//dd($products);
             if ($products->count() > 0)
                 return response()->json($products, 200);
             else
@@ -98,7 +98,7 @@ class RuinedController extends Controller
 
             $ruinedHeader=new RuinedHeader();
             $ruinedHeader->ruinedable_id=$request->ruined_from;
-            $ruinedHeader->ruinedable_name=($request->type=='restaurant')?'App\Restaurant':'App\Department';
+            $ruinedHeader->ruinedable_type=($request->type=='restaurant')?'App\Restaurant':'App\Department';
             $ruinedHeader->price_math_method=$request->price_math_method;
             $ruinedHeader->restaurant_id = Auth::user()->restaurant->id;
             if ($request->price_math_method != 'last_price') {
@@ -149,9 +149,10 @@ class RuinedController extends Controller
                     // start  13 date = (01/01/2001 */*)=13
                     $to = substr($request->rangeofdate, 13, 10);
                 }
+                $product=Product::find($id)->price($method,$from,$to);
+                $quantity=Product::find($id)->departmentquantity($request->ruined_type,$request->ruined_from);
 
-$product=Product::find($id)->price($method,$from,$to);
-                return response()->json($product, 200);
+                return response()->json([$product,$quantity], 200);
 
             }
         }

@@ -27,6 +27,16 @@
                     <div class="col-1" ></div>
 
                     <div class="col-10" style="  padding: 50px;">
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="kt-login__signup">
                             <form class="kt-form kt-form--label-right" method="post" action="{{route('restaurant.store')}}">
                                 @csrf
@@ -40,7 +50,7 @@
                                                     <input type="text" required name="name" class="form-control"
                                                            placeholder="Enter full name">
                                                     <span
-                                                        class="form-text text-muted">Please enter your full name</span>
+                                                        class="form-text text-muted">Please enter Restaurant full name</span>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class="">Email:</label>
@@ -84,7 +94,7 @@
 
                                                                     <div class="input-group">
 
-                                                                        <input type="text" required
+                                                                        <input type="text"
                                                                                class="form-control form-control-danger"
                                                                                name="phone"
                                                                                placeholder="012**********">
@@ -95,7 +105,7 @@
 
                                                                     <div class=" form-group input-group">
 
-                                                                        <input type="text" required
+                                                                        <input type="text"
                                                                                class="form-control form-control-danger"
                                                                                name="type"
                                                                                placeholder="Ex: office">
@@ -130,7 +140,7 @@
                                                                 <div class="kt-input-icon kt-input-icon--right">
                                                                     <input type="text" name="address"
                                                                            class="form-control"
-                                                                           required placeholder="Enter your address">
+                                                                            placeholder="Enter your address">
                                                                     <span
                                                                         class="kt-input-icon__icon kt-input-icon__icon--right"><span><i
                                                                                 class="la la-map-marker"></i></span></span>

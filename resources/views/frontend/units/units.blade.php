@@ -15,14 +15,14 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        Units
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="#"  data-toggle="modal" data-target="#newunit" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 New Record
                             </a>
@@ -32,6 +32,15 @@
             </div>
             <div class="kt-portlet__body">
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+            @endif
                 <!--begin: Datatable -->
                 <table id="datatable-responsive"
                        class="table table-striped table-bordered dt-responsive  nowrap "
@@ -69,50 +78,6 @@
 
                     </tbody>
                 </table>
-                <form action="{{url('unit')}}" method="post">
-                    @csrf
-                    <div class="row" id="kt_repeater_2" class="repeater">
-
-                        <div class="col-2">unit</div>
-                        <div class="col-2">child_unit</div>
-                        <div class="col-2">convert_rate</div>
-                        <div class="col-2">
-                            <a href="javascript:;" data-repeater-create=""
-                               class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                <i class="la la-plus"></i> Add
-                            </a>
-                        </div>
-
-                        <div class="col-12" data-repeater-list="unit_g">
-                            <div class="row" data-repeater-item>
-
-                                <div class="col-2">
-                                    <input type="text" class="form-control" name="unit">
-                                </div>
-
-                                <div class="col-2">
-                                    <input type="text" class="form-control" name="child_unit">
-                                </div>
-                                <div class="col-2">
-                                    <input type="text" class="form-control" name="convert_rate">
-                                </div>
-
-                                <div class="col-2" style=" display: flex;
-  justify-content: center;
-  align-items: center">
-                                    <a href="javascript:;" data-repeater-delete="" class="btn btn-danger btn-icon">
-                                        <i class="la la-remove"></i>
-                                    </a>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="col-12 pull-left">
-                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">supmit</button>
-                        </div>
-                    </div>
-                </form>
 
             </div>
         </div>
@@ -161,6 +126,58 @@
                     <div class="modal-footer">
                         <div class="col-12 pull-left">
                             <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">supmit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade delete" id="newunit" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="{{url('unit')}}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">new unit <span class="model_type"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        @csrf
+                        <div class="row">
+                            <div class="col-1"></div>
+
+                            <div class="col-10">
+
+                                <div class="form-group">
+                                    <label>unit</label>
+                                    <input type="text" class="form-control" name="unit">
+                                </div>
+
+                                <div class=" form-group">
+                                    <label>child_unit</label>
+                                    <input type="text" class="form-control" name="child_unit">
+                                </div>
+                                <div class="form-group">
+                                    <label>convert_rate</label>
+                                    <input type="text" class="form-control" name="convert_rate">
+                                </div>
+
+                            </div>
+
+                            <div class="col-1"></div>
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-12 pull-left">
+                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">create</button>
                         </div>
                     </div>
                 </form>

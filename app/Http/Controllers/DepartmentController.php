@@ -40,6 +40,12 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string','unique:departments'],
+            'description' => ['nullable', 'string'],
+            ]);
+
+
         $department=new Department();
         $department->name=$request->name;
         $department->description=$request->description;
@@ -80,8 +86,14 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $department= Department::findOrFail($id);
+    {        $department= Department::findOrFail($id);
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255','unique:departments,name,'.$department->id],
+            'description' => ['nullable', 'string'],
+            ]);
+
+
         $department->name=$request->name;
         $department->description=$request->description;
         $department->save();

@@ -37,7 +37,14 @@ return view('frontend.expense.index')->with(compact('expenses'));
      */
     public function store(Request $request)
     {
-$expenses=new Expense();
+        $request->validate([
+            'payment_method' => ['required'],
+            'payment_amount' => ['required','numeric'],
+            'note'=> ['nullable','string','max:255'],
+            ]);
+
+
+        $expenses=new Expense();
 $expenses->restaurant_id=Auth::user()->restaurant->id;
 $expenses->payment_method=$request->payment_method;
 $expenses->payment_amount=$request->payment_amount;

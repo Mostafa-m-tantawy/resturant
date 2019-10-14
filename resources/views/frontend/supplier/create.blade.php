@@ -2,76 +2,17 @@
 @section('content')
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-        <div class="alert alert-light alert-elevate" role="alert">
-            <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-            <div class="alert-text">
-                You can use the dom initialisation parameter to move DataTables features around the table to where you
-                want them.
-                See official documentation <a class="kt-link kt-font-bold"
-                                              href="https://datatables.net/examples/advanced_init/dom_multiple_elements.html"
-                                              target="_blank">here</a>.
-            </div>
-        </div>
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head kt-portlet__head--lg">
                 <div class="kt-portlet__head-label">
-										<span class="kt-portlet__head-icon">
-											<i class="kt-font-brand flaticon2-line-chart"></i>
-										</span>
-                    <h3 class="kt-portlet__head-title">
-                        Multiple Controls
-                    </h3>
+
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
-                        <div class="kt-portlet__head-actions">
-                            <div class="dropdown dropdown-inline">
-                                <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="la la-download"></i> Export
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="kt-nav">
-                                        <li class="kt-nav__section kt-nav__section--first">
-                                            <span class="kt-nav__section-text">Choose an option</span>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-print"></i>
-                                                <span class="kt-nav__link-text">Print</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-copy"></i>
-                                                <span class="kt-nav__link-text">Copy</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-file-excel-o"></i>
-                                                <span class="kt-nav__link-text">Excel</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-file-text-o"></i>
-                                                <span class="kt-nav__link-text">CSV</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-file-pdf-o"></i>
-                                                <span class="kt-nav__link-text">PDF</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            &nbsp;
-                            <a href="#" class="btn btn-brand btn-elevate btn-icon-sm">
+                        <div class="kt-portlet__head-actions">&nbsp;
+                            <a href="{{url('supplier')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                All Supplier
                             </a>
                         </div>
                     </div>
@@ -83,11 +24,20 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                3 Columns Form Layout
+                                Create new supplier
                             </h3>
                         </div>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                @endif
                     <!--begin::Form-->
                     <form class="kt-form kt-form--label-right" method="post" action="{{route('supplier.store')}}">
                       @csrf  <div class="kt-portlet__body">
@@ -105,11 +55,7 @@
                                             <input type="email"required name="email" class="form-control" placeholder="Enter email">
                                             <span class="form-text text-muted">Please enter your email</span>
                                         </div>
-                                        <div class="col-12">
-                                            <label>Password :</label>
-                                            <input type="password" required name="password" class="form-control" placeholder="********">
-                                            <span class="form-text text-muted">Please enter password</span>
-                                        </div>
+
                                         <div class="col-12">
                                             <label>Start Balance :</label>
                                             <input type="number" step='0.01' name="balance" class="form-control">

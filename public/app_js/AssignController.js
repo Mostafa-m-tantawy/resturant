@@ -2,7 +2,6 @@
  * Created by rifat on 8/27/17.
  */
 var convertion_rate;
-var clicked_assign_type = '';
 var clicked_assign_to = '';
 var purse = {};
 var unitId = '';
@@ -19,75 +18,8 @@ $(document).ready(function () {
      * It will take the current supplier id for further use
      */
 
-    $("#type").on('change', function (e) {
-        clicked_assign_type = $(this).val();
-    });
-
     $("#assignable_id").on('change', function (e) {
         clicked_assign_to = $(this).val();
-    });
-
-    /**
-     * Supplier dropdown on change Action
-     */
-    $("#type").on('change', function () {
-
-
-        if (purses.length != 0) {
-            if (clicked_assign_type != '') {
-                $(this).val(clicked_assign_type);
-                Swal.fire({
-                    type: 'error',
-                    title: 'Oops...',
-                    text: 'Cannot change  assign type!',
-                })
-            }
-        } else {
-            if ($(this).val() != '') {
-
-                var formdata = new FormData();
-                formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
-
-                $.ajax({
-                    url: '/get-assignable/' + $(this).val(),
-                    type: "POST",
-                    data: formdata,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        // console.log(data);
-                        if (clicked_assign_type == 'branch') {
-                            $('#assignable_id').html('');
-                            $('<option ></option>').val('').text('select product').appendTo('#assignable_id');
-                            $.each(data, function (i, item) {
-                                $('<option ></option>').val(item.id).text(item.user.name).appendTo('#assignable_id');
-
-                            });
-
-                        } else if (clicked_assign_type == 'department') {
-                            $('#assignable_id').html('');
-                            $('<option ></option>').val('').text('select product').appendTo('#assignable_id');
-                            $.each(data, function (i, item) {
-                                $('<option ></option>').val(item.id).text(item.name).appendTo('#assignable_id');
-
-                            });
-                        }
-
-                    },
-                    error: function (data) {
-                        if (data['status'] == 422) {
-                            Swal.fire({
-                                type: 'error',
-                                title: 'Oops...',
-                                text: 'There is no list fro selection!',
-                            })
-                        }
-
-                    },
-                });
-
-            }
-        }
     });
 
 
@@ -151,7 +83,7 @@ $(document).ready(function () {
 
         }else{
         purse = {
-            assign_type: clicked_assign_type,
+            assign_type: 'department',
             assign_to: clicked_assign_to,
             product: {
                 productId: $("#product").val(),
@@ -190,7 +122,6 @@ $(document).ready(function () {
             $("#pursesDetailsRender").append(
                 $("<tr>").append(
                     $("<th>", {text: index + 1}),
-                    $("<td>", {text: data.assign_type}),
                     $("<td>", {text: data.assign_to}),
                     $("<td>", {text: data.product.productName}),
                     $("<td>").append(
@@ -218,14 +149,14 @@ $(document).ready(function () {
         if (purses.length != 0) {
             $("#pursesDetailsRender").append(
                 $("<tr>").append(
-                    $("<th>", {colspan: 4}),
+                    $("<th>", {colspan: 3}),
                     $("<th>", {text: "scan image:", class: "text-right"}),
                     $("<th>", {
                         html: '<form id="imgform" name="imgform" enctype="multipart/form-data"><input class="form-control" type="file" name="img" id="img"></form> ',
                     })
                 ),
                 $("<tr>").append(
-                    $("<th>", {colspan: 5}),
+                    $("<th>", {colspan: 4}),
                     $("<th>").append(
                         $("<button>", {
                             text: "Confirm Purses",
@@ -276,7 +207,7 @@ console.log(purses)
         }
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
         formdata.append("purses", json_arr);
-        formdata.append("assign_type", clicked_assign_type);
+        formdata.append("assign_type", departmnet);
         formdata.append("assign_to", clicked_assign_to);
         $.ajaxSetup({
             headers: {
