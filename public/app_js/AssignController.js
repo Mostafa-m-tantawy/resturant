@@ -78,8 +78,7 @@ $(document).ready(function () {
             // console.log(data);
             $("#unit").text(data.unit.unit);
             // $("#child_unit").text(data.unit.child_unit);
-            // convertion_rate = data.unit.convert_rate;
-
+            convertion_rate = data.unit.convert_rate;
             unitId = data.unit.id;
             unitName = data.unit.unit;
 
@@ -280,7 +279,7 @@ console.log(purses)
         }
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
         formdata.append("purses", json_arr);
-        formdata.append("assign_type", departmnet);
+        formdata.append("assign_type", 'department');
         formdata.append("assign_to", clicked_assign_to);
         $.ajaxSetup({
             headers: {

@@ -12,24 +12,73 @@
 */
 
 Route::get('/','HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('states','SupplierController@states');
+Auth::routes();
+Route::resource('restaurant','RestaurantController')->only([
+    'store',
+]);
+
+
+Route::middleware(['auth'])->group(function () {
 
 Route::post ('address/update',     'SupplierController@updateAddress');
 Route::post ('phone/update',     'SupplierController@updatePhone');
 Route::post ('delete/address-phones',     'SupplierController@deleteAddressPhones');
 
 
+// -------------------------product category  routes--------------------------------
+Route::resource('product-category','ProductCategoryController')->except(['update']);
+Route::post ('product-category/update',     'ProductCategoryController@update');
+
+
+
+
+
+// -------------------------product   routes--------------------------------
+Route::resource('product','ProductController')->except(['update']);
+Route::post ('product/update',     'ProductController@update');
+
+
+
+
+
 // -------------------------restaurant  routes--------------------------------
-Route::resource('restaurant','RestaurantController');
+Route::resource('restaurant','RestaurantController')->except(['store']);;
 Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restaurant.stock');
+
+
+
+
 // -------------------------department  routes--------------------------------
 Route::resource('department','DepartmentController');
 Route::any('departments/stock','DepartmentController@stock')->name('department.stock');
+
+
+
+
+
+// ------------------------supplier routes--------------------------------
+Route::resource('supplier','SupplierController');
+Route::any  ('product/create/{supplier_id}',    'ProductController@products');
+Route::post ('product/update/{supplier_id}',     'ProductController@updateProduct');
+Route::get  ('product/delete/{id}/{supplier_id}',     'ProductController@deleteProduct');
+
+
+
+
+
+
 
 // ------------------------supplier routes--------------------------------
 Route::resource('supplier','SupplierController');
 Route::any  ('product/create/{supplier_id}',    'ProductController@products');
 Route::post ('product/update/{supplier_id}',     'ProductController@updateProduct');
 Route::get  ('product/delete/{supplier_id}',     'ProductController@deleteProduct');
+Route::get  ('product/index',     'ProductController@index');
+
+
+
 
 
 // -------------------------unit routes--------------------------------
@@ -37,6 +86,10 @@ Route::get  ('product/delete/{supplier_id}',     'ProductController@deleteProduc
 Route::resource('unit','UnitController');
 Route::get('unit/delete/{id}','UnitController@destroy');
 Route::post ('unit/update',     'UnitController@update');
+
+
+
+
 
 //--------------------------purchase from supplier  routes------------------------------
 Route::get ('purchase/create',     'PursesController@addPurchase');
@@ -49,8 +102,16 @@ Route::get('deleted-purses-product/{id}','PursesController@deletePursesProduct')
 Route::get('purchase/summery','PursesController@SummeryIndex');
 Route::get('purchase/detailed','PursesController@detailedIndex');
 
+
+
+
+
+
 // -------------------------stock reports --------------------------------
 Route::any('stock/index','StockController@index')->name('stock.index');
+
+
+
 
 
 // -------------------------Assign to department or branch --------------------------------
@@ -58,16 +119,29 @@ Route::get('assign/create','AssignController@CreateAssign');
 Route::post('/get-assignable/{id}','AssignController@getAssignable');
 Route::post('/save-assign','AssignController@saveAssign');
 
+
+
+
+
+
 // -------------------------  payment  --------------------------------
 
 Route::post('payment/store','PaymentController@savePayment')->name('payment.create');
 Route::get('purchase/delete/{id}','PaymentController@deletePayment')->name('payment.delete');
+
+
+
+
 
 //--------------------- refund-------------------------
 Route::get ('refund','RefundController@index')->name('refund.index');
 Route::get ('refund/create','RefundController@newRefund')->name('refund.create');
 Route::post('/save-refund','RefundController@saveRefund')->name('refund.store');;
 Route::get('refund/delete/{id}','RefundController@deleteRefund')->name('refund.delete');;
+
+
+
+
 
 
 //--------------------- ruined-------------------------
@@ -78,17 +152,76 @@ Route::post('ruined-products','RuinedController@ruinedProducts');
 Route::post('get-product-cost/{id}','RuinedController@getProductCost');
 Route::post('/save-ruined','RuinedController@saveRuined')->name('ruined.store');;
 
+
+
+
+
+
 // -----------------expenses ----------------------------
 Route::resource ('expenses','ExpensesController');
 
-Route::post('states','SupplierController@states');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'RestaurantController@dashboard')->name('dashboard');
-Route::get('/logout', function (){
-    Auth::logout();
-    return redirect(route('home'));
+
+// -------------------------   dish category  routes--------------------------------
+    Route::resource('dish-category','DishCategoryController')->except(['update']);;
+    Route::post ('dish-category/update',     'DishCategoryController@update');
+
+
+//-------------dish--------------------------
+Route::resource ('dish',            'DishController');
+Route::post('category-dishes/{id}', 'DishController@getDishes');
+
+
+
+//--------------dish size-----------------
+Route::get('/dish-size/{id}',       'DishSizeController@index')     ->name('dish.size.index');
+Route::post('/dish-size/store',     'DishSizeController@store')     ->name('dish.size.store');
+Route::post('/dish-size/update',    'DishSizeController@update')    ->name('dish.size.update');
+Route::get('/dish-size/delete/{id}','DishSizeController@delete')    ->name('dish.size.delete');
+
+
+
+
+
+
+//------------- Recipe  --------------------------
+Route::get ('dish-size/recipe/{dish_size_id}',    'RecipeController@index')   ->name('dish.recipe.index');;
+Route::post('dish-size/recipe',                  'RecipeController@store')   ->name('dish.recipe.store');
+Route::get('dish-size/recipe/delete/{id}',       'RecipeController@delete')  ->name('dish.recipe.delete');
+
+
+//------------- side  --------------------------
+Route::get ('dish-size/side/{dish_size_id}',    'SideDishController@index')   ->name('dish.side.index');;
+Route::post('dish-size/side',                  'SideDishController@store')   ->name('dish.side.store');
+Route::get('dish-size/side/delete/{id}',       'SideDishController@delete')  ->name('dish.side.delete');
+
+
+//------------- side  --------------------------
+Route::get ('dish-size/extra/{dish_size_id}',   'ExtraDishController@index')   ->name('dish.extra.index');;
+Route::post('dish-size/extra',                  'ExtraDishController@store')   ->name('dish.extra.store');
+Route::get('dish-size/extra/delete/{id}',       'ExtraDishController@delete')  ->name('dish.extra.delete');
+
+//------------- order  --------------------------
+Route::get ('order/create',   'OrderController@newOrder')   ->name('order.create');;
+Route::post ('save-order',   'OrderController@saveOrder')   ->name('order.save');;
+Route::post ('dish-available-units',   'OrderController@dishAvailableUnits')   ->name('order.dish.available');;
+
+//------------- system configuration  --------------------------
+    Route::get ('system-configuration',             'systemConfigurationController@index')   ->name('system-conf.index');;
+    Route::post ('system-configuration/store',      'systemConfigurationController@store')   ->name('system-conf.store');;
+
+
+
+    Route::get('/dashboard', 'RestaurantController@dashboard')->name('dashboard');
+    Route::get('/logout', function (){
+        Auth::logout();
+        return redirect(route('home'));
+    });
+
 });
+
+
+
+
 //Route::get('/register', 'HomeController@register')->name('register');

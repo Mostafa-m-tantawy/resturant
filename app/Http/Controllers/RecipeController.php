@@ -3,112 +3,55 @@
 namespace App\Http\Controllers;
 
 use App\Dish;
+use App\DishCategory;
+use App\DishSize;
+use App\DishSizeRecipe;
 use App\Product;
+use App\ProductCategory;
 use App\Recipe;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
-    /**
-     * Show All recipe
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function allRecipe()
+
+    public function index($id)
     {
-        $dishes = Dish::all();
-        $recipes = Recipe::all();
-        return view('user.admin.recipe.all-recipe', [
-            'dishes' => $dishes,
-            'recipes' => $recipes
+        $dish_size = DishSize::findOrFail($id);
+        $categories   =ProductCategory::all();
+
+        return view('frontend.dish.recipe.add-recipe')->with(compact('dish_size','categories'));
+    }
+
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'product' => ['required'],
+            'quantity' => ['required', 'numeric'],
         ]);
+      $recipe=  DishSizeRecipe::where('product_id',$request->product)->where('dish_size_id',$request->dish_size_id)->first();
+if(!$recipe){
+    $recipe = new DishSizeRecipe();
+
+}
+
+        $recipe->product_id = $request->product;
+        $recipe->unit_quantity = $request->quantity;
+        $recipe->child_unit_quantity = $request->child;
+        $recipe->dish_size_id = $request->dish_size_id;
+
+        $recipe->save();
+        return redirect(route('dish.recipe.index', [$request->dish_size_id]));
     }
 
-    /**
-     * New recipe
-     * @param $dish_id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function addRecipe($dish_id)
+
+
+    public function delete($id)
     {
-        $dish = Dish::findOrFail($dish_id);
-        $products = Product::orderBy('product_name', 'desc')->get();
-        return view('user.admin.dish.dish-recipe.add-dish-recipe', [
-            'dish' => $dish,
-            'products' => $products
-        ]);
-    }
+        $size=DishSizeRecipe::find($id)->dishSize;
+        DishSizeRecipe::destroy($id);
+        return redirect(route('dish.recipe.index', [$size->id]));
 
-    /**
-     * Edit recipe
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function editRecipe($id)
-    {
-        return view('user.admin.recipe.edit-recipe');
-    }
-
-    /**
-     * Delete recipe
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function deleteRecipe($id)
-    {
-        $recipe = Recipe::findOrFail($id);
-        if($recipe->delete()){
-            return redirect()->back()->with('delete_success','Recipe has been deleted successfully');
-        }
-    }
-
-    /**
-     * Save dish recipe
-     * @param Request $request
-     * @param $dish_id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function saveRecipe(Request $request, $dish_id)
-    {
-
-        $existRecipe = Recipe::where('dish_type_id',$request->get('dish_type_id'))
-            ->where('product_id',$request->get('product_id'))
-            ->first();
-        if(!$existRecipe){
-            $recipe = new Recipe();
-            $recipe->dish_id = $dish_id;
-            $recipe->dish_type_id = $request->get('dish_type_id');
-            $recipe->product_id = $request->get('product_id');
-            $recipe->unit_needed = $request->get('unit');
-            $recipe->child_unit_needed = $request->get('child_unit');
-            $recipe->user_id = auth()->id();
-            if ($recipe->save()) {
-                return redirect()->back();
-            }
-        }else{
-            return redirect()->back()->with(['error','Already Exist']);
-        }
-
-
-    }
-
-    /**
-     *
-     * @param Request $request
-     * @param $id
-     */
-    public function updateRecipe(Request $request, $id)
-    {
-
-    }
-
-    /**
-     * Get dish prices and types
-     * @param $dish_id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getTypesOfDish($dish_id)
-    {
-        $dish = Dish::findOrFail($dish_id);
-        return response()->json($dish->dishPrices);
     }
 }

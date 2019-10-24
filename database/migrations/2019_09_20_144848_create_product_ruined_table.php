@@ -18,8 +18,10 @@ class CreateProductRuinedTable extends Migration
             $table->unsignedBigInteger('ruined_header_id');
             $table->unsignedBigInteger('product_id');
             $table->double('quantity');
-           $table->double('price_unit')->nullable();
+            $table->double('price_unit')->nullable();
             $table->string('note')->nullable();
+            $table->double('vat')->default(0)->nullable();  //vat percentage
+
             $table->timestamps();
         });
     }

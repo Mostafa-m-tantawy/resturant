@@ -9,6 +9,7 @@ use App\State;
 use App\Supplier;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -23,7 +24,6 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers = Supplier::all();
-//        dd($suppliers);
         return view('frontend.supplier.index')->with(compact('suppliers'));
         //
     }
@@ -60,12 +60,15 @@ class SupplierController extends Controller
         $user->email = $request->email;
         $user->name = $request->name;
         $user->password = Hash::make(1234);
+        $user->restaurant_id = Auth::user()->restaurant->id;
+
         $user->save();
 
 
         $supplier = new Supplier();
         $supplier->start_balance = $request->balance;
         $supplier->user_id = $user->id;
+        $supplier->restaurant_id = Auth::user()->restaurant->id;
         $supplier->save();
 
         if ($request->phone_g) {
@@ -90,7 +93,7 @@ class SupplierController extends Controller
                 }
             }
         }
-        return redirect(route('supplier'));
+        return redirect('supplier');
 
 
         //

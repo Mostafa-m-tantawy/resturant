@@ -35,6 +35,11 @@ class Restaurant extends Model
         return $this->hasMany(RefundProduct::class);
     }
 
+  public function suppliers()
+    {
+        return $this->hasMany(Supplier::class);
+    }
+
 
     public function getGrossPurchasesAttribute(){
         $total=0;
@@ -42,7 +47,7 @@ class Restaurant extends Model
         foreach ($purchases as $purchase) {
 
             $total+=$purchase->pursesProducts->sum(function($t){
-                return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+                return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->vat/100);
             });;
         }//->total;
         return $total;
@@ -55,7 +60,7 @@ class Restaurant extends Model
     public function getGrossRefundsAttribute(){
 
         $total=   $this->refunds->sum(function($t){
-            return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+            return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->vat/100);
         });
         return $total;
     }

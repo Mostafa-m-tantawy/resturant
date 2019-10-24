@@ -15,9 +15,9 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('restaurant_id');
             $table->timestamps();
         });
     }

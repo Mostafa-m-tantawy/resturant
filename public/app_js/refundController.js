@@ -57,7 +57,7 @@ $(document).ready(function () {
 
                         $.each(data, function (i, item) {
                          if(item.quantity_available)
-                             $('<option data-vat="'+item.vat+'" data-quantity="'+item.quantity+'"></option>').val(item.id).text(item.name).appendTo('#product');
+                             $('<option data-vat="'+item.pivot.vat+'" data-quantity="'+item.quantity+'"></option>').val(item.id).text(item.name).appendTo('#product');
 
                         });
 

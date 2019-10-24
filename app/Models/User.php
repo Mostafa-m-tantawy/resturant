@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\restaurantScope;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,11 +12,14 @@ class User extends Authenticatable
 {
     use Notifiable,HasRoles;
 
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -51,6 +55,6 @@ class User extends Authenticatable
     }
 
     public function restaurant(){
-        return $this->hasOne(Restaurant::class);
+        return $this->belongsTo(Restaurant::class);
     }
 }

@@ -48,7 +48,9 @@ $(document).ready(function () {
                         $('<option ></option>').val('').text('select product').appendTo('#product');
 
                         $.each(data, function (i, item) {
-                            $('<option data-vat="'+item.vat+'"></option>').val(item.id).text(item.name).appendTo('#product');
+                            console.log(item.pivot);
+
+                            $('<option data-vat="'+item.pivot.vat+'"></option>').val(item.id).text(item.name).appendTo('#product');
 
                         });
                         // for (var i = 0; i < data.lenght; i++) {

@@ -19,7 +19,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{trans('main.purchases')}} {{trans('main.details')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -28,7 +28,7 @@
 
                             <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Purchase
+                                {{trans('main.new')}} {{trans('main.purchase')}}
                             </a>
                         </div>
                     </div>
@@ -42,14 +42,13 @@
                        width="100%">
                     <thead>
                     <tr>
-                        <th>Purchase ID</th>
-                        <th>Restaurant name</th>
-                        <th>Supplier Name</th>
-                        <th> product</th>
-                        <th> quantity</th>
-                        <th> price</th>
-                        <th> vat</th>
-                        <th> Total</th>
+                        <th> {{trans('main.id')}}</th>
+                        <th> {{trans('main.supplier')}} </th>
+                        <th>  {{trans('main.product')}}</th>
+                        <th>  {{trans('main.quantity')}}</th>
+                        <th>  {{trans('main.price')}}</th>
+                        <th>  {{trans('main.vat')}}</th>
+                        <th>  {{trans('main.total')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,13 +56,12 @@
                         @foreach($purchase->pursesProducts as $product)
                             <tr>
                                 <td>{{$purchase ->id}}</td>
-                                <td>{{$purchase ->restaurant->user->name}}</td>
                                 <td>{{$purchase ->supplier->user->name}}</td>
                                 <td>{{$product  ->product->name}}</td>
                                 <td>{{$product  ->quantity}}</td>
                                 <td>{{$product  ->unit_price}}</td>
-                                <td>{{($product  ->quantity*$product  ->unit_price)*( $product  ->product->vat/100)}}</td>
-                                <td>{{number_format(($product->unit_price*$product->quantity)+($product  ->quantity*$product  ->unit_price)*( $product  ->product->vat/100),2)}}</td>
+                                <td>{{($product  ->quantity*$product  ->unit_price)*( $product  ->product->vat($purchase ->supplier)/100)}}</td>
+                                <td>{{number_format(($product->unit_price*$product->quantity)+($product  ->quantity*$product  ->unit_price)*( $product  ->vat/100),2)}}</td>
 
                             </tr>
                         @endforeach

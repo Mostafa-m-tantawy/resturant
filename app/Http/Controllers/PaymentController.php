@@ -6,6 +6,7 @@ use App\Payment;
 use App\PursesPayment;
 use App\Uploadedfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
@@ -24,6 +25,7 @@ class PaymentController extends Controller
         }
 
         $pursesPayment = new Payment();
+        $pursesPayment->restaurant_id = Auth::user()->restaurant->id;
         $pursesPayment->payment_amount = $request->get('payment');
         $pursesPayment->sender_id = $request->get('sender_id');;
         $pursesPayment->receiver_id = $request->get('receiver_id');;

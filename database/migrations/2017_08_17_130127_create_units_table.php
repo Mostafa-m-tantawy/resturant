@@ -18,6 +18,7 @@ class CreateUnitsTable extends Migration
             $table->string('unit');
             $table->string('child_unit')->nullable();
             $table->double('convert_rate')->nullable();
+            $table->unsignedBigInteger('restaurant_id');
             $table->timestamps();
         });
     }

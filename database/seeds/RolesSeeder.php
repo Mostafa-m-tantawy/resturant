@@ -14,11 +14,9 @@ class RolesSeeder extends Seeder
     {
         //
         //
-        $role = Role::create(['name' => 'Super-admin']);
-        $role = Role::create(['name' => 'Restaurant']);
-        $role = Role::create(['name' => 'Supplier']);
-        $role = Role::create(['name' => 'Branch']);
+//        $role = Role::create(['name' => 'Super-admin']);
 //        $permission = Permission::create(['name' => 'edit articles']);
+
 
     }
 }

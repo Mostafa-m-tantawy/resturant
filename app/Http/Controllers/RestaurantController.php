@@ -10,6 +10,7 @@ use App\Purse;
 use App\Restaurant;
 use App\State;
 use App\Supplier;
+use App\SystemConf;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +67,11 @@ class RestaurantController extends Controller
             $restaurant = new Restaurant;
             $restaurant->user_id = $user->id;
             $restaurant->save();
-            Auth::login($user);
+
+        $user->restaurant_id = $restaurant->id;
+        $user->save();
+
+        Auth::login($user);
 
        if($request->phone_g)
        {
@@ -90,6 +95,15 @@ class RestaurantController extends Controller
             }
             }
         }
+
+     $systemconf= SystemConf::create(
+         [
+             ['restaurant_id'=>$restaurant->id,'name' => 'service'],
+             ['restaurant_id'=>$restaurant->id,'name' => 'vat'],
+             ['restaurant_id'=>$restaurant->id,'name' => 'method'],
+             ['restaurant_id'=>$restaurant->id,'name' => 'months'],
+             ]
+         );
         return redirect(route('dashboard'));
 
     }

@@ -26,7 +26,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    Department
+                                    {{trans('main.department')}}
                                 </h3>
                             </div>
 
@@ -34,14 +34,14 @@
                         <div class="kt-form kt-form--label-right">
                             <div class="kt-portlet__body">
                                 <div class="form-group form-group-xs row">
-                                    <label class="col-3 col-form-label">Name:</label>
+                                    <label class="col-3 col-form-label">{{trans('main.name')}}:</label>
                                     <div class="col-7">
                                         <span
                                             class="form-control-plaintext kt-font-bolder">{{$department->name}}</span>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-xs row">
-                                    <label class="col-3 col-form-label">description:</label>
+                                    <label class="col-3 col-form-label">{{trans('main.description')}}:</label>
                                     <div class="col-7">
                                         <span
                                             class="form-control-plaintext kt-font-bolder">{{$department->description}}</span>
@@ -68,7 +68,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#kt_apps_contacts_view_tab_3"
                                            role="tab">
-                                            <i class="flaticon2-calendar-3"></i> Personal
+                                            <i class="flaticon2-calendar-3"></i> {{trans('main.personal')}}
                                         </a>
                                     </li>
                                 </ul>
@@ -88,20 +88,20 @@
                                         <div class="kt-portlet__body">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <h3>Department Information</h3>
+                                                    <h3>{{trans('main.department')}} {{trans('main.information')}}</h3>
                                                     <div class="form-group row">
                                                         <div class="col-12">
-                                                            <label>Name:</label>
+                                                            <label>{{trans('main.name')}}:</label>
                                                             <input type="text" required name="name" class="form-control"
                                                                    placeholder="Enter full name" value="{{$department->name}}">
-                                                            <span class="form-text text-muted"> department name</span>
+                                                            <span class="form-text text-muted"> {{trans('main.department')}} {{trans('main.name')}}</span>
                                                         </div>
                                                         <div class="col-12">
-                                                            <label class="">Description:</label>
+                                                            <label class="">{{trans('main.description')}}:</label>
                                                             <input type="text" required name="description"
                                                                    value="{{$department->description}}" class="form-control" placeholder="Enter email">
                                                             <span
-                                                                class="form-text text-muted">description</span>
+                                                                class="form-text text-muted">{{trans('main.description')}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,8 +112,8 @@
                                                 <div class="row">
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-lg-8">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">{{trans('main.submit')}}</button>
+                                                        <button type="reset" class="btn btn-secondary">{{trans('main.cancel')}}</button>
                                                     </div>
                                                 </div>
                                             </div>

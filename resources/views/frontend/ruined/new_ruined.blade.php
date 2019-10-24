@@ -24,11 +24,11 @@
                                         <select id="price_math_method" name='price_math_method'
                                                 class="form-control">
 
-                                            <option  selected value="" disabled>Select Method
+                                            <option selected value="" disabled>Select Method
                                             </option>
-                                            <option  value="last_price">Last Purchased  Price
+                                            <option value="last_price">Last Purchased Price
                                             </option>
-                                            <option  value="avg_price">Average price
+                                            <option value="avg_price">Average price
                                             </option>
                                         </select>
                                     </div>
@@ -72,7 +72,8 @@
                                         <label for=""
                                                class=" control-label"> {{ trans('main.select') }}  {{ trans('main.product') }}</label>
                                         <select name="product" id="product" class="form-control" required>
-                                            <option value=""> {{ trans('main.select') }}   {{ trans('main.product') }} </option>
+                                            <option
+                                                value=""> {{ trans('main.select') }}   {{ trans('main.product') }} </option>
 
                                         </select>
                                     </div>
@@ -89,12 +90,26 @@
                                     </div>
 
 
-                                    <div class="form-group col-4">
-                                        <label class=" control-label"
-                                               for="example-email"> {{ trans('main.cost') }}  </label>
-                                        <div class="input-group ">
-                                            <input type="number" readonly id="cost" name="cost"
-                                                   class="form-control">
+                                    <div class="col-4">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label class=" control-label"
+                                                   for="example-email"> {{ trans('main.cost') }}  </label>
+                                            <div class="input-group ">
+                                                <input type="number" readonly id="cost" name="cost"
+                                                       class="form-control">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label class=" control-label"
+                                                   for="example-email"> {{ trans('main.vat') }}  </label>
+                                            <div class="input-group ">
+                                                <input type="number"  id="vat" name="vat"
+                                                       class="form-control">
+                                            </div>
+
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="form-group col-4">
@@ -105,7 +120,6 @@
                                                    class="form-control">
                                         </div>
                                     </div>
-
 
 
                                     <div class="form-group col-12">
@@ -123,7 +137,8 @@
                             <div class="p-20">
                                 <div class="table-responsive">
                                     <table id="datatable-responsive"
-                                           class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                                           class="table table-striped table-bordered dt-responsive nowrap"
+                                           cellspacing="0">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -132,9 +147,9 @@
                                             <th> {{ trans('main.cost') }} {{ trans('main.method') }}</th>
                                             <th> {{ trans('main.date') }} {{ trans('main.range') }}</th>
                                             <th> {{ trans('main.product') }}</th>
-                                            <th > {{ trans('main.quantity')}}</th>
-                                            <th > {{ trans('main.cost')}}</th>
-                                            <th > {{ trans('main.action') }}</th>
+                                            <th> {{ trans('main.quantity')}}</th>
+                                            <th> {{ trans('main.cost')}}</th>
+                                            <th> {{ trans('main.action') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody id="pursesDetailsRender">
@@ -159,7 +174,8 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset('js/demo1/pages/crud/forms/widgets/bootstrap-daterangepicker.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/demo1/pages/crud/forms/widgets/bootstrap-daterangepicker.js')}}"
+            type="text/javascript"></script>
 
     <script src="{{ url('/app_js/ruinedController.js') }}">
     </script>

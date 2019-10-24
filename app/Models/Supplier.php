@@ -2,6 +2,7 @@
 namespace App;
 
 
+use App\Scopes\restaurantScope;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class Supplier extends Model
     }
     public function products()
     {
-        return $this->hasMany(Product::class)->orderBy('name');
+        return $this->belongsToMany(Product::class,'product_supplier')->withPivot('vat')->orderBy('name');
     }
     public function refunds()
     {
@@ -37,7 +38,7 @@ class Supplier extends Model
         foreach ($purchases as $purchase) {
 
             $total+=$purchase->pursesProducts->sum(function($t){
-                return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+                return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->vat/100);
             });;
         }//->total;
     return $total;
@@ -49,9 +50,16 @@ class Supplier extends Model
     public function getGrossRefundsAttribute(){
 
         $total=   $this->refunds->where('restaurant_id',Auth::user()->restaurant->id)->sum(function($t){
-            return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->product->vat/100);
+            return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->vat/100);
         });
     return $total;
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new restaurantScope());
     }
 }
 

@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card-box" id="app">
-                            <h4 class="m-t-0 header-title"><b> {{ trans('main.purses') }}</b></h4>
+                            <h4 class="m-t-0 header-title"><b>  {{ trans('main.purchases') }}</b></h4>
                             <hr>
                             <form class="form-horizontal" role="form" action="#" id="purses" method="post"
                                   enctype="multipart/form-data" data-parsley-validate novalidate>
@@ -98,7 +98,7 @@
                                             <th> {{ trans('main.supplier') }}</th>
                                             <th> {{ trans('main.product') }}</th>
                                             <th width="100px"> {{ trans('main.quantity') }}</th>
-                                            <th width="150px">Unit Price</th>
+                                            <th width="150px"> {{ trans('main.unit') }}  {{ trans('main.price') }}</th>
                                             <th> {{ trans('main.child') }}  {{ trans('main.unit') }}  {{ trans('main.price') }}</th>
                                             <th> {{ trans('main.gross') }}  {{ trans('main.price') }}</th>
                                             <th width="95px"> {{ trans('main.action') }}</th>

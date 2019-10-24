@@ -42,6 +42,7 @@
                        width="100%">
                     <thead>
                     <tr>
+
                         <th>ID</th>
                         <th>Type</th>
                         <th>ruined from</th>
@@ -49,7 +50,10 @@
                         <th>date if avg</th>
                         <th>quantity</th>
                         <th>unit price</th>
+                        <th>vat</th>
+                        <th>total</th>
                         <th>note</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -64,6 +68,8 @@
                             <td>{{$ruin->product->name}}</td>
                             <td>{{$ruin->quantity}}</td>
                             <td>{{$ruin->price_unit}}</td>
+                            <td>{{$ruin->quantity*$ruin->price_unit*($ruin->vat/100)}}</td>
+                            <td>{{($ruin->quantity*$ruin->price_unit)+$ruin->quantity*$ruin->price_unit*($ruin->vat/100)}}</td>
                             <td>{{$ruin->note}}</td>
 
 {{--                             <td>--}}

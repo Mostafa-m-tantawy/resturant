@@ -18,7 +18,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $restaurant=Auth::user()->restaurant;
-        $departments=Department::where('restaurant_id',$restaurant->id)->get();
+        $departments=Department::all();
         return  view('frontend.department.index')->with(compact('restaurant','departments'));
     }
 

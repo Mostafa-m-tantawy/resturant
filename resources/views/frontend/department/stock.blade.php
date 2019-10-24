@@ -13,7 +13,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                       {{trans('main.stock')}} {{trans('main.report')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -30,7 +30,7 @@
                     @csrf
                     <div class="row">
                         <div class="form-group col-5">
-                            <label class="col-form-label ">Calculation Method </label>
+                            <label class="col-form-label ">{{trans('main.department')}} {{trans('main.stock')}}  </label>
 
                             <select id="department_id" name='department_id'
                                     class="form-control" required>
@@ -43,21 +43,23 @@
 
                     <div class="row">
                         <div class="form-group col-5">
-                            <label class="col-form-label ">Calculation Method </label>
+                            <label class="col-form-label ">{{trans('main.calculation')}} {{trans('main.method')}}  </label>
 
                             <select id="price_math_method" name='price_math_method'
                                     class="form-control">
-                                <option @if($method=='last_price') selected @endif value="last_price">Last Purchased
-                                    Price
+                                <option @if($method=='last_price') selected @endif value="last_price">
+                                    {{trans('main.Last Purchased Price')}}
                                 </option>
-                                <option @if($method=='avg_price') selected @endif value="avg_price">Average price
+                                <option @if($method=='avg_price') selected @endif value="avg_price">
+                                    {{trans('main.Average price')}}
+
                                 </option>
                             </select>
                         </div>
 
                         <div class="form-group col-md-5 " id="stock_range_date"
                              style="display:none;">
-                            <label class="col-form-label ">Date Range </label>
+                            <label class="col-form-label ">     {{trans('main.date')}} {{trans('main.range')}}  </label>
 
                             <div class='input-group pull-right' id='kt_daterangepicker_6'>
                                 <input type='text' class="form-control" readonly
@@ -92,10 +94,9 @@
                                width="100%">
                             <thead>
                             <tr>
-                                <th>name</th>
-                                <th>Quantity Available</th>
-                                <th>Unit price</th>
-                                <th>vat</th>
+                                <th> {{trans('main.name')}}</th>
+                                <th> {{trans('main.quantity')}}  {{trans('main.available')}}</th>
+                                <th> {{trans('main.unit')}} {{trans('main.price')}}</th>
 
                             </tr>
                             </thead>
@@ -105,7 +106,6 @@
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->assignQuantity($department) }}</td>
                                     <td>{{$product->price($method,$from,$to) }}</td>
-                                    <td>{{$product->vat }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

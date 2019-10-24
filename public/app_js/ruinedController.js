@@ -301,6 +301,7 @@ $('#cost').val(parseFloat(data[0]));
             product: {
                 productId: $("#product").val(),
                 productName: $("#product option:selected").text(),
+                vat:  $("#vat").val(),
                 quantityAvailable: $("#product option:selected").data('quantity'),
             },
             quantity: $("#quantity").val(),
