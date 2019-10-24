@@ -14,7 +14,7 @@
                     <div class="col-sm-12">
                         <div class="card-box" id="app">
 
-                            <h4 class="m-t-0 header-title"><b> {{ trans('main.purses') }}</b></h4>
+                            <h4 class="m-t-0 header-title"><b> {{ trans('main.purchases') }}</b></h4>
                             <p>
 
                             </p>
@@ -36,7 +36,7 @@
                                             <option
                                                 value=""> {{ trans('main.select') }}  {{ trans('main.one') }}</option>
                                             @foreach($products as $product)
-                                                <option data-vat="{{$product->vat}}"
+                                                <option data-vat="{{$product->vat($purses->supplier)}}"
                                                         value="{{$product->id}}">{{$product->name}}</option>
                                             @endforeach
                                         </select>
@@ -126,8 +126,7 @@
                                                 <td>{{$product->product->name}}</td>
                                                 <td>{{$product->quantity}}</td>
                                                 <td>{{$product->unit_price}} </td>
-                                                <td>{{$product->unit_price}} </td>
-                                                <th>{{($product->vat_value)?$product->vat_value:0}} </th>
+                                                <th>{{$product->vat}} </th>
                                                 <th>{{$product->total}} </th>
 
 {{--                                                <td>--}}
@@ -149,19 +148,19 @@
 
                                         <tr>
                                             <th colspan="5"></th>
-                                            <th class="text-right">Sup Total :</th>
+                                            <th class="text-right">{{ trans('main.sup-total') }} :</th>
                                             <th>{{ number_format($purses->total -$purses->vat,2,'.',',')}}</th>
                                             <th></th>
                                         </tr>
                                         <tr>
                                             <th colspan="5"></th>
-                                            <th class="text-right">Vat :</th>
+                                            <th class="text-right">{{ trans('main.vat') }} :</th>
                                             <th>{{ number_format($purses->vat,2,'.',',')}}</th>
                                             <th></th>
                                         </tr>
                                         <tr>
                                             <th colspan="5"></th>
-                                            <th class="text-right">Total :</th>
+                                            <th class="text-right">{{ trans('main.total') }} :</th>
                                             <th>{{ number_format($purses->total,2,'.',',')}}</th>
                                             <th></th>
                                         </tr>

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <form action="{{url('delete/address-phones')}}" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete <span class="model_type"></span></h5>
+                    <h5 class="modal-title">{{trans('main.delete')}} <span class="model_type"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -17,7 +17,7 @@
                             <div class="col-12">
                                 <input type="hidden"   name="type">
                                 <input type="hidden"   name="id">
-                                <h3>Do you Want to confirm Delete ?</h3>
+                                <h3>{{trans('main.Do you Want to confirm Delete ?')}}</h3>
                             </div>
 
                         </div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="col-12 pull-left">
-                        <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">Delete</button>
+                        <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.delete')}}</button>
                     </div>
                 </div>
             </form>

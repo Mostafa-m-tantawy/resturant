@@ -64,7 +64,6 @@ class PursesController extends Controller
 
         $suppliers = Supplier::all();
         $unit = Unit::all();
-
         return view('frontend.purchase.edit-purses',[
             'products'          =>      $products,
             'units'             =>      $unit,
@@ -105,20 +104,9 @@ class PursesController extends Controller
                 $pursesProduct->product_id = $product->productId;
                 $pursesProduct->quantity = $purse->quantity;
                 $pursesProduct->unit_price = $unit->unitPrice;
+                $pursesProduct->Vat = $product->vat;
 
                 if ($pursesProduct->save()) {
-//                    $producttocook=Product::find($product->productId);
-//                    if($producttocook->iscookable){
-//                        foreach ($producttocook->prepareRecipes as $recipe) {
-//
-//                            $cookedProduct = new CookedProduct();
-//                            $cookedProduct->cookable_id = $product->productId;
-//                            $cookedProduct->cookable_type = 'App\Product';
-//                            $cookedProduct->product_id = $recipe->product_id;
-//                            $cookedProduct->quantity = $recipe->unit_needed * $purse->quantity;
-//                            $cookedProduct->save();
-//                        }
-//                    }
                 } else {
                     PursesProduct::where('purses_id', $purses->id)->delete();
                     Purse::destroy($purse->id);
@@ -142,12 +130,7 @@ class PursesController extends Controller
      * @param $id
      * @return array
      */
-    public function updatePurses(Request $request,$id)
-    {
-        return $request->all();
-    }
-
-    /**
+        /**
      * Get products unit by id
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -194,6 +177,7 @@ class PursesController extends Controller
         $pursesProduct->product_id = $request->get('product_id');
         $pursesProduct->quantity = $request->get('quantity');
         $pursesProduct->unit_price = $request->get('unit_price');
+        $pursesProduct->vat = $request->get('vat');
         if($pursesProduct->save()){
             return redirect()->back();
         }

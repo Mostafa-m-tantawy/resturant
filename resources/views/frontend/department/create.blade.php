@@ -2,16 +2,7 @@
 @section('content')
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-        <div class="alert alert-light alert-elevate" role="alert">
-            <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-            <div class="alert-text">
-                You can use the dom initialisation parameter to move DataTables features around the table to where you
-                want them.
-                See official documentation <a class="kt-link kt-font-bold"
-                                              href="https://datatables.net/examples/advanced_init/dom_multiple_elements.html"
-                                              target="_blank">here</a>.
-            </div>
-        </div>
+
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head kt-portlet__head--lg">
                 <div class="kt-portlet__head-label">
@@ -19,7 +10,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{trans('main.create')}}  {{trans('main.department')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -28,7 +19,7 @@
                            &nbsp;
                             <a href="#" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                {{trans('main.new')}}  {{trans('main.record')}}
                             </a>
                         </div>
                     </div>
@@ -37,13 +28,6 @@
             <div class="kt-portlet__body">
 
                 <div class="kt-portlet">
-                    <div class="kt-portlet__head">
-                        <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">
-                                3 Columns Form Layout
-                            </h3>
-                        </div>
-                    </div>
 
                     <!--begin::Form-->
                     <form class="kt-form kt-form--label-right" method="post" action="{{route('department.store')}}">
@@ -61,17 +45,15 @@
                                         </div>
                                     @endif
 
-                                    <h3>Personal Information</h3>
+                                    <h3> {{trans('main.department')}}  {{trans('main.information')}}</h3>
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <label>Full Name:</label>
+                                            <label> {{trans('main.name')}}</label>
                                             <input type="text"required name="name" class="form-control" placeholder="Enter full name">
-                                            <span class="form-text text-muted">Please enter your full name</span>
                                         </div>
                                         <div class="col-12">
-                                            <label class="">description :</label>
+                                            <label class="">{{trans('main.description')}} :</label>
                                             <input type="text" name="description" class="form-control" placeholder="Enter description">
-                                            <span class="form-text text-muted">Please enter your email</span>
                                         </div>
 
                                     </div>
@@ -84,8 +66,8 @@
                                 <div class="row">
                                     <div class="col-lg-4"></div>
                                     <div class="col-lg-8">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">{{trans('main.submit')}}</button>
+                                        <button type="reset" class="btn btn-secondary">{{trans('main.cancel')}}</button>
                                     </div>
                                 </div>
                             </div>

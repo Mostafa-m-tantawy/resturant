@@ -86,7 +86,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    Financial receivables
+                                    {{trans('main.financial')}} {{trans('main.receivables')}}
                                 </h3>
                             </div>
 
@@ -94,31 +94,38 @@
                             <div class="kt-widget1 kt-widget1--fit">
                                 <div class="kt-widget1__item">
                                     <div class="kt-widget1__info">
-                                        <h3 class="kt-widget1__title">Purchases</h3>
-                                        <span class="kt-widget1__desc">Restaurant gross  purchases</span>
+                                        <h3 class="kt-widget1__title"> {{trans('main.suppliers')}}</h3>
+                                        <span class="kt-widget1__desc">{{trans('main.suppliers')}} {{trans('main.start')}} {{trans('main.balance')}}</span>
+                                    </div>
+                                    <span class="kt-widget1__number kt-font-brand">+${{number_format($restaurant->suppliers->sum('start_balance'),2)}}</span>
+                                </div>
+                                <div class="kt-widget1__item">
+                                    <div class="kt-widget1__info">
+                                        <h3 class="kt-widget1__title">{{trans('main.purchases')}}</h3>
+                                        <span class="kt-widget1__desc">{{trans('main.restaurant')}} {{trans('main.gross')}} {{trans('main.purchases')}}</span>
                                     </div>
                                     <span class="kt-widget1__number kt-font-brand">+${{number_format($restaurant->GrossPurchases,2)}}</span>
                                 </div>
                                 <div class="kt-widget1__item">
                                     <div class="kt-widget1__info">
-                                        <h3 class="kt-widget1__title">Returns  </h3>
-                                        <span class="kt-widget1__desc">Restaurant gross return to supplier </span>
+                                        <h3 class="kt-widget1__title">  {{trans('main.refund')}}</h3>
+                                        <span class="kt-widget1__desc">{{trans('main.restaurant')}} {{trans('main.gross')}} {{trans('main.to')}} {{trans('main.supplier')}}     </span>
                                     </div>
                                     <span class="kt-widget1__number kt-font-danger">-${{number_format($restaurant->GrossRefunds,2)}}</span>
                                 </div>
                                 <div class="kt-widget1__item">
                                     <div class="kt-widget1__info">
-                                        <h3 class="kt-widget1__title">Payment</h3>
-                                        <span class="kt-widget1__desc">Restaurant gross payment</span>
+                                        <h3 class="kt-widget1__title"> {{trans('main.payment')}}</h3>
+                                        <span class="kt-widget1__desc">{{trans('main.restaurant')}} {{trans('main.gross')}} {{trans('main.payment')}}  </span>
                                     </div>
                                     <span class="kt-widget1__number kt-font-danger">-${{number_format($restaurant->GrossPayments,2)}}</span>
                                 </div>
                                 <div class="kt-widget1__item">
                                     <div class="kt-widget1__info">
-                                        <h3 class="kt-widget1__title">Dept</h3>
-                                        <span class="kt-widget1__desc">Restaurant  dept</span>
+                                        <h3 class="kt-widget1__title">{{trans('main.dept')}}</h3>
+                                        <span class="kt-widget1__desc">{{trans('main.restaurant')}}  {{trans('main.dept')}}</span>
                                     </div>
-                                    <span class="kt-widget1__number kt-font-success">${{number_format($restaurant->GrossPurchases-$restaurant->GrossRefunds-$restaurant->GrossPayments,2)}}</span>
+                                    <span class="kt-widget1__number kt-font-success">${{number_format($restaurant->suppliers->sum('start_balance')+$restaurant->GrossPurchases-$restaurant->GrossRefunds-$restaurant->GrossPayments,2)}}</span>
                                 </div>
                             </div>
                         </div>
@@ -140,13 +147,13 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#kt_apps_contacts_view_tab_3"
                                            role="tab">
-                                            <i class="flaticon2-calendar-3"></i> Personal
+                                            <i class="flaticon2-calendar-3"></i> {{trans('main.information')}}
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#kt_apps_supplier_payments"
                                            role="tab">
-                                            <i class="flaticon2-gear"></i> Payments
+                                            <i class="flaticon2-gear"></i> {{trans('main.payments')}}
                                         </a>
                                     </li>
                                 </ul>
@@ -164,32 +171,30 @@
                                         <div class="kt-portlet__body">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <h3>Personal Information</h3>
+                                                    <h3> {{trans('main.information')}}</h3>
                                                     <div class="form-group row">
                                                         <div class="col-12">
-                                                            <label>Full Name:</label>
+                                                            <label> {{trans('main.name')}}:</label>
                                                             <input type="text" required name="name" class="form-control"
-                                                                   placeholder="Enter full name"
+                                                                   placeholder="Enter restaurant name"
                                                                    value="{{$restaurant->user->name}}">
-                                                            <span class="form-text text-muted">Please enter your full name</span>
                                                         </div>
                                                         <div class="col-12">
-                                                            <label class="">Email:</label>
+                                                            <label class="">{{trans('main.email')}}:</label>
                                                             <input type="email" required name="email"
                                                                    value="{{$restaurant->user->email}}"
                                                                    class="form-control" placeholder="Enter email">
-                                                            <span
-                                                                class="form-text text-muted">Please enter your email</span>
                                                         </div>
 
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6" id="kt_repeater_1">
-                                                    <h3>Contact Information<a href="javascript:;"
+                                                    <h3>{{trans('main.contact')}} {{trans('main.information')}}
+                                                        <a href="javascript:;"
                                                                               data-repeater-create=""
                                                                               class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                                            <i class="la la-plus"></i> Add
+                                                            <i class="la la-plus"></i> {{trans('main.add')}}
                                                         </a></h3>
                                                     <div class="repeater" class="form-group  row">
                                                         <div data-repeater-list="phone_g" class="col-lg-12">
@@ -222,7 +227,7 @@
 
 
                                                                 <div class="col-lg-5">
-                                                                    <label>Phone</label>
+                                                                    <label>{{trans('main.phone')}}</label>
 
                                                                     <div class="input-group">
 
@@ -232,7 +237,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-5">
-                                                                    <label>Type</label>
+                                                                    <label>{{trans('main.type')}}</label>
 
                                                                     <div class=" form-group input-group">
 
@@ -256,16 +261,16 @@
                                                 </div>
 
                                                 <div class="col-md-6" id="kt_repeater_2" class="repeater">
-                                                    <h3>Addresses Information<a href="javascript:;"
+                                                    <h3>{{trans('main.address')}} {{trans('main.information')}}<a href="javascript:;"
                                                                                 data-repeater-create=""
                                                                                 class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                                            <i class="la la-plus"></i> Add
+                                                            <i class="la la-plus"></i> {{trans('main.add')}}
                                                         </a></h3>
                                                     <br>
                                                     @foreach($restaurant->user->addresses as $address)
                                                         <div class="form-group form-group-xs row">
                                                             <label class="col-3 col-form-label">
-                                                                Address{{$loop->index+1}}:</label>
+                                                                {{trans('main.address')}} - {{$loop->index+1}}:</label>
                                                             <div class="col-7">
                                                                         <span
                                                                             class="form-control-plaintext kt-font-bolder">
@@ -291,26 +296,25 @@
                                                     <div data-repeater-list="address_g">
                                                         <div class="form-group form-group-last row" data-repeater-item>
                                                             <div class="col-lg-12">
-                                                                <label>Address:</label>
+                                                                <label>{{trans('main.address')}}:</label>
                                                                 <div class="kt-input-icon kt-input-icon--right">
                                                                     <input type="text" name="address"
                                                                            class="form-control"
                                                                            required
-                                                                           placeholder="Enter your address">
+                                                                           placeholder="{{trans('main.enter')}} {{trans('main.restaurant')}} {{trans('main.address')}}">
                                                                     <span
                                                                         class="kt-input-icon__icon kt-input-icon__icon--right"><span><i
                                                                                 class="la la-map-marker"></i></span></span>
                                                                 </div>
-                                                                <span class="form-text text-muted">Please enter your address</span>
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <div class="row kt-margin-b-10">
                                                                     <div class="col-lg-5">
-                                                                        <label>Country</label>
+                                                                        <label>{{trans('main.country')}}</label>
                                                                         <select class="form-control country"
                                                                                 name="country"
                                                                                 onchange="changecity(this)">
-                                                                            <option value="00">Select Country
+                                                                            <option value="00">{{trans('main.select')}} {{trans('main.country')}}
                                                                             </option>
                                                                             @foreach($countries as $country)
                                                                                 <option
@@ -319,10 +323,10 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <label>City</label>
+                                                                        <label>{{trans('main.city')}}</label>
 
                                                                         <select class="form-control" name="city">
-                                                                            <option value="00">Select City</option>
+                                                                            <option value="00">{{trans('main.select')}} {{trans('main.city')}}</option>
 
                                                                         </select>
                                                                     </div>
@@ -349,8 +353,8 @@
                                                 <div class="row">
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-lg-8">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">{{trans('main.submit')}}</button>
+                                                        <button type="reset" class="btn btn-secondary">{{trans('main.cancel')}}</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -369,7 +373,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                                                 <h3 class="kt-portlet__head-title">
-                                                    Multiple Controls
+                                                    {{trans('main.payments')}}
                                                 </h3>
                                             </div>
                                             <div class="kt-portlet__head-toolbar">
@@ -389,14 +393,12 @@
                                                cellspacing="0" width="100%">
                                             <thead>
                                             <tr>
-                                                <th> ID</th>
-                                                <th>Sender Id</th>
-                                                <th>Sender name</th>
-                                                <th>Receiver name</th>
-                                                <th>amount</th>
-                                                <th>method</th>
-                                                <th>due date</th>
-                                                <th>action</th>
+                                                <th>  {{trans('main.id')}} </th>
+                                                <th>  {{trans('main.supplier')}} {{trans('main.name')}} </th>
+                                                <th> {{trans('main.amount')}} </th>
+                                                <th> {{trans('main.methof')}} </th>
+                                                <th> {{trans('main.Due Date')}} </th>
+                                                <th> {{trans('main.action')}} </th>
                                             </tr>
                                             </thead>
                                             <tbody>

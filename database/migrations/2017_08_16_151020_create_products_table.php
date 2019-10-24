@@ -15,13 +15,13 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->string('name');
             $table->string('barcode')->nullable();
             $table->string('reorder_point')->nullable();
-            $table->unsignedBigInteger('product_type_id'); //stockable --non stockable --service
+            $table->boolean('is_stockable')->nullable(); //stockable --non stockable
+            $table->unsignedBigInteger('product_category_id')->nullable();
             $table->unsignedBigInteger('unit_id');
-            $table->unsignedBigInteger('supplier_id');
-            $table->integer('vat')->nullable();
             $table->timestamps();
         });
     }

@@ -1,11 +1,17 @@
 <?php namespace App;
 
+use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
 
 
 class Uploadedfile extends Model {
 	protected $guarded = array();
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new restaurantScope());
+    }
     public static $rules = array(
         'filable_type' => 'required',
         'filable_id' => 'required',

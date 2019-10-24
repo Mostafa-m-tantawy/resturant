@@ -19,7 +19,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{trans('main.department')}} {{trans('main.index')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -28,7 +28,7 @@
 
                             <a href="{{route('department.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                {{trans('main.new')}} {{trans('main.record')}}
                             </a>
                         </div>
                     </div>
@@ -42,10 +42,10 @@
                width="100%">
         <thead>
             <tr>
-                <th> ID</th>
-                <th>Name</th>
-                <th>description</th>
-                <th>profile</th>
+                <th> {{trans('main.id')}}</th>
+                <th>{{trans('main.name')}}</th>
+                <th>{{trans('main.description')}}</th>
+                <th>{{trans('main.profile')}}</th>
 {{--                <th>delete</th>--}}
             </tr>
             </thead>
@@ -57,7 +57,7 @@
                     <td>{{$department->description}}</td>
                    <td>
                        <a href="{{url('department/'.$department->id)}}" title="products">
-                           <span>Profile</span>
+                           <span>{{trans('main.profile')}}</span>
                            <i  class="la la-edit" style="font-size: 25px;"></i></a>
                       </td>
 {{--                   <td>--}}

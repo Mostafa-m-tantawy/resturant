@@ -80,6 +80,8 @@
 
     <!--end::Layout Skins -->
     <link rel="shortcut icon" href="{{asset('media/logos/favicon.ico')}}" />
+
+    @yield('style')
 </head>
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
     <div class="kt-header-mobile__logo">

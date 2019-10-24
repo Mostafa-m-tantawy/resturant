@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UnitController extends Controller
 {
@@ -51,7 +52,8 @@ class UnitController extends Controller
 
         ]);
             $uint = new Unit();
-            $uint->unit = $request->unit;
+        $uint->restaurant_id = Auth::user()->restaurant->id;
+        $uint->unit = $request->unit;
             $uint->child_unit = $request->child_unit;
             $uint->convert_rate = $request->convert_rate;
             $uint->save();

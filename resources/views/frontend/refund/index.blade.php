@@ -60,8 +60,8 @@
                             <td>{{$refund->product->name}}</td>
                             <td>{{$refund->quantity}}</td>
                             <td>{{$refund->unit_price}}</td>
-                            <td>{{$refund->product->vat}}</td>
-                            <td>{{($refund->quantity*$refund->unit_price)+($refund->quantity*$refund->unit_price)*($refund->product->vat/100) }}</td>
+                            <td>{{$refund->vat}}</td>
+                            <td>{{($refund->quantity*$refund->unit_price)+($refund->quantity*$refund->unit_price)*($refund->vat/100) }}</td>
                             <td>
                                 <a href="{{url('refund/delete/'.$refund->id)}}" title="delete">
                                     <i style="color: red" class="flaticon-delete"></i>

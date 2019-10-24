@@ -91,7 +91,6 @@
                                 <th>name</th>
                                 <th>Quantity Available</th>
                                 <th>Unit price</th>
-                                <th>vat</th>
 
                             </tr>
                             </thead>
@@ -101,7 +100,6 @@
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->quantity }}</td>
                                     <td>{{$product->price($method,$from,$to) }}</td>
-                                    <td>{{$product->vat }}</td>
 
                                 </tr>
                             @endforeach

@@ -19,7 +19,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{ trans('main.purchases') }} {{ trans('main.summery') }}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -28,7 +28,7 @@
 
                             <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Purchase
+                                {{ trans('main.new') }}  {{ trans('main.purchase') }}
                             </a>
                         </div>
                     </div>
@@ -42,18 +42,16 @@
                        width="100%">
                     <thead>
                     <tr>
-                        <th>Purchase ID</th>
-                        <th>Restaurant name</th>
-                        <th>Supplier Name</th>
-                        <th>Total price</th>
-                        <th>Actions</th>
+                        <th>  {{ trans('main.id') }}</th>
+                        <th> {{ trans('main.supplier') }} </th>
+                        <th>  {{ trans('main.total') }}</th>
+                        <th> {{ trans('main.action') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($purses as $purchase)
                         <tr>
                             <td>{{$purchase->id}}</td>
-                            <td>{{$purchase->restaurant->user->name}}</td>
                             <td>{{$purchase->supplier->user->name}}</td>
                             <td>{{$purchase->total}}</td>
 

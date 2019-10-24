@@ -19,6 +19,8 @@ class CreatePursesProductsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->double('quantity');
             $table->double('unit_price');
+            $table->double('vat')->default(0)->nullable();  //vat percentage
+            $table->date('expired_date')->nullable();
             $table->timestamps();
         });
     }

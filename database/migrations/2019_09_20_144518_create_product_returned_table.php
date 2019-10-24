@@ -21,6 +21,7 @@ class CreateProductReturnedTable extends Migration
             $table->double('quantity');
             $table->double('unit_price');
             $table->string('note')->nullable();
+            $table->double('vat')->default(0)->nullable();  //vat percentage
 
             $table->timestamps();
         });

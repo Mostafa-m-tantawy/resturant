@@ -122,6 +122,7 @@ class RuinedController extends Controller
                 $ruinedProduct->quantity = $purse->quantity;
                 $ruinedProduct->price_unit = $purse->unit_cost;
                 $ruinedProduct->note = $purse->note;
+                $ruinedProduct->vat = $product->vat;
                 $ruinedProduct->save();
             }
 

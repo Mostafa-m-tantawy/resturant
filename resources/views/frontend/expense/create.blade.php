@@ -10,7 +10,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{trans('main.create')}} {{trans('main.expense')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -19,7 +19,7 @@
                             &nbsp;
                             <a href="{{route('expenses.index')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                               All expenses
+                                {{trans('main.all')}} {{trans('main.expenses')}}
                             </a>
                         </div>
                     </div>
@@ -28,13 +28,7 @@
             <div class="kt-portlet__body">
 
                 <div class="kt-portlet">
-                    <div class="kt-portlet__head">
-                        <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">
-                                3 Columns Form Layout
-                            </h3>
-                        </div>
-                    </div>
+
 
                     <!--begin::Form-->
                     <form class="kt-form kt-form--label-right" method="post" action="{{route('expenses.store')}}">
@@ -52,26 +46,26 @@
                                         </div>
                                     @endif
 
-                                    <h3>Personal Information</h3>
+                                    <h3>{{trans('main.expense')}}  {{trans('main.information')}}</h3>
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <label>Payment Method</label>
+                                            <label>{{trans('main.payment')}} {{trans('main.method')}}</label>
                                          <select id="payment_method" class="form-control" name="payment_method">
-                                             <option value="0"> Select Method</option>
-                                             <option value="cash">Cash </option>
-                                             <option value="check">Check </option>
+                                             <option value="0"> {{trans('main.select')}} {{trans('main.method')}}</option>
+                                             <option value="cash">{{trans('main.cash')}} </option>
+                                             <option value="check">{{trans('main.check')}} </option>
                                          </select>
                                           </div>
                                         <div class="col-12"id="duedate"  style="display: none">
-                                            <label class="">Due Date</label>
+                                            <label class="">{{trans('main.Due Date')}}</label>
                                             <input type="date"  name="duedate" class="form-control">
                                         </div>
                                         <div class="col-12">
-                                            <label class="">Payment Amount</label>
+                                            <label class="">{{trans('main.payment')}} {{trans('main.amount')}} </label>
                                             <input type="number" required name="payment_amount" class="form-control">
                                         </div>
                                         <div class="col-12">
-                                            <label>Note :</label>
+                                            <label>{{trans('main.note')}}  :</label>
                                             <input type="text" required name="note" class="form-control" >
                                         </div>
 
@@ -84,8 +78,8 @@
                                 <div class="row">
                                     <div class="col-lg-4"></div>
                                     <div class="col-lg-8">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">{{trans('main.submit')}}</button>
+                                        <button type="reset" class="btn btn-secondary">{{trans('main.cancel')}}</button>
                                     </div>
                                 </div>
                             </div>

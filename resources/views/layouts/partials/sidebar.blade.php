@@ -54,16 +54,64 @@
         <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1"
              data-ktmenu-dropdown-timeout="500">
             <ul class="kt-menu__nav ">
-                <li class="kt-menu__item " aria-haspopup="true"><a href="{{route('supplier.index')}}"
-                                                                   class="kt-menu__link "><span
-                            class="kt-menu__link-text">{{trans('main.suppliers')}}</span></a></li>
-                <li class="kt-menu__item " aria-haspopup="true"><a href="{{route('unit.index')}}"
-                                                                   class="kt-menu__link "><span
-                            class="kt-menu__link-text">{{trans('main.units')}}</span></a></li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="{{route('supplier.index')}}" class="kt-menu__link ">
+                     <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/supplier.jpg')}}" height="24"width="24">
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.suppliers')}}
+                        </span>
+                    </a>
+                </li>
+
+
+
+                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                     <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/product.png')}}" height="24"width="24">
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.product')}}</span><i
+                            class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true"><a href="{{url('product')}}"
+                                                                               class="kt-menu__link "><i
+                                        class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                        class="kt-menu__link-text">index</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true"><a href="{{'product/create'}}"
+                                                                               class="kt-menu__link "><i
+                                        class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                        class="kt-menu__link-text">create</span>
+                                </a>
+                            </li>
+                            <li class="kt-menu__item " aria-haspopup="true"><a href="{{url('product-category')}}"
+                                                                               class="kt-menu__link "><i
+                                        class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                        class="kt-menu__link-text">{{trans('main.category')}}</span>
+                                </a>
+                            </li>
+
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('unit.index')}}" class="kt-menu__link ">
+                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                                        <span></span></i>
+                                    <span class="kt-menu__link-text">{{trans('main.units')}}</span>
+                                </a>
+                            </li>
+                            </ul>
+                    </div>
+
+                </li>
+
 
 
                 <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
                     data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                 <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/restaurant.jpg')}}" height="24"width="24">
+                     </span>
                         <span class="kt-menu__link-text">{{trans('main.restaurant')}}</span><i
                             class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
@@ -86,7 +134,11 @@
                 </li>
 
                 <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
-                    data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                     <span class="kt-menu__link-icon">
+{{--                         <img class="img-fluid" src="{{url('media/icons/purchase.jpeg')}}" height="24"width="24">--}}
+                     </span>
                         <span class="kt-menu__link-text">{{trans('main.purchase')}}</span><i
                             class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
@@ -108,7 +160,11 @@
 
                 </li>
                 <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
-                    data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                        <span class="kt-menu__link-icon">
+{{--                         <img class="img-fluid" src="{{url('media/icons/refund.jpg')}}" height="24"width="24">--}}
+                     </span>
                         <span class="kt-menu__link-text">{{trans('main.department')}}</span><i
                             class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
@@ -127,6 +183,9 @@
 
                 <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
                     data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                     <span class="kt-menu__link-icon">
+{{--                         <img class="img-fluid" src="{{url('media/icons/refund.jpg')}}" height="24"width="24">--}}
+                     </span>
                         <span class="kt-menu__link-text">{{trans('main.refund')}}</span><i
                             class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
@@ -145,7 +204,11 @@
 
                 </li>
                 <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
-                    data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                     <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/ruined.jpg')}}" height="24"width="24">
+                     </span>
                         <span class="kt-menu__link-text">{{trans('main.ruined')}}</span><i
                             class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
@@ -163,8 +226,13 @@
                     </div>
 
                 </li>
+
                 <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
-                    data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                          <span class="kt-menu__link-icon">
+{{--                         <img class="img-fluid" src="{{url('media/icons/refund.jpg')}}" height="24"width="24">--}}
+                     </span>
                         <span class="kt-menu__link-text">{{trans('main.expenses')}}</span><i
                             class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
@@ -179,6 +247,70 @@
                                     <span  class="kt-menu__link-text">
                                         {{trans('main.create')}} {{trans('main.expenses')}}</span></a>
                             </li>
+
+                        </ul>
+                    </div>
+
+                </li>
+
+                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                          <span class="kt-menu__link-icon">
+{{--                         <img class="img-fluid" src="{{url('media/icons/refund.jpg')}}" height="24"width="24">--}}
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.dish')}}</span><i
+                            class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+
+
+                            <li class="kt-menu__item " aria-haspopup="true"><a href="{{route('dish.index')}}"
+                                                                               class="kt-menu__link ">
+                                    <span
+                                        class="kt-menu__link-text">{{trans('main.all')}} {{trans('main.dishes')}}</span></a>
+                            </li>
+
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('dish.create')}}" class="kt-menu__link ">
+                                    <span  class="kt-menu__link-text">
+                                        {{trans('main.create')}} {{trans('main.dish')}}</span></a>
+                            </li>
+                             <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('dish-category.index')}}" class="kt-menu__link ">
+                                    <span  class="kt-menu__link-text">
+                                         {{trans('main.categories')}}</span></a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </li>
+
+                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                          <span class="kt-menu__link-icon">
+{{--                         <img class="img-fluid" src="{{url('media/icons/refund.jpg')}}" height="24"width="24">--}}
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.order')}}</span><i
+                            class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+
+
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('dish.index')}}" class="kt-menu__link ">
+                                    <span class="kt-menu__link-text">
+                                        {{trans('main.all')}} {{trans('main.orders')}}</span></a>
+                            </li>
+
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('dish.create')}}" class="kt-menu__link ">
+                                    <span  class="kt-menu__link-text">
+                                        {{trans('main.create')}} {{trans('main.orders')}}</span></a>
+                            </li>
+
 
                         </ul>
                     </div>
