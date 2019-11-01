@@ -19,38 +19,6 @@
                                 {{csrf_field()}}
                                 <div class="row">
                                     <div class="form-group col-4">
-                                        <label class="col-form-label ">Calculation Method </label>
-
-                                        <select id="price_math_method" name='price_math_method'
-                                                class="form-control">
-
-                                            <option selected value="" disabled>Select Method
-                                            </option>
-                                            <option value="last_price">Last Purchased Price
-                                            </option>
-                                            <option value="avg_price">Average price
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-md-4 " id="stock_range_date"
-                                         style="display:none;">
-                                        <label class="col-form-label ">Date Range </label>
-
-                                        <div class='input-group pull-right' id='kt_daterangepicker_6'>
-                                            <input type='text' class="form-control" readonly
-                                                   name="rangeofdate" id="rangeofdate"
-                                                   placeholder="Select date range"/>
-                                            <div class="input-group-append">
-                                                            <span class="input-group-text"><i
-                                                                    class="la la-calendar-check-o"></i></span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-4">
                                         <label for=""
                                                class=" control-label"> {{ trans('main.type') }}</label>
                                         <select name="type" id="type" class="form-control " required>
@@ -91,8 +59,7 @@
 
 
                                     <div class="col-4">
-                                    <div class="row">
-                                        <div class="form-group col-6">
+                                        <div class="form-group ">
                                             <label class=" control-label"
                                                    for="example-email"> {{ trans('main.cost') }}  </label>
                                             <div class="input-group ">
@@ -100,16 +67,6 @@
                                                        class="form-control">
                                             </div>
 
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label class=" control-label"
-                                                   for="example-email"> {{ trans('main.vat') }}  </label>
-                                            <div class="input-group ">
-                                                <input type="number"  id="vat" name="vat"
-                                                       class="form-control">
-                                            </div>
-
-                                        </div>
                                         </div>
                                     </div>
                                     <div class="form-group col-4">
@@ -144,8 +101,6 @@
                                             <th>#</th>
                                             <th>  {{ trans('main.type') }}</th>
                                             <th>  {{ trans('main.ruined') }} {{ trans('main.from') }}</th>
-                                            <th> {{ trans('main.cost') }} {{ trans('main.method') }}</th>
-                                            <th> {{ trans('main.date') }} {{ trans('main.range') }}</th>
                                             <th> {{ trans('main.product') }}</th>
                                             <th> {{ trans('main.quantity')}}</th>
                                             <th> {{ trans('main.cost')}}</th>

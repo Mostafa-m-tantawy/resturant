@@ -19,7 +19,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{trans('main.all')}} {{trans('main.supplier')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -28,7 +28,7 @@
 
                             <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                {{trans('main.new')}} {{trans('main.record')}}
                             </a>
                         </div>
                     </div>
@@ -38,15 +38,14 @@
 
         <!--begin: Datatable -->
         <table id="datatable-responsive"
-               class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-               width="100%">
-        <thead>
+               class="display table table-striped table-bordered " cellspacing="0"
+               style="width:100%"> <thead>
             <tr>
-                <th> ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Products</th>
-                <th>profile</th>
+                <th> {{trans('main.id')}}</th>
+                <th>{{trans('main.name')}}</th>
+                <th>{{trans('main.email')}}</th>
+                <th>{{trans('main.products')}}</th>
+                <th>{{trans('main.profile')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -56,9 +55,9 @@
                     <td>{{$supplier->user->name}}</td>
                     <td>{{$supplier->user->email}}</td>
                    <td>
-                       <a href="{{url('product/create/'.$supplier->id)}}" title="products"> <span>Products</span><i  class="la la-edit" style="font-size: 25px;"></i></a>
+                       <a href="{{url('product/create/'.$supplier->id)}}" title="products"> <span>{{trans('main.products')}}</span><i  class="la la-edit" style="font-size: 25px;"></i></a>
                       </td><td><a href="{{url('supplier/'.$supplier->id)}}"title="profile">
-                       <span>Profile</span><i class="socicon-persona"style=" padding:5px; top:10px;font-size: 25px;"></i></a></td>
+                       <span>{{trans('main.profile')}}</span><i class="socicon-persona"style=" padding:5px; top:10px;font-size: 25px;"></i></a></td>
             </tr>
                @endforeach
 
@@ -72,17 +71,3 @@
         </div>
 
     @stop
-@section('scripts')
-
- <script>
-        $(document).ready(function () {
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf','print'
-                ],
-            });  })
-    </script>
-
-@stop

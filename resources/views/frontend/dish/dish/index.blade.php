@@ -47,9 +47,9 @@
                                 <div style="height: 100px; background-color: darkslategrey"></div>
                                 @foreach($categories as $category)
                                     <a class="nav-link @if($loop->first) active @endif"
-                                       id="v-pills-{{$category->name}}-tab"
-                                       data-toggle="pill" href="#v-pills-{{$category->name}}"
-                                       role="tab" aria-controls="v-pills-{{$category->name}}"
+                                       id="v-pills-{{$category->id}}-tab"
+                                       data-toggle="pill" href="#v-pills-{{$category->id}}"
+                                       role="tab" aria-controls="v-pills-{{$category->id}}"
                                        aria-selected="@if($loop->first)true @else false @endif">{{$category->name}}</a>
                                 @endforeach
                             </div>
@@ -60,9 +60,9 @@
 
 
                                         <div class="tab-pane fade  @if($loop->first) show active @endif"
-                                             style="height: 100%" id="v-pills-{{$category->name}}"
+                                             style="height: 100%" id="v-pills-{{$category->id}}"
                                              role="tabpane{{$category->id}}"
-                                             aria-labelledby="v-pills-{{$category->name}}-tab">
+                                             aria-labelledby="v-pills-{{$category->id}}-tab">
                                             <div class="container-fluid" style="height: 100%"
                                                  style="background-color: #0abb87">
 
@@ -176,12 +176,6 @@
 @section('scripts')
     <script src="{{asset('js/demo1/pages/crud/forms/widgets/form-repeater.js')}}" type="text/javascript"></script>
     {{----}}
-    <script>
 
-        $(document).ready(function () {
-
-
-        })
-    </script>
 
 @stop

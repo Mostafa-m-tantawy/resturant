@@ -19,17 +19,17 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{trans('main.supplier')}} {{trans('main.products')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            {{--                            <a href="{{route('supplier.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">--}}
-                            {{--                                <i class="la la-plus"></i>--}}
-                            {{--                                New Record--}}
-                            {{--                            </a>--}}
+                                                        <a href="{{route('product.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                                                            <i class="la la-plus"></i>
+                                                            {{trans('main.new')}} {{trans('main.product')}}
+                                                        </a>
                         </div>
                     </div>
                 </div>
@@ -38,19 +38,17 @@
 
                 <!--begin: Datatable -->
                 <table id="datatable-responsive"
-                       class="table table-striped table-bordered dt-responsive  nowrap "
-                       cellspacing="0"
-                       width="100%"
-                >
+                       class="display table table-striped table-bordered " cellspacing="0"
+                       style="width:100%">
                     <thead>
                     <tr>
-                        <th> ID</th>
-                        <th>Name</th>
-                        <th>unit</th>
-                        <th>barcode</th>
-                        <th>reorder point</th>
-                        <th>vat</th>
-                        <th>action</th>
+                        <th> {{trans('main.id')}}</th>
+                        <th>{{trans('main.product')}}</th>
+                        <th>{{trans('main.unit')}}</th>
+                        <th>{{trans('main.barcode')}}</th>
+                        <th>{{trans('main.re-order point')}}</th>
+                        <th>{{trans('main.vat')}}</th>
+                        <th>{{trans('main.action')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -85,12 +83,12 @@
                     @csrf
                     <div class="row" id="kt_repeater_2" class="repeater">
 
-                        <div class="col-4">Product</div>
-                        <div class="col-4">vat</div>
+                        <div class="col-4">{{trans('main.product')}}</div>
+                        <div class="col-4">{{trans('main.vat')}}</div>
                         <div class="col-4">
                             <a href="javascript:;" data-repeater-create=""
                                class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                <i class="la la-plus"></i> Add
+                                <i class="la la-plus"></i> {{trans('main.add')}}
                             </a>
                         </div>
 
@@ -120,7 +118,7 @@
 
                         </div>
                         <div class="col-12 pull-left">
-                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">supmit</button>
+                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.submit')}}</button>
                         </div>
                     </div>
                 </form>
@@ -139,17 +137,7 @@
         $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
             return $(value).val();
         };
-        $(document).ready(function () {
 
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-
-            });
-        })
     </script>
 
 @stop

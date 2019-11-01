@@ -29,55 +29,23 @@
                 <form method="post" action="{{route('department.stock')}}">
                     @csrf
                     <div class="row">
-                        <div class="form-group col-5">
+                        <div class="form-group col-10">
                             <label class="col-form-label ">{{trans('main.department')}} {{trans('main.stock')}}  </label>
 
                             <select id="department_id" name='department_id'
                                     class="form-control" required>
-                                @foreach($departments as $department)
-                                <option value="{{$department->id}}"> {{$department->name}}</option>
+                                @foreach($departments as $department_d)
+                                <option value="{{$department_d->id}}"> {{$department_d->name}}</option>
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="form-group col-2">
+                            <label class="col-form-label "> </label>
+                            <input type="submit" class="btn btn-primary form-control">
+                        </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-5">
-                            <label class="col-form-label ">{{trans('main.calculation')}} {{trans('main.method')}}  </label>
-
-                            <select id="price_math_method" name='price_math_method'
-                                    class="form-control">
-                                <option @if($method=='last_price') selected @endif value="last_price">
-                                    {{trans('main.Last Purchased Price')}}
-                                </option>
-                                <option @if($method=='avg_price') selected @endif value="avg_price">
-                                    {{trans('main.Average price')}}
-
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-5 " id="stock_range_date"
-                             style="display:none;">
-                            <label class="col-form-label ">     {{trans('main.date')}} {{trans('main.range')}}  </label>
-
-                            <div class='input-group pull-right' id='kt_daterangepicker_6'>
-                                <input type='text' class="form-control" readonly
-                                       name="rangeofdate" @if($from && $to)value="{{$from .' / '.$to }}"@endif
-                                       placeholder="Select date range"/>
-                                <div class="input-group-append">
-                                                            <span class="input-group-text"><i
-                                                                    class="la la-calendar-check-o"></i></span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-group col-2" style="align-self: flex-end">
-                            <input type="submit" value="Generate" class="btn btn-primary">
-                        </div>
-
-
-                    </div>
                 </form>
                 <!--end:  -->
 
@@ -90,9 +58,8 @@
 
                         <!--begin: Datatable -->
                         <table id="datatable-responsive"
-                               class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-                               width="100%">
-                            <thead>
+                               class="display table table-striped table-bordered " cellspacing="0"
+                               style="width:100%">         <thead>
                             <tr>
                                 <th> {{trans('main.name')}}</th>
                                 <th> {{trans('main.quantity')}}  {{trans('main.available')}}</th>
@@ -104,8 +71,8 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->assignQuantity($department) }}</td>
-                                    <td>{{$product->price($method,$from,$to) }}</td>
+                                    <td>{{$product->assignQuantity($department)-$product->cookedProduct($department) }}</td>
+                                    <td>{{$product->cost }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -126,12 +93,7 @@
         $(document).ready(function () {
 
 
-                $('#price_math_method').change(function () {
-                    $('#stock_range_date').css('display', 'none');
 
-                    if ($(this).val() == 'avg_price')
-                        $('#stock_range_date').css('display', 'block');
-                });
 
                 $("#datatable-responsive").DataTable({
                 dom: 'Bfrtip',

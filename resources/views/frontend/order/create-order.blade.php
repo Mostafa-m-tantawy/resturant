@@ -4,6 +4,10 @@
 @stop
 
 @section('content')
+
+    <input type="hidden" name="vatPercentage" value="{{$systemconf->where('name','vat')->first()->value}}">
+    <input type="hidden" name="servicePercentage" value="{{$systemconf->where('name','service')->first()->value}}">
+
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
         <div class="kt-portlet kt-portlet--mobile">

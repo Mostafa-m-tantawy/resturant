@@ -24,19 +24,7 @@ class StockController extends Controller
      */
     public function index(Request $request)
     {
-        $from  =null;
-        $to    =null;
-        $method=null;
-        if( $request->isMethod('post')){
-            $method=$request->price_math_method;
 
-        if($request->price_math_method!='last_price'){
-
-            // lenght 10 date = (01/01/2001) =10
-            $from   =substr($request->rangeofdate,0,10);
-            // start  13 date = (01/01/2001 */*)=13
-            $to     =substr($request->rangeofdate,13,10);
-        }
 
         $restaurant_id=Auth::user()->restaurant->id;
 
@@ -47,15 +35,8 @@ class StockController extends Controller
                 $qq->where('restaurant_id',$restaurant_id);
             });
         })->get();
-            return view('frontend.stock.index')->with(compact('products','from','to','method'));
 
-        }
-        return view('frontend.stock.index')->with(compact('from','to','method'));;
-
-
-
-
-
+            return view('frontend.stock.index')->with(compact('products'));
     }
     /**
      * Current stock

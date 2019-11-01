@@ -80,6 +80,8 @@
 
     <!--end::Layout Skins -->
     <link rel="shortcut icon" href="{{asset('media/logos/favicon.ico')}}" />
+    <link href="{{asset('css/datatable_latest.css')}}" rel="stylesheet" type="text/css" />
+{{--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/sc-2.0.1/datatables.min.css"/>--}}
 
     @yield('style')
 </head>
@@ -91,7 +93,6 @@
     </div>
     <div class="kt-header-mobile__toolbar">
         <button class="kt-header-mobile__toggler kt-header-mobile__toggler--left" id="kt_aside_mobile_toggler"><span></span></button>
-        <button class="kt-header-mobile__toggler" id="kt_header_mobile_toggler"><span></span></button>
         <button class="kt-header-mobile__topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></button>
     </div>
 </div>

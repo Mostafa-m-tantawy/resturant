@@ -21,7 +21,7 @@ class Product extends Model
         return $this->belongsToMany(Supplier::class, 'product_supplier')->withPivot('vat');
     }
 
-    protected $appends = ['quantity', 'quantity_available'];
+    protected $appends = ['cost','quantity', 'quantity_available'];
 
     public function unit()
     {
@@ -31,11 +31,6 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
-    }
-
-    public function productType()
-    {
-        return $this->belongsTo(ProductType::class);
     }
 
     public function purchasedProduct()
@@ -56,6 +51,11 @@ class Product extends Model
     public function ruined()
     {
         return $this->hasMany(RuinedProduct::class);
+    }
+
+    public function cooked()
+    {
+        return $this->hasMany(CookedProduct::class);
     }
 
     public function vat($supplier)
@@ -82,13 +82,46 @@ class Product extends Model
     }
 
     // quantity assign_to_me
-
-    public function AssignQuantity($assignable)
+    public function assginedToMe($assignable)
     {
         $assign_to_me = $this->assignDetails()->whereHas('assignHeader', function ($q) use ($assignable) {
             $q->where('assignable_id', $assignable->id)->where('assignable_type', get_class($assignable));
         });
-        return $assign_to_me->sum('quantity');;
+        $assign_quantity=$assign_to_me->sum('quantity');;
+
+        return $assign_quantity;
+    }
+
+
+//quantity ruined from me
+    public function ruinedFromMe($ruinedable)
+    {
+        $ruind = $this->ruined()->whereHas('ruinedHeader', function ($q) use ($ruinedable) {
+            $q->where('ruinedable_id', $ruinedable->id)->where('ruinedable_type', get_class($ruinedable));
+        });;
+        $ruind_quantity = $ruind->sum('quantity');
+
+        return $ruind_quantity;
+    }//quantity ruined from me
+    public function cookedProduct($cookable)
+    {
+        $cooked = $this->cooked()->whereHas('dishSize',function ($qq)use ($cookable){
+                $qq->whereHas('dish',function ($qqq)use ($cookable){
+                    $qqq->where('department_id',$cookable->id);
+                });
+
+        });;
+        $cooked_quantity = $cooked->sum('quantity');
+
+        return $cooked_quantity;
+    }
+
+
+ //assinged to me  - euined from me
+    public function AssignQuantity($assignable)
+    {
+//        dd($assignable,$this->assginedToMe($assignable)-$this->ruinedFromMe($assignable));
+        return $this->assginedToMe($assignable)-$this->ruinedFromMe($assignable);
     }
 
 
@@ -101,24 +134,23 @@ class Product extends Model
         $assign_to_other = $this->assignDetails()->whereHas('assignHeader', function ($q) use ($model) {
             $q->where('restaurant_id', $model->id);
         });;
-        $assign_to_me = $this->assignDetails()->whereHas('assignHeader', function ($q) use ($model) {
-            $q->where('assignable_id', $model->id)->where('assignable_type', get_class($model));
-        });;;
         $refund = $this->refund()->where('restaurant_id', $model->id);
 
-        $ruind = $this->ruined()->whereHas('ruinedHeader', function ($q) use ($model) {
-            $q->where('ruinedable_id', $model->id)->where('ruinedable_type', get_class($model));
-        });;;
 
 
         $purchased_quantity = $purchases->sum('quantity');
+
         $assign_to_otherquantity = $assign_to_other->sum('quantity');
-        $assign_to_me_quantity = $assign_to_me->sum('quantity');
+
+        $assign_to_me_quantity = $this->assginedToMe($model);
+
         $refund_quantity = $refund->sum('quantity');
-        $ruind_quantity = $ruind->sum('quantity');
-        //        if($this->id==6)
-        //            dd($refund_quantity);
-        $totalquantity = $purchased_quantity - $ruind_quantity - $assign_to_otherquantity + $assign_to_me_quantity - $refund_quantity;
+
+        $ruind_quantity = $this->ruinedFromMe($model);
+
+        $totalquantity = $purchased_quantity - $ruind_quantity
+            - $assign_to_otherquantity + $assign_to_me_quantity
+            - $refund_quantity;
         return $totalquantity;
     }
 
@@ -128,27 +160,32 @@ class Product extends Model
     {
         $sysyemConf=SystemConf::all();
         $method=$sysyemConf->where('name','method')->first()->value;
-           if($method == 'avg_price' ) {
-               $from =  Carbon::now()->toDateString();
-               $to = Carbon::now()->subMonth($sysyemConf->where('name','months')->first()->value) ->toDateString();
+        $from ='';
+        $to='';
+        if($method == 'avg_cost' ) {
+               $from = Carbon::now()->subMonth($sysyemConf->where('name','months')->first()->value) ->toDateString();
+               $to =  Carbon::now()->toDateString();
            }
 
         $purchases = $this->purchasedProduct()->whereHas('purse', function ($q) {
             $q->where('restaurant_id', Auth::user()->restaurant->id);
         });
+
         if ($method == 'last_price' && $purchases->count() > 0) {
             return $purchases->orderByDesc('created_at')->first()->unit_price;
 
-        } elseif ($method == 'avg_price' && $purchases->whereBetween('created_at', [$from, $to])->count() > 0) {
+        } elseif ($method == 'avg_cost' && $purchases->whereBetween('created_at', [$from. ' 00:00:00', $to. ' 23:59:59'])->count() > 0) {
 
-            return $purchases->whereBetween('created_at', [$from . ' 00:00:00', $to . ' 23:59:59'])
-                    ->get()->sum(function ($t) {
-                        return $t->unit_price * $t->quantity;
-                    })
-                /
-                $purchases->whereBetween('created_at', [$from . ' 00:00:00', $to . ' 23:59:59'])
+           $totalcost=$purchases->whereBetween('created_at', [$from . ' 00:00:00', $to . ' 23:59:59'])
+                    ->get()->sum(function ($t) {return $t->unit_price * $t->quantity;});
+
+           $totalquantity= $purchases->whereBetween('created_at', [$from . ' 00:00:00', $to . ' 23:59:59'])
                     ->get()->sum('quantity');
 
+           $vat= $purchases->whereBetween('created_at', [$from . ' 00:00:00', $to . ' 23:59:59'])
+                    ->get()->sum('vat') /   $purchases->count();
+
+           return ($totalcost/$totalquantity)+(($totalcost/$totalquantity)*($vat/100));
         }
     }
 
@@ -170,8 +207,8 @@ class Product extends Model
             });;;
             $assign_to_me_quantity = $assign_to_me->sum('quantity');
             $ruind_quantity = $ruind->sum('quantity');
-
-            $totalquantity = -$ruind_quantity + $assign_to_me_quantity;
+            $cooked=$this->cookedProduct($department);
+            $totalquantity = -$ruind_quantity + $assign_to_me_quantity-$cooked;
             return $totalquantity;
         }
     }

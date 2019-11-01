@@ -273,7 +273,8 @@ $(document).ready(function () {
                     $("<th>", {colspan: 5}),
                     $("<th>", {text: "scan image:", class: "text-right"}),
                     $("<th>", {
-                        html: '<form id="imgform" name="imgform" enctype="multipart/form-data"><input class="form-control" type="file" name="img" id="img"></form> ',
+                        html: '<form id="imgform" name="imgform" enctype="multipart/form-data">' +
+                            '<input class="form-control" type="file" multiple name="files[]" id="img"></form> ',
                         // $("<input/>",{type:"file",
                         //     value:"0", min:"0", style:"width: 120px",class:"form-control",
                         //     id:"image",
@@ -342,8 +343,12 @@ $(document).ready(function () {
         var json_arr = JSON.stringify(purses);
 
         if ($('#img').prop('files').length > 0) {
-            var file = $('#img').prop('files')[0];
-            formdata.append("image", file);
+            var file = $('#img').prop('files');
+
+            for( var i = 0; i < file.length; i++ ){
+                let filee = file[i];
+                formdata.append('files[' + i + ']', filee);
+            }
 
         }
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));

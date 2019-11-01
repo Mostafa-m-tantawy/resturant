@@ -14,7 +14,8 @@ class DishController extends Controller
 
 
     public function index(){
-        $categories=DishCategory::all();
+        $categories=DishCategory::with('dishes')->get();
+//        dd($categories);
         return view('frontend.dish.dish.index')->with(compact('categories'));
     }
 
@@ -47,6 +48,7 @@ class DishController extends Controller
         $dish->dish_category_id=$request->category;
         $dish->department_id=$request->department ;
         $dish->type=$request->type;
+        $dish->sides_limit=$request->sides_limit;
         if($request->status=='on')
             $dish->status=1;
         else
@@ -89,6 +91,7 @@ class DishController extends Controller
         $dish->description=$request->description;
         $dish->dish_category_id=$request->category;
         $dish->department_id=$request->department;
+        $dish->sides_limit=$request->sides_limit;
 
         $dish->type=$request->type;
         if($request->status=='on')

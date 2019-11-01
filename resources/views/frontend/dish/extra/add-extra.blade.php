@@ -163,9 +163,8 @@
                         <h2> {{trans('main.extra')}} {{trans('main.of')}} {{$dish_size->dish->name}} -> {{$dish_size->name}}</h2>
                         <!--begin: Datatable -->
                         <table id="datatable-responsive"
-                               class="table table-striped table-bordered dt-responsive  nowrap "
-                               cellspacing="0"
-                               width="100%">
+                               class="display table table-striped table-bordered " cellspacing="0"
+                               style="width:100%">
                             <thead>
                             <tr>
                                 <th>{{trans('main.extra')}} {{trans('main.name')}}</th>
@@ -205,19 +204,6 @@
         var convertion_rate = 0;
         var unitName = '';
 
-        $(document).ready(function () {
-//
-
-
-
-            $("#datatable-responsive").DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-//
-            });
-        })
     </script>
 
 @stop

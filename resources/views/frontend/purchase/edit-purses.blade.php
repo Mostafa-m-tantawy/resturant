@@ -48,7 +48,7 @@
                                             {{ trans('main.quantity') }} (<span class="input-group-addon"
                                                                                 id="unit"> {{ trans('main.unit') }}</span>)</label>
                                         <input type="text" id="quantity" name="quantity"step="0.01" min="0"
-                                               class="form-control" placeholder="Quantity">
+                                               class="form-control" placeholder="{{ trans('main.quantity') }} ">
 
                                     </div>
 
@@ -57,7 +57,7 @@
                                                for="example-email"> {{ trans('main.unit') }}  {{ trans('main.price') }}
                                         </label>
                                         <input type="number" min="1" name="unit_price" class="form-control"
-                                               placeholder="Unit Price" required id="unitPrice">
+                                               placeholder="{{ trans('main.unit price') }} " required id="unitPrice">
                                     </div>
 
                                     <div class="form-group col-4">
@@ -68,7 +68,7 @@
                                             <input readonly type="text" id="child_unit_price"
                                                    name="child_unit_price"
                                                    class="form-control"
-                                                   placeholder="Child Unit Price">
+                                                   placeholder="{{ trans('main.Child Unit Price') }}">
 
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
 
                                         <div class="input-group">
                                             <input disabled type="number" min="1" name="product_name"
-                                                   class="form-control" placeholder="Gross Price" required
+                                                   class="form-control" placeholder="{{ trans('main.gross') }}  {{ trans('main.price') }} " required
                                                    id="grossPrice">
                                             <span class="input-group-addon"
                                                   id=""></span>

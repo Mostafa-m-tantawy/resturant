@@ -167,11 +167,9 @@
                     <div class="container">
 
                     <!--begin: Datatable -->
-                    <table id="datatable-responsive"
-                           class="table table-striped table-bordered dt-responsive  nowrap "
-                           cellspacing="0"
-                           width="100%">
-                        <thead>
+                        <table id="datatable-responsive"
+                               class="display table table-striped table-bordered " cellspacing="0"
+                               style="width:100%">            <thead>
                         <tr>
                             <th> {{trans('main.size')}}</th>
                             <th>{{trans('main.price')}}</th>
@@ -293,13 +291,7 @@
                 $(e.currentTarget).find('input[name="price"]').val(price);
                 $(e.currentTarget).find('input[name="dish_id"]').val(dish_id);
             });
-            $("#datatable-responsive").DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-//
-            });
+
         })
     </script>
 

@@ -32,10 +32,8 @@
 
                 <!--begin: Datatable -->
                 <table id="datatable-responsive"
-                       class="table table-striped table-bordered dt-responsive  nowrap "
-                       cellspacing="0"
-                       width="100%"
-                >
+                       class="display table table-striped table-bordered " cellspacing="0"
+                       style="width:100%">
                     <thead>
                     <tr>
                         <th>{{trans('main.id')}}</th>
@@ -196,14 +194,7 @@
                 if (is_stockable == 0)
                     $(e.currentTarget).find('input[name="is_stockable"]').prop('checked', false);
             });
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
 
-            });
         })
     </script>
 

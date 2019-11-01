@@ -19,61 +19,22 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{trans('main.restaurant')}} {{trans('main.stock')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('purchase/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Purchase
+                                {{trans('main.new')}} {{trans('main.purchase')}}
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="kt-portlet__body">
-                <form method="post" action="{{route('stock.index',[Auth::user()->id])}}">
-                    @csrf
-                    <div class="row">
-                        <div class="form-group col-5">
-                            <label class="col-form-label ">Calculation Method </label>
-
-                            <select id="price_math_method" name='price_math_method'
-                                    class="form-control">
-                                <option @if($method=='last_price') selected @endif value="last_price">Last Purchased
-                                    Price
-                                </option>
-                                <option @if($method=='avg_price') selected @endif value="avg_price">Average price
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-5 " id="stock_range_date"
-                             style="display:none;">
-                            <label class="col-form-label ">Date Range </label>
-
-                            <div class='input-group pull-right' id='kt_daterangepicker_6'>
-                                <input type='text' class="form-control" readonly
-                                       name="rangeofdate" @if($from && $to)value="{{$from .' / '.$to }}"@endif
-                                       placeholder="Select date range"/>
-                                <div class="input-group-append">
-                                                            <span class="input-group-text"><i
-                                                                    class="la la-calendar-check-o"></i></span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-group col-2" style="align-self: flex-end">
-                            <input type="submit" value="Generate" class="btn btn-primary">
-                        </div>
-
-
-                    </div>
-                </form>
-                <!--end:  -->
 
                 <!--begin: separator -->
                 @if(isset($products))
@@ -84,22 +45,23 @@
 
                         <!--begin: Datatable -->
                         <table id="datatable-responsive"
-                               class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-                               width="100%">
-                            <thead>
+                               class="display table table-striped table-bordered " cellspacing="0"
+                               style="width:100%">      <thead>
                             <tr>
-                                <th>name</th>
-                                <th>Quantity Available</th>
-                                <th>Unit price</th>
+                                <th>{{trans('main.product')}}</th>
+                                <th>{{trans('main.available')}} {{trans('main.quantity')}} </th>
+                                <th>{{trans('main.Unit cost')}}</th>
 
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($products as $product)
+
+
                                 <tr>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->quantity }}</td>
-                                    <td>{{$product->price($method,$from,$to) }}</td>
+                                    <td>{{$product->cost }}</td>
 
                                 </tr>
                             @endforeach
@@ -128,12 +90,7 @@
                         $('#stock_range_date').css('display', 'block');
                 });
 
-                $("#datatable-responsive").DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-            });
+
         })
     </script>
 

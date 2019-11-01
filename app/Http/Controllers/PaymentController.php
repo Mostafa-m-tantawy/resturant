@@ -36,17 +36,8 @@ class PaymentController extends Controller
 
 
         if($pursesPayment->save()){
-            if ($request->hasFile('file')) {
-                $fileToUpload = $request->file('file');
-                $filename= date("dmY-his") . $fileToUpload->getClientOriginalName();
-                $fulllink = 'uploaded/payment/'.$pursesPayment->receiver_id;
-                $fileToUpload->move($fulllink,$filename );
-
-                $file=new Uploadedfile();
-                $file->filable_type=get_class($pursesPayment);
-                $file->filable_id=$pursesPayment->id;
-                $file->url=$fulllink . '/' . $filename;;
-                $file->save();
+            if($request->hasfile('files')) {
+                $pursesPayment->upload($request->file('files'));
             }
             return redirect()->back();
         }
@@ -55,5 +46,6 @@ class PaymentController extends Controller
         Payment::destroy($id);
         return redirect()->back();
     }
+
 
 }

@@ -42,11 +42,9 @@
                     </div>
             @endif
             <!--begin: Datatable -->
-                <table id="datatable-responsive"
-                       class="table table-striped table-bordered dt-responsive  nowrap "
-                       cellspacing="0"
-                       width="100%">
-                    <thead>
+                    <table id="datatable-responsive"
+                           class="display table table-striped table-bordered " cellspacing="0"
+                           style="width:100%">          <thead>
                     <tr>
                         <th>{{trans('main.id')}}</th>
                         <th>{{trans('main.name')}}</th>
@@ -192,14 +190,7 @@
                 $(e.currentTarget).find('input[name="name"]').val(name);
                 $(e.currentTarget).find('input[name="description"]').val(description);
             });
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-//
-            });
+
         })
     </script>
 

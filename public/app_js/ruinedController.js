@@ -4,8 +4,6 @@
 var convertion_rate;
 var clicked_ruined_type = '';
 var clicked_ruind_from = '';
-var clicked_rangeofdate = '';
-var clicked_price_math_method = '';
 var purse = {};
 var unitId = '';
 var unitName = '';
@@ -22,48 +20,9 @@ function checkQuantityForAdd(product_id) {
 
 $(document).ready(function () {
 
-    /**
-     * It will take the current supplier id for further use
-     */
-    $("#price_math_method").on('change', function (e) {
-// console.log( $(this).val());
-        if (purses.length != 0) {
-            if (clicked_price_math_method != '') {
-                $(this).val(clicked_price_math_method);
-                Swal.fire({
-                    type: 'error',
-                    title: 'Oops...',
-                    text: 'Cannot change  Method!',
-                })
-            }
-        }
-        clicked_price_math_method = $(this).val();
-
-    });
-
-
-    $("#rangeofdate").on('change', function (e) {
-        // console.log( $(this).val());
-
-        if (purses.length != 0) {
-            if (clicked_rangeofdate != '') {
-                $(this).val(clicked_rangeofdate);
-                Swal.fire({
-                    type: 'error',
-                    title: 'Oops...',
-                    text: 'Cannot change  date range!',
-                })
-            }}
-        clicked_rangeofdate = $(this).val();
-
-    });
-
-
-
     $("#type").on('change', function (e) {
         clicked_ruined_type = $(this).val();
     });
-
 
     /**
      * Supplier dropdown on change Action
@@ -165,7 +124,7 @@ $(document).ready(function () {
 
                         $.each(data, function (i, item) {
                         // if(item.quantity_available) {
-                            $('<option data-vat="' + item.vat + '" data-quantity="' + item.quantity + '"></option>').val(item.id).text(item.name).appendTo('#product');
+                            $('<option  data-cost="' + item.cost + '" data-quantity="' + item.quantity + '"></option>').val(item.id).text(item.name).appendTo('#product');
                             // productlist = true;
                         // }});
                       // if( productlist==false){
@@ -206,7 +165,7 @@ $(document).ready(function () {
 
         //unit price is fixed to cost of recioes if has recipe
         var selected = $(this).find('option:selected');
-
+        $("#cost").val($("#product option:selected").data('cost'));
 
         $.get('/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
@@ -220,8 +179,6 @@ $(document).ready(function () {
 
         var formdata = new FormData();
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
-        formdata.append("price_math_method", clicked_price_math_method);
-        formdata.append("rangeofdate",clicked_rangeofdate );
         formdata.append("ruined_type",clicked_ruined_type );
         formdata.append("ruined_from",clicked_ruind_from );
 
@@ -233,7 +190,7 @@ $(document).ready(function () {
             contentType: false,
             success: function (data) {
                 console.log(data);
-                var quantityassigned=parseFloat(data[1])-checkQuantityForAdd(productId);
+                var quantityassigned=parseFloat(data)-checkQuantityForAdd(productId);
 
                 if (parseFloat(quantityassigned) >= 0) {
                     $('#quantity').prop("max", quantityassigned);
@@ -247,14 +204,13 @@ $(document).ready(function () {
                 }
                 // $('#quantity').prop("max", parseFloat(data[1]));
 
-$('#cost').val(parseFloat(data[0]));
             },
             error: function (data) {
                 if (data['status'] == 422) {
                     Swal.fire({
                         type: 'error',
                         title: 'Oops...',
-                        text: 'There is error of cost!',
+                        text: 'There is error of getting max quantities!',
                     })
                 }
 
@@ -293,10 +249,8 @@ $('#cost').val(parseFloat(data[0]));
 
         }else{
         purse = {
-            price_math_method: clicked_price_math_method,
-            rangeofdate: clicked_rangeofdate,
-            type: clicked_rangeofdate,
-            ruined_from: clicked_rangeofdate,
+            type: clicked_ruined_type,
+            ruined_from: clicked_ruind_from,
 
             product: {
                 productId: $("#product").val(),
@@ -345,8 +299,6 @@ $('#cost').val(parseFloat(data[0]));
                     $("<th>", {text: index + 1}),
                     $("<td>", {text: clicked_ruined_type}),
                     $("<td>", {text: clicked_ruind_from}),
-                    $("<td>", {text: clicked_price_math_method}),
-                    $("<td>", {text: clicked_rangeofdate}),
                     $("<td>", {text: data.product.productName}),
                     $("<td>").append(
                         $("<input/>", {
@@ -375,14 +327,14 @@ $('#cost').val(parseFloat(data[0]));
         if (purses.length != 0) {
             $("#pursesDetailsRender").append(
                 $("<tr>").append(
-                    $("<th>", {colspan: 7}),
+                    $("<th>", {colspan: 5}),
                     $("<th>", {text: "scan image:", class: "text-right"}),
                     $("<th>", {
                         html: '<form id="imgform" name="imgform" enctype="multipart/form-data"><input class="form-control" type="file" name="img" id="img"></form> ',
                     })
                 ),
                 $("<tr>").append(
-                    $("<th>", {colspan: 8}),
+                    $("<th>", {colspan: 6}),
                     $("<th>").append(
                         $("<button>", {
                             text: "Confirm Purses",
@@ -467,8 +419,6 @@ $('#cost').val(parseFloat(data[0]));
         formdata.append("purses", json_arr);
         formdata.append("type", clicked_ruined_type);
         formdata.append("ruined_from", clicked_ruind_from);
-         formdata.append("price_math_method", clicked_price_math_method);
-        formdata.append("rangeofdate", clicked_rangeofdate);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

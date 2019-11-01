@@ -38,8 +38,9 @@
 
         <!--begin: Datatable -->
         <table id="datatable-responsive"
-               class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-               width="100%">
+               class="display table table-striped table-bordered " cellspacing="0"
+               style="width:100%">
+
         <thead>
             <tr>
                 <th> {{trans('main.id')}}</th>

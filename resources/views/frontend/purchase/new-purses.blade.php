@@ -44,7 +44,7 @@
                                         <div class="input-group ">
                                             <input type="text" id="quantity" name="quantity"
                                                    class="form-control"
-                                                   placeholder="Quantity">
+                                                   placeholder="{{ trans('main.quantity') }} ">
                                          </div>
                                     </div>
 
@@ -54,7 +54,7 @@
                                                for="example-email"> {{ trans('main.unit') }}  {{ trans('main.price') }}
                                             :</label>
                                         <input type="number" step="0.01" min="0" name="unit_price" class="form-control"
-                                               placeholder="Unit Price"
+                                               placeholder="{{ trans('main.unit') }}  {{ trans('main.price') }} "
                                                parsley-trigger="change" required id="unitPrice">
                                     </div>
 
@@ -65,14 +65,14 @@
 
                                             <input disabled type="text" id="child_unit_price" name="quantity"
                                                    class="form-control" step="0.01" min="0"
-                                                   placeholder="Child Unit Price">
+                                                   placeholder=" {{ trans('main.Child Unit Price') }}">
 
                                     </div>
 
                                     <div class="form-group col-4">
                                             <label class=" control-label" for="example-email"> {{ trans('main.gross') }}  {{ trans('main.price') }}</label>
                                             <input disabled type="number" min="1" name="product_name"
-                                                   class="form-control" placeholder="Gross Price" required id="grossPrice">
+                                                   class="form-control" placeholder=" {{ trans('main.gross') }}  {{ trans('main.price') }}" required id="grossPrice">
 
 
                                     </div>
@@ -81,7 +81,7 @@
                                         <label class="col-md-2 control-label"></label>
                                         <div class="col-md-10">
                                             <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">
-                                                {{ trans('main.purses') }}  {{ trans('main.now') }}
+                                                {{ trans('main.purchase') }}  {{ trans('main.now') }}
                                             </button>
                                         </div>
                                     </div>

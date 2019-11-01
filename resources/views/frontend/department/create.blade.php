@@ -49,11 +49,11 @@
                                     <div class="form-group row">
                                         <div class="col-12">
                                             <label> {{trans('main.name')}}</label>
-                                            <input type="text"required name="name" class="form-control" placeholder="Enter full name">
+                                            <input type="text"required name="name" class="form-control" placeholder="{{trans('main.enter')}} {{trans('main.name')}}">
                                         </div>
                                         <div class="col-12">
                                             <label class="">{{trans('main.description')}} :</label>
-                                            <input type="text" name="description" class="form-control" placeholder="Enter description">
+                                            <input type="text" name="description" class="form-control" placeholder="{{trans('main.enter')}} {{trans('main.description')}}">
                                         </div>
 
                                     </div>

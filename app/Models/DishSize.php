@@ -20,7 +20,7 @@ class DishSize extends Model
         return $this->hasMany(DishSizeExtra::class);
     }
 
-    protected $appends = ['quantity'];
+    protected $appends = ['quantity','cost'];
 
     public function getQuantityAttribute()
     {
@@ -36,6 +36,19 @@ class DishSize extends Model
             return 0;
 
         }
+
+    }
+    public function getCostAttribute()
+    {
+        $recipes=$this->recipes;
+        $total=0;
+        foreach ($recipes as $recipe){
+            $total=$recipe->product->cost *$recipe->unit_quantity;
+        }
+
+            return $total;
+
+
 
     }
 }

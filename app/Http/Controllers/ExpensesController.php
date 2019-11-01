@@ -15,8 +15,8 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-        $expenses=Expense::all();
-return view('frontend.expense.index')->with(compact('expenses'));
+        $expenses = Expense::all();
+        return view('frontend.expense.index')->with(compact('expenses'));
     }
 
     /**
@@ -32,35 +32,41 @@ return view('frontend.expense.index')->with(compact('expenses'));
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
             'payment_method' => ['required'],
-            'payment_amount' => ['required','numeric'],
-            'note'=> ['nullable','string','max:255'],
-            ]);
+            'payment_amount' => ['required', 'numeric'],
+            'note' => ['nullable', 'string', 'max:255'],
+        ]);
 
 
-        $expenses=new Expense();
-$expenses->restaurant_id=Auth::user()->restaurant->id;
-$expenses->payment_method=$request->payment_method;
-$expenses->payment_amount=$request->payment_amount;
-$expenses->note=$request->note;
-    if($request->payment_method=='check'){
-        $expenses->due_date=$request->duedate;
+        $expenses = new Expense();
+        $expenses->restaurant_id = Auth::user()->restaurant->id;
+        $expenses->payment_method = $request->payment_method;
+        $expenses->payment_amount = $request->payment_amount;
+        $expenses->note = $request->note;
 
-    }
-        $expenses->save();
-    return redirect()->route('expenses.index');
+        if ($request->payment_method == 'check') {
+            $expenses->due_date = $request->duedate;
+
+        }
+        if ($expenses->save()) {
+
+            if ($request->hasfile('files')) {
+                $expenses->upload($request->file('files'));
+            }
+        }
+        return redirect()->route('expenses.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -71,7 +77,7 @@ $expenses->note=$request->note;
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -82,8 +88,8 @@ $expenses->note=$request->note;
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -94,7 +100,7 @@ $expenses->note=$request->note;
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

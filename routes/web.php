@@ -21,6 +21,9 @@ Route::resource('restaurant','RestaurantController')->only([
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get ('download',     'DashboardController@download');
+
+
 
 Route::post ('address/update',     'SupplierController@updateAddress');
 Route::post ('phone/update',     'SupplierController@updatePhone');
@@ -191,10 +194,15 @@ Route::post('dish-size/recipe',                  'RecipeController@store')   ->n
 Route::get('dish-size/recipe/delete/{id}',       'RecipeController@delete')  ->name('dish.recipe.delete');
 
 
+
+
 //------------- side  --------------------------
 Route::get ('dish-size/side/{dish_size_id}',    'SideDishController@index')   ->name('dish.side.index');;
 Route::post('dish-size/side',                  'SideDishController@store')   ->name('dish.side.store');
 Route::get('dish-size/side/delete/{id}',       'SideDishController@delete')  ->name('dish.side.delete');
+
+
+
 
 
 //------------- side  --------------------------
@@ -202,10 +210,30 @@ Route::get ('dish-size/extra/{dish_size_id}',   'ExtraDishController@index')   -
 Route::post('dish-size/extra',                  'ExtraDishController@store')   ->name('dish.extra.store');
 Route::get('dish-size/extra/delete/{id}',       'ExtraDishController@delete')  ->name('dish.extra.delete');
 
+//------------- dish ruined  --------------------------
+
+    Route::get ('dish-ruined',                  'DishRuinedController@index')                ->name('dish-ruined.index');;
+    Route::get ('dish-ruined/create',           'DishRuinedController@newOrder')             ->name('dish-ruined.create');;
+    Route::post('save-dish-ruined',             'DishRuinedController@saveOrder')            ->name('dish-ruined.save');;
+    Route::get ('dish-ruined/edit/{id}',        'DishRuinedController@edit')                 ->name('dish-ruined.edit');;
+    Route::post('dish-ruined/edit-json/{id}',   'DishRuinedController@editJson')             ->name('dish-ruined.edit.json');;
+    Route::post('dish-ruined/update',           'DishRuinedController@update')               ->name('dish-ruined.update');;
+    Route::get ('dish-ruined/delete/{id}',      'DishRuinedController@delete')               ->name('dish-ruined.delete');;
+
+
 //------------- order  --------------------------
-Route::get ('order/create',   'OrderController@newOrder')   ->name('order.create');;
-Route::post ('save-order',   'OrderController@saveOrder')   ->name('order.save');;
-Route::post ('dish-available-units',   'OrderController@dishAvailableUnits')   ->name('order.dish.available');;
+Route::get ('order',                'OrderController@index')                ->name('order.index');;
+Route::get ('order/create',         'OrderController@newOrder')             ->name('order.create');;
+Route::get ('order/cost',           'OrderController@costOrder')             ->name('order.cost');;
+Route::post('save-order',           'OrderController@saveOrder')            ->name('order.save');;
+Route::post('dish-available-units', 'OrderController@dishAvailableUnits')   ->name('order.dish.available');;
+Route::post('all-delete-pending',   'OrderController@allDeletePending')     ->name('order.delete.pending');;
+Route::post('dish-delete-pending',  'OrderController@DishDeletePending')    ->name('order.delete.pending');;
+Route::get ('order/edit/{id}',      'OrderController@edit')                 ->name('order.edit');;
+Route::post('order/edit-json/{id}', 'OrderController@editJson')             ->name('order.edit.json');;
+Route::post('order/update',         'OrderController@update')               ->name('order.update');;
+Route::get ('order/delete/{id}',    'OrderController@delete')               ->name('order.delete');;
+
 
 //------------- system configuration  --------------------------
     Route::get ('system-configuration',             'systemConfigurationController@index')   ->name('system-conf.index');;
@@ -213,7 +241,7 @@ Route::post ('dish-available-units',   'OrderController@dishAvailableUnits')   -
 
 
 
-    Route::get('/dashboard', 'RestaurantController@dashboard')->name('dashboard');
+    Route::any('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::get('/logout', function (){
         Auth::logout();
         return redirect(route('home'));

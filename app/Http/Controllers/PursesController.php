@@ -38,6 +38,7 @@ class PursesController extends Controller
     public function SummeryIndex()
     {
         $purses = Purse::where('restaurant_id',Auth::user()->restaurant->id)->get();
+
         return view('frontend.purchase.summery_index',[
             'purses'            =>      $purses
         ]);
@@ -86,15 +87,11 @@ class PursesController extends Controller
         $purses->supplier_id = $request->get('supplier_id');
         $purses->user_id = $user->id;
         $purses->restaurant_id = $user->restaurant->id;
-//        if ($request->hasFile('image')) {
-//            $images = $request->file('image');
-//            $filename_images = date("dmY-his") . $images->getClientOriginalName();
-//            $fulllink_images = 'media/images/library';
-//            Storage::disk('tenant')->put($fulllink_images . '/' . $filename_images, file_get_contents($images), 'public');
-//            $purses->image = $fulllink_images . '/' . $filename_images;
-//
-//        }
         if($purses->save()) {
+
+            if($request->hasfile('files')) {
+                $purses->upload($request->file('files'));
+            }
             foreach (json_decode($request->get('purses')) as $purse) {
 
                 $product = $purse->product;

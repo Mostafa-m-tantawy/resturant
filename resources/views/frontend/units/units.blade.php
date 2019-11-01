@@ -15,7 +15,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Units
+                        {{trans('main.units')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -24,7 +24,7 @@
 
                             <a href="#"  data-toggle="modal" data-target="#newunit" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                {{trans('main.new')}} {{trans('main.record')}}
                             </a>
                         </div>
                     </div>
@@ -42,22 +42,23 @@
                     </div>
             @endif
                 <!--begin: Datatable -->
-                <table id="datatable-responsive"
-                       class="table table-striped table-bordered dt-responsive  nowrap "
-                       cellspacing="0"
-                       width="100%">
+                    <table id="datatable-responsive"
+                           class="display table table-striped table-bordered " cellspacing="0"
+                           style="width:100%">
                     <thead>
                     <tr>
-                        <th> ID</th>
-                        <th>unit</th>
-                        <th>child_unit</th>
-                        <th>convert_rate</th>
+                        <th>{{trans('main.id')}}</th>
+                        <th>{{trans('main.unit')}}</th>
+                        <th>{{trans('main.child unit')}} </th>
+                        <th>{{trans('main.convert_rate')}}</th>
+                        <th>{{trans('main.action')}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($units as $unit)
 {{----}}
                         <tr>
+                            <td>{{$unit->id}}</td>
                             <td>{{$unit->unit}}</td>
                             <td>{{$unit->child_unit}}</td>
                             <td>{{$unit->convert_rate}}</td>
@@ -92,7 +93,7 @@
                     {{--                    {{url('unit/update)}}--}}
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title">Update unit</h5>
+                        <h5 class="modal-title">{{trans('main.update')}} {{trans('main.unit')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -103,20 +104,20 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-12">
-                                    <label>id</label>
+                                    <label>{{trans('main.id')}}</label>
                                     <input type="number" readonly class="form-control" name="id">
                                 </div>
                                 <div class="col-12">
-                                    <label>unit</label>
+                                    <label>{{trans('main.unit')}}</label>
                                     <input type="text" class="form-control" name="unit">
                                 </div>
 
                                 <div class="col-12">
-                                    <label>child_unit</label>
+                                    <label>{{trans('main.child unit')}}</label>
                                     <input type="text" class="form-control" name="child_unit">
                                 </div>
                                 <div class="col-12">
-                                    <label>convert_rate</label>
+                                    <label>{{trans('main.convert_rate')}}</label>
                                     <input type="number" class="form-control" name="convert_rate">
                                 </div>
                             </div>
@@ -139,7 +140,7 @@
             <div class="modal-content">
                 <form action="{{url('unit')}}" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title">new unit <span class="model_type"></span></h5>
+                        <h5 class="modal-title">{{trans('main.new')}} {{trans('main.unit')}} <span class="model_type"></span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -153,16 +154,16 @@
                             <div class="col-10">
 
                                 <div class="form-group">
-                                    <label>unit</label>
+                                    <label>{{trans('main.unit')}}</label>
                                     <input type="text" class="form-control" name="unit">
                                 </div>
 
                                 <div class=" form-group">
-                                    <label>child_unit</label>
+                                    <label>{{trans('main.child unit')}}</label>
                                     <input type="text" class="form-control" name="child_unit">
                                 </div>
                                 <div class="form-group">
-                                    <label>convert_rate</label>
+                                    <label>{{trans('main.convert_rate')}}</label>
                                     <input type="text" class="form-control" name="convert_rate">
                                 </div>
 
@@ -177,7 +178,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-12 pull-left">
-                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">create</button>
+                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.create')}}</button>
                         </div>
                     </div>
                 </form>

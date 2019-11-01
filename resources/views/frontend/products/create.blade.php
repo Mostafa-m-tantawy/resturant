@@ -40,7 +40,7 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                {{trans('main.create')}} {{trans('main.new')}} {{trans('main.product')}}
+                                {{trans('main.create')}} {{trans('main.product')}}
                             </h3>
                         </div>
                     </div>
@@ -67,13 +67,13 @@
                                     <div class="form-group row">
                                         <div class="col-12">
                                             <label>{{trans('main.product')}} {{trans('main.name')}}</label>
-                                            <input type="text"required name="name" class="form-control" placeholder="Enter full name">
+                                            <input type="text"required name="name" class="form-control" placeholder=" {{trans('main.name')}} ">
                                         </div>
 
                                         <div class="col-12">
                                             <label class="">{{trans('main.unit')}} </label>
                                             <select name="unit" class="form-control">
-                                                <option value="">select Unit</option>
+                                                <option value="">{{trans('main.select')}} {{trans('main.unit')}}</option>
                                                 @foreach($units as $unit )
                                                     <option value="{{$unit->id}}">{{$unit->unit}}</option>
                                                 @endforeach
@@ -103,13 +103,13 @@
 
                                        <div class="col-12">
                                             <label class=""> {{trans('main.re-order point')}}  :</label>
-                                            <input type="number" min="0" step=".001" name="reorder_point" class="form-control" placeholder="Enter description">
+                                            <input type="number" min="0" step=".001" name="reorder_point" class="form-control" placeholder="{{trans('main.enter')}} {{trans('main.description')}}">
                                         </div>
 
 
                                         <div class="col-12">
                                             <label class="">{{trans('main.barcode')}}  </label>
-                                            <input type="text" name="barcode" class="form-control" placeholder="Enter barcode">
+                                            <input type="text" name="barcode" class="form-control" placeholder="{{trans('main.enter')}} {{trans('main.barcode')}}">
 
                                         </div>
 

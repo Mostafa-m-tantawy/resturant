@@ -26,7 +26,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('purchase/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{ trans('main.new') }}  {{ trans('main.purchase') }}
                             </a>
@@ -38,14 +38,14 @@
 
                 <!--begin: Datatable -->
                 <table id="datatable-responsive"
-                       class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-                       width="100%">
-                    <thead>
+                       class="display table table-striped table-bordered " cellspacing="0"
+                       style="width:100%">         <thead>
                     <tr>
                         <th>  {{ trans('main.id') }}</th>
                         <th> {{ trans('main.supplier') }} </th>
                         <th>  {{ trans('main.total') }}</th>
                         <th> {{ trans('main.action') }}</th>
+                        <th> {{ trans('main.attachments') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,6 +61,13 @@
 {{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
 {{--                                                                                                     class="flaticon-delete"></i></a>--}}
                             </td>
+                            <td>
+                               @foreach($purchase->files as $file)
+                                    <a title="Show" href="{{url('/download?url='.$file->url)}}">
+                                        {{$loop->index + 1}}<i class="fa fa-cloud-download-alt"></i></a>
+                                @endforeach
+
+                            </td>
                         </tr>
                     @endforeach
 
@@ -74,21 +81,6 @@
     </div>
 
 @stop
-@section('scripts')
-
-    <script>
-        $(document).ready(function () {
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf','print'
-                ],
-            });  })
-    </script>
-
-@stop
-
 
 
 

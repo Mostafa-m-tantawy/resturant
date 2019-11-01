@@ -32,16 +32,16 @@
 
         <!--begin: Datatable -->
         <table id="datatable-responsive"
-               class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-               width="100%">
-        <thead>
+               class="display table table-striped table-bordered " cellspacing="0"
+               style="width:100%">    <thead>
             <tr>
                 <th>{{trans('main.id')}}</th>
                 <th>{{trans('main.restaurant')}}</th>
                 <th>{{trans('main.method')}}</th>
                 <th>{{trans('main.amount')}}</th>
-                <th>{{trans('main.due date')}}</th>
+                <th>{{trans('main.Due Date')}}</th>
                 <th>{{trans('main.note')}}</th>
+                <th> {{ trans('main.attachments') }}</th>
                 <th>{{trans('main.created_at')}}</th>
             </tr>
             </thead>
@@ -54,6 +54,13 @@
                     <td>{{$expense->payment_amount}}</td>
                     <td>{{$expense->due_date}}</td>
                     <td>{{$expense->note}}</td>
+                   <td>
+                       @foreach($expense->files as $file)
+                           <a title="Show" href="{{url('/download?url='.$file->url)}}">
+                               {{$loop->index + 1}}<i class="fa fa-cloud-download-alt"></i></a>
+                       @endforeach
+
+                   </td>
                     <td>{{$expense->created_at}}</td>
 
             </tr>
@@ -69,17 +76,3 @@
         </div>
 
     @stop
-@section('scripts')
-
- <script>
-        $(document).ready(function () {
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf','print'
-                ],
-            });  })
-    </script>
-
-@stop

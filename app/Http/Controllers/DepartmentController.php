@@ -112,34 +112,18 @@ class DepartmentController extends Controller
     }
     public function stock(Request $request)
     {
-        $from  =null;
-        $to    =null;
-        $method=null;
         $restaurant=Auth::user()->restaurant;
         $departments=$restaurant->departments;
         if( $request->isMethod('post')){
-            $method=$request->price_math_method;
-            $department=$request->department_id;
-            if($request->price_math_method!='last_price'){
-                // lenght 10 date = (01/01/2001) =10
-                $from   =substr($request->rangeofdate,0,10);
-                // start  13 date = (01/01/2001 */*)=13
-                $to     =substr($request->rangeofdate,13,10);
-            }
-
+           $department=Department::find($request->department_id);
             $products=Product::whereHas('assignDetails',function ($q)use($department){
                 $q->whereHas('assignHeader',function ($qq)use($department){
 
-                    $qq->where('assignable_id',$department)->where('assignable_type','App\Department');
+                    $qq->where('assignable_id',$department->id)->where('assignable_type','App\Department');
                 });
             })->get();
-
-
-            return view('frontend.department.stock')->with(compact('department','departments','products','from','to','method'));
-
+            return view('frontend.department.stock')->with(compact('department','departments','products'));
         }
-        return view('frontend.department.stock')->with(compact('departments','from','to','method'));;
-
-
+        return view('frontend.department.stock')->with(compact('departments'));;
     }
 }

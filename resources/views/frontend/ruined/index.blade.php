@@ -19,7 +19,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        Multiple Controls
+                        {{ trans('main.ruineds') }}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -28,7 +28,7 @@
 
                             <a href="{{route('ruined.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                New Record
+                                {{ trans('main.new') }} {{ trans('main.record') }}
                             </a>
                         </div>
                     </div>
@@ -38,21 +38,18 @@
 
                 <!--begin: Datatable -->
                 <table id="datatable-responsive"
-                       class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-                       width="100%">
-                    <thead>
+                       class="display table table-striped table-bordered " cellspacing="0"
+                       style="width:100%">    <thead>
                     <tr>
 
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>ruined from</th>
-                        <th>price Method</th>
-                        <th>date if avg</th>
-                        <th>quantity</th>
-                        <th>unit price</th>
-                        <th>vat</th>
-                        <th>total</th>
-                        <th>note</th>
+                        <th>{{ trans('main.id') }}</th>
+                        <th>{{ trans('main.type') }}</th>
+                        <th>{{ trans('main.from') }}</th>
+                        <th>{{ trans('main.product') }}</th>
+                        <th>{{ trans('main.quantity') }}</th>
+                        <th>{{ trans('main.unit price') }}</th>
+                        <th>{{ trans('main.gross') }}</th>
+                        <th>{{ trans('main.note') }}</th>
 
                     </tr>
                     </thead>
@@ -61,15 +58,14 @@
                         <tr>
                             <td>{{$ruin->id}}</td>
                             <td>{{($ruin->ruinedHeader->ruinedable_type=='App\Restaurant')?
+                            trans('main.restaurant'):trans('main.department')}}</td>
+                            <td>{{($ruin->ruinedHeader->ruinedable_type=='App\Restaurant')?
                             $ruin->ruinedHeader->ruinedable->user->name:
                              $ruin->ruinedHeader->ruinedable->name}}</td>
-                            <td>{{$ruin->ruinedHeader->price_math_method}}</td>
-                            <td>{{$ruin->ruinedHeader->math_start_date  }}  to {{$ruin->ruinedHeader->math_end_date }}</td>
                             <td>{{$ruin->product->name}}</td>
                             <td>{{$ruin->quantity}}</td>
                             <td>{{$ruin->price_unit}}</td>
-                            <td>{{$ruin->quantity*$ruin->price_unit*($ruin->vat/100)}}</td>
-                            <td>{{($ruin->quantity*$ruin->price_unit)+$ruin->quantity*$ruin->price_unit*($ruin->vat/100)}}</td>
+                            <td>{{($ruin->quantity*$ruin->price_unit)}}</td>
                             <td>{{$ruin->note}}</td>
 
 {{--                             <td>--}}
@@ -87,19 +83,5 @@
 
         </div>
     </div>
-
-@stop
-@section('scripts')
-
-    <script>
-        $(document).ready(function () {
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf','print'
-                ],
-            });  })
-    </script>
 
 @stop
