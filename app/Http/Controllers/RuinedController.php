@@ -99,18 +99,9 @@ class RuinedController extends Controller
             $ruinedHeader=new RuinedHeader();
             $ruinedHeader->ruinedable_id=$request->ruined_from;
             $ruinedHeader->ruinedable_type=($request->type=='restaurant')?'App\Restaurant':'App\Department';
-            $ruinedHeader->price_math_method=$request->price_math_method;
             $ruinedHeader->restaurant_id = Auth::user()->restaurant->id;
-            if ($request->price_math_method != 'last_price') {
-
-                 // lenght 10 date = (01/01/2001) =10
-                 $from = substr($request->rangeofdate, 0, 10);
-                 // start  13 date = (01/01/2001 */*)=13
-                 $to = substr($request->rangeofdate, 13, 10);
-                 $ruinedHeader->math_start_date=$from;
-                 $ruinedHeader->math_end_date=$to;
-             }
             $ruinedHeader->save();
+
             foreach (json_decode($request->get('purses')) as $purse) {
 
                 $product = $purse->product;
@@ -122,7 +113,6 @@ class RuinedController extends Controller
                 $ruinedProduct->quantity = $purse->quantity;
                 $ruinedProduct->price_unit = $purse->unit_cost;
                 $ruinedProduct->note = $purse->note;
-                $ruinedProduct->vat = $product->vat;
                 $ruinedProduct->save();
             }
 
@@ -137,25 +127,11 @@ class RuinedController extends Controller
         }
     public function getProductCost(Request $request,$id)
         {
-            $from  =null;
-            $to    =null;
-            $method=null;
-            if( $request->isMethod('post')) {
-                $method = $request->price_math_method;
-
-                if ($request->price_math_method != 'last_price') {
-
-                    // lenght 10 date = (01/01/2001) =10
-                    $from = substr($request->rangeofdate, 0, 10);
-                    // start  13 date = (01/01/2001 */*)=13
-                    $to = substr($request->rangeofdate, 13, 10);
-                }
-                $product=Product::find($id)->price($method,$from,$to);
                 $quantity=Product::find($id)->departmentquantity($request->ruined_type,$request->ruined_from);
 
-                return response()->json([$product,$quantity], 200);
+                return response()->json($quantity, 200);
 
             }
-        }
+
 
     }

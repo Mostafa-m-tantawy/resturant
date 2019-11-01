@@ -105,13 +105,95 @@
 
 <!--begin::Page Scripts(used by this page) -->
 <script src="{{asset('/js/demo1/pages/dashboard.js')}}" type="text/javascript"></script>
-<script src=" {{asset('js/datatable/jquery.dataTables.min.js')}} "></script>
-<script src="{{asset('js/datatable/dataTables.buttons.min.js')}}   "></script>
-<script src=" {{asset('js/datatable/buttons.flash.min.js')}}     "></script>
-<script src=" {{asset('js/datatable/jszip.min.js')}}     "></script>
-<script src=" {{asset('js/datatable/pdfmake.min.js')}}     "></script>
-<script src=" {{asset('js/datatable/vfs_fonts.js')}}     ">   </script>
-<script src=" {{asset('js/datatable/buttons.html5.min.js')}}     ">     </script>
-<script src=" {{asset('js/datatable/buttons.print.min.js')}}     ">     </script>
+{{--<script src=" {{asset('js/datatable/jquery.dataTables.min.js')}} "></script>--}}
+{{--<script src="{{asset('js/datatable/dataTables.buttons.min.js')}}   "></script>--}}
+{{--<script src=" {{asset('js/datatable/buttons.flash.min.js')}}     "></script>--}}
+{{--<script src=" {{asset('js/datatable/jszip.min.js')}}     "></script>--}}
+{{--<script src=" {{asset('js/datatable/pdfmake.min.js')}}     "></script>--}}
+{{--<script src=" {{asset('js/datatable/vfs_fonts.js')}}     ">   </script>--}}
+{{--<script src=" {{asset('js/datatable/buttons.html5.min.js')}}     ">     </script>--}}
+{{--<script src=" {{asset('js/datatable/buttons.print.min.js')}}     ">     </script>--}}
+{{--<script src=" {{asset('js/datatable/datatable_latest.js')}}     ">     </script>--}}
+
+<script type="text/javascript" src="{{asset('js/datatable/pdfmake.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/datatable/vsfonts.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/datatable/datatable.js')}}"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('a[href="'+window.location.href+'"]').closest('.kt-menu__item--submenu').addClass(' kt-menu__item--here kt-menu__item--open');
+
+            // $('a[href=\'http://google.com\']')
+
+        });
+    </script>
+
+<script>
+    // pdfMake.fonts = {
+    //     DroidKufi: {
+    //         normal: 'DroidKufi-Regular.ttf',
+    //         bold: 'DroidKufi-Regular.ttf',
+    //         italics: 'DroidKufi-Regular.ttf',
+    //         bolditalics: 'DroidKufi-Regular.ttf'
+    //     }
+    // }
+    // { extend: 'pdf', className: 'btn green btn-outline',  text: 'Export PDF',
+    //     customize: function (doc) {
+    //     doc.defaultStyle =
+    //         {
+    //             font: 'DroidKufi',
+    //         }
+    //
+    // }
+    // },
+    $(document).ready(function() {
+
+        $('table.display').DataTable( {
+            responsive: true,
+            "pagingType": "full_numbers",
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'excel', 'print'
+            ],
+
+            @if (App::isLocale('ar'))
+            "language":
+                {
+                    "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
+                    "sLoadingRecords": "جارٍ التحميل...",
+                    "sProcessing":   "جارٍ التحميل...",
+                    "sLengthMenu":   "أظهر _MENU_ مدخلات",
+                    "sZeroRecords":  "لم يعثر على أية سجلات",
+                    "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix":  "",
+                    "sSearch":       "ابحث:",
+                    "sUrl":          "",
+                    "oPaginate": {
+                        "sFirst":    "الأول",
+                        "sPrevious": "السابق",
+                        "sNext":     "التالي",
+                        "sLast":     "الأخير"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": تفعيل لترتيب العمود تصاعدياً",
+                        "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
+                    }
+                }
+            @endif
+        } );
+    } );
+    // $(document).ready(function () {
+    //     $("#datatable-responsive").DataTable({
+    //         order: [0, 'desc'],
+    //         "pagingType": "full_numbers",
+    //         buttons: [
+    //             'copy', 'excel', 'pdf', 'print'
+    //         ],
+    //     });
+    // })
+</script>
 
 @yield('scripts')

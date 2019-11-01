@@ -117,6 +117,11 @@
                                             <input type="text" class="form-control" name="description">
                                             <span class="form-text text-muted"> {{trans('main.dish')}}  {{trans('main.description')}}</span>
                                         </div>
+                                    <div class="form-group">
+                                            <label> {{trans('main.sides_limit')}}</label>
+                                            <input type="number"  class="form-control" name="sides_limit">
+                                            <span class="form-text text-muted"> {{trans('main.sides_limit')}} </span>
+                                        </div>
 
                                     </div>
                                     <div class="form-group">

@@ -14,9 +14,15 @@ var discount = 0;
 // vat on dishes  only      14%
 var vat = 0;
 
+// service on dishes only    original percentage
+var servicePercentage = 0;
+
+// vat on dishes  only   original percentage
+var vatPercentage = 0;
 
 // Class definition
 
+   var staff=false;
 
 /**
  * sum quantity assigned of purses list
@@ -30,26 +36,72 @@ function checkQuantityForAdd(dishSizeId) {
     }
     return quantity;
 };
+function checkForNumberOfSides () {
+
+    var quantity=0;
+    var sidesavaliable=0;
+    for (var i=0;i<purses.length;i++){
+        if(purses[i].typeval=='side')
+            quantity+=parseFloat(purses[i].quantity);
+        if(purses[i].typeval!='side'){
+            sidesavaliable+=purses[i].dish.sides_limit*parseFloat(purses[i].quantity);;
+        }
+    }
+    console.log(sidesavaliable-quantity)
+    return sidesavaliable-quantity;
+};
 
 
+
+// Execute code, then leave
+window.onbeforeunload = function () {
+    var formdata = new FormData();
+    var json_arr = JSON.stringify(purses);
+
+    formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
+    formdata.append("purses", json_arr);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+
+        url: '/all-delete-pending',
+        type: "post",
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+
+        },
+    });
+
+}
 $(document).ready(function () {
 
     /**
      * It will take the current supplier id for further use
      */
+    vatPercentage = $('input[name="vatPercentage"]').val();
+    servicePercentage = $('input[name="servicePercentage"]').val();
 
     $('#category').change(function () {
-        var formdata = new FormData();
-        formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
-        $.ajax({
-            url: '/category-dishes/' + $(this).val(),
-            type: "POST",
-            data: formdata,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                // console.log(data);
+
+        if(checkForNumberOfSides()>0 || $(this).val()!='side') {
+
+            var formdata = new FormData();
+            formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
+
+            $.ajax({
+                url: '/category-dishes/' + $(this).val(),
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
 
                     $('#dish').html('');
                     $('<option ></option>').val('').text('select dish').appendTo('#dish');
@@ -58,31 +110,43 @@ $(document).ready(function () {
 
 
                         $("#dish").append(
-                             $("<optgroup>",{label:item.name}).append(function(op){
-                                 var options='';
-                                 $.each(item.sizes, function (ii, size) {
-                                     options+="<option data-price='"+size.price+"' value='"+size.id+"'data-quantity='"+size.quantity+"' data-dish='"+item.name+"'>"+size.name+"</option>"
-                                     })
-                                 return options;
-                                 })
-
+                            $("<optgroup>", {label: item.name}).append(function (op) {
+                                var options = '';
+                                $.each(item.sizes, function (ii, size) {
+                                    options += "<option " +
+                                        "data-sides_limit='" + item.sides_limit + "'" +
+                                        "data-price='" + size.price + "' " +
+                                        "data-cost='" + size.cost + "' " +
+                                        "value='" + size.id + "'" +
+                                        "data-quantity='" + size.quantity + "' " +
+                                        "data-dish='" + item.name + "'>" + size.name + "" +
+                                        "</option>"
+                                })
+                                return options;
+                            })
                         )
                     });
 
-            },
-            error: function (data) {
+                },
+                error: function (data) {
 
-                if (data['status'] == 422) {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Oops...',
-                        text: 'There are no dishes in this category',
-                    })
-                }
+                    if (data['status'] == 422) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'There are no dishes in this category',
+                        })
+                    }
 
-            },
-        });
-
+                },
+            });
+        }else{
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'There is no Available sides ',
+            })
+        }
     });
 
     /**
@@ -124,11 +188,21 @@ $(document).ready(function () {
          * @type {{pursesId: string, supplier: {supplierId: (*), supplierName: (*)}, product: {productId: (*), productName: (*)}, quantity: (*), unit: {unitId: string, unitName: string, childUnit: number, convertRate: *, unitPrice: (*)}, grossPrice: (*)}}
          */
 
-        if ( !form[0].checkValidity()){
+        if ( !form[0].checkValidity()
+            ||((checkForNumberOfSides()- $("#quantity").val())<0
+                && $("#category option:selected").val()=='side')){
             form[0].reportValidity();
 
-
+            if((checkForNumberOfSides()- $("#quantity").val())<0){
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Available sides equal to '+checkForNumberOfSides(),
+                })
+            }
         }else{
+
+
             // console.log($("#dish").val());
             var formdataq = new FormData();
             formdataq.append("_token", $('meta[name="csrf-token"]').attr('content'));
@@ -151,12 +225,16 @@ $(document).ready(function () {
                     purse = {
                         id:data,
                         type:    $("#category option:selected").text(),
+                        typeval:    $("#category option:selected").val(),
                         dish: {
                             dishId: $("#dish").val(),
                             dishName: $("#dish option:selected").data('dish'),
                             dishSizeName: $("#dish option:selected").text(),
                             quantityAvailable: $("#dish option:selected").data('quantity'),
-                            price: $("#dish option:selected").data('price'),
+                            originalprice:$("#dish option:selected").data('price'),
+                            price: staff? $("#dish option:selected").data('cost'):$("#dish option:selected").data('price'),
+                            cost:  $("#dish option:selected").data('cost'),
+                            sides_limit: $("#dish option:selected").data('sides_limit'),
                         },
                         quantity: $("#quantity").val(),
                     }
@@ -205,25 +283,18 @@ $(document).ready(function () {
          service = 0;
 // vat on dishes  only      14%
          vat = 0;
-
         $.each(data, function (index, data) {
             sup_total   += (data.dish.price * data.quantity);
-            service     += $('#service').is(':checked')?(data.dish.price * data.quantity) * (12 / 100):0 ;
-            vat         += $('#vat').is(':checked')?(data.dish.price * data.quantity) * (14 / 100):0 ;
+            service     += $('#service').is(':checked')?(data.dish.price * data.quantity) * (servicePercentage / 100):0 ;
+            vat         += $('#vat').is(':checked')?(data.dish.price * data.quantity) * (vatPercentage / 100):0 ;
             $("#pursesDetailsRender").append(
                 $("<tr>").append(
                     $("<th>", {text: index + 1}),
                     $("<td>", {text: data.type}),
                     $("<td>", {text: data.dish.dishName}),
                     $("<td>", {text: data.dish.dishSizeName}),
-                    $("<td>").append(
-                        $("<input/>", {
-                            value: data.quantity,
-                            class: 'form-control',
-                            type: 'number',
-                            onChange: '$(this).updateQuantity(' + index + ')'
-                        })
-                    ),
+                    $("<td>", {text: data.quantity}),
+
                     $("<td>").append(
                         $("<div>", {class: 'btn-group'}).append(
                             $("<button>", {
@@ -285,6 +356,31 @@ $(document).ready(function () {
      * @param index
      */
     $.fn.deleteFromList = function (index) {
+        var formdata = new FormData();
+
+        formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
+        formdata.append("id", purses[index].id);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+
+            url: '/dish-delete-pending',
+            type: "post",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                Swal.fire(
+                    'Good job!',
+                    'Success ! dish deleted successfully',
+                    'success'
+                );
+            },
+        });
+
         purses.splice(index, 1);
         $("#pursesDetailsRender").empty();
         $(this).renderHtml(purses);
@@ -325,6 +421,8 @@ $(document).ready(function () {
      * Update quantity of purses list
      * @param index
      */
+
+
     $.fn.checkQuantityForUpdate = function (index) {
 
         var quantity=0;
@@ -338,7 +436,6 @@ $(document).ready(function () {
     };
     $('#vat').click(function () {
         $("#pursesDetailsRender").empty();
-
         $(this).renderHtml(purses);
         // console.log($(this).is(':checked'));
     })
@@ -350,6 +447,17 @@ $(document).ready(function () {
     })
 
     $('#staff').click(function () {
+        if($(this).is(':checked')){
+            for (var i=0;i<purses.length;i++){
+                    purses[i].dish.price=purses[i].dish.cost;
+            }
+            staff=true;}
+        else {
+            for (var i=0;i<purses.length;i++){
+                purses[i].dish.price=purses[i].dish.originalprice;
+            }
+            staff = false;
+        }
         $("#pursesDetailsRender").empty();
 
         $(this).renderHtml(purses);

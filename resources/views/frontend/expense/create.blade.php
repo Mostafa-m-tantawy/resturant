@@ -31,8 +31,10 @@
 
 
                     <!--begin::Form-->
-                    <form class="kt-form kt-form--label-right" method="post" action="{{route('expenses.store')}}">
-                      @csrf  <div class="kt-portlet__body">
+                    <form class="kt-form kt-form--label-right" enctype="multipart/form-data"
+                          method="post" action="{{route('expenses.store')}}">
+                      @csrf
+                        <div class="kt-portlet__body">
                             <div class="row">
                                 <div class="col-md-12">
 
@@ -63,6 +65,10 @@
                                         <div class="col-12">
                                             <label class="">{{trans('main.payment')}} {{trans('main.amount')}} </label>
                                             <input type="number" required name="payment_amount" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label>{{trans('main.files')}}  :</label>
+                                            <input type="file"  multiple name="files[]" class="form-control" >
                                         </div>
                                         <div class="col-12">
                                             <label>{{trans('main.note')}}  :</label>

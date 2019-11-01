@@ -111,7 +111,7 @@
                                         <div class="form-group">
                                             <label>{{trans('main.name')}} </label>
                                             <input type="text" class="form-control" name="name"
-                                                   value="{{$dish->name}}" placeholder="EX: Burger">
+                                                   value="{{$dish->name}}" >
                                             <span class="form-text text-muted">{{trans('main.dish')}}  {{trans('main.name')}} .</span>
                                         </div>
                                         <div class="form-group">
@@ -119,7 +119,11 @@
                                             <input type="text" class="form-control"  value="{{$dish->description}}" name="description">
                                             <span class="form-text text-muted">{{trans('main.dish')}}  {{trans('main.description')}} </span>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label> {{trans('main.sides_limit')}}</label>
+                                            <input type="number"  class="form-control" name="sides_limit"  value="{{$dish->sides_limit}}" >
+                                            <span class="form-text text-muted"> {{trans('main.sides_limit')}} </span>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>{{trans('main.category')}} </label>

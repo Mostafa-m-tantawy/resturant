@@ -22,6 +22,7 @@ class CreateDishesTable extends Migration
             $table->enum('type', ['dish', 'side','extra']);
             $table->unsignedBigInteger('dish_category_id');
             $table->unsignedBigInteger('department_id')->nullable();;
+            $table->integer('sides_limit')->default(0)->nullable();
             $table->boolean('status')->default(1)->nullable();
             $table->timestamps();
         });

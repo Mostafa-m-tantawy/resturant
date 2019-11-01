@@ -12,7 +12,7 @@
                         <div class="kt-portlet__head-actions">&nbsp;
                             <a href="{{url('supplier')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
-                                All Supplier
+                                {{ trans('main.all') }} {{ trans('main.suppliers') }}
                             </a>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                Create new supplier
+                                {{ trans('main.create') }}  {{ trans('main.supplier') }}
                             </h3>
                         </div>
                     </div>
@@ -43,36 +43,33 @@
                       @csrf  <div class="kt-portlet__body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h3>Personal Information</h3>
+                                    <h3>{{trans('main.personal')}} {{trans('main.information')}}</h3>
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <label>Full Name:</label>
+                                            <label>{{trans('main.name')}}:</label>
                                             <input type="text"required name="name" class="form-control" placeholder="Enter full name">
-                                            <span class="form-text text-muted">Please enter your full name</span>
                                         </div>
                                         <div class="col-12">
-                                            <label class="">Email:</label>
+                                            <label class="">{{trans('main.email')}}:</label>
                                             <input type="email"required name="email" class="form-control" placeholder="Enter email">
-                                            <span class="form-text text-muted">Please enter your email</span>
                                         </div>
 
                                         <div class="col-12">
-                                            <label>Start Balance :</label>
+                                            <label>{{trans('main.Starting Balance')}} :</label>
                                             <input type="number" step='0.01' name="balance" class="form-control">
-                                            <span class="form-text text-muted">Please enter start balance</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4" id="kt_repeater_1">
-                                    <h3>Contact Information<a href="javascript:;" data-repeater-create="" class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                            <i class="la la-plus"></i> Add
+                                    <h3>{{trans('main.contact')}} {{trans('main.information')}}<a href="javascript:;" data-repeater-create="" class="btn btn-bold btn-sm btn-label-brand pull-right">
+                                            <i class="la la-plus"></i> {{trans('main.add')}}
                                         </a></h3>
                                         <div class="repeater" class="form-group  row">
                                             <div data-repeater-list="phone_g" class="col-lg-12">
                                                 <div data-repeater-item class="row kt-margin-b-10">
                                                     <div class="col-lg-5">
-                                                        <label>Phone</label>
+                                                        <label>{{trans('main.phone')}}</label>
 
                                                         <div class="input-group">
 
@@ -80,7 +77,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-5">
-                                                        <label>Type</label>
+                                                        <label>{{trans('main.type')}}</label>
 
                                                         <div class=" form-group input-group">
 
@@ -101,38 +98,37 @@
                                 </div>
 
                                 <div class="col-md-4" id="kt_repeater_2"class="repeater">
-                                    <h3>Addresses Information<a href="javascript:;" data-repeater-create="" class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                            <i class="la la-plus"></i> Add
+                                    <h3>{{trans('main.addresses')}} {{trans('main.information')}}<a href="javascript:;" data-repeater-create="" class="btn btn-bold btn-sm btn-label-brand pull-right">
+                                            <i class="la la-plus"></i> {{trans('main.add')}}
                                         </a></h3>
                                     <div data-repeater-list="address_g">
                                     <div class="form-group form-group-last row"  data-repeater-item>
 
                                         <div class="col-lg-12">
-                                            <label>Address:</label>
+                                            <label>   {{trans('main.address')}}:</label>
                                             <div class="kt-input-icon kt-input-icon--right">
                                                 <input type="text" name="address" class="form-control"
                                                       required placeholder="Enter your address">
                                                 <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i
                                                             class="la la-map-marker"></i></span></span>
                                             </div>
-                                            <span class="form-text text-muted">Please enter your address</span>
                                         </div>
                                         <div  class="col-lg-12">
                                             <div  class="row kt-margin-b-10">
                                                 <div class="col-lg-5">
-                                                    <label>Country</label>
+                                                    <label>{{trans('main.country')}}</label>
                                                         <select class="form-control country"name="country" onchange="changecity(this)">
-                                                            <option value="00">Select Country</option>
+                                                            <option value="00">{{trans('main.select')}} {{trans('main.country')}}</option>
                                                            @foreach($countries as $country)
                                                                 <option value="{{$country->id}}">{{$country->name}}</option>
 @endforeach
                                                         </select>
                                                 </div>
                                                 <div class="col-lg-5">
-                                                    <label>City</label>
+                                                    <label>{{trans('main.city')}}</label>
 
                                                         <select class="form-control" name="city">
-                                                            <option value="00">Select City</option>
+                                                            <option value="00">{{trans('main.select')}} {{trans('main.city')}}</option>
 
                                                         </select>
                                                 </div>
@@ -157,8 +153,8 @@
                                 <div class="row">
                                     <div class="col-lg-4"></div>
                                     <div class="col-lg-8">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">{{trans('main.submit')}}</button>
+                                        <button type="reset" class="btn btn-secondary">{{trans('main.cancel')}}</button>
                                     </div>
                                 </div>
                             </div>

@@ -388,15 +388,14 @@
                                         <!--begin: Datatable -->
                                         <div
                                             class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                                        <table id="datatable-responsive2"
-                                               class="table table-striped table-bordered dt-responsive  nowrap "
-                                               cellspacing="0" width="100%">
-                                            <thead>
+                                        <table id="datatable-responsive"
+                                               class="display table table-striped table-bordered " cellspacing="0"
+                                               style="width:100%">    <thead>
                                             <tr>
                                                 <th>  {{trans('main.id')}} </th>
                                                 <th>  {{trans('main.supplier')}} {{trans('main.name')}} </th>
                                                 <th> {{trans('main.amount')}} </th>
-                                                <th> {{trans('main.methof')}} </th>
+                                                <th> {{trans('main.method')}} </th>
                                                 <th> {{trans('main.Due Date')}} </th>
                                                 <th> {{trans('main.action')}} </th>
                                             </tr>
@@ -529,22 +528,8 @@
             });
 
 
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
 
-            });
-            $("#datatable-responsive2").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
 
-            });
         })
     </script>
 

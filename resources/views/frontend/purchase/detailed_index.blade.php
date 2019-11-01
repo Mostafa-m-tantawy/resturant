@@ -1,6 +1,8 @@
 @extends('layouts.welcome')
 @section('head')
-    <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{{--    <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>--}}
+{{--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>--}}
+
 @stop
 @section('content')
     <!-- begin:: Content -->
@@ -26,7 +28,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{url('purchase')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('purchase/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{trans('main.new')}} {{trans('main.purchase')}}
                             </a>
@@ -38,8 +40,8 @@
 
                 <!--begin: Datatable -->
                 <table id="datatable-responsive"
-                       class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-                       width="100%">
+                       class="display table table-striped table-bordered " cellspacing="0"
+                        class="display" style="width:100%">
                     <thead>
                     <tr>
                         <th> {{trans('main.id')}}</th>
@@ -77,31 +79,6 @@
     </div>
 
 @stop
-@section('scripts')
-
-    <script>
-        $(document).ready(function () {
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-            });
-        })
-    </script>
-
-@stop
-
-
-
-
-
-
-
-
-
-
 
 
 

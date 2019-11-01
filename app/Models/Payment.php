@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Http\Traits\uploadFileTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
+    use uploadFileTrait;
+
     //
     public function sender(){
         return $this->belongsTo(Restaurant::class,'sender_id');

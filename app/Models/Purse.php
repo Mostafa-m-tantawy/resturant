@@ -1,13 +1,15 @@
 <?php
 namespace App;
 
+use App\Http\Traits\uploadFileTrait;
 use App\Scopes\restaurantScope;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Purse extends Model
-{
+{    use uploadFileTrait;
+
 
     protected static function boot()
     {
@@ -33,10 +35,7 @@ class Purse extends Model
         return $this->belongsTo(Restaurant::class,'restaurant_id');
     }
 
-    public function pursesPayments()
-    {
-        return $this->hasMany(PursesPayment::class);
-    }
+
 
     public function gettotalAttribute()
     {

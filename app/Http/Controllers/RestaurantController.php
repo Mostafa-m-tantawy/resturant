@@ -98,10 +98,10 @@ class RestaurantController extends Controller
 
      $systemconf= SystemConf::create(
          [
-             ['restaurant_id'=>$restaurant->id,'name' => 'service'],
-             ['restaurant_id'=>$restaurant->id,'name' => 'vat'],
-             ['restaurant_id'=>$restaurant->id,'name' => 'method'],
-             ['restaurant_id'=>$restaurant->id,'name' => 'months'],
+             ['restaurant_id'=>$restaurant->id,'name' => 'service','value'=>'12'],
+             ['restaurant_id'=>$restaurant->id,'name' => 'vat','value'=>'14'],
+             ['restaurant_id'=>$restaurant->id,'name' => 'method','value'=>'avg_cost'],
+             ['restaurant_id'=>$restaurant->id,'name' => 'months','value'=>'6'],
              ]
          );
         return redirect(route('dashboard'));
@@ -241,9 +241,6 @@ class RestaurantController extends Controller
 
     }
 
-    public function dashboard()
-    {
-        return view('frontend.dashboard');
-    }
+
 
 }

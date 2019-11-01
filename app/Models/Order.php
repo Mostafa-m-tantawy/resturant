@@ -13,4 +13,48 @@ class Order extends Model
         parent::boot();
         static::addGlobalScope(new restaurantScope());
     }
+
+
+    public function  orderDetails(){
+
+        return $this->hasMany(OrderDetails::class);
+    }
+
+    public function getVatAttribute(){
+
+        return ($this->getOriginal('vat')/100)*($this->sup_total+$this->service);
+
+    }
+
+
+    public function getServiceAttribute(){
+
+        return ($this->getOriginal('service')/100)*$this->sup_total;
+
+    }
+
+
+    public function getSupTotalAttribute(){
+
+        $details=$this->orderDetails->sum(function ($t){
+            return $t->unit_price*$t->quantity;
+        });
+        return $details;
+
+    }
+public function getSupTotalCostAttribute(){
+
+        $details=$this->orderDetails->sum(function ($t){
+            return $t->unit_cost*$t->quantity;
+        });
+        return $details;
+
+    }
+
+    public function getGrossTotalAttribute(){
+
+        return $this->sup_total+$this->vat+$this->service;
+
+    }
+
 }

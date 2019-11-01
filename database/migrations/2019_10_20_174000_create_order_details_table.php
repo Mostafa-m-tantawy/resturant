@@ -17,6 +17,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('dish_size_id');
+            $table->double('unit_cost')->nullable();
             $table->double('unit_price')->nullable();
             $table->double('quantity')->nullable();
             $table->timestamps();
