@@ -19,14 +19,14 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.all')}} {{trans('main.orders')}}
+                        {{trans('main.all')}} {{trans('main.assigns')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('order.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('assign/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{trans('main.new')}} {{trans('main.record')}}
                             </a>
@@ -40,41 +40,30 @@
                 <table id="datatable-responsive"
                        class="display table table-striped table-bordered " cellspacing="0"
                        style="width:100%">
-                    <thead><tr>
+                    <thead>
+                    <tr>
                         <th> {{trans('main.id')}}</th>
-                        <th>{{trans('main.is staff')}}</th>
-                        <th>{{trans('main.sup-total')}}</th>
-                        <th>{{trans('main.service')}}</th>
-                        <th>{{trans('main.vat')}}</th>
-                        <th>{{trans('main.discount')}}</th>
-                        <th>{{trans('main.gross-total')}}</th>
+                        <th> {{trans('main.from')}}</th>
+                        <th> {{trans('main.to')}}</th>
+                        <th> {{trans('main.product')}}</th>
+                        <th> {{trans('main.quantity')}}</th>
                         <th>{{trans('main.created_at')}}</th>
-                        <th>{{trans('main.edit')}}</th>
-                        <th>{{trans('main.delete')}}</th>
+
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($orders as $order)
+                    @foreach($assigns as $assign)
+                    @foreach($assign->details as $detail)
                         <tr>
-                            <td>{{$order->id}}</td>
-                           <td>{{$order->is_staff}}</td>
-                            <td>{{$order->sup_total}}</td>
-                            <td>{{$order->service}}</td>
-                            <td>{{$order->vat}}</td>
-                            <td>{{$order->discount}}</td>
-                            <td>{{$order->gross_total}}</td>
-                            <td>{{$order->created_at}}</td>
-                            <td>
-                                <a title="update" href="{{url('order/edit/'.$order->id)}}">
-                                    <i class="flaticon-edit-1"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a title="delete" href="{{url('order/delete/'.$order->id)}}">
-                                    <i style="color: red" class="flaticon-delete"></i></a>
+                            <td>{{$detail->id}}</td>
+                            <td>{{$assign->sourceable->name}}</td>
+                            <td>{{$assign->assignable->name}}</td>
+                            <td>{{$detail->product->name}}</td>
+                            <td>{{$detail->quantity}}</td>
+                            <td>{{$detail->created_at}}</td>
 
-                            </td>
                         </tr>
+                    @endforeach
                     @endforeach
 
                     </tbody>

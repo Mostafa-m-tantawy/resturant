@@ -495,8 +495,8 @@
                                                 <th>{{trans('main.amount')}}</th>
                                                 <th>{{trans('main.method')}}</th>
                                                 <th>{{trans('main.Due Date')}}</th>
+                                                <th>{{ trans('main.attachments') }}</th>
                                                 <th>{{trans('main.action')}}</th>
-                                                <th> {{ trans('main.attachments') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -518,28 +518,7 @@
                                                            href="{{url('purchase/delete/'.$payment->id)}}">
                                                             <i style="color: red" class="flaticon-delete"></i></a>
                                                     </td>
-                                                {{--                                                    --}}{{--                    <td>{{$product->unit->name}}</td>--}}
-                                                {{--                                                    <td>1</td>--}}
-                                                {{--                                                    <td>{{$payment->barcode}}</td>--}}
-                                                {{--                                                    <td>{{$payment->reorder_point}}</td>--}}
-                                                {{--                                                    <td>{{$payment->vat}}</td>--}}
-                                                {{--                                                    <td>--}}
-                                                {{--                                                        <a title="update"--}}
-                                                {{--                                                           data-toggle="modal" data-target=".bd-example-modal-lg"--}}
-                                                {{--                                                           data-id="{{$product->id}}" data-name="{{$product->name}}"--}}
-                                                {{--                                                           data-unit="1"--}}
-                                                {{--                                                           data-barcode="{{$product->barcode}}"--}}
-                                                {{--                                                           data-vat="{{$product->vat}}"--}}
-                                                {{--                                                           data-reorder="{{$product->reorder_point}}"><i--}}
-                                                {{--                                                                class="flaticon-edit-1"></i>--}}
-                                                {{--                                                        </a>--}}
-                                                {{--                                                        <a title="delete"--}}
-                                                {{--                                                           href="{{url('product/delete/'.$product->id)}}"> <i--}}
-                                                {{--                                                                style="color: red"--}}
-                                                {{--                                                                class="flaticon-delete"></i></a>--}}
-                                                {{--                                                    </td>--}}
-
-                                                {{--                                                </tr>--}}
+                                                </tr>
                                             @endforeach
                                             {{--                {{dd($products)}}--}}
 

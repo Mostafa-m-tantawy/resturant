@@ -250,6 +250,14 @@ $(document).ready(function () {
                     $("<th>", {colspan: 5}),
                     $("<th>", {text: "Total :", class: "text-right"}),
                     $("<th>", {text: total.toFixed(2)})
+                ), $("<tr>").append(
+                    $("<th>", {colspan: 5}),
+                    $("<th>", {text: "Total :", class: "text-right"}),
+                    $("<th>", {html: '<select class="form-control" name="payment" id="payment">' +
+                            '<option value="cash">Cash</option>' +
+                            '<option value="later">Later</option>' +
+                            '</select>'
+                    })
                 ),
                 // $("<tr>").append('<th colspan="5"></th>' +
                 //     '<th class="text-right"> Payment Method :</th>' +
@@ -354,6 +362,7 @@ $(document).ready(function () {
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
         formdata.append("supplier_id", $("#supplier_id").val());
         formdata.append("purses", json_arr);
+        formdata.append("payment", $("#payment").val() );
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

@@ -96,14 +96,19 @@ class RestaurantController extends Controller
             }
         }
 
-     $systemconf= SystemConf::create(
-         [
-             ['restaurant_id'=>$restaurant->id,'name' => 'service','value'=>'12'],
-             ['restaurant_id'=>$restaurant->id,'name' => 'vat','value'=>'14'],
-             ['restaurant_id'=>$restaurant->id,'name' => 'method','value'=>'avg_cost'],
-             ['restaurant_id'=>$restaurant->id,'name' => 'months','value'=>'6'],
-             ]
-         );
+     SystemConf::create(['restaurant_id'=>$restaurant->id,'name' => 'service','value'=>'12']
+     );
+
+        SystemConf::create(
+         ['restaurant_id'=>$restaurant->id,'name' => 'vat','value'=>'14']         );
+
+        SystemConf::create(
+             ['restaurant_id'=>$restaurant->id,'name' => 'method','value'=>'avg_cost']       );
+
+        SystemConf::create(
+                 ['restaurant_id'=>$restaurant->id,'name' => 'months','value'=>'6']         );
+
+
         return redirect(route('dashboard'));
 
     }

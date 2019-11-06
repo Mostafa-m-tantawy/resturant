@@ -16,12 +16,11 @@ class CreateAssignStocksTable extends Migration
         Schema::create('assign_stocks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('sourceable_id');
+            $table->string('sourceable_type');
             $table->unsignedBigInteger('assignable_id');
             $table->string('assignable_type');
-            $table->string('price_math_method')->nullable();;
-            $table->date('math_start_date')->nullable();
-            $table->date('math_end_date')->nullable();
-            $table->timestamps();
+           $table->timestamps();
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Product;
 use App\ProductCategory;
 use App\Supplier;
@@ -70,7 +71,27 @@ return  redirect('product')  ;      }
      */
     public function show($id)
     {
-        //
+        $restaurant=Auth::user()->restaurant;
+        $departments=Department::all();
+        $product=Product::find($id);
+
+
+        $purchased=$product->purchasedProduct;
+        $assigns=$product->assignDetails;
+        $ruineds=$product->ruined;
+        $refunds=$product->refund;
+
+        $purchase =$product->purchasedProduct->sum('quantity');
+        $assign_to_me = $product->assginedToMe($restaurant);
+        $assign_to_other = $product->assginedToOthers($restaurant);
+        $refund = $product->refund->sum('quantity');
+        $ruind= $product->ruinedFromMe($restaurant);
+
+
+        return view('frontend.products.show')
+            ->with(compact('product','departments','purchase',
+                'assign_to_me','assign_to_other','refund','ruind',
+            'purchased','assigns','ruineds','refunds'));
     }
 
     /**
@@ -160,5 +181,24 @@ return  redirect('product')  ;      }
         $product = Product::find($id);
         $product->supplier()->detach($supplier_id);
         return redirect('product/create/' . $supplier_id);
+    }
+
+
+    public function getProductQuantity(Request $request,$id)
+    {
+        if($request->type=='restaurant'){
+
+            $quantity=Product::find($id)->quantity;
+
+        }else{
+
+            $department=Department::find($request->id);
+
+            $quantity=Product::find($id)->departmentquantity($department);
+
+        }
+
+        return response()->json($quantity, 200);
+
     }
 }

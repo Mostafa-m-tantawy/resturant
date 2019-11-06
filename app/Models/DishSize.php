@@ -27,7 +27,7 @@ class DishSize extends Model
         $recipes=$this->recipes;
         $quantities=[];
         foreach ($recipes as $recipe){
-        $quantities[]=$recipe->product->departmentquantity('department',$this->dish->department_id)/$recipe->unit_quantity;
+        $quantities[]=$recipe->product->departmentquantity($this->dish->department)/$recipe->unit_quantity;
         }
         if(count($quantities)>0){
             return min($quantities);

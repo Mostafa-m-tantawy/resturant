@@ -17,4 +17,16 @@ class Department extends Model
         parent::boot();
         static::addGlobalScope(new restaurantScope());
     }
+
+    public function getProductsAttribute(){
+
+        $products=Product::
+      WhereHas('assignDetails',function ($q){
+            $q->whereHas('assignHeader',function ($qq){
+                $qq->where('assignable_id',$this->id)->where('assignable_type','App\Department');
+            });
+        })->get()->where('quantity_available',true);
+
+        return $products;
+    }
 }

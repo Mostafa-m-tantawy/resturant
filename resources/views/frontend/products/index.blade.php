@@ -43,6 +43,7 @@
                         <th>{{trans('main.barcode')}}</th>
                         <th>{{trans('main.re-order point')}}</th>
                         <th>{{trans('main.stockable')}}</th>
+                        <th>{{trans('main.show')}}</th>
                         <th>{{trans('main.action')}}</th>
                     </tr>
                     </thead>
@@ -60,6 +61,10 @@
                             <td>{{$product->reorder_point}}</td>
                             <td>{{($product->is_stockable)?'Yes':'No'}}</td>
                             <td>
+                                <a href="{{url('product/'.$product->id)}}" ><i class="flaticon-edit-1"></i></a>
+
+                            </td>
+                            <td>
                                 <a title="update"
                                    data-toggle="modal" data-target=".bd-example-modal-lg"
                                    data-id="{{$product->id}}" data-name="{{$product->name}}"
@@ -69,6 +74,8 @@
 {{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
 {{--                                                                                                     class="flaticon-delete"></i></a>--}}
                             </td>
+
+
 
                         </tr>
                     @endforeach

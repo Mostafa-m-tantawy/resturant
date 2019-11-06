@@ -14,39 +14,26 @@ use Illuminate\Support\Facades\Auth;
 class AssignController extends Controller
 {
 
+    public function index(){
+
+        $assigns=AssignStock::all();
+        return view('frontend.assign.index')->with(compact('assigns'));
+    }
     public function CreateAssign()
     {
 
         $restaurant = Auth::user()->restaurant;
-        $products=Product::
-        whereHas('purchasedProduct',function ($q)use ($restaurant){
-            $q->whereHas('purse',function ($qq)use($restaurant){
-                $qq->where('restaurant_id',$restaurant->id);
-            });
-        })-> OrWhereHas('assignDetails',function ($q)use ($restaurant){
-        $q->whereHas('assignHeader',function ($qq)use($restaurant){
-            $qq->where('assignable_id',Auth ::user()->restaurant->id)->where('assignable_type','App\Restaurant');
-        });
 
-
-    })->get();
-
-
-
-        return view('frontend.assign.create-assign')->with(compact('restaurant','products'));
+        return view('frontend.assign.create-assign')->with(compact('restaurant'));
 
     }
 
-    public function getAssignable($type)
+    public function getSource($type)
     {
-        if ($type == 'branch') {
-            $branches = Restaurant::where('parent_id', Auth::user()->id)->with('user')->get();
-
-          if($branches->count()>0)
-              return response()->json($branches, 200);
-            else
-                return response()->json('false', 422);
-        }
+        if ($type == 'restaurant') {
+            $restaurant =Auth::user()->restaurant;
+              return response()->json($restaurant, 200);
+          }
         elseif ($type == 'department') {
             $departments=Department::where('restaurant_id', Auth::user()->restaurant->id)->get();
 
@@ -57,14 +44,40 @@ class AssignController extends Controller
         }
 
     }
+    public function getSourceProducts(Request $request)
+    {
+        if ($request->type == 'restaurant') {
+            $products =Auth::user()->restaurant->products;
+            $departments=Auth::user()->restaurant->departments;
+            if($products->count()>0)
+                return response()->json([$products,$departments], 200);
+            else
+                return response()->json('false', 422);
+        }
+        elseif ($request->type == 'department') {
+            $department=Department::find($request->id);
+            $restaurant =Auth::user()->restaurant;
+
+            $products=$department->products;
+            if($products->count()>0)
+                return response()->json([$products,[$restaurant]], 200);
+            else
+                return response()->json('false', 422);
+        }
+
+    }
+
+
     public function saveAssign(Request $request)
 
     {
         $assign = new AssignStock();
 
 	    $assign->restaurant_id=Auth::user()->restaurant->id;
-		$assign->assignable_id	= $request->assign_to;
-		$assign->assignable_type=($request->assign_type=='branch')?'App\Restaurant':'App\Department';
+		$assign->sourceable_id	    = $request->source_id;
+		$assign->sourceable_type	= ($request->source_type=='restaurant')?'App\Restaurant':'App\Department';
+		$assign->assignable_id	    = $request->assign_to;
+		$assign->assignable_type    =($request->source_type=='restaurant')?'App\Department':'App\Restaurant';
 		if($assign->save()){
 
             foreach (json_decode($request->get('purses')) as $purse) {

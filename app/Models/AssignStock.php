@@ -16,4 +16,10 @@ class AssignStock extends Model
     public function assignable(){
         return $this->morphTo();
     }
+    public function sourceable(){
+        return $this->morphTo();
+    }
+    public function details(){
+        return $this->hasMany(AssignStockDetails::class);
+    }
 }

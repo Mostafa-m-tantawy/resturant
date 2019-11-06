@@ -18,29 +18,37 @@
             <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
 									<span class="kt-header__topbar-icon">
 
+                                        @if (App::isLocale('ar'))
+                                            <img class="" src="{{asset('/media/flags/008-saudi-arabia.svg')}}" alt="" />
+									@else
 										<img class="" src="{{asset('/media/flags/020-flag.svg')}}" alt="" />
+					@endif
 									</span>
             </div>
             <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround">
                 <ul class="kt-nav kt-margin-t-10 kt-margin-b-10">
-                    <li class="kt-nav__item kt-nav__item--active">
-                        <a href="#" class="kt-nav__link">
+                    <form action="{{url('chang-lang')}}" method="post"  id="form_en">
+                        @csrf
+                        <input type="hidden" name="lang" value="en">
+                        <li class="kt-nav__item kt-nav__item--active" onclick="document.getElementById('form_en').submit();">
+                        <a  class="kt-nav__link">
                             <span class="kt-nav__link-icon"><img src="{{asset('/media/flags/020-flag.svg')}}" alt="" /></span>
                             <span class="kt-nav__link-text">English</span>
                         </a>
                     </li>
-                    <li class="kt-nav__item">
-                        <a href="#" class="kt-nav__link">
-                            <span class="kt-nav__link-icon"><img src="{{asset('/media/flags/016-spain.svg')}}" alt="" /></span>
-                            <span class="kt-nav__link-text">Spanish</span>
+
+                    </form>
+                    <form action="{{url('chang-lang')}}" method="post"  id="form_ar">
+                        @csrf
+                        <input type="hidden" name="lang" value="ar">
+                        <li class="kt-nav__item"  onclick="document.getElementById('form_ar').submit();">
+                        <a class="kt-nav__link">
+                            <span class="kt-nav__link-icon"><img src="{{asset('/media/flags/008-saudi-arabia.svg')}}" alt="" /></span>
+                            <span class="kt-nav__link-text">Arabic</span>
                         </a>
                     </li>
-                    <li class="kt-nav__item">
-                        <a href="#" class="kt-nav__link">
-                            <span class="kt-nav__link-icon"><img src="{{asset('/media/flags/017-germany.svg')}}" alt="" /></span>
-                            <span class="kt-nav__link-text">German</span>
-                        </a>
-                    </li>
+                    </form>
+
                 </ul>
             </div>
         </div>
@@ -51,8 +59,8 @@
         <div class="kt-header__topbar-item kt-header__topbar-item--user">
             <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
                 <div class="kt-header__topbar-user">
-                    <span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
-                    <span class="kt-header__topbar-username kt-hidden-mobile"> {{Auth::user()->name}}</span>
+                    <span class="kt-header__topbar-welcome">Hi,</span>
+                    <span class="kt-header__topbar-username "> {{Auth::user()->name}}</span>
 {{--                    <img class="kt-hidden" alt="Pic" src="{{asset('/media/users/300_25.jpg')}}" />--}}
 
                     <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
