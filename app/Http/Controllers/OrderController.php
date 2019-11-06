@@ -82,7 +82,7 @@ class OrderController extends Controller
         $recipes = $dishSize->recipes;
         $quantities = [];
         foreach ($recipes as $recipe) {
-            $departmentQuantity = $recipe->product->departmentquantity('department', $dishSize->dish->department_id);
+            $departmentQuantity = $recipe->product->departmentquantity( $dishSize->dish->department);
 
             $pendingQuantity = PendingRecipe::where('product_id', $recipe->product->id)->sum('quantity');//   $recipe->product->departmentquantity('department',$this->dish->department_id)
 

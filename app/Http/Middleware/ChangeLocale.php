@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class ChangeLocale
 {
@@ -14,9 +15,28 @@ class ChangeLocale
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle( $request, Closure $next)
     {
-        app::setLocale('ar');
+
+
+
+        if ($request->session()->get('lang')) {
+            //
+
+            if(session::get('lang')=='ar'){
+                App::setLocale('ar');
+
+            }
+            else{
+                App::setLocale('en');
+
+            }
+        }else{
+            App::setLocale('ar');
+
+        }
+
+
         return $next($request);
     }
 }

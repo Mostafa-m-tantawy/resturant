@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Payment;
 use App\Product;
 use App\Purse;
 use App\PursesProduct;
@@ -46,7 +47,7 @@ class PursesController extends Controller
     public function detailedIndex()
     {
 
-        $purses = Purse::where('restaurant_id',Auth::user()->restaurant->id)->get();
+        $purses = Purse::all();
 
         return view('frontend.purchase.detailed_index',[
             'purses'            =>      $purses
@@ -104,11 +105,24 @@ class PursesController extends Controller
                 $pursesProduct->Vat = $product->vat;
 
                 if ($pursesProduct->save()) {
+
+
+
                 } else {
                     PursesProduct::where('purses_id', $purses->id)->delete();
                     Purse::destroy($purse->id);
                     return response()->json('Internal Serer Error', 500);
                 }
+            }
+
+            if($request->get('payment')=='cash'){
+                $payment=new Payment;
+                $payment->restaurant_id= $user->restaurant->id;;
+                $payment->payment_amount=$purses->total;
+                $payment->payment_method='cash';
+                $payment->sender_id=$user->restaurant->id;;;
+                $payment->receiver_id=$request->get('supplier_id');;
+                $payment->save();
             }
 //            $vat= Systemconf::where('name','RESTAURANT_VAT_PERCENTAGE')->first()->value;
 //            $purses->vat= $purses->pursesProducts->sum('gross_price')*($vat/100);

@@ -71,7 +71,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->assignQuantity($department)-$product->cookedProduct($department) }}</td>
+                                    <td>{{$product->departmentquantity($department) }}</td>
                                     <td>{{$product->cost }}</td>
                                 </tr>
                             @endforeach
@@ -89,20 +89,6 @@
 @section('scripts')
 
     <script src="{{asset('js/demo1/pages/crud/forms/widgets/bootstrap-daterangepicker.js')}}" type="text/javascript"></script>
-    <script>
-        $(document).ready(function () {
-
-
-
-
-                $("#datatable-responsive").DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-            });
-        })
-    </script>
 
 @stop
 

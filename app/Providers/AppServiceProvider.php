@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\SystemConf;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+       if(Schema::hasTable('system_confs'))
         View::share('systemconf', SystemConf::all());
     }
 }

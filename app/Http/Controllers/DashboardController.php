@@ -7,13 +7,19 @@ use App\Order;
 use App\OrderDetails;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
     public function dashboard(Request $request)
     {
-            if($request->range) {
+
+//        dd(session::get('lang'));
+//        session(['lang' => 'en']);
+
+        if($request->range) {
                 // lenght 10 date = (01/01/2001) =10
                 $from = substr($request->range, 0, 10);
                 // start  13 date = (01/01/2001 */*)=13
@@ -61,5 +67,31 @@ class DashboardController extends Controller
     public function download(Request $request)
     {
         return response()->download($request->url);
+    }
+
+
+    public function changLang(Request $request)
+    {
+        $acceptLang = ['en','ar'];
+        $lang = in_array($request->lang, $acceptLang) ? $request->lang : 'ar';
+
+//        $request->session()->forget('lang');
+
+        if($lang=='ar'){
+            session(['lang' => 'ar']);
+            App::setLocale('ar');
+
+
+        }
+        else{
+            session(['lang' => 'en']);
+            App::setLocale('en');
+
+
+        }
+
+
+        return back();
+
     }
 }

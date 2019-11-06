@@ -52,6 +52,10 @@ class Restaurant extends Model
         }//->total;
         return $total;
     }
+    public function getNameAttribute(){
+
+        return $this->user->name;
+    }
     public function getGrossPaymentsAttribute(){
         $total=   $this->paySupplier->sum('payment_amount');
         return $total;
@@ -63,6 +67,23 @@ class Restaurant extends Model
             return ($t->quantity * $t->unit_price)+($t->quantity * $t->unit_price)*($t->vat/100);
         });
         return $total;
+    }
+    public function getProductsAttribute(){
+
+        $products=Product::
+        whereHas('purchasedProduct',function ($q){
+            $q->whereHas('purse',function ($qq){
+                $qq->where('restaurant_id',$this->id);
+            });
+        })-> OrWhereHas('assignDetails',function ($q){
+            $q->whereHas('assignHeader',function ($qq){
+                $qq->where('assignable_id',$this->id)->where('assignable_type','App\Restaurant');
+            });
+
+
+        })->get()->where('quantity_available',true);
+
+        return $products;
     }
 //
 

@@ -19,7 +19,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.all')}} {{trans('main.orders')}}
+                        {{trans('main.all')}} {{trans('main.orders')}} {{trans('main.service')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -42,38 +42,17 @@
                        style="width:100%">
                     <thead><tr>
                         <th> {{trans('main.id')}}</th>
-                        <th>{{trans('main.is staff')}}</th>
-                        <th>{{trans('main.sup-total')}}</th>
                         <th>{{trans('main.service')}}</th>
-                        <th>{{trans('main.vat')}}</th>
-                        <th>{{trans('main.discount')}}</th>
-                        <th>{{trans('main.gross-total')}}</th>
                         <th>{{trans('main.created_at')}}</th>
-                        <th>{{trans('main.edit')}}</th>
-                        <th>{{trans('main.delete')}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($orders as $order)
                         <tr>
                             <td>{{$order->id}}</td>
-                           <td>{{$order->is_staff}}</td>
-                            <td>{{$order->sup_total}}</td>
                             <td>{{$order->service}}</td>
-                            <td>{{$order->vat}}</td>
-                            <td>{{$order->discount}}</td>
-                            <td>{{$order->gross_total}}</td>
                             <td>{{$order->created_at}}</td>
-                            <td>
-                                <a title="update" href="{{url('order/edit/'.$order->id)}}">
-                                    <i class="flaticon-edit-1"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a title="delete" href="{{url('order/delete/'.$order->id)}}">
-                                    <i style="color: red" class="flaticon-delete"></i></a>
 
-                            </td>
                         </tr>
                     @endforeach
 

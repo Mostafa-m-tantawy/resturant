@@ -22,6 +22,7 @@ Route::resource('restaurant','RestaurantController')->only([
 
 Route::middleware(['auth'])->group(function () {
     Route::get ('download',     'DashboardController@download');
+    Route::post ('chang-lang',     'DashboardController@changLang');
 
 
 
@@ -41,6 +42,7 @@ Route::post ('product-category/update',     'ProductCategoryController@update');
 // -------------------------product   routes--------------------------------
 Route::resource('product','ProductController')->except(['update']);
 Route::post ('product/update',     'ProductController@update');
+Route::post ('product/quantity/{id}',     'ProductController@getProductQuantity');
 
 
 
@@ -118,8 +120,10 @@ Route::any('stock/index','StockController@index')->name('stock.index');
 
 
 // -------------------------Assign to department or branch --------------------------------
+Route::get('assign/index','AssignController@index');
 Route::get('assign/create','AssignController@CreateAssign');
-Route::post('/get-assignable/{id}','AssignController@getAssignable');
+Route::post('/get-sourceable/{id}','AssignController@getSource');
+Route::post('/get-sourceable-products','AssignController@getSourceProducts');
 Route::post('/save-assign','AssignController@saveAssign');
 
 
@@ -152,7 +156,7 @@ Route::get ('ruined','RuinedController@index')->name('ruined.index');
 Route::get ('ruined/create','RuinedController@newRuined')->name('ruined.create');
 Route::post('/get-assignable-ruined/{id}','RuinedController@getAssignable');
 Route::post('ruined-products','RuinedController@ruinedProducts');
-Route::post('get-product-cost/{id}','RuinedController@getProductCost');
+Route::post('get-product-cost/{id}','RuinedController@getProductQuantity');
 Route::post('/save-ruined','RuinedController@saveRuined')->name('ruined.store');;
 
 

@@ -204,14 +204,7 @@
                 $(e.currentTarget).find('input[name="child_unit"]').val(child);
                 $(e.currentTarget).find('input[name="convert_rate"]').val(convert_rate);
             });
-            $("#datatable-responsive").DataTable({
-                order: [0, 'desc'],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-//
-            });
+
         })
     </script>
 

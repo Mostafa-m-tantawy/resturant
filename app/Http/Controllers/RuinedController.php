@@ -125,9 +125,16 @@ class RuinedController extends Controller
             RefundProduct::destroy($id);
             return redirect()->back();
         }
-    public function getProductCost(Request $request,$id)
+    public function getProductQuantity(Request $request,$id)
         {
-                $quantity=Product::find($id)->departmentquantity($request->ruined_type,$request->ruined_from);
+            if($request->ruined_type=='restaurant'){
+                $quantity=Product::find($id)->quantity;
+
+            }else{
+                $department=Department::find($request->ruined_from);
+                $quantity=Product::find($id)->departmentquantity($department);
+
+            }
 
                 return response()->json($quantity, 200);
 

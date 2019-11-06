@@ -46,7 +46,7 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'unit' => ['required', 'string','unique:units'],
+            'unit' => ['required', 'string'],
             'child_unit' => ['required', 'string' ],
             'convert_rate' => ['required', 'numeric' ],
 

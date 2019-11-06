@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card-box" id="app">
-                            <h4 class="m-t-0 header-title"><b> {{ trans('main.purses') }}</b></h4>
+                            <h4 class="m-t-0 header-title"><b> {{ trans('main.assign') }}</b></h4>
                             <hr>
                             <form class="form-horizontal" role="form" action="#" id="purses" method="post"
                                   enctype="multipart/form-data" data-parsley-validate novalidate>
@@ -21,26 +21,38 @@
 
                                     <div class="form-group col-4">
                                         <label for=""
-                                               class=" control-label">  {{ trans('main.assign') }} {{ trans('main.to') }}</label>
-                                        <select name="assignable_id" id="assignable_id" class="form-control " required>
-                                            <option value=""> {{ trans('main.select') }}   {{ trans('main.department') }} </option>
-                                            @foreach($restaurant->departments as $department )
-                                                <option value="{{$department->id}}">{{$department->name}} </option>
+                                               class=" control-label">  {{ trans('main.from') }} {{ trans('main.type') }}</label>
+                                        <select name="sourceable_type" id="sourceable_type" class="form-control " required>
+                                            <option value=""> {{ trans('main.select') }}   {{ trans('main.type') }} </option>
+                                            <option value="restaurant"> {{ trans('main.restaurant') }}    </option>
+                                            <option value="department"> {{ trans('main.department') }}    </option>
 
-                                            @endforeach
                                         </select>
                                     </div>
+
+                                    <div class="form-group col-4">
+                                        <label for=""
+                                               class=" control-label">   {{ trans('main.from') }} {{ trans('main.id') }}</label>
+                                        <select name="sourceable_id" id="sourceable_id" class="form-control " required>
+                                            <option value=""> {{ trans('main.select') }}   {{ trans('main.id') }} </option>
+                                           </select>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label for=""
+                                               class=" control-label">   {{ trans('main.to') }} {{ trans('main.id') }}</label>
+                                        <select name="assignable_id" id="assignable_id" class="form-control " required>
+                                            <option value=""> {{ trans('main.select') }}   {{ trans('main.id') }} </option>
+                                           </select>
+                                    </div>
+
+
                                     <div class="form-group col-4">
                                         <label for=""
                                                class=" control-label"> {{ trans('main.select') }}  {{ trans('main.product') }}</label>
                                         <select name="product" id="product" class="form-control" required>
                                             <option value=""> {{ trans('main.select') }}   {{ trans('main.product') }} </option>
-                                            @foreach( $products as $product)
-                                                @if($product->quantityAvailable)
-                                                    <option value="{{$product->id}}"
-                                                            data-quantity="{{$product->quantity}}">{{$product->name}}</option>
-                                                @endif
-                                            @endforeach
+
                                         </select>
                                     </div>
 

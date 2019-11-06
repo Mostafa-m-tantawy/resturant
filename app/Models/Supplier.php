@@ -31,7 +31,10 @@ class Supplier extends Model
     {
         return $this->hasMany(RefundProduct::class);
     }
+    public function getNameAttribute(){
 
+        return $this->user->name;
+    }
     public function getGrossPurchasesAttribute(){
         $total=0;
         $purchases=$this->purchases;
