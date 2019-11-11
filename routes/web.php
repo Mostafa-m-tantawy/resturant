@@ -63,17 +63,6 @@ Route::any('departments/stock','DepartmentController@stock')->name('department.s
 
 
 
-// ------------------------supplier routes--------------------------------
-Route::resource('supplier','SupplierController');
-Route::any  ('product/create/{supplier_id}',    'ProductController@products');
-Route::post ('product/update/{supplier_id}',     'ProductController@updateProduct');
-Route::get  ('product/delete/{id}/{supplier_id}',     'ProductController@deleteProduct');
-
-
-
-
-
-
 
 // ------------------------supplier routes--------------------------------
 Route::resource('supplier','SupplierController');

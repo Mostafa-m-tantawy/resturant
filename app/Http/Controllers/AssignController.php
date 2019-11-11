@@ -15,13 +15,11 @@ class AssignController extends Controller
 {
 
     public function index(){
-
         $assigns=AssignStock::all();
         return view('frontend.assign.index')->with(compact('assigns'));
     }
     public function CreateAssign()
     {
-
         $restaurant = Auth::user()->restaurant;
 
         return view('frontend.assign.create-assign')->with(compact('restaurant'));
