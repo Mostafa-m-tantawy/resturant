@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Country;
 use App\SystemConf;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -29,5 +30,10 @@ class AppServiceProvider extends ServiceProvider
 
        if(Schema::hasTable('system_confs'))
         View::share('systemconf', SystemConf::all());
+
+
+        View::share('countries', Country::all());
     }
+
+
 }

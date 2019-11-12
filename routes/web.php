@@ -19,6 +19,7 @@ Route::resource('restaurant','RestaurantController')->only([
     'store',
 ]);
 
+include('seperated/employee.php');
 
 Route::middleware(['auth'])->group(function () {
     Route::get ('download',     'DashboardController@download');
