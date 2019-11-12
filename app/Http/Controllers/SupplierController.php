@@ -81,7 +81,7 @@ class SupplierController extends Controller
 
             }
         }
-        if ($request->phone_g) {
+        if ($request->address_g) {
             foreach ($request->address_g as $item) {
                 if (isset($item['address'])) {
                     $address = new Address();
