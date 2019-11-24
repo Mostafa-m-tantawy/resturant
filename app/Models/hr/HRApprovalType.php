@@ -2,13 +2,23 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
 
-class HRApprovalType extends Model
+class HrApprovalType extends Model
 {
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
-    }}
+    use baseTrait,restaurantScopeTrait;
+
+
+    protected $rules = array(
+        'name'  =>  'required|string|max:255',
+        'style' =>  'required|string|max:255',
+        'model' =>  ['required','max:255','unique:hr_approval_types'],
+    );
+public function approvers(){
+    return $this->hasMany(HrApprover::class,'hr_approval_type_id');
+}
+
+}

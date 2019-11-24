@@ -2,13 +2,16 @@
 namespace App;
 
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Supplier extends Model
-{
+{    use baseTrait,restaurantScopeTrait;
+
     public function purchases()
     {
         return $this->hasMany(Purse::class)->where('restaurant_id',Auth::user()->restaurant->id);
@@ -59,10 +62,6 @@ class Supplier extends Model
     }
 
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
-    }
+
 }
 

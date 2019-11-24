@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Http\Traits\uploadFileTrait;
 use App\Scopes\restaurantScope;
 use App\User;
@@ -8,14 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Purse extends Model
-{    use uploadFileTrait;
+{    use uploadFileTrait, baseTrait,restaurantScopeTrait;
 
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
-    }
     public function supplier()
     {
         return $this->belongsTo(Supplier::class,'supplier_id');

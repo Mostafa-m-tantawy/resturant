@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Restaurant extends Model
-{
+{    use baseTrait;
+
 
     //
     public function user (){

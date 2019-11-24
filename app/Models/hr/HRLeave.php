@@ -2,14 +2,28 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
+use Baklysystems\LaravelHR\Models\ApprovalRequest;
 use Illuminate\Database\Eloquent\Model;
 
-class HRLeave extends Model
+class HrLeave extends Model
 {
-    protected static function boot()
+    use baseTrait,restaurantScopeTrait;
+    protected $rules = array(
+        'type' =>  'required|Integer',
+        'from'          =>  'required|date',
+        'to'            =>  'required|date',
+        'reason'        =>  'required|string',
+    );
+
+    public function type(){
+        return $this->belongsTo(HrLeaveType::class,'hr_leave_type_id');
+    }
+
+    public function approve_request()
     {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
+        return $this->morphOne(HrApprovalRequest::class, 'approvable');
     }
 }

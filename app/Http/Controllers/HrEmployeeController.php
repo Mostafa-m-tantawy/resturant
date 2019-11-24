@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\Department;
-use App\HREmployee;
+use App\HrEmployee;
 use App\Phone;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class EmployeeController extends Controller
+class HrEmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees=HREmployee::all();
+        $employees=HrEmployee::all();
 
         return view('hr.employee.index')->with(compact('employees'));
 
@@ -47,7 +47,7 @@ $departments=Department::all();
     public function store(Request $request)
     {
         $data=$request->all();
-        $employee=new HREmployee();
+        $employee=new HrEmployee();
 
         if ($employee->validate($data))
         {
@@ -87,15 +87,15 @@ $departments=Department::all();
             $employee->user_id =$user->id;
 //            $employee->photo        =$profileImg;
             $employee->name         =$user->name;
-            $employee->gender       =$user->$request->get('gender');
-            $employee->civil_status      =$user->$request->get('civil_status');
-            $employee->date_of_birth      =$user->$request->get('date_of_birth');
-            $employee->date_of_joining    =$user->$request->get('date_of_joining');
+            $employee->gender       =$request->get('gender');
+            $employee->civil_status      =$request->get('civil_status');
+            $employee->date_of_birth      =$request->get('date_of_birth');
+            $employee->date_of_joining    =$request->get('date_of_joining');
             $employee->department_id      =$request->get('department');
             $employee->salary              =$request->get('salary');
             $employee->bank_account      =$request->get('bank_account');
             $employee->bank_name      =$request->get('bank_name');
-            ;
+
             if(!$employee->save()){
 
                 Phone::where($user->id)->delete();
@@ -107,6 +107,8 @@ $departments=Department::all();
             $errors = $employee->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
+
+        return redirect(route('employee.index'));
     }
 
     /**
@@ -115,9 +117,11 @@ $departments=Department::all();
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id)
     {
-        //
+        $employee=HrEmployee::find($id);
+        $departments=Department::all();
+        return view('hr.employee.show')->with(compact('employee','departments'));
     }
 
     /**
@@ -140,7 +144,56 @@ $departments=Department::all();
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = HrEmployee::findOrFail($id);
+        $user = $employee->user;
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255','unique:users,name,'.$user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
+            'phone_g.*.phone'=> ['required'],
+            'phone_g.*.type'=> ['required'],
+            'address_g.*.address'=> ['required'],  ]);
+
+
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->save();
+
+        $employee->name         =$user->name;
+        $employee->gender       =$request->get('gender');
+        $employee->civil_status      =$request->get('civil_status');
+        $employee->date_of_birth      =$request->get('date_of_birth');
+        $employee->date_of_joining    =$request->get('date_of_joining');
+        $employee->department_id      =$request->get('department');
+        $employee->salary              =$request->get('salary');
+        $employee->bank_account      =$request->get('bank_account');
+        $employee->bank_name      =$request->get('bank_name');
+
+        $employee->save();
+
+        if (is_array($request->phone_g))
+            foreach ($request->phone_g as $item) {
+                $phone = new Phone();
+                $phone->phone = $item['phone'];
+                $phone->type = $item['type'];
+                $phone->user_id = $user->id;;
+                $phone->save();
+
+            }
+        if (is_array($request->address_g))
+            foreach ($request->address_g as $item) {
+                if (isset($item['address'])) {
+                    $address = new Address();
+                    $address->address = $item['address'];
+                    if (isset($item['city']))
+                        $address->city_id = $item['city'];
+                    $address->user_id = $user->id;;
+                    $address->save();
+                }
+            }
+
+        return redirect()->back();
+
     }
 
     /**

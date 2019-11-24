@@ -8,7 +8,16 @@
         <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
             <!-- begin:: Aside -->
 
-            @include('layouts.partials.sidebar')
+          @if(Request()->route()->getPrefix()=='/hr')
+              @include('layouts.partials.hr_SideBar')
+              @elseif(Request()->route()->getPrefix()=='/stock')
+              @include('layouts.partials.stock_sidebar')
+              @elseif(Request()->route()->getPrefix()=='/sales')
+              @include('layouts.partials.sales_sidebar')
+{{--              @else--}}
+{{--              @include('layouts.partials.sidebar')--}}
+
+              @endif
         <!-- end:: Aside -->
 
             <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">

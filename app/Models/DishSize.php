@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class DishSize extends Model
 {
+    use baseTrait;
 
     public function dish(){
         return $this->belongsTo(Dish::class);

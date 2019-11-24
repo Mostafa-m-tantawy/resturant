@@ -19,6 +19,7 @@ class CreateAssetsTable extends Migration
 
             $table->string('name');
             $table->text('description');
+            $table->double('cost');
 
             $table->timestamps();
         });

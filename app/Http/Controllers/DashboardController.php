@@ -15,9 +15,12 @@ class DashboardController extends Controller
 {
     public function dashboard(Request $request)
     {
+        return view('dashboard');
 
-//        dd(session::get('lang'));
-//        session(['lang' => 'en']);
+    }
+    public function salesDashboard(Request $request)
+    {
+
 
         if($request->range) {
                 // lenght 10 date = (01/01/2001) =10
@@ -40,11 +43,6 @@ class DashboardController extends Controller
             $vat = $orders->sum('vat');
             $service = $orders->sum('Service');;
 
-        /// stock
-            $products=Product::all()->filter(function ($value, $key) {
-                return $value['quantity'] <= $value['reorder_point'];
-            });
-
          ///top sales dishes
             $orderdetails= OrderDetails::select('dish_size_id', DB::raw('SUM(quantity) as total_points'))
                 ->whereBetween('created_at', [$from, $to])
@@ -56,12 +54,64 @@ class DashboardController extends Controller
 //dd($orderdetails[0]->dishSize);
 
 
-        return view('frontend.dashboard')
+        return view('frontend.salesDashboard')
             ->with(compact('total','sup_total',
-            'vat','service','products','orderdetails',
+            'vat','service','orderdetails',
             'from','to'
 
             ));
+    }
+
+    public function stockDashboard(Request $request)
+    {
+
+        if($request->range) {
+        // lenght 10 date = (01/01/2001) =10
+        $from = substr($request->range, 0, 10);
+        // start  13 date = (01/01/2001 */*)=13
+        $to = substr($request->range, 13, 10);
+    }else{
+
+        // lenght 10 date = (01/01/2001) =10
+        $from = \Carbon\Carbon::today()->format('Y-m-d');
+        // start  13 date = (01/01/2001 */*)=13
+        $to = \Carbon\Carbon::today()->format('Y-m-d');
+
+    }
+
+
+        /// stock
+        $products=Product::all()->filter(function ($value, $key) {
+            return $value['quantity'] <= $value['reorder_point'];
+        });
+
+        return view('frontend.stockDashboard')
+            ->with(compact('products','from','to'
+
+        ));;
+
+    }
+    public function hrDashboard(Request $request)
+    {
+
+        if($request->range) {
+        // lenght 10 date = (01/01/2001) =10
+        $from = substr($request->range, 0, 10);
+        // start  13 date = (01/01/2001 */*)=13
+        $to = substr($request->range, 13, 10);
+    }else{
+
+        // lenght 10 date = (01/01/2001) =10
+        $from = \Carbon\Carbon::today()->format('Y-m-d');
+        // start  13 date = (01/01/2001 */*)=13
+        $to = \Carbon\Carbon::today()->format('Y-m-d');
+
+    }
+        return view('hr.hrDashboard') ->with(compact(
+            'from','to'
+
+        ));;
+
     }
 
     public function download(Request $request)

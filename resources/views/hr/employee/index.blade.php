@@ -40,19 +40,32 @@
                     <tr>
                         <th> {{trans('main.id')}}</th>
                         <th>{{trans('main.name')}}</th>
-                        <th>{{trans('main.description')}}</th>
+                        <th>{{trans('main.department')}}</th>
+                        <th>{{trans('main.gender')}}</th>
+                        <th>{{trans('main.civil status')}}</th>
+                        <th>{{trans('main.date of joining')}}</th>
+                        <th>{{trans('main.salary')}}</th>
+                        <th>{{trans('main.bank account')}}</th>
+                        <th>{{trans('main.bank name')}}</th>
                         <th>{{trans('main.profile')}}</th>
-                        {{--                <th>delete</th>--}}
+
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($departments as $department)
+                    @foreach($employees as $employee)
                         <tr>
-                            <td>{{$department->id}}</td>
-                            <td>{{$department->name}}</td>
-                            <td>{{$department->description}}</td>
+                            <td>{{$employee->id}}</td>
+                            <td>{{$employee->name}}</td>
+                            <td>{{$employee->department? $employee->department->name:''}}</td>
+                            <td>{{$employee->gender}}</td>
+                            <td>{{$employee->civil_status}}</td>
+                            <td>{{$employee->date_of_joining}}</td>
+                            <td>{{$employee->salary}}</td>
+                            <td>{{$employee->bank_account}}</td>
+                            <td>{{$employee->bank_name}}</td>
+
                             <td>
-                                <a href="{{url('department/'.$department->id)}}" title="products">
+                                <a href="{{url('employee/'.$employee->id)}}" title="products">
                                     <span>{{trans('main.profile')}}</span>
                                     <i  class="la la-edit" style="font-size: 25px;"></i></a>
                             </td>

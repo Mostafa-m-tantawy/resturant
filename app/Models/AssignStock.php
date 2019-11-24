@@ -2,17 +2,16 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
 
 class AssignStock extends Model
 {
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
-    }
+    use baseTrait,restaurantScopeTrait;
+
     public function assignable(){
         return $this->morphTo();
     }
