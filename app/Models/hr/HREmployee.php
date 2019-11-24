@@ -2,10 +2,16 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
-class HREmployee extends Model
+class HrEmployee extends Model
 {
+
+    use baseTrait;
+
     protected $rules = array(
 
 
@@ -16,6 +22,28 @@ class HREmployee extends Model
         'address_g.*.address' => ['required'],
 
     );
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+
+    public function emergencies()
+    {
+        return $this->hasMany(HrEmergencyContact::class);
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(HrApprovalRequest::class,'hr_employee_id');
+    }
 
 
 }

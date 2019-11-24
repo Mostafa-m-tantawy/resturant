@@ -2,9 +2,12 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class HRApprove extends Model
+class HrApprove extends Model
 {
-    //
+    use baseTrait;
+
 }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
 use App\User;
 use Carbon\Carbon;
@@ -9,17 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
-{
+{    use baseTrait,restaurantScopeTrait;
+
+
     protected $appends = ['cost','quantity', 'quantity_available'];
-
-
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
-    }
-
 
 
 

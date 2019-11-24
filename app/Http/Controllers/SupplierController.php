@@ -165,7 +165,7 @@ class SupplierController extends Controller
                 $phone->save();
 
             }
-        if (is_array($request->phone_g))
+        if (is_array($request->address_g))
             foreach ($request->address_g as $item) {
                 if (isset($item['address'])) {
                     $address = new Address();

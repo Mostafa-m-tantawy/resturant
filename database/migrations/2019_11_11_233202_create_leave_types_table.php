@@ -19,7 +19,7 @@ class CreateLeaveTypesTable extends Migration
 
             $table->string('name');
 
-            $table->enum('type',['earning','deduction','neutral']);
+            $table->enum('type',['sick','earning','deduction','neutral']);
 
             $table->timestamps();
         });

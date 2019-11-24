@@ -2,13 +2,16 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Http\Traits\uploadFileTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    use uploadFileTrait;
+    use uploadFileTrait, baseTrait,restaurantScopeTrait;
+
 
     //
     public function sender(){
@@ -18,9 +21,5 @@ class Payment extends Model
         return $this->belongsTo(Supplier::class,'receiver_id');
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
-    }
+
 }

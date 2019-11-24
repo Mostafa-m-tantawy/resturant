@@ -2,14 +2,21 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
+use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
-class HRLeaveType extends Model
+class HrLeaveType extends Model
 {
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new restaurantScope());
-    }
+    use baseTrait,restaurantScopeTrait;
+
+    protected $rules = array(
+        'name'  => 'required|string|max:255',
+        'type'  => 'required|string',
+    );
+
+
+
 }

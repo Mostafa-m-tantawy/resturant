@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\Country;
+use App\HrEmployee;
 use App\Http\Requests\createNewRestaurantRequest;
 use App\Phone;
 use App\Purse;
@@ -70,6 +71,11 @@ class RestaurantController extends Controller
 
         $user->restaurant_id = $restaurant->id;
         $user->save();
+
+        $employee=new HrEmployee();
+        $employee->user_id =$user->id;
+        $employee->name         =$user->name.' (Super Admin)';
+        $employee->save();
 
         Auth::login($user);
 

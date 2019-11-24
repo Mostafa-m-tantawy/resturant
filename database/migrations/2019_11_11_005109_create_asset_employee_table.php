@@ -15,16 +15,14 @@ class CreateAssetEmployeeTable extends Migration
     {
         Schema::create('hr_asset_employee', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('restaurant_id');
-
             $table->unsignedBigInteger('hr_employee_id');
 //            $table->foreign('hr_employee_id')->references('id')->on('hr_employees')->onDelete('cascade')->onUpdate('cascade');
 
             $table->unsignedBigInteger('asset_id');
 //            $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->date('date_of_assignment');
-            $table->date('date_of_release');
+            $table->date('date_of_assignment')->nullable();
+            $table->date('date_of_release')->nullable();
 
             $table->timestamps();
         });

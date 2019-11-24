@@ -39,7 +39,7 @@
                         </div>
                 @endif
                 <!--begin::Form-->
-                    <form class="kt-form kt-form--label-right" method="post" action="{{route('supplier.store')}}">
+                    <form class="kt-form kt-form--label-right" method="post" action="{{route('employee.store')}}">
                         @csrf
                         <div class="kt-portlet__body">
                             <div class="row">
@@ -76,29 +76,52 @@
 
                                         <div class="col-12">
                                             <label class="">{{trans('main.basic salary')}}:</label>
-                                            <input type="number" step="0.01" min="0"  name="salary" class="form-control">
+                                            <input type="number" step="0.01" min="0" name="salary" class="form-control">
                                         </div>
 
 
                                         <div class="col-12">
                                             <label>{{trans('main.bank name')}}:</label>
-                                            <input type="text"  name="bank_name" class="form-control">
+                                            <input type="text" name="bank_name" class="form-control">
                                         </div>
 
 
                                         <div class="col-12">
                                             <label>{{trans('main.bank account')}}:</label>
-                                            <input type="text"  name="bank_account" class="form-control">
+                                            <input type="text" name="bank_account" class="form-control">
                                         </div>
 
                                         <div class="col-12">
                                             <label>{{trans('main.department')}}:</label>
                                             <select name="department" class="form-control">
-                                                <option value="">{{trans('main.select')}} {{trans('main.department')}} </option>
-                                            @foreach($departments as $department)
+                                                <option
+                                                    value="">{{trans('main.select')}} {{trans('main.department')}} </option>
+                                                @foreach($departments as $department)
                                                     <option value="{{$department->id}}">{{$department->name}} </option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>  {{trans('main.gender')}}</label>
+                                            <div class="form-group row">
+                                                <div class="col-9">
+                                                    <div class="kt-radio-inline">
+                                                        <label class="kt-radio">
+                                                            <input type="radio" value="male"   checked="checked" name="gender">
+                                                            {{trans('main.male')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="kt-radio">
+                                                            <input type="radio" value="female" name="gender">
+                                                            {{trans('main.female')}}
+                                                            <span></span>
+                                                        </label>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>

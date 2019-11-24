@@ -5,7 +5,7 @@ namespace App;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
 
-class HRPayroll extends Model
+class HrPayroll extends Model
 {
     protected static function boot()
     {

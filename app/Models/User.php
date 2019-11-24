@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Traits\baseTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -10,8 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasRoles;
-
+    use Notifiable,HasRoles,baseTrait;
 
 
     /**
@@ -56,5 +56,8 @@ class User extends Authenticatable
 
     public function restaurant(){
         return $this->belongsTo(Restaurant::class)->with('user');
+    }
+    public function employee(){
+        return $this->hasOne(HrEmployee::class);
     }
 }

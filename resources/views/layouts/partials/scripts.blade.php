@@ -185,15 +185,16 @@
             @endif
         } );
     } );
-    // $(document).ready(function () {
-    //     $("#datatable-responsive").DataTable({
-    //         order: [0, 'desc'],
-    //         "pagingType": "full_numbers",
-    //         buttons: [
-    //             'copy', 'excel', 'pdf', 'print'
-    //         ],
-    //     });
-    // })
+
+
+    function deleteConfirm(e,type){
+        var r = confirm("{{trans('main.Are you sure you want to delete this')}}"+type+'!?');
+
+        if (r == false) {
+            e.preventDefault();
+            return false;
+        }
+    }
 </script>
 
 @yield('scripts')
