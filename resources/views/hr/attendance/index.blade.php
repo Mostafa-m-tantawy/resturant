@@ -49,32 +49,34 @@
                     <thead>
                     <tr>
                         <th>{{trans('main.id')}}</th>
-                        <th>{{trans('main.name')}}</th>
-                        <th>{{trans('main.style')}} </th>
-                        <th>{{trans('main.model')}}</th>
-                        <th>{{trans('main.update')}}</th>
-                        <th>{{trans('main.approvers')}}</th>
+                        <th>{{trans('main.employee')}}</th>
+                        <th>{{trans('main.date')}}</th>
+                        <th>{{trans('main.check in')}} </th>
+                        <th>{{trans('main.check out')}}</th>
+                        <th>{{trans('main.delete')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($types as $type)
+                    @foreach($attendances as $attendance)
                         <tr>
-                            <td>{{$type->id}}</td>
-                            <td>{{$type->name}}</td>
-                            <td>{{trans('main.'.$type->style)}}</td>
-                            <td>{{trans('main.'.substr($type->model,4))}}</td>
+                            <td>{{$attendance->id}}</td>
+                            <td>{{$attendance->employee->name}}</td>
+                            <td>{{$attendance->attendance_date}}</td>
+                            <td>{{$attendance->check_in}}</td>
                             <td>
-                                <a title="update"
-                                   data-toggle="modal" data-target=".updateAsset"
-                                   data-name="{{$type->name}}" data-id="{{$type->id}}"
-                                   data-style="{{$type->style}}" data-model="{{$type->model}}">
-                                    <i class="flaticon-edit"></i>
-                                </a>
-                            </td>
+                                <form method="post"  action="{{route('attendance.checkout',[$attendance->id])}}">
+                                    @csrf
+                                    <button class="btn btn-primary"> {{trans('main.checkout')}}</button>
+                                </form>
                             <td>
-                                <a href="{{url('hr/approver?id='.$type->id)}}"> <i class="flaticon2-group"></i></a>
+                             <form method="post"
+                                   onsubmit="deleteConfirm(event,'{{trans('main.asset')}}')"
+                                   action="{{route('attendance.destroy',[$attendance->id])}}">
+                                 @csrf
+                                 @method('DELETE')
+                                 <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                             </form>
                             </td>
-
                             {{----}}
                         </tr>
                     @endforeach
@@ -115,23 +117,14 @@
                                     <input type="text" class="form-control" name="name">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.style')}}</label>
-                                    <select name="style" class="form-control">
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.style')}}</option>
-                                    <option  value="override"> {{trans('main.override')}}</option>
-                                    <option  value="aggregate"> {{trans('main.aggregate')}}</option>
-                                    <option  value="chain"> {{trans('main.chain')}}</option>
-                                    </select>
+                                    <label>{{trans('main.description')}}</label>
+                                    <input type="text" class="form-control" name="description">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.model')}}</label>
-                                    <select>
-                                    <option  value=""> {{trans('main.select')}} {{trans('main.model')}}</option>
-                                    <option  value="App\HrLeave"> {{trans('main.HrLeave')}}</option>
-                                    <option  value="App\HrPayslip"> {{trans('main.HrPayslip')}}</option>
-                                    <option  value="App\HrPayroll"> {{trans('main.HrPayroll')}}</option>
-                                    </select>
+                                    <label>{{trans('main.cost')}}</label>
+                                    <input type="text" class="form-control" name="cost">
                                 </div>
+
 
                             </div>
                         </div>
@@ -152,9 +145,9 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{route('approve-type.store')}}" method="post">
+                <form action="{{route('attendance.store')}}" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title"> {{trans('main.new asset')}} <span
+                        <h5 class="modal-title"> {{trans('main.new attendance')}} <span
                                 class="model_type"></span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -168,28 +161,24 @@
 
                             <div class="col-10">
 
+
                                 <div class="form-group">
-                                    <label>{{trans('main.name')}}</label>
-                                    <input type="text" class="form-control" name="name">
+                                    <label>{{trans('main.date')}}</label>
+                                    <input type="text" disabled value="{{\Carbon\Carbon::now()->toDateString()}}" class="form-control" >
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.style')}}</label>
-                                    <select name="style" class="form-control">
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.style')}}</option>
-                                        <option  value="override"> {{trans('main.override')}}</option>
-                                        <option  value="aggregate"> {{trans('main.aggregate')}}</option>
-                                        <option  value="chain"> {{trans('main.chain')}}</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label>{{trans('main.checkin')}}</label>
+                                    <input type="text" disabled  value="{{\Carbon\Carbon::now()->toTimeString()}}" class="form-control" >
                                 </div>
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.model')}}</label>
-                                    <select>
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.model')}}</option>
-                                        <option  value="App\HrLeave"> {{trans('main.HrLeave')}}</option>
-                                        <option  value="App\HrPayslip"> {{trans('main.HrPayslip')}}</option>
-                                        <option  value="App\HrPayroll"> {{trans('main.HrPayroll')}}</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label>{{trans('main.employee')}}</label>
+                             <select name="employee_id" class="form-control">
+                                 <option value="">{{trans('main.select')}} {{trans('main.employee')}}</option>
+                                 @foreach($employees as $employee)
+                                     <option value="{{$employee->id}}">{{$employee->name}}</option>
+                                     @endforeach
+                             </select>
                                 </div>
 
 
@@ -224,13 +213,13 @@
             $('#updateAsset').on('show.bs.modal', function (e) {
                 var Id = $(e.relatedTarget).data('id');
                 var name = $(e.relatedTarget).data('name');
-                var style = $(e.relatedTarget).data('style');
-                var model = $(e.relatedTarget).data('model');
+                var description = $(e.relatedTarget).data('description');
+                var cost = $(e.relatedTarget).data('cost');
                 $(e.currentTarget).find('input[name="id"]').val(Id);
                 $(e.currentTarget).find('input[name="name"]').val(name);
-                $(e.currentTarget).find('select[name="style"]').val(style);
-                $(e.currentTarget).find('select[name="model"]').val(model);
-                $(e.currentTarget).find('form').attr('action', "{{url('hr/approve-type/')}}/" + Id);
+                $(e.currentTarget).find('input[name="description"]').val(description);
+                $(e.currentTarget).find('input[name="cost"]').val(cost);
+                $(e.currentTarget).find('form').attr('action', "{{url('asset/')}}/" + Id);
             });
 
 

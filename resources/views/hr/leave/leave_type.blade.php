@@ -209,7 +209,7 @@
                 $(e.currentTarget).find('input[name="name"]').val(name);
                 $(e.currentTarget).find('select[name="type"]').val(type);
 
-                $(e.currentTarget).find('form').attr('action', "{{url('leave-type/')}}/" + Id);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/leave-type/')}}/" + Id);
             });
 
 

@@ -29,7 +29,7 @@ class CreateAttendancesTable extends Migration
             $table->date('attendance_date');
 
             $table->time('check_in');
-            $table->time('check_out');
+            $table->time('check_out')->nullable();
 
 
             $table->unique(['hr_employee_id','attendance_date', 'check_in']);

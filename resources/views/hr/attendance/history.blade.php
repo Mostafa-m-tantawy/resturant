@@ -49,38 +49,44 @@
                     <thead>
                     <tr>
                         <th>{{trans('main.id')}}</th>
-                        <th>{{trans('main.name')}}</th>
-                        <th>{{trans('main.description')}} </th>
-                        <th>{{trans('main.cost')}} </th>
-                        <th>{{trans('main.show')}}</th>
+                        <th>{{trans('main.employee')}}</th>
+                        <th>{{trans('main.date')}}</th>
+                        <th>{{trans('main.check in')}} </th>
+                        <th>{{trans('main.check out')}}</th>
                         <th>{{trans('main.update')}}</th>
                         <th>{{trans('main.delete')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($assets as $asset)
+                    @foreach($attendances as $attendance)
                         <tr>
-                            <td>{{$asset->id}}</td>
-                            <td>{{$asset->name}}</td>
-                            <td>{{$asset->description}}</td>
-                            <td>{{$asset->cost}}</td>
-                            <td><a href="{{route('asset.update',[$asset->id])}}" class="btn btn-primary"><i
-                                        class="flaticon-visible"></i></a></td>
+                            <td>{{$attendance->id}}</td>
+                            <td>{{$attendance->employee->name}}</td>
+                            <td>{{$attendance->attendance_date}}</td>
+                            <td>{{$attendance->check_in}}</td>
+                            <td>{{$attendance->check_out}}</td>
                             <td>
                                 <a title="update"
                                    data-toggle="modal" data-target=".updateAsset"
-                                   data-name="{{$asset->name}}" data-id="{{$asset->id}}"
-                                   data-description="{{$asset->description}}" data-cost="{{$asset->cost}}">
+                                   data-employee="{{$attendance->employee->name}}"
+                                   data-id="{{$attendance->id}}"
+                                   data-attendance_date="{{$attendance->attendance_date}}"
+                                   data-check_in="{{$attendance->check_in}}"
+                                   data-check_out="{{$attendance->check_out}}">
                                     <i class="flaticon-edit"></i>
                                 </a>
                             </td>
+
                             <td>
-                             <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.asset')}}')" action="{{route('asset.destroy',[$asset->id])}}">
-                                 @csrf
-                                 @method('DELETE')
-                                 <button class="btn btn-danger"> {{trans('main.delete')}}</button>
-                             </form>
+                                <form method="post"
+                                      onsubmit="deleteConfirm(event,'{{trans('main.asset')}}')"
+                                      action="{{route('attendance.destroy',[$attendance->id])}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                                </form>
                             </td>
+
                             {{----}}
                         </tr>
                     @endforeach
@@ -117,18 +123,23 @@
                                     <input type="number" readonly class="form-control" name="id">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.name')}}</label>
-                                    <input type="text" class="form-control" name="name">
-                                </div>
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.description')}}</label>
-                                    <input type="text" class="form-control" name="description">
-                                </div>
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.cost')}}</label>
-                                    <input type="text" class="form-control" name="cost">
+                                    <label>{{trans('main.date')}}</label>
+                                    <input type="date"  name="attendance_date"  class="form-control" >
                                 </div>
 
+                                <div class="form-group col-12">
+                                    <label>{{trans('main.checkin')}}</label>
+                                    <input type="time"  name="check_in" class="form-control" >
+                                </div>
+                                <div class="form-group col-12">
+                                    <label>{{trans('main.checkout')}}</label>
+                                    <input type="time" name="check_out" class="form-control" >
+                                </div>
+                                <div class="form-group col-12">
+                                    <label>{{trans('main.employee')}}</label>
+                                    <input type="text" disabled name="employee" class="form-control">
+
+                                </div>
 
                             </div>
                         </div>
@@ -145,80 +156,25 @@
             </div>
         </div>
     </div>
-    <div class="modal fade newLeaveType" id="newLeaveType" tabindex="-1" role="dialog"
-         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form action="{{route('asset.store')}}" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title"> {{trans('main.new asset')}} <span
-                                class="model_type"></span></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        @csrf
-                        <div class="row">
-                            <div class="col-1"></div>
-
-                            <div class="col-10">
-
-                                <div class="form-group">
-                                    <label>{{trans('main.name')}}</label>
-                                    <input type="text" class="form-control" name="name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>{{trans('main.description')}}</label>
-                                    <input type="text" class="form-control" name="description">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>{{trans('main.cost')}}</label>
-                                    <input type="text" class="form-control" name="cost">
-                                </div>
-
-
-                            </div>
-
-                            <div class="col-1"></div>
-
-
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-12 pull-left">
-                            <button type="submit"
-                                    class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.create')}}</button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-@stop
+   @stop
 @section('scripts')
     <script src="{{asset('js/demo1/pages/crud/forms/widgets/form-repeater.js')}}" type="text/javascript"></script>
     {{----}}
     <script>
 
         $(document).ready(function () {
-//
-            $('#updateAsset').on('show.bs.modal', function (e) {
+                $('#updateAsset').on('show.bs.modal', function (e) {
                 var Id = $(e.relatedTarget).data('id');
-                var name = $(e.relatedTarget).data('name');
-                var description = $(e.relatedTarget).data('description');
-                var cost = $(e.relatedTarget).data('cost');
+                var employee = $(e.relatedTarget).data('employee');
+                var attendance_date = $(e.relatedTarget).data('attendance_date');
+                var check_in = $(e.relatedTarget).data('check_in');
+                var check_out = $(e.relatedTarget).data('check_out');
                 $(e.currentTarget).find('input[name="id"]').val(Id);
-                $(e.currentTarget).find('input[name="name"]').val(name);
-                $(e.currentTarget).find('input[name="description"]').val(description);
-                $(e.currentTarget).find('input[name="cost"]').val(cost);
-                $(e.currentTarget).find('form').attr('action', "{{url('hr/asset/')}}/" + Id);
+                $(e.currentTarget).find('input[name="employee"]').val(employee);
+                $(e.currentTarget).find('input[name="attendance_date"]').val(attendance_date);
+                $(e.currentTarget).find('input[name="check_in"]').val(check_in);
+                $(e.currentTarget).find('input[name="check_out"]').val(check_out);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/attendance/')}}/" + Id);
             });
 
 

@@ -50,29 +50,19 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
 
         include('stock/department.php');
 
-
         include('stock/product.php');
-
 
         include('stock/supplier.php');
 
-
         include('stock/unit.php');
-
 // -------------------------stock reports --------------------------------
         Route::any('stock/index','StockController@index')->name('stock.index');
 
-
-
         include('stock/assign.php');
-
 
         include('stock/payment.php');
 
-
         include('stock/refund.php');
-
-
 
         include('stock/ruined.php');
 
@@ -87,6 +77,9 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
         include('hr/leave.php');
         include('assets/asset.php');
         include('assets/asset_employee.php');
+        include('hr/shift.php');
+        include('hr/attendance.php');
+        include('hr/holiday.php');
     });
 
 
