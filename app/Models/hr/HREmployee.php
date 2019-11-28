@@ -45,5 +45,18 @@ class HrEmployee extends Model
         return $this->hasMany(HrApprovalRequest::class,'hr_employee_id');
     }
 
+    public function shift(){
+        return $this->belongsToMany(HrShift::class,'employee_shift','hr_shift_id','hr_employee_id');
+    }
 
+    public function attendance(){
+        return $this->hasMany(HrAttendance::class,'hr_employee_id');
+    }
+    public  function  getshiftNameAttribute(){
+
+      $shift= $this->shift->first();
+        if( $shift  )
+       return $shift->name;
+
+    }
 }

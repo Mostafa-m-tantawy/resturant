@@ -51,9 +51,9 @@
                                             <div class="kt-widget kt-widget--user-profile-4">
                                                 <div class="kt-widget__head">
                                                     <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-"
+                                                      <a href="{{route('dashboard.hr')}}"> <img class="kt-widget__img kt-hidden-"
                                                              src="{{asset('/media/icons/hr.png')}}" alt="image">
-
+                                                      </a>
                                                     </div>
                                                     <div class="kt-widget__content">
                                                         <div class="kt-widget__section">
@@ -74,7 +74,7 @@
                                                                                 <div class="kt-widget2__checkbox">
                                                                                 </div>
                                                                                 <div class="kt-widget2__info">
-                                                                                    <a href="{{url('product')}}"
+                                                                                    <a href="{{route('dashboard.hr')}}"
                                                                                        class="kt-widget2__title">
                                                                                         Make Metronic Great Again.Lorem
                                                                                         Ipsum Amet
@@ -117,10 +117,11 @@
                                             <div class="kt-widget kt-widget--user-profile-4">
                                                 <div class="kt-widget__head">
                                                     <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-"
-                                                             src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        <a href="{{route('dashboard.stock')}}" >
 
-                                                    </div>
+                                                            <img class="kt-widget__img kt-hidden-"
+                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        </a> </div>
                                                     <div class="kt-widget__content">
                                                         <div class="kt-widget__section">
                                                             <a href="{{route('dashboard.stock')}}"
@@ -186,9 +187,11 @@
                                             <div class="kt-widget kt-widget--user-profile-4">
                                                 <div class="kt-widget__head">
                                                     <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-"
-                                                             src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        <a href="{{route('dashboard.sales')}}" >
 
+                                                         <img class="kt-widget__img kt-hidden-"
+                                                             src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        </a>
                                                     </div>
                                                     <div class="kt-widget__content">
                                                         <div class="kt-widget__section">
@@ -251,8 +254,11 @@
                                             <div class="kt-widget kt-widget--user-profile-4">
                                                 <div class="kt-widget__head">
                                                     <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-"
-                                                             src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        <a href="{{route('dashboard.sales')}}" >
+
+                                                            <img class="kt-widget__img kt-hidden-"
+                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        </a>
 
                                                     </div>
                                                     <div class="kt-widget__content">

@@ -15,7 +15,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.approve types')}}
+                        {{trans('main.holiday')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -50,30 +50,36 @@
                     <tr>
                         <th>{{trans('main.id')}}</th>
                         <th>{{trans('main.name')}}</th>
-                        <th>{{trans('main.style')}} </th>
-                        <th>{{trans('main.model')}}</th>
+                        <th>{{trans('main.from')}} </th>
+                        <th>{{trans('main.to')}}</th>
                         <th>{{trans('main.update')}}</th>
-                        <th>{{trans('main.approvers')}}</th>
+                        <th>{{trans('main.delete')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($types as $type)
+                    @foreach($holidays as $holiday)
                         <tr>
-                            <td>{{$type->id}}</td>
-                            <td>{{$type->name}}</td>
-                            <td>{{trans('main.'.$type->style)}}</td>
-                            <td>{{trans('main.'.substr($type->model,4))}}</td>
+                            <td>{{$holiday->id}}</td>
+                            <td>{{$holiday->name}}</td>
+                            <td>{{$holiday->from}}</td>
+                            <td>{{$holiday->to}}</td>
                             <td>
                                 <a title="update"
                                    data-toggle="modal" data-target=".updateAsset"
-                                   data-name="{{$type->name}}" data-id="{{$type->id}}"
-                                   data-style="{{$type->style}}" data-model="{{$type->model}}">
+                                   data-name="{{$holiday->name}}" data-id="{{$holiday->id}}"
+                                   data-from="{{$holiday->from}}" data-to="{{$holiday->to}}">
                                     <i class="flaticon-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <a href="{{url('hr/approver?id='.$type->id)}}"> <i class="flaticon2-group"></i></a>
-                            </td>
+                                <form method="post"
+                                      onsubmit="deleteConfirm(event,'{{trans('main.asset')}}')"
+                                      action="{{route('holiday.destroy',[$holiday->id])}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                                </form>
+                               </td>
 
                             {{----}}
                         </tr>
@@ -115,22 +121,12 @@
                                     <input type="text" class="form-control" name="name">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.style')}}</label>
-                                    <select name="style" class="form-control">
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.style')}}</option>
-                                    <option  value="override"> {{trans('main.override')}}</option>
-                                    <option  value="aggregate"> {{trans('main.aggregate')}}</option>
-                                    <option  value="chain"> {{trans('main.chain')}}</option>
-                                    </select>
+                                    <label>{{trans('main.from')}}</label>
+                                    <input type="date" class="form-control" name="from">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.model')}}</label>
-                                    <select>
-                                    <option  value=""> {{trans('main.select')}} {{trans('main.model')}}</option>
-                                    <option  value="App\HrLeave"> {{trans('main.HrLeave')}}</option>
-                                    <option  value="App\HrPayslip"> {{trans('main.HrPayslip')}}</option>
-                                    <option  value="App\HrPayroll"> {{trans('main.HrPayroll')}}</option>
-                                    </select>
+                                    <label>{{trans('main.to')}}</label>
+                                    <input type="date" class="form-control" name="to">
                                 </div>
 
                             </div>
@@ -152,7 +148,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{route('approve-type.store')}}" method="post">
+                <form action="{{route('holiday.store')}}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title"> {{trans('main.new asset')}} <span
                                 class="model_type"></span></h5>
@@ -172,26 +168,14 @@
                                     <label>{{trans('main.name')}}</label>
                                     <input type="text" class="form-control" name="name">
                                 </div>
-
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.style')}}</label>
-                                    <select name="style" class="form-control">
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.style')}}</option>
-                                        <option  value="override"> {{trans('main.override')}}</option>
-                                        <option  value="aggregate"> {{trans('main.aggregate')}}</option>
-                                        <option  value="chain"> {{trans('main.chain')}}</option>
-                                    </select>
+                                    <label>{{trans('main.from')}}</label>
+                                    <input type="date" class="form-control" name="from">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.model')}}</label>
-                                    <select>
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.model')}}</option>
-                                        <option  value="App\HrLeave"> {{trans('main.HrLeave')}}</option>
-                                        <option  value="App\HrPayslip"> {{trans('main.HrPayslip')}}</option>
-                                        <option  value="App\HrPayroll"> {{trans('main.HrPayroll')}}</option>
-                                    </select>
+                                    <label>{{trans('main.to')}}</label>
+                                    <input type="date" class="form-control" name="to">
                                 </div>
-
 
                             </div>
 
@@ -224,13 +208,13 @@
             $('#updateAsset').on('show.bs.modal', function (e) {
                 var Id = $(e.relatedTarget).data('id');
                 var name = $(e.relatedTarget).data('name');
-                var style = $(e.relatedTarget).data('style');
-                var model = $(e.relatedTarget).data('model');
+                var from = $(e.relatedTarget).data('from');
+                var to = $(e.relatedTarget).data('to');
                 $(e.currentTarget).find('input[name="id"]').val(Id);
                 $(e.currentTarget).find('input[name="name"]').val(name);
-                $(e.currentTarget).find('select[name="style"]').val(style);
-                $(e.currentTarget).find('select[name="model"]').val(model);
-                $(e.currentTarget).find('form').attr('action', "{{url('hr/approve-type/')}}/" + Id);
+                $(e.currentTarget).find('input[name="from"]').val(from);
+                $(e.currentTarget).find('input[name="to"]').val(to);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/holiday/')}}/" + Id);
             });
 
 

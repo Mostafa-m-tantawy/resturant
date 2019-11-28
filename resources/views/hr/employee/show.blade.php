@@ -166,6 +166,11 @@
                                            role="tab">
                                             <i class="flaticon2-user-outline-symbol"></i> {{trans('main.emergency')}}
                                         </a>
+                                    </li>    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#kt_apps_attendance"
+                                           role="tab">
+                                            <i class="flaticon2-user-outline-symbol"></i> {{trans('main.attendance')}}
+                                        </a>
                                     </li>
 
                                 </ul>
@@ -473,8 +478,6 @@
 
                                 <!--End:: Tab Content-->
 
-                                <!--End:: Tab Content-->
-
                                 <!--Begin:: Tab Content-->
                                 <div class="tab-pane" id="kt_apps_supplier_purchases" role="tabpanel">
 
@@ -650,6 +653,69 @@
                                     </form>
 
                                 </div>
+                                <!--End:: Tab Content-->
+
+                                <!--Begin:: Tab Content-->
+                                <div class="tab-pane" id="kt_apps_attendance" role="tabpanel">
+
+                                     <div class="kt-portlet__body" style="padding: unset">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table id="datatable-responsive"
+                                                           class="display table table-striped table-bordered " cellspacing="0"
+                                                           style="width:100%">
+
+                                                        <thead>
+                                                        <tr>
+                                                            <th> {{trans('main.id')}}</th>
+                                                            <th>{{trans('main.date')}}</th>
+                                                            <th>{{trans('main.checkin')}}</th>
+                                                            <th>{{trans('main.checkout')}}</th>
+                                                            <th>{{trans('main.overtime')}}</th>
+                                                            <th>{{trans('main.come late')}}</th>
+                                                            <th>{{trans('main.leave early')}}</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($attendances as $attendance)
+                                                            <tr>
+                                                                <td>{{$attendance->id}}</td>
+                                                                <td>{{$attendance->attendance_date}}</td>
+                                                                <td>{{$attendance->check_in}}</td>
+                                                                <td>{{$attendance->check_out}}</td>
+                                                                <td>{{$attendance->late['overtime']}}</td>
+                                                                <td>{{$attendance->late['late']}}</td>
+                                                                <td>{{$attendance->late['early']}}</td>
+
+                                                            </tr>
+                                                        @endforeach
+
+                                                        </tbody>
+                                                    </table>
+
+
+                                                            </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="kt-portlet__foot">
+                                            <div class="kt-form__actions">
+                                                <div class="row">
+                                                    <div class="col-lg-4"></div>
+                                                    <div class="col-lg-8">
+                                                        <button type="submit"
+                                                                class="btn btn-primary">{{trans('main.submit')}}</button>
+                                                        <button type="reset"
+                                                                class="btn btn-secondary">{{trans('main.cancel')}}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <!--End:: Tab Content-->
 
                             </div>
 
@@ -760,7 +826,7 @@
                 $(e.currentTarget).find('input[name="name"]').val(name);
                 $(e.currentTarget).find('input[name="email"]').val(email);
                 $(e.currentTarget).find('input[name="relationship"]').val(relationship);
-                $(e.currentTarget).find('form').attr('action', "{{url('emergency/')}}/" + Id);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/emergency/')}}/" + Id);
             });
 
 
@@ -769,7 +835,7 @@
                 var name = $(e.relatedTarget).data('name');
                 $(e.currentTarget).find('.name').html(name);
                 $(e.currentTarget).find('input[name="id"]').val(Id);
-                $(e.currentTarget).find('form').attr('action', "{{url('emergency/')}}/" + Id);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/emergency/')}}/" + Id);
 
             });
 

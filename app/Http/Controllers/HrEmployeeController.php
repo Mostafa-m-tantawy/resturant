@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\Department;
+use App\HrAttendance;
 use App\HrEmployee;
+use App\HrPayroll;
 use App\Phone;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ class HrEmployeeController extends Controller
      */
     public function index()
     {
-        $employees=HrEmployee::all();
+        $employees = HrEmployee::all();
 
         return view('hr.employee.index')->with(compact('employees'));
 
@@ -33,7 +35,7 @@ class HrEmployeeController extends Controller
      */
     public function create()
     {
-$departments=Department::all();
+        $departments = Department::all();
         return view('hr.employee.create')->with(compact('departments'));
 
     }
@@ -41,16 +43,15 @@ $departments=Department::all();
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $data=$request->all();
-        $employee=new HrEmployee();
+        $data = $request->all();
+        $employee = new HrEmployee();
 
-        if ($employee->validate($data))
-        {
+        if ($employee->validate($data)) {
 
             $user = new User;
             $user->email = $request->email;
@@ -84,26 +85,25 @@ $departments=Department::all();
             }
 
 
-            $employee->user_id =$user->id;
+            $employee->user_id = $user->id;
 //            $employee->photo        =$profileImg;
-            $employee->name         =$user->name;
-            $employee->gender       =$request->get('gender');
-            $employee->civil_status      =$request->get('civil_status');
-            $employee->date_of_birth      =$request->get('date_of_birth');
-            $employee->date_of_joining    =$request->get('date_of_joining');
-            $employee->department_id      =$request->get('department');
-            $employee->salary              =$request->get('salary');
-            $employee->bank_account      =$request->get('bank_account');
-            $employee->bank_name      =$request->get('bank_name');
+            $employee->name = $user->name;
+            $employee->gender = $request->get('gender');
+            $employee->civil_status = $request->get('civil_status');
+            $employee->date_of_birth = $request->get('date_of_birth');
+            $employee->date_of_joining = $request->get('date_of_joining');
+            $employee->department_id = $request->get('department');
+            $employee->salary = $request->get('salary');
+            $employee->bank_account = $request->get('bank_account');
+            $employee->bank_name = $request->get('bank_name');
 
-            if(!$employee->save()){
+            if (!$employee->save()) {
 
                 Phone::where($user->id)->delete();
                 Address::where($user->id)->delete();
                 User::destroy($user->id);
             }
-        } else
-        {
+        } else {
             $errors = $employee->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
@@ -111,23 +111,37 @@ $departments=Department::all();
         return redirect(route('employee.index'));
     }
 
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show( $id)
+    public function show($id)
     {
-        $employee=HrEmployee::find($id);
-        $departments=Department::all();
-        return view('hr.employee.show')->with(compact('employee','departments'));
+        $employee = HrEmployee::find($id);
+        $departments = Department::all();
+
+        $lastPayroll=HrPayroll::whereHas('payslips',function ($q)use($employee){
+           $q->where('hr_employee_id',$employee->id);
+       })->whereHas('approveRequest',function ($q){
+           $q->where('status','accepted');
+        })->orderByDesc('updated_at')->first();
+
+        $attendances = HrAttendance::where('hr_employee_id', $employee->id)->where('check_out','<>',null);
+        if($lastPayroll)
+            $attendances=  $attendances ->where('attendance_date',$lastPayroll->to);
+
+        $attendances=$attendances->get();
+
+        return view('hr.employee.show')->with(compact('employee', 'departments','attendances'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -138,8 +152,8 @@ $departments=Department::all();
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -148,26 +162,26 @@ $departments=Department::all();
         $user = $employee->user;
 
         $request->validate([
-            'name' => ['required', 'string', 'max:255','unique:users,name,'.$user->id],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'phone_g.*.phone'=> ['required'],
-            'phone_g.*.type'=> ['required'],
-            'address_g.*.address'=> ['required'],  ]);
+            'name' => ['required', 'string', 'max:255', 'unique:users,name,' . $user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'phone_g.*.phone' => ['required'],
+            'phone_g.*.type' => ['required'],
+            'address_g.*.address' => ['required'],]);
 
 
         $user->email = $request->email;
         $user->name = $request->name;
         $user->save();
 
-        $employee->name         =$user->name;
-        $employee->gender       =$request->get('gender');
-        $employee->civil_status      =$request->get('civil_status');
-        $employee->date_of_birth      =$request->get('date_of_birth');
-        $employee->date_of_joining    =$request->get('date_of_joining');
-        $employee->department_id      =$request->get('department');
-        $employee->salary              =$request->get('salary');
-        $employee->bank_account      =$request->get('bank_account');
-        $employee->bank_name      =$request->get('bank_name');
+        $employee->name = $user->name;
+        $employee->gender = $request->get('gender');
+        $employee->civil_status = $request->get('civil_status');
+        $employee->date_of_birth = $request->get('date_of_birth');
+        $employee->date_of_joining = $request->get('date_of_joining');
+        $employee->department_id = $request->get('department');
+        $employee->salary = $request->get('salary');
+        $employee->bank_account = $request->get('bank_account');
+        $employee->bank_name = $request->get('bank_name');
 
         $employee->save();
 
@@ -199,7 +213,7 @@ $departments=Department::all();
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

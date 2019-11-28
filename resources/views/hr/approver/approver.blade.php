@@ -268,7 +268,7 @@
                 $(e.currentTarget).find('select[name="approver"]').val(approver);
                 $(e.currentTarget).find('input[name="level"]').val(level);
 
-                $(e.currentTarget).find('form').attr('action', "{{url('approver/')}}/" + Id);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/approver/')}}/" + Id);
             });
 
 //
@@ -278,7 +278,7 @@
                $(e.currentTarget).find('input[name="id"]').val(Id);
                 $(e.currentTarget).find('#approver').text(approver);
 
-                $(e.currentTarget).find('form').attr('action', "{{url('approver/')}}/" + Id);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/approver/')}}/" + Id);
             });
 
 
