@@ -17,7 +17,8 @@ class HrLeaveController extends Controller
      */
     public function index()
     {
-        //
+        $leaves=HrLeave::all();
+        return view('hr.leave.index')->with(compact('leaves'));
     }
 
     /**
@@ -73,7 +74,7 @@ class HrLeaveController extends Controller
             }
             else
             {
-                $errors = "type not found";
+                $errors = " Approve type not found";
                 return redirect()->back()->withInput()->withErrors($errors);
             }
 

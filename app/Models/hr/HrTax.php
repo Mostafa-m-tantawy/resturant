@@ -7,11 +7,14 @@ use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
 
-class HrPayrollType extends Model
+class HrTax extends Model
 {
     use baseTrait,restaurantScopeTrait;
-
     protected $rules = array(
-        'name'  => 'required|string|max:255'
+        'name'            => 'required  |   string',
+        'percentage'      => 'required  |   numeric',
+        'start'           => 'nullable  |   numeric',
+        'end'             => 'nullable  |   numeric',
     );
+
 }

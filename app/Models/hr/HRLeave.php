@@ -26,4 +26,11 @@ class HrLeave extends Model
     {
         return $this->morphOne(HrApprovalRequest::class, 'approvable');
     }
+
+    public function getStatusAttribute(){
+
+   return $approve_request=$this->approve_request->status;
+
+
+}
 }

@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('countries', Country::all());
 
         Schema::defaultStringLength(191);
-//        date_default_timezone_set('Africa/Cairo');
+        date_default_timezone_set('Africa/Cairo');
     }
 
 

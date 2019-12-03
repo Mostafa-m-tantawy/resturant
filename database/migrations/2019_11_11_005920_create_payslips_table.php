@@ -15,6 +15,7 @@ class CreatePayslipsTable extends Migration
     {
         Schema::create('hr_payslips', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->unsignedBigInteger('restaurant_id');
 
             $table->unsignedBigInteger('hr_payroll_id');
@@ -28,13 +29,11 @@ class CreatePayslipsTable extends Migration
             $table->decimal('total_deduction')->default(0)->nullable();;
             $table->decimal('net_salary')->default(0)->nullable();
 
-            $table->integer('absence')->default(0)->nullable();;
-
-            $table->time('late')->default(0)->nullable();;
-            $table->time('over_time')->default(0)->nullable();;
-
             $table->integer('leave')->default(0)->nullable();;
             $table->integer('holiday')->default(0)->nullable();;
+
+            $table->double('insurance')->default(0)->nullable();
+            $table->double('taxes')->default(0)->nullable();
 
             $table->unique(['hr_payroll_id', 'hr_employee_id']);
 

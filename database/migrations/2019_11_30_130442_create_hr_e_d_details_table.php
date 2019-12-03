@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHrTaxesTable extends Migration
+class CreateHrEDDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateHrTaxesTable extends Migration
      */
     public function up()
     {
-        Schema::create('hr_taxes', function (Blueprint $table) {
+        Schema::create('hr_e_d_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('restaurant_id');
-            $table->string('name');
-            $table->double('percentage');
-            $table->double('start')->nullable();
-            $table->double('end')->nullable();
-            $table->double('discount')->nullable();
-
+            $table->unsignedBigInteger('hr_payslip_id');
+            $table->unsignedBigInteger('hr_earning_deduction_id');
+            $table->double('amount')->default(0)->nullable();
+            $table->string('reason')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateHrTaxesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hr_taxes');
+        Schema::dropIfExists('hr_e_d_details');
     }
 }

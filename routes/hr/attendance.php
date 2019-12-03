@@ -1,5 +1,5 @@
 <?php
-Route::get('attendance/history','AttendanceController@history')->name('attendance.history');
-Route::post('attendance/checkout/{id}','AttendanceController@checkout')->name('attendance.checkout');
+Route::get('attendance/history','HrAttendanceController@history')->name('attendance.history');
+Route::post('attendance/checkout/{id}','HrAttendanceController@checkout')->name('attendance.checkout');
 
-Route::resource('attendance','AttendanceController');
+Route::resource('attendance','HrAttendanceController');

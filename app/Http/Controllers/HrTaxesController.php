@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\HrApprovalType;
+use App\HrTax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use vendor\project\StatusTest;
 
-class HrApproveTypeController extends Controller
+class HrTaxesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class HrApproveTypeController extends Controller
      */
     public function index()
     {
-        $types=HrApprovalType::all();
-        return view('hr.approve_type.approve_type')->with(compact('types'));
+        $taxes=HrTax::all();
+        return view('hr.taxes.index')->with(compact('taxes'));
     }
 
     /**
@@ -39,22 +38,24 @@ class HrApproveTypeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $approvalType = new HrApprovalType();
-        if ($approvalType->validate($data)) {
+        $tax = new HrTax();
+        if ($tax->validate($data)) {
 
-            $approvalType->name=$request->name;
-            $approvalType->style=$request->style;
-            $approvalType->model=$request->model;
-            $approvalType->restaurant_id=Auth::user()->restaurant->id;
-            $approvalType->save();
+            $tax->name=$request->name;
+            $tax->percentage=$request->percentage;
+            $tax->start=$request->start;
+            $tax->end=$request->end;
+            $tax->discount=$request->discount;
+            $tax->restaurant_id=Auth::user()->restaurant->id;
+            $tax->save();
 
 //            \Session::flash('flash_message', 'Data successfully added!');
             return redirect()->back();
         } else {
-            $errors = $approvalType->errors();
+            $errors = $tax->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
-        return redirect('approve-type');
+        return redirect()->back();
     }
 
     /**
@@ -89,18 +90,21 @@ class HrApproveTypeController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $approvalType =  HrApprovalType::find($id);
-        if ($approvalType->validate($data)) {
-            $approvalType->name=$request->name;
-            $approvalType->style=$request->style;
-            $approvalType->save();
+        $tax =  HrTax::find($id);
+        if ($tax->validate($data)) {
 
-//            \Session::flash('flash_message', 'Data successfully added!');
-            return redirect()->back();
+            $tax->name=$request->name;
+            $tax->percentage=$request->percentage;
+            $tax->start=$request->start;
+            $tax->end=$request->end;
+            $tax->discount=$request->discount;
+            $tax->save();
+       return redirect()->back();
         } else {
-            $errors = $approvalType->errors();
+            $errors = $tax->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
+        return redirect()->back();
     }
 
     /**
@@ -111,6 +115,8 @@ class HrApproveTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        HrTax::destroy($id);
+        return redirect()->back();
+
     }
 }

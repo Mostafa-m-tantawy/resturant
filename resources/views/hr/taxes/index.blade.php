@@ -15,7 +15,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.approve types')}}
+                        {{trans('main.taxes')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -47,35 +47,44 @@
                        class="display table table-striped table-bordered " cellspacing="0"
                        style="width:100%">
                     <thead>
-                    <tr>
-                        <th>{{trans('main.id')}}</th>
-                        <th>{{trans('main.name')}}</th>
-                        <th>{{trans('main.style')}} </th>
-                        <th>{{trans('main.model')}}</th>
-                        <th>{{trans('main.update')}}</th>
-                        <th>{{trans('main.approvers')}}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($types as $type)
                         <tr>
-                            <td>{{$type->id}}</td>
-                            <td>{{$type->name}}</td>
-                            <td>{{trans('main.'.$type->style)}}</td>
-                            <td>{{trans('main.'.substr($type->model,4))}}</td>
+
+                            <th>{{trans('main.id')}}</th>
+                            <th>{{trans('main.name')}}</th>
+                            <th>{{trans('main.percentage')}} </th>
+                            <th>{{trans('main.start')}}</th>
+                            <th>{{trans('main.end')}}</th>
+                            <th>{{trans('main.discount')}}</th>
+                            <th>{{trans('main.update')}}</th>
+                            <th>{{trans('main.delete')}}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    @foreach($taxes as $tax)
+                        <tr>
+                            <td>{{$tax->id}}</td>
+                            <td>{{$tax->name}}</td>
+                            <td>{{$tax->percentage}}</td>
+                            <td>{{$tax->start}}</td>
+                            <td>{{$tax->end}}</td>
+                            <td>{{$tax->discount}}</td>
                             <td>
                                 <a title="update"
                                    data-toggle="modal" data-target=".updateAsset"
-                                   data-name="{{$type->name}}" data-id="{{$type->id}}"
-                                   data-style="{{$type->style}}" data-model="{{$type->model}}">
+                                   data-name="{{$tax->name}}" data-id="{{$tax->id}}"
+                                   data-percentage="{{$tax->percentage}}" data-end="{{$tax->end}}"
+                                   data-start="{{$tax->start}}"data-discount="{{$tax->discount}}">
                                     <i class="flaticon-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <a href="{{url('hr/approver?id='.$type->id)}}"> <i class="flaticon2-group"></i></a>
+                                <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.taxes')}}')" action="{{route('taxes.destroy',[$tax->id])}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                                </form>
                             </td>
-
-                            {{----}}
                         </tr>
                     @endforeach
 
@@ -96,7 +105,7 @@
                     @csrf
                     @method('put')
                     <div class="modal-header">
-                        <h5 class="modal-title">{{trans('main.update')}} {{trans('main.asset')}}</h5>
+                        <h5 class="modal-title">{{trans('main.update')}} {{trans('main.taxes')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -115,23 +124,26 @@
                                     <input type="text" class="form-control" name="name">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.style')}}</label>
-                                    <select name="style" class="form-control">
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.style')}}</option>
-                                    <option  value="override"> {{trans('main.override')}}</option>
-                                    <option  value="aggregate"> {{trans('main.aggregate')}}</option>
-                                    <option  value="chain"> {{trans('main.chain')}}</option>
-                                    </select>
+                                    <label>{{trans('main.percentage')}}</label>
+                                    <input type="number" min="0" max="100" step="0.01"  class="form-control" name="percentage">
                                 </div>
+
+
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.model')}}</label>
-                                    <select>
-                                    <option  value=""> {{trans('main.select')}} {{trans('main.model')}}</option>
-                                    <option  value="App\HrLeave"> {{trans('main.HrLeave')}}</option>
-                                    <option  value="App\HrPayslip"> {{trans('main.HrPayslip')}}</option>
-                                    <option  value="App\HrPayroll"> {{trans('main.HrPayroll')}}</option>
-                                    </select>
+                                    <label>{{trans('main.start')}}</label>
+                                    <input type="number" min="0" step="0.01"  class="form-control" name="start">
                                 </div>
+
+
+                                <div class="form-group col-12">
+                                    <label>{{trans('main.end')}}</label>
+                                    <input type="number" min="0" step="0.01" class="form-control" name="end">
+                                </div>
+ <div class="form-group col-12">
+                                    <label>{{trans('main.discount')}}</label>
+                                    <input type="number" min="0" step="0.01" class="form-control" name="discount">
+                                </div>
+
 
                             </div>
                         </div>
@@ -152,7 +164,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{route('approve-type.store')}}" method="post">
+                <form action="{{route('taxes.store')}}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title"> {{trans('main.new asset')}} <span
                                 class="model_type"></span></h5>
@@ -173,24 +185,29 @@
                                     <input type="text" class="form-control" name="name">
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.style')}}</label>
-                                    <select name="style" class="form-control">
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.style')}}</option>
-                                        <option  value="override"> {{trans('main.override')}}</option>
-                                        <option  value="aggregate"> {{trans('main.aggregate')}}</option>
-                                        <option  value="chain"> {{trans('main.chain')}}</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label>{{trans('main.percentage')}}</label>
+                                    <input type="number" min="0" max="100" step="0.01"  class="form-control" name="percentage">
                                 </div>
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.model')}}</label>
-                                    <select>
-                                        <option  value=""> {{trans('main.select')}} {{trans('main.model')}}</option>
-                                        <option  value="App\HrLeave"> {{trans('main.HrLeave')}}</option>
-                                        <option  value="App\HrPayslip"> {{trans('main.HrPayslip')}}</option>
-                                        <option  value="App\HrPayroll"> {{trans('main.HrPayroll')}}</option>
-                                    </select>
+
+
+                                <div class="form-group">
+                                    <label>{{trans('main.start')}}</label>
+                                    <input type="number" min="0" step="0.01"  class="form-control" name="start">
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label>{{trans('main.end')}}</label>
+                                    <input type="number" min="0" step="0.01" class="form-control" name="end">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>{{trans('main.discount')}}</label>
+                                    <input type="number" min="0" step="0.01" class="form-control" name="discount">
+                                </div>
+
 
 
                             </div>
@@ -220,17 +237,24 @@
     <script>
 
         $(document).ready(function () {
-//
+
             $('#updateAsset').on('show.bs.modal', function (e) {
-                var Id = $(e.relatedTarget).data('id');
-                var name = $(e.relatedTarget).data('name');
-                var style = $(e.relatedTarget).data('style');
-                var model = $(e.relatedTarget).data('model');
+
+                var Id          = $(e.relatedTarget).data('id');
+                var name        = $(e.relatedTarget).data('name');
+                var percentage  = $(e.relatedTarget).data('percentage');
+                var start       = $(e.relatedTarget).data('start');
+                var end         = $(e.relatedTarget).data('end');
+                var discount         = $(e.relatedTarget).data('discount');
+
+
                 $(e.currentTarget).find('input[name="id"]').val(Id);
                 $(e.currentTarget).find('input[name="name"]').val(name);
-                $(e.currentTarget).find('select[name="style"]').val(style);
-                $(e.currentTarget).find('select[name="model"]').val(model);
-                $(e.currentTarget).find('form').attr('action', "{{url('hr/approve-type/')}}/" + Id);
+                $(e.currentTarget).find('input[name="percentage"]').val(percentage);
+                $(e.currentTarget).find('input[name="start"]').val(start);
+                $(e.currentTarget).find('input[name="end"]').val(end);
+                $(e.currentTarget).find('input[name="discount"]').val(discount);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/taxes/')}}/" + Id);
             });
 
 

@@ -43,24 +43,30 @@
 
         <thead>
             <tr>
+
                 <th> {{trans('main.id')}}</th>
-                <th>{{trans('main.name')}}</th>
-                <th>{{trans('main.description')}}</th>
-                <th>{{trans('main.profile')}}</th>
-{{--                <th>delete</th>--}}
+                <th>{{trans('main.type')}}</th>
+                <th>{{trans('main.from')}}</th>
+                <th>{{trans('main.to')}}</th>
+                <th>{{trans('main.reason')}}</th>
+                <th>{{trans('main.status')}}</th>
+
             </tr>
             </thead>
             <tbody>
-           @foreach($departments as $department)
+           @foreach($leaves as $leave)
                <tr>
-                    <td>{{$department->id}}</td>
-                    <td>{{$department->name}}</td>
-                    <td>{{$department->description}}</td>
-                   <td>
-                       <a href="{{url('department/'.$department->id)}}" title="products">
-                           <span>{{trans('main.profile')}}</span>
-                           <i  class="la la-edit" style="font-size: 25px;"></i></a>
-                      </td>
+                    <td>{{$leave->id}}</td>
+                    <td>{{$leave->type->name}}</td>
+                    <td>{{$leave->from}}</td>
+                    <td>{{$leave->to}}</td>
+                    <td>{{$leave->reason}}</td>
+                    <td>{{$leave->status}}</td>
+{{--                   <td>--}}
+{{--                       <a href="{{url('department/'.$department->id)}}" title="products">--}}
+{{--                           <span>{{trans('main.profile')}}</span>--}}
+{{--                           <i  class="la la-edit" style="font-size: 25px;"></i></a>--}}
+{{--                      </td>--}}
 {{--                   <td>--}}
 {{--                       <a title="products" data-toggle="modal" data-target=".delete_department"--}}
 {{--                          data-id="{{$department->id}}" >--}}

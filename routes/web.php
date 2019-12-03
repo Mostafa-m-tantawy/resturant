@@ -47,23 +47,16 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
     Route::prefix('stock')->group(function () {
 
         Route::any('/dashboard', 'DashboardController@stockDashboard')->name('dashboard.stock');
-
         include('stock/department.php');
-
         include('stock/product.php');
-
         include('stock/supplier.php');
-
         include('stock/unit.php');
 // -------------------------stock reports --------------------------------
         Route::any('stock/index','StockController@index')->name('stock.index');
 
-        include('stock/assign.php');
-
+       include('stock/assign.php');
         include('stock/payment.php');
-
         include('stock/refund.php');
-
         include('stock/ruined.php');
 
 
@@ -71,7 +64,9 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
 
 
     Route::prefix('hr')->group(function () {
+
         Route::any('/dashboard', 'DashboardController@hrDashboard')->name('dashboard.hr');
+
         include('hr/approve.php');
         include('hr/employee.php');
         include('hr/leave.php');
@@ -80,6 +75,11 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
         include('hr/shift.php');
         include('hr/attendance.php');
         include('hr/holiday.php');
+        include('hr/payroll.php');
+        include('hr/payslip.php');
+        include('hr/earningDeduction.php');
+        include('hr/taxes.php');
+
     });
 
 
@@ -94,12 +94,6 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
         include('order/order.php');
         include('order/recipe.php');
     });
-
-
-
-
-
-
 
 
 
