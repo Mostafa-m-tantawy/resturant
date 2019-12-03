@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEarningDeductionsTable extends Migration
+class CreateHrEarningDeductionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,19 +15,11 @@ class CreateEarningDeductionsTable extends Migration
     {
         Schema::create('hr_earning_deductions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('restaurant_id');
 
-            $table->unsignedBigInteger('hr_payslip_id');
-//            $table->foreign('payslip_id')->references('id')->on('hr_payslips')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->string('earn_deductable_type')->nullable();
-
-            $table->integer('earn_deductable_id')->nullable();
-
-            $table->decimal('amount')->default(0);
-            $table->text('reason')->nullable();
-
+            $table->string('name');
             $table->enum('type',['earning','deduction'])->default('earning');
-
+            $table->boolean('insurance')->default(0);
             $table->timestamps();
         });
     }

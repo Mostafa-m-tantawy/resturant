@@ -15,7 +15,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.assets')}}
+                        {{trans('main.earnings and deductions')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -50,37 +50,27 @@
                     <tr>
                         <th>{{trans('main.id')}}</th>
                         <th>{{trans('main.name')}}</th>
-                        <th>{{trans('main.description')}} </th>
-                        <th>{{trans('main.cost')}} </th>
-                        <th>{{trans('main.show')}}</th>
+                        <th>{{trans('main.type')}} </th>
+                        <th>{{trans('main.insurance')}} </th>
                         <th>{{trans('main.update')}}</th>
-                        <th>{{trans('main.delete')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($assets as $asset)
+                    @foreach($types as $type)
                         <tr>
-                            <td>{{$asset->id}}</td>
-                            <td>{{$asset->name}}</td>
-                            <td>{{$asset->description}}</td>
-                            <td>{{$asset->cost}}</td>
-                            <td><a href="{{route('asset.update',[$asset->id])}}" class="btn btn-primary"><i
-                                        class="flaticon-visible"></i></a></td>
+                            <td>{{$type->id}}</td>
+                            <td>{{$type->name}}</td>
+                            <td>{{$type->type}}</td>
+                            <td>{{($type->insurance==0)?'no':'yes'}}</td>
                             <td>
                                 <a title="update"
                                    data-toggle="modal" data-target=".updateAsset"
-                                   data-name="{{$asset->name}}" data-id="{{$asset->id}}"
-                                   data-description="{{$asset->description}}" data-cost="{{$asset->cost}}">
+                                   data-name="{{$type->name}}" data-id="{{$type->id}}"
+                                   data-type="{{$type->type}}" data-insurance="{{$type->insurance}}">
                                     <i class="flaticon-edit"></i>
                                 </a>
                             </td>
-                            <td>
-                             <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.asset')}}')" action="{{route('asset.destroy',[$asset->id])}}">
-                                 @csrf
-                                 @method('DELETE')
-                                 <button class="btn btn-danger"> {{trans('main.delete')}}</button>
-                             </form>
-                            </td>
+
                             {{----}}
                         </tr>
                     @endforeach
@@ -102,7 +92,7 @@
                     @csrf
                     @method('put')
                     <div class="modal-header">
-                        <h5 class="modal-title">{{trans('main.update')}} {{trans('main.asset')}}</h5>
+                        <h5 class="modal-title">{{trans('main.update')}} {{trans('main.earnings and deductions')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -121,15 +111,18 @@
                                     <input type="text" class="form-control" name="name">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.description')}}</label>
-                                    <input type="text" class="form-control" name="description">
+                                    <label>{{trans('main.type')}}</label>
+                                    <select readonly name="type" class="form-control">
+                                        <option  value=""> {{trans('main.select')}} {{trans('main.type')}}</option>
+                                    <option  value="earning"> {{trans('main.earning')}}</option>
+                                    <option  value="deduction"> {{trans('main.deduction')}}</option>
+                                     </select>
                                 </div>
+
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.cost')}}</label>
-                                    <input type="text" class="form-control" name="cost">
+                                    <label>{{trans('main.insurance')}}</label>
+                                    <input type="checkbox" class="form-control" name="insurance">
                                 </div>
-
-
                             </div>
                         </div>
 
@@ -149,7 +142,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{route('asset.store')}}" method="post">
+                <form action="{{route('earning-deduction.store')}}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title"> {{trans('main.new asset')}} <span
                                 class="model_type"></span></h5>
@@ -169,17 +162,18 @@
                                     <label>{{trans('main.name')}}</label>
                                     <input type="text" class="form-control" name="name">
                                 </div>
-
-                                <div class="form-group">
-                                    <label>{{trans('main.description')}}</label>
-                                    <input type="text" class="form-control" name="description">
+                                <div class="form-group ">
+                                    <label>{{trans('main.type')}}</label>
+                                    <select  name="type" class="form-control">
+                                        <option  value=""> {{trans('main.select')}} {{trans('main.type')}}</option>
+                                        <option  value="earning"> {{trans('main.earning')}}</option>
+                                        <option  value="deduction"> {{trans('main.deduction')}}</option>
+                                    </select>
                                 </div>
-
                                 <div class="form-group">
-                                    <label>{{trans('main.cost')}}</label>
-                                    <input type="text" class="form-control" name="cost">
+                                    <label>{{trans('main.insurance')}}</label>
+                                    <input type="checkbox" class="form-control" name="insurance">
                                 </div>
-
 
                             </div>
 
@@ -212,13 +206,15 @@
             $('#updateAsset').on('show.bs.modal', function (e) {
                 var Id = $(e.relatedTarget).data('id');
                 var name = $(e.relatedTarget).data('name');
-                var description = $(e.relatedTarget).data('description');
-                var cost = $(e.relatedTarget).data('cost');
+                var type = $(e.relatedTarget).data('type');
+                var insurance = $(e.relatedTarget).data('insurance');
+
                 $(e.currentTarget).find('input[name="id"]').val(Id);
                 $(e.currentTarget).find('input[name="name"]').val(name);
-                $(e.currentTarget).find('input[name="description"]').val(description);
-                $(e.currentTarget).find('input[name="cost"]').val(cost);
-                $(e.currentTarget).find('form').attr('action', "{{url('hr/asset/')}}/" + Id);
+                $(e.currentTarget).find('select[name="type"]').val(type);
+                if(insurance)
+                $(e.currentTarget).find('input[name="insurance"]').attr('checked','true');
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/earning-deduction/')}}/" + Id);
             });
 
 

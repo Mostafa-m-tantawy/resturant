@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\HrApprovalType;
+use App\HrEarningDeduction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use vendor\project\StatusTest;
 
-class HrApproveTypeController extends Controller
+class HrEarningDeductionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class HrApproveTypeController extends Controller
      */
     public function index()
     {
-        $types=HrApprovalType::all();
-        return view('hr.approve_type.approve_type')->with(compact('types'));
+        $types=HrEarningDeduction::all();
+        return view('hr.ear_de.earning_deduction')->with(compact('types'));
     }
 
     /**
@@ -38,23 +37,27 @@ class HrApproveTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $approvalType = new HrApprovalType();
-        if ($approvalType->validate($data)) {
 
-            $approvalType->name=$request->name;
-            $approvalType->style=$request->style;
-            $approvalType->model=$request->model;
-            $approvalType->restaurant_id=Auth::user()->restaurant->id;
-            $approvalType->save();
+        $data=$request->all();
+        $earning=new HrEarningDeduction();
 
-//            \Session::flash('flash_message', 'Data successfully added!');
-            return redirect()->back();
-        } else {
-            $errors = $approvalType->errors();
+        if ($earning->validate($data)) {
+
+            $earning->restaurant_id=Auth::user()->restaurant->id;
+            $earning->name=$request->name;
+            $earning->type=$request->type;
+            if($request->insurance=='on')
+                $earning->insurance=1;
+            else
+                    $earning->insurance=0;
+            $earning->save();
+        }
+        else{
+            $errors = $earning->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
-        return redirect('approve-type');
+
+        return redirect()->back();
     }
 
     /**
@@ -88,19 +91,23 @@ class HrApproveTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $approvalType =  HrApprovalType::find($id);
-        if ($approvalType->validate($data)) {
-            $approvalType->name=$request->name;
-            $approvalType->style=$request->style;
-            $approvalType->save();
+        $data=$request->all();
+        $earning= HrEarningDeduction::find($id);
+        if ($earning->validate($data)) {
 
-//            \Session::flash('flash_message', 'Data successfully added!');
-            return redirect()->back();
-        } else {
-            $errors = $approvalType->errors();
+            $earning->name=$request->name;
+            if($request->insurance=='on')
+                $earning->insurance=1;
+            else
+                $earning->insurance=0;
+            $earning->save();
+        }
+        else{
+            $errors = $earning->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
+
+        return redirect()->back();
     }
 
     /**

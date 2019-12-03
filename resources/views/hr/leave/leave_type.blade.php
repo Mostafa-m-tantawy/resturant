@@ -65,7 +65,7 @@
                             <td>{{$type->created_at}}</td>
                             <td>
                                 <a title="update"
-                                   data-toggle="modal" data-target=".bd-example-modal-lg"
+                                   dثata-toggle="modal" data-target=".bd-example-modal-lg"
                                    data-name="{{$type->name}}" data-id="{{$type->id}}"
                                    data-type="{{$type->type}}" >
                                     <i class="flaticon-edit-1"></i>
@@ -116,7 +116,7 @@
                                     <label>{{trans('main.type')}}</label>
                                     <select name="type" class="form-control">
                                         <option value="">{{trans('main.select')}} {{trans('main.type')}}</option>
-                                        <option value="earning">{{trans('main.earning')}}</option>
+                                        <option value="earning">{{trans('main.earning_leave')}}</option>
                                         <option value="deduction">{{trans('main.deduction')}}</option>
                                         <option value="neutral">{{trans('main.neutral')}}</option>
                                         <option value="sick">{{trans('main.sick')}}</option>
@@ -165,7 +165,7 @@
                                     <label>{{trans('main.type')}}</label>
                                     <select name="type" class="form-control">
                                         <option value="">{{trans('main.select')}} {{trans('main.type')}}</option>
-                                        <option value="earning">{{trans('main.earning')}}</option>
+                                        <option value="earning">{{trans('main.earning_leave')}}</option>
                                         <option value="deduction">{{trans('main.deduction')}}</option>
                                         <option value="neutral">{{trans('main.neutral')}}</option>
                                         <option value="sick">{{trans('main.sick')}}</option>

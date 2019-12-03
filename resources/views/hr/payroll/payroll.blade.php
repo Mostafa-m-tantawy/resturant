@@ -15,7 +15,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.assets')}}
+                        {{trans('main.payroll')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -49,38 +49,30 @@
                     <thead>
                     <tr>
                         <th>{{trans('main.id')}}</th>
-                        <th>{{trans('main.name')}}</th>
-                        <th>{{trans('main.description')}} </th>
-                        <th>{{trans('main.cost')}} </th>
-                        <th>{{trans('main.show')}}</th>
+                        <th>{{trans('main.type')}}</th>
+                        <th>{{trans('main.from')}} </th>
+                        <th>{{trans('main.to')}}</th>
                         <th>{{trans('main.update')}}</th>
-                        <th>{{trans('main.delete')}}</th>
+                        <th>{{trans('main.payslip')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($assets as $asset)
+                    @foreach($payrolls as $payroll)
                         <tr>
-                            <td>{{$asset->id}}</td>
-                            <td>{{$asset->name}}</td>
-                            <td>{{$asset->description}}</td>
-                            <td>{{$asset->cost}}</td>
-                            <td><a href="{{route('asset.update',[$asset->id])}}" class="btn btn-primary"><i
-                                        class="flaticon-visible"></i></a></td>
+                            <td>{{$payroll->id}}</td>
+                            <td>{{$payroll->type->name}}</td>
+                            <td>{{$payroll->from}}</td>
+                            <td>{{$payroll->to}}</td>
                             <td>
                                 <a title="update"
                                    data-toggle="modal" data-target=".updateAsset"
-                                   data-name="{{$asset->name}}" data-id="{{$asset->id}}"
-                                   data-description="{{$asset->description}}" data-cost="{{$asset->cost}}">
+                                   data-type="{{$payroll->hr_payroll_type_id}}" data-id="{{$payroll->id}}"
+                                   data-from="{{$payroll->from}}" data-to="{{$payroll->to}}">
                                     <i class="flaticon-edit"></i>
                                 </a>
                             </td>
-                            <td>
-                             <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.asset')}}')" action="{{route('asset.destroy',[$asset->id])}}">
-                                 @csrf
-                                 @method('DELETE')
-                                 <button class="btn btn-danger"> {{trans('main.delete')}}</button>
-                             </form>
-                            </td>
+                            <td><a href="{{url('hr/payslip?id='.$payroll->id)}}">  <i class="flaticon-map"></i> </a></td>
+
                             {{----}}
                         </tr>
                     @endforeach
@@ -117,16 +109,23 @@
                                     <input type="number" readonly class="form-control" name="id">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{trans('main.name')}}</label>
-                                    <input type="text" class="form-control" name="name">
+                                    <label>{{trans('main.type')}}</label>
+                                    <select name="type" class="form-control">
+                                        <option  value=""> {{trans('main.select')}} {{trans('main.type')}}</option>
+                                        @foreach($types as $type)
+                                        <option  value="{{$type->id}}">{{$type->name}} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.description')}}</label>
-                                    <input type="text" class="form-control" name="description">
+
+
+                                 <div class="form-group col-12">
+                                    <label>{{trans('main.from')}}</label>
+                                    <input type="date" class="form-control" name="from">
                                 </div>
-                                <div class="form-group col-12">
-                                    <label>{{trans('main.cost')}}</label>
-                                    <input type="text" class="form-control" name="cost">
+                                 <div class="form-group col-12">
+                                    <label>{{trans('main.to')}}</label>
+                                    <input type="date" class="form-control" name="to">
                                 </div>
 
 
@@ -149,7 +148,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{route('asset.store')}}" method="post">
+                <form action="{{route('payroll.store')}}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title"> {{trans('main.new asset')}} <span
                                 class="model_type"></span></h5>
@@ -165,19 +164,23 @@
 
                             <div class="col-10">
 
-                                <div class="form-group">
-                                    <label>{{trans('main.name')}}</label>
-                                    <input type="text" class="form-control" name="name">
+                                <div class="form-group col-12">
+                                    <label>{{trans('main.type')}}</label>
+                                    <select name="type" class="form-control">
+                                        <option  value=""> {{trans('main.select')}} {{trans('main.type')}}</option>
+                                        @foreach($types as $type)
+                                            <option  value="{{$type->id}}">{{$type->name}} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>{{trans('main.description')}}</label>
-                                    <input type="text" class="form-control" name="description">
+                                <div class="form-group col-12">
+                                    <label>{{trans('main.from')}}</label>
+                                    <input type="date" class="form-control" name="from">
                                 </div>
-
-                                <div class="form-group">
-                                    <label>{{trans('main.cost')}}</label>
-                                    <input type="text" class="form-control" name="cost">
+                                <div class="form-group col-12">
+                                    <label>{{trans('main.to')}}</label>
+                                    <input type="date" class="form-control" name="to">
                                 </div>
 
 
@@ -203,22 +206,20 @@
     </div>
 @stop
 @section('scripts')
-    <script src="{{asset('js/demo1/pages/crud/forms/widgets/form-repeater.js')}}" type="text/javascript"></script>
-    {{----}}
     <script>
 
         $(document).ready(function () {
 //
             $('#updateAsset').on('show.bs.modal', function (e) {
                 var Id = $(e.relatedTarget).data('id');
-                var name = $(e.relatedTarget).data('name');
-                var description = $(e.relatedTarget).data('description');
-                var cost = $(e.relatedTarget).data('cost');
+                var type = $(e.relatedTarget).data('type');
+                var from = $(e.relatedTarget).data('from');
+                var to = $(e.relatedTarget).data('to');
                 $(e.currentTarget).find('input[name="id"]').val(Id);
-                $(e.currentTarget).find('input[name="name"]').val(name);
-                $(e.currentTarget).find('input[name="description"]').val(description);
-                $(e.currentTarget).find('input[name="cost"]').val(cost);
-                $(e.currentTarget).find('form').attr('action', "{{url('hr/asset/')}}/" + Id);
+                $(e.currentTarget).find('select[name="type"]').val(type);
+                $(e.currentTarget).find('input[name="from"]').val(from);
+                $(e.currentTarget).find('input[name="to"]').val(to);
+                $(e.currentTarget).find('form').attr('action', "{{url('hr/payroll/')}}/" + Id);
             });
 
 

@@ -204,7 +204,58 @@
                         </span>
                     </a>
                 </li>
+                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                          <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/expenses.png')}}" height="34"width="34">
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.payroll')}}</span><i
+                            class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('payroll-type.index')}}" class="kt-menu__link ">
+                                    <span
+                                        class="kt-menu__link-text"> {{trans('main.payroll types')}}</span></a>
+                            </li>
 
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('payroll.index')}}" class="kt-menu__link ">
+                                    <span  class="kt-menu__link-text">
+                                        {{trans('main.all')}} {{trans('main.payroll')}}</span></a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </li> <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"
+                    data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                          <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/expenses.png')}}" height="34"width="34">
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.earnings and deductions')}}</span><i
+                            class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('earning-deduction.index')}}" class="kt-menu__link ">
+                                    <span
+                                        class="kt-menu__link-text">
+                                        {{trans('main.earnings and deductions types')}}</span></a>
+                            </li>
+
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="{{route('earning-details.index')}}" class="kt-menu__link ">
+                                    <span  class="kt-menu__link-text">
+                                        {{trans('main.earnings and deductions')}}</span></a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </li>
             </ul>
         </div>
     </div>

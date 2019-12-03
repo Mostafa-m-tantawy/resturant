@@ -125,7 +125,7 @@ class HrEmployeeController extends Controller
 
         $lastPayroll=HrPayroll::whereHas('payslips',function ($q)use($employee){
            $q->where('hr_employee_id',$employee->id);
-       })->whereHas('approveRequest',function ($q){
+       })->whereHas('approve_request',function ($q){
            $q->where('status','accepted');
         })->orderByDesc('updated_at')->first();
 

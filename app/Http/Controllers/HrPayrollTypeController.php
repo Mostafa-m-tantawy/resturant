@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\HrPayrollType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HrPayrollTypeController extends Controller
 {
@@ -13,7 +15,8 @@ class HrPayrollTypeController extends Controller
      */
     public function index()
     {
-        //
+        $types=HrPayrollType::all();
+        return  view('hr.payroll.payroll_type')->with(compact('types'));
     }
 
     /**
@@ -34,7 +37,22 @@ class HrPayrollTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        $type=new HrPayrollType();
+
+        if ($type->validate($data)) {
+
+            $type->restaurant_id=Auth::user()->restaurant->id;
+            $type->name=$request->name;
+            $type->save();
+        }
+        else{
+            $errors = $type->errors();
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
+
+        return redirect()->back();
+
     }
 
     /**
@@ -68,7 +86,21 @@ class HrPayrollTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=$request->all();
+        $type= HrPayrollType::find($id);
+
+        if ($type->validate($data)) {
+
+            $type->name=$request->name;
+            $type->save();
+        }
+        else{
+            $errors = $type->errors();
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
+
+        return redirect()->back();
+
     }
 
     /**

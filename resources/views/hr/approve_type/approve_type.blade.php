@@ -184,7 +184,7 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <label>{{trans('main.model')}}</label>
-                                    <select>
+                                    <select class="form-control" name="model">
                                         <option  value=""> {{trans('main.select')}} {{trans('main.model')}}</option>
                                         <option  value="App\HrLeave"> {{trans('main.HrLeave')}}</option>
                                         <option  value="App\HrPayslip"> {{trans('main.HrPayslip')}}</option>
