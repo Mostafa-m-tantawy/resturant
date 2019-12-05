@@ -69,9 +69,7 @@
                                    data-child="{{$unit->child_unit}}" data-convert_rate="{{$unit->convert_rate}}">
                                     <i class="flaticon-edit-1"></i>
                                 </a>
-                                <a title="delete" href="{{url('unit/delete/'.$unit->id)}}"> <i style="color: red"
-                                                                                               class="flaticon-delete"></i></a>
-                            </td>
+                                </td>
 {{----}}
                         </tr>
                     @endforeach
@@ -89,9 +87,10 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="unit/update" method="post">
-                    {{--                    {{url('unit/update)}}--}}
+                <form  method="post">
+
                     @csrf
+                    @method('put')
                     <div class="modal-header">
                         <h5 class="modal-title">{{trans('main.update')}} {{trans('main.unit')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -134,11 +133,11 @@
             </div>
         </div>
     </div>
-    <div class="modal fade delete" id="newunit" tabindex="-1" role="dialog"
+    <div class="modal fade newunit" id="newunit" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{url('unit')}}" method="post">
+                <form action="{{route('unit.store')}}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title">{{trans('main.new')}} {{trans('main.unit')}} <span class="model_type"></span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -203,6 +202,8 @@
                 $(e.currentTarget).find('input[name="unit"]').val(unit);
                 $(e.currentTarget).find('input[name="child_unit"]').val(child);
                 $(e.currentTarget).find('input[name="convert_rate"]').val(convert_rate);
+
+                $(e.currentTarget).find('form').attr('action', "{{url('stock/unit/')}}/" + Id);
             });
 
         })

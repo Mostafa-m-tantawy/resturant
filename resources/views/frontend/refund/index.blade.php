@@ -63,7 +63,7 @@
                             <td>{{$refund->vat}}</td>
                             <td>{{($refund->quantity*$refund->unit_price)+($refund->quantity*$refund->unit_price)*($refund->vat/100) }}</td>
                             <td>
-                                <a href="{{url('refund/delete/'.$refund->id)}}" title="delete">
+                                <a href="{{url('stock/refund/delete/'.$refund->id)}}" title="delete">
                                     <i style="color: red" class="flaticon-delete"></i>
                                 </a> </td>
                         </tr>

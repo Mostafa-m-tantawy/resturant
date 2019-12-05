@@ -58,7 +58,7 @@ $(document).ready(function () {
             formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
             $.ajax({
-                url: '/get-sourceable/' + $(this).val(),
+                url: 'stock/get-sourceable/' + $(this).val(),
                 type: "POST",
                 data: formdata,
                 processData: false,
@@ -123,7 +123,7 @@ $(document).ready(function () {
 
 
             $.ajax({
-                url: '/get-sourceable-products',
+                url: 'stock/get-sourceable-products',
                 type: "POST",
                 data: formdata,
                 processData: false,
@@ -220,7 +220,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: 'product/quantity/'+$(this).val(),
+            url: 'stock/product/quantity/'+$(this).val(),
             type: "POST",
             data: formdata,
             processData: false,
@@ -249,7 +249,7 @@ $(document).ready(function () {
         });
 
 
-        $.get('/get-unit-of-product/' + productId, function (data) {
+        $.get('stock/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
             $("#unit").text(data.unit.unit);
             // $("#child_unit").text(data.unit.child_unit);
@@ -455,7 +455,7 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            url: '/save-assign',
+            url: 'stock/save-assign',
             type: "post",
             data: formdata,
             processData: false,

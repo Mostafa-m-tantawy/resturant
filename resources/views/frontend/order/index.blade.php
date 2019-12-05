@@ -65,12 +65,12 @@
                             <td>{{$order->gross_total}}</td>
                             <td>{{$order->created_at}}</td>
                             <td>
-                                <a title="update" href="{{url('order/edit/'.$order->id)}}">
+                                <a title="update" href="{{url('cost/order/edit/'.$order->id)}}">
                                     <i class="flaticon-edit-1"></i>
                                 </a>
                             </td>
                             <td>
-                                <a title="delete" href="{{url('order/delete/'.$order->id)}}">
+                                <a title="delete" href="{{url('cost/order/delete/'.$order->id)}}">
                                     <i style="color: red" class="flaticon-delete"></i></a>
 
                             </td>

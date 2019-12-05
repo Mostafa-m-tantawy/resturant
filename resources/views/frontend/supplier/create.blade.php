@@ -10,7 +10,7 @@
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">&nbsp;
-                            <a href="{{url('supplier')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{route('supplier.index')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{ trans('main.all') }} {{ trans('main.suppliers') }}
                             </a>

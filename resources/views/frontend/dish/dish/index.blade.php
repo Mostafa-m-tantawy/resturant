@@ -114,7 +114,7 @@
                                                                                     <div class="kt-widget5__stats">
                                                                                 <span
                                                                                     class="kt-widget5__number">
-                                                                                    <a href="{{url('dish/'.$dish->id.'/edit')}}">
+                                                                                    <a href="{{url('cost/dish/'.$dish->id.'/edit')}}">
                                                                                         <i style="font-size: 40px;"
                                                                                            class="flaticon-edit-1"></i>
                                                                                     </a>
@@ -125,7 +125,7 @@
                                                                                     </div>
                                                                                     <div class="kt-widget5__stats">
                                                                                 <span class="kt-widget5__number">
-                                                                                     <a href="{{url('dish/'.$dish->id.'/edit')}}">
+                                                                                     <a href="{{url('cost/dish/'.$dish->id.'/edit')}}">
                                                                                      <img style="height: 50px"
                                                                                           src="media/icons/svg/Communication/Clipboard-list.svg"/>
                                                                                      </a>

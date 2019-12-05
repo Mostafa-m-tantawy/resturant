@@ -35,7 +35,7 @@ $(document).ready(function () {
                 formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
                 $.ajax({
-                    url: '/supplier-products/' + $(this).val(),
+                    url: 'stock/supplier-products/' + $(this).val(),
                     type: "POST",
                     data: formdata,
                     processData: false,
@@ -107,7 +107,7 @@ $(document).ready(function () {
         var selected = $(this).find('option:selected');
 
 
-        $.get('/get-unit-of-product/' + productId, function (data) {
+        $.get('stock/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
             $("#unit").text(data.unit.unit);
             $("#child_unit").text(data.unit.child_unit);
@@ -369,7 +369,7 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            url: '/save-purses',
+            url: 'stock/save-purses',
             type: "POST",
             data: formdata,
             processData: false,

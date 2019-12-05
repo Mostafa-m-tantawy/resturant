@@ -114,6 +114,31 @@ class DashboardController extends Controller
 
     }
 
+
+
+    public function posDashboard(Request $request)
+    {
+
+        if($request->range) {
+        // lenght 10 date = (01/01/2001) =10
+        $from = substr($request->range, 0, 10);
+        // start  13 date = (01/01/2001 */*)=13
+        $to = substr($request->range, 13, 10);
+    }else{
+
+        // lenght 10 date = (01/01/2001) =10
+        $from = \Carbon\Carbon::today()->format('Y-m-d');
+        // start  13 date = (01/01/2001 */*)=13
+        $to = \Carbon\Carbon::today()->format('Y-m-d');
+
+    }
+        return view('pos.dashboard') ->with(compact(
+            'from','to'
+
+        ));;
+
+    }
+
     public function download(Request $request)
     {
         return response()->download($request->url);

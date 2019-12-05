@@ -26,7 +26,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{url('purchase/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('stock/purchase/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{ trans('main.new') }}  {{ trans('main.purchase') }}
                             </a>
@@ -56,7 +56,7 @@
                             <td>{{$purchase->total}}</td>
 
                             <td>
-                                <a title="Show" href="{{url('purchase/show/'.$purchase->id)}}"> <i  class="fa fa-book-open"></i></a>
+                                <a title="Show" href="{{url('stock/purchase/show/'.$purchase->id)}}"> <i  class="fa fa-book-open"></i></a>
 
 {{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
 {{--                                                                                                     class="flaticon-delete"></i></a>--}}

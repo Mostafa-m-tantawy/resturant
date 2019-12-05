@@ -223,7 +223,7 @@
             $("#product").on('change', function (e) {
 
                 var productId = $("#product").val();
-                $.get('/get-unit-of-product/' + productId, function (data) {
+                $.get('stock/get-unit-of-product/' + productId, function (data) {
                     // console.log(data);
                     convertion_rate = parseFloat(data.unit.convert_rate);
                     unitName = data.unit.unit;

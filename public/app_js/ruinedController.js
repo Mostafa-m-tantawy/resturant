@@ -45,7 +45,7 @@ $(document).ready(function () {
                 formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
                 $.ajax({
-                    url: '/get-assignable-ruined/' + $(this).val(),
+                    url: 'stock/get-assignable-ruined/' + $(this).val(),
                     type: "POST",
                     data: formdata,
                     processData: false,
@@ -110,7 +110,7 @@ $(document).ready(function () {
                 formdata.append("from", clicked_ruind_from);
 
                 $.ajax({
-                    url: '/ruined-products',
+                    url: 'stock/ruined-products',
                     type: "POST",
                     data: formdata,
                     processData: false,
@@ -183,7 +183,7 @@ $(document).ready(function () {
         formdata.append("ruined_from",clicked_ruind_from );
 
         $.ajax({
-            url: '/get-product-cost/' + $(this).val(),
+            url: 'stock/get-product-cost/' + $(this).val(),
             type: "POST",
             data: formdata,
             processData: false,
@@ -425,7 +425,7 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            url: '/save-ruined',
+            url: 'stock/save-ruined',
             type: "post",
             data: formdata,
             processData: false,
