@@ -408,10 +408,9 @@
                                                 <div class="kt-portlet__head-wrapper">
                                                     <div class="kt-portlet__head-actions">
 
-                                                        <a href="{{url('purchase')}}"
-                                                           class="btn btn-brand btn-elevate btn-icon-sm"
-                                                           data-toggle="modal" data-target=".new_payment"><i
-                                                                class="la la-plus"></i>
+                                                        <a href="{{url('stock/purchase/create')}}"
+                                                           class="btn btn-brand btn-elevate btn-icon-sm">
+                                                            <i class="la la-plus"></i>
                                                             {{trans('main.new')}} {{trans('main.purchases')}}
                                                         </a>
                                                     </div>
@@ -419,9 +418,7 @@
                                             </div>
                                         </div>
                                         <!--begin: Datatable -->
-                                        <div
-                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                                        <table id="datatable-responsive"
+                                       <table id="datatable-responsive"
                                                class="display table table-striped table-bordered " cellspacing="0"
                                                style="width:100%">
                                             <thead>
@@ -440,7 +437,7 @@
                                                     <td>{{$purchase->total}}</td>
 
                                                     <td>
-                                                        <a title="Show" href="{{url('purchase/show/'.$purchase->id)}}">
+                                                        <a title="Show" href="{{url('stock/purchase/show/'.$purchase->id)}}">
                                                             <i class="fa fa-book-open"></i></a>
 
                                                         {{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
@@ -484,9 +481,7 @@
                                             </div>
                                         </div>
                                         <!--begin: Datatable -->
-                                        <div
-                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                                        <table id="datatable-responsive"
+                                         <table id="datatable-responsive"
                                                class="display table table-striped table-bordered " cellspacing="0"
                                                style="width:100%">
                                             <thead>
@@ -515,7 +510,7 @@
                                                         @endforeach
 
                                                     </td> <td><a title="delete"
-                                                           href="{{url('purchase/delete/'.$payment->id)}}">
+                                                           href="{{url('stock/purchase/delete/'.$payment->id)}}">
                                                             <i style="color: red" class="flaticon-delete"></i></a>
                                                     </td>
                                                 </tr>
@@ -562,7 +557,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{url('payment/store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('payment.create')}}" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title">{{trans('main.payment')}} </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

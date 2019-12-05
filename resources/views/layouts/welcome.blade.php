@@ -12,8 +12,10 @@
               @include('layouts.partials.hr_SideBar')
               @elseif(Request()->route()->getPrefix()=='/stock')
               @include('layouts.partials.stock_sidebar')
-              @elseif(Request()->route()->getPrefix()=='/sales')
-              @include('layouts.partials.sales_sidebar')
+              @elseif(Request()->route()->getPrefix()=='/cost')
+              @include('layouts.partials.cost_sidebar')
+          @elseif(Request()->route()->getPrefix()=='/pos')
+              @include('.pos.layout.partial.sidebar')
 {{--              @else--}}
 {{--              @include('layouts.partials.sidebar')--}}
 

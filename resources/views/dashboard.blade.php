@@ -187,7 +187,7 @@
                                             <div class="kt-widget kt-widget--user-profile-4">
                                                 <div class="kt-widget__head">
                                                     <div class="kt-widget__media">
-                                                        <a href="{{route('dashboard.sales')}}" >
+                                                        <a href="{{route('dashboard.cost')}}" >
 
                                                          <img class="kt-widget__img kt-hidden-"
                                                              src="{{asset('/media/icons/hr.png')}}" alt="image">
@@ -195,8 +195,8 @@
                                                     </div>
                                                     <div class="kt-widget__content">
                                                         <div class="kt-widget__section">
-                                                            <a href="{{route('dashboard.sales')}}" class="kt-widget__username">
-                                                                {{trans('main.sales management')}}
+                                                            <a href="{{route('dashboard.cost')}}" class="kt-widget__username">
+                                                                {{trans('main.cost management')}}
                                                             </a>
 
                                                             <div class="kt-portlet__body">
@@ -211,12 +211,12 @@
                                                                                 <div class="kt-widget2__checkbox">
                                                                                 </div>
                                                                                 <div class="kt-widget2__info">
-                                                                                    <a href="{{route('dashboard.sales')}}"
+                                                                                    <a href="{{route('dashboard.cost')}}"
                                                                                        class="kt-widget2__title">
                                                                                         Make Metronic Great Again.Lorem
                                                                                         Ipsum Amet
                                                                                     </a>
-                                                                                    <a href="{{route('dashboard.sales')}}"
+                                                                                    <a href="{{route('dashboard.cost')}}"
                                                                                        class="kt-widget2__username">
                                                                                         By Bob Make Metronic Great
                                                                                      Ipsum Amet
@@ -254,7 +254,7 @@
                                             <div class="kt-widget kt-widget--user-profile-4">
                                                 <div class="kt-widget__head">
                                                     <div class="kt-widget__media">
-                                                        <a href="{{route('dashboard.sales')}}" >
+                                                        <a href="{{route('dashboard.pos')}}" >
 
                                                             <img class="kt-widget__img kt-hidden-"
                                                                  src="{{asset('/media/icons/hr.png')}}" alt="image">
@@ -264,7 +264,7 @@
                                                     <div class="kt-widget__content">
                                                         <div class="kt-widget__section">
                                                             <a href="#" class="kt-widget__username">
-                                                                {{trans('main.human Resources')}}
+                                                                {{trans('main.point of sales')}}
                                                             </a>
 
                                                             <div class="kt-portlet__body">
@@ -279,12 +279,12 @@
                                                                                 <div class="kt-widget2__checkbox">
                                                                                 </div>
                                                                                 <div class="kt-widget2__info">
-                                                                                    <a href="#"
+                                                                                    <a href="{{route('dashboard.pos')}}"
                                                                                        class="kt-widget2__title">
                                                                                         Make Metronic Great Again.Lorem
                                                                                         Ipsum Amet
                                                                                     </a>
-                                                                                    <a href="#"
+                                                                                    <a href="{{route('dashboard.pos')}}"
                                                                                        class="kt-widget2__username">
                                                                                         By Bob Make Metronic Great
                                                                                         Again.Lorem Ipsum Amet

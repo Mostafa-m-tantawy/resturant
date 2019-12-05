@@ -55,9 +55,19 @@
                     <td>{{$supplier->user->name}}</td>
                     <td>{{$supplier->user->email}}</td>
                    <td>
-                       <a href="{{url('product/create/'.$supplier->id)}}" title="products"> <span>{{trans('main.products')}}</span><i  class="la la-edit" style="font-size: 25px;"></i></a>
-                      </td><td><a href="{{url('supplier/'.$supplier->id)}}"title="profile">
-                       <span>{{trans('main.profile')}}</span><i class="socicon-persona"style=" padding:5px; top:10px;font-size: 25px;"></i></a></td>
+                       <a href="{{url('stock/product/create/'.$supplier->id)}}"
+                          title="products">
+                           <span>{{trans('main.products')}}</span>
+                           <i  class="la la-edit" style="font-size: 25px;"></i>
+                       </a>
+                      </td>
+                   <td>
+                       <a href="{{route('supplier.show',[$supplier->id])}}" title="profile">
+                       <span>{{trans('main.profile')}}</span>
+                           <i class="socicon-persona"style=" padding:5px; top:10px;font-size: 25px;">
+                           </i>
+                       </a>
+                   </td>
             </tr>
                @endforeach
 

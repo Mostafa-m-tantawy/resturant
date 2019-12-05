@@ -18,7 +18,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    Restaurant
+                                    {{trans('main.restaurant')}}
                                 </h3>
                             </div>
 
@@ -26,14 +26,14 @@
                         <div class="kt-form kt-form--label-right">
                             <div class="kt-portlet__body">
                                 <div class="form-group form-group-xs row">
-                                    <label class="col-3 col-form-label">Name:</label>
+                                    <label class="col-3 col-form-label">{{trans('main.name')}}:</label>
                                     <div class="col-7">
                                         <span
                                             class="form-control-plaintext kt-font-bolder">{{$restaurant->user->name}}</span>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-xs row">
-                                    <label class="col-3 col-form-label">email:</label>
+                                    <label class="col-3 col-form-label">{{trans('main.email')}}:</label>
                                     <div class="col-7">
                                         <span
                                             class="form-control-plaintext kt-font-bolder">{{$restaurant->user->email}}</span>
@@ -60,7 +60,7 @@
 
                                 @foreach($restaurant->user->addresses as $address)
                                     <div class="form-group form-group-xs row">
-                                        <label class="col-3 col-form-label"> Address{{$loop->index+1}}:</label>
+                                        <label class="col-3 col-form-label"> {{trans('main.address')}} {{$loop->index+1}}:</label>
                                         <div class="col-7">
                                         <span class="form-control-plaintext kt-font-bolder">
                                             {{$address->address}} / {{($address->city)?$address->city->name:''}}</span>
@@ -386,8 +386,6 @@
                                             </div>
                                         </div>
                                         <!--begin: Datatable -->
-                                        <div
-                                            class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
                                         <table id="datatable-responsive"
                                                class="display table table-striped table-bordered " cellspacing="0"
                                                style="width:100%">    <thead>
@@ -406,14 +404,12 @@
 
                                                 <tr>
                                                     <td>{{$payment->id}}</td>
-                                                    <td>{{$payment->sender->id}}</td>
                                                     <td>{{$payment->sender->user->name}}</td>
-                                                    <td>{{$payment->receiver->user->name}}</td>
                                                     <td>{{$payment->payment_amount}}</td>
                                                     <td>{{$payment->payment_method}}</td>
                                                     <td>{{$payment->due_date}}</td>
                                                     <td><a title="delete"
-                                                           href="{{url('purchase/delete/'.$payment->id)}}">
+                                                           href="{{url('stock/purchase/delete/'.$payment->id)}}">
                                                             <i style="color: red" class="flaticon-delete"></i></a>
                                                     </td>
                                                 </tr>

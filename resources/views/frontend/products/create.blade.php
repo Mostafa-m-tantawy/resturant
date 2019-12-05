@@ -26,7 +26,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
                             &nbsp;
-                            <a href="{{url('product/index')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('stock/product/index')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{trans('main.all')}} {{trans('main.products')}}
                             </a>

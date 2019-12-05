@@ -84,7 +84,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="product-category/update" method="post">
+                <form action="{{url('stock/product-category/update')}}" method="post">
                     {{--                    {{url('unit/update)}}--}}
                     @csrf
                     <div class="modal-header">
@@ -130,7 +130,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{url('product-category')}}" method="post">
+                <form action="{{url('stock/product-category')}}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title">{{trans('main.create')}} {{trans('main.product')}} {{trans('main.category')}} <span class="model_type"></span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

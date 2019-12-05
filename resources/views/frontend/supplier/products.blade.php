@@ -25,11 +25,11 @@
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
-
-                                                        <a href="{{route('product.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
-                                                            <i class="la la-plus"></i>
-                                                            {{trans('main.new')}} {{trans('main.product')}}
-                                                        </a>
+                            <a href="{{route('product.create')}}"
+                               class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>
+                                {{trans('main.new')}} {{trans('main.product')}}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -63,13 +63,10 @@
                             <td>{{$product->reorder_point}}</td>
                             <td>{{$product->pivot->vat}}</td>
                             <td>
-{{--                                <a title="update"--}}
-{{--                                   data-toggle="modal" data-target=".bd-example-modal-lg"--}}
-{{--                                   data-id="{{$product->id}}"--}}
-{{--                                   data-vat="{{$product->vat}}"><i class="flaticon-edit-1"></i>--}}
-{{--                                </a>--}}
-                                <a title="delete" href="{{url('product/delete/'.$product->id.'/'.$supplier->id)}}">
-                                    <i style="color: red" class="flaticon-delete"></i></a>
+                                <a title="delete"
+                                   href="{{url('stock/product/delete/'.$product->id.'/'.$supplier->id)}}">
+                                    <i style="color: red" class="flaticon-delete"></i>
+                                </a>
                             </td>
 
                         </tr>
@@ -79,7 +76,7 @@
 
                     </tbody>
                 </table>
-                <form action="{{url('/product/create/'.$supplier->id)}}" method="post">
+                <form action="{{url('stock/product/create/'.$supplier->id)}}" method="post">
                     @csrf
                     <div class="row" id="kt_repeater_2" class="repeater">
 
@@ -118,7 +115,8 @@
 
                         </div>
                         <div class="col-12 pull-left">
-                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.submit')}}</button>
+                            <button type="submit"
+                                    class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.submit')}}</button>
                         </div>
                     </div>
                 </form>

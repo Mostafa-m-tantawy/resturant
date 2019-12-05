@@ -63,12 +63,12 @@
                             <td>{{$ruin->sup_total}}</td>
                             <td>{{$ruin->gross_total}}</td>
                             <td>
-                                <a title="update" href="{{url('dish-ruined/edit/'.$ruin->id)}}">
+                                <a title="update" href="{{url('cost/dish-ruined/edit/'.$ruin->id)}}">
                                     <i class="flaticon-edit-1"></i>
                                 </a>
                             </td>
                             <td>
-                                <a title="delete" href="{{url('dish-ruined/delete/'.$ruin->id)}}">
+                                <a title="delete" href="{{url('cost/dish-ruined/delete/'.$ruin->id)}}">
                                     <i style="color: red" class="flaticon-delete"></i></a>
 
                             </td>

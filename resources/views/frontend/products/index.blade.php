@@ -20,7 +20,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                                                        <a href="{{url('product/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                                                        <a href="{{url('stock/product/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                                             <i class="la la-plus"></i>
                                                             {{trans('main.new')}} {{trans('main.record')}}
                                                         </a>
@@ -61,7 +61,7 @@
                             <td>{{$product->reorder_point}}</td>
                             <td>{{($product->is_stockable)?'Yes':'No'}}</td>
                             <td>
-                                <a href="{{url('product/'.$product->id)}}" ><i class="flaticon-edit-1"></i></a>
+                                <a href="{{url('stock/product/'.$product->id)}}" ><i class="flaticon-edit-1"></i></a>
 
                             </td>
                             <td>
@@ -96,7 +96,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{url('product/update')}}" method="post">
+                <form action="{{url('stock/product/update')}}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title">{{trans('main.update')}} {{trans('main.product')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

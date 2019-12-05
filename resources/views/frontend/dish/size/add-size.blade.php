@@ -221,7 +221,7 @@
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="{{url('dish-size/update')}}" method="post">
+                <form action="{{url('cost/dish-size/update')}}" method="post">
                     {{--                    {{url('unit/update)}}--}}
                     @csrf
                     <div class="modal-header">

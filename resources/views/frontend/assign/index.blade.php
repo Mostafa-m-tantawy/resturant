@@ -26,7 +26,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{url('assign/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{url('stock/assign/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{trans('main.new')}} {{trans('main.record')}}
                             </a>

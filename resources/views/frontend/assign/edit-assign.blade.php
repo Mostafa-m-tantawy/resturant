@@ -21,7 +21,7 @@
 
                             <hr>
                             <form class="form-horizontal" role="form"
-                                  action="{{url('/save-purses-product/'.$purses->id)}}" method="post"
+                                  action="{{url('stock//save-purses-product/'.$purses->id)}}" method="post"
                                   enctype="multipart/form-data" data-parsley-validate novalidate>
                                 {{csrf_field()}}
 
@@ -132,7 +132,7 @@
 
                                                 <td>
                                                     @if(($purses->pursesProducts->count()) >= 1)
-                                                        <a href="{{url('deleted-purses-product/'.$product->id)}}">
+                                                        <a href="{{url('stock/deleted-purses-product/'.$product->id)}}">
                                                             <i style="color: red" class="flaticon-delete"></i>
                                                         </a>
                                                     @endif

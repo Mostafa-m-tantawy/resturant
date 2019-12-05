@@ -43,7 +43,7 @@ $(document).ready(function () {
                 formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
                 $.ajax({
-                    url: '/supplier-products/' + $(this).val(),
+                    url: 'stock/supplier-products/' + $(this).val(),
                     type: "POST",
                     data: formdata,
                     processData: false,
@@ -115,7 +115,7 @@ $(document).ready(function () {
             $('#quantity').prop("max", quantityassigned);
 
         }
-      $.get('/get-unit-of-product/' + productId, function (data) {
+      $.get('stock/get-unit-of-product/' + productId, function (data) {
             // console.log(data);
             $("#unit").text(data.unit.unit);
             convertion_rate = data.unit.convert_rate;
@@ -378,7 +378,7 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            url: '/save-refund',
+            url: 'stock/save-refund',
             type: "POST",
             data: formdata,
             processData: false,

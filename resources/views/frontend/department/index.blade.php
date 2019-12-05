@@ -57,7 +57,7 @@
                     <td>{{$department->name}}</td>
                     <td>{{$department->description}}</td>
                    <td>
-                       <a href="{{url('department/'.$department->id)}}" title="products">
+                       <a href="{{url('stock/department/'.$department->id)}}" title="products">
                            <span>{{trans('main.profile')}}</span>
                            <i  class="la la-edit" style="font-size: 25px;"></i></a>
                       </td>

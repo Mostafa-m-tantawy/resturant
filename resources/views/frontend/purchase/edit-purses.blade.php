@@ -21,7 +21,7 @@
 
                             <hr>
                             <form class="form-horizontal" role="form"
-                                  action="{{url('/save-purses-product/'.$purses->id)}}" method="post"
+                                  action="{{url('stock/save-purses-product/'.$purses->id)}}" method="post"
                                   enctype="multipart/form-data" data-parsley-validate novalidate>
                                 {{csrf_field()}}
 

@@ -48,7 +48,7 @@ window.onbeforeunload = function () {
     });
     $.ajax({
 
-        url: '/all-delete-pending',
+        url: 'stock/all-delete-pending',
         type: "post",
         data: formdata,
         processData: false,
@@ -72,7 +72,7 @@ $(document).ready(function () {
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
         $.ajax({
-            url: '/category-dishes/' + $(this).val(),
+            url: 'stock/category-dishes/' + $(this).val(),
             type: "POST",
             data: formdata,
             processData: false,
@@ -170,7 +170,7 @@ $(document).ready(function () {
                 }
             });
             $.ajax({
-                url: '/dish-available-units',
+                url: 'stock/dish-available-units',
                 type: "post",
                 data: formdataq,
                 processData: false,
@@ -313,7 +313,7 @@ $(document).ready(function () {
         });
         $.ajax({
 
-            url: '/dish-delete-pending',
+            url: 'stock/dish-delete-pending',
             type: "post",
             data: formdata,
             processData: false,
@@ -433,7 +433,7 @@ $(document).ready(function () {
         });
         $.ajax({
 
-            url: '/save-dish-ruined',
+            url: 'stock/save-dish-ruined',
             type: "post",
             data: formdata,
             processData: false,

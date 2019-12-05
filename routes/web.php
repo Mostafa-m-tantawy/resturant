@@ -37,14 +37,14 @@ Route::post ('delete/address-phones',     'SupplierController@deleteAddressPhone
 
 
 
-// -------------------------restaurant  routes--------------------------------
-Route::resource('restaurant','RestaurantController')->except(['store']);;
-Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restaurant.stock');
-
-
-
 
     Route::prefix('stock')->group(function () {
+
+
+// -------------------------restaurant  routes--------------------------------
+        Route::resource('restaurant','RestaurantController')->except(['store']);;
+        Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restaurant.stock');
+
 
         Route::any('/dashboard', 'DashboardController@stockDashboard')->name('dashboard.stock');
         include('stock/department.php');
@@ -54,11 +54,16 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
 // -------------------------stock reports --------------------------------
         Route::any('stock/index','StockController@index')->name('stock.index');
 
+       include('stock/purchase.php');
        include('stock/assign.php');
         include('stock/payment.php');
         include('stock/refund.php');
         include('stock/ruined.php');
 
+
+
+// -----------------expenses ----------------------------
+        Route::resource ('expenses','ExpensesController');
 
     });
 
@@ -83,8 +88,8 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
     });
 
 
-    Route::prefix('sales')->group(function () {
-        Route::any('/dashboard', 'DashboardController@salesDashboard')->name('dashboard.sales');
+    Route::prefix('cost')->group(function () {
+        Route::any('/dashboard', 'DashboardController@salesDashboard')->name('dashboard.cost');
 
         include('order/dish.php');
         include('order/dish_extra.php');
@@ -95,11 +100,13 @@ Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restau
         include('order/recipe.php');
     });
 
+    Route::prefix('pos')->group(function () {
+        Route::any('/dashboard', 'DashboardController@posDashboard')->name('dashboard.pos');
+        include('pos/order.php');
+
+    });
 
 
-
-// -----------------expenses ----------------------------
-Route::resource ('expenses','ExpensesController');
 
 
 //------------- system configuration  --------------------------

@@ -41,7 +41,7 @@ $(document).ready(function (e) {
     $("#product").on('change', function (e) {
         var productId = $("#product").val()
         $("#vat").val($('#product option:selected ').data('vat'));
-        $.get('/get-unit-of-product/' + productId, function (data) {
+        $.get('stock/get-unit-of-product/' + productId, function (data) {
             //console.log(data);
             $("#unit").text(data.unit.unit);
             $("#child_unit").text(data.unit.child_unit);
