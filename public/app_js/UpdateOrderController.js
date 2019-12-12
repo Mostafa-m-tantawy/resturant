@@ -67,7 +67,7 @@ window.onbeforeunload = function () {
     });
     $.ajax({
 
-        url: 'sales/all-delete-pending',
+        url: 'cost/all-delete-pending',
         type: "post",
         data: formdata,
         processData: false,
@@ -78,35 +78,40 @@ window.onbeforeunload = function () {
     });
 
 }
+
+
 $(document).ready(function () {
 
-     vatPercentage = $('input[name="vatPercentage"]').val();
-     servicePercentage = $('input[name="servicePercentage"]').val();
-     discount = $('input[name="discount"]').val();;
-     staff = $('input[name="staff"]').val();;
-
-    if(vatPercentage != 0)
-        $('#vat').     prop("checked",true);
-
-
-    if(servicePercentage != 0)
-    $('#service'). prop("checked",true);
-
-
-    if(staff != 0)
-     $('#staff').   prop("checked",true);
+     vatPercentage      = $('input[name="vatPercentage"]').val();
+     servicePercentage  = $('input[name="servicePercentage"]').val();
 
     var formdata = new FormData();
     formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
     $.ajax({
-        url: 'sales/order/edit-json/' + $('input[name="order_id"]').val(),
+        url: 'cost/order/edit-json/' + $('input[name="order_id"]').val(),
         type: "post",
         data: formdata,
         processData: false,
         contentType: false,
         success: function (data) {
             console.log(data);
+
+            if(data.vat != 0) {
+                $('#vat').prop("checked", true);
+                vatPercentage      = data.vat;
+
+            }
+            if(data.service != 0) {
+                $('#service').prop("checked", true);
+                servicePercentage  = data.service;
+            }
+            if(data.is_staff != 0) {
+                $('#staff').prop("checked", true);
+                staff              = true;
+
+            }
+            discount           = data.discount;
 
             $.each(data.order_details, function (i, item) {
                 purse = {
@@ -169,7 +174,7 @@ $(document).ready(function () {
         formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
 
         $.ajax({
-            url: 'sales/category-dishes/' + $(this).val(),
+            url: 'cost/category-dishes/' + $(this).val(),
             type: "POST",
             data: formdata,
             processData: false,
@@ -289,7 +294,7 @@ $(document).ready(function () {
                 }
             });
             $.ajax({
-                url: 'sales/dish-available-units',
+                url: 'cost/dish-available-units',
                 type: "post",
                 data: formdataq,
                 processData: false,
@@ -461,7 +466,7 @@ $(document).ready(function () {
             });
             $.ajax({
 
-                url: 'sales/dish-delete-pending',
+                url: 'cost/dish-delete-pending',
                 type: "post",
                 data: formdata,
                 processData: false,
@@ -556,7 +561,7 @@ $(document).ready(function () {
         $("#pursesDetailsRender").empty();
 
         $(this).renderHtml(purses);
-        // console.log($(this).is(':checked'));
+        console.log($(this).is(':checked'));
     })
 
     $('#staff').click(function () {
@@ -614,7 +619,7 @@ $(document).ready(function () {
         });
         $.ajax({
 
-            url: 'sales/order/update',
+            url: 'cost/order/update',
             type: "post",
             data: formdata,
             processData: false,

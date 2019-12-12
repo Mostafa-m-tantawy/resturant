@@ -16,4 +16,7 @@ return $this->belongsTo(DishSize::class,'side_id');
     public  function DishSize(){
 return $this->belongsTo(DishSize::class);
     }
+
+
+
 }

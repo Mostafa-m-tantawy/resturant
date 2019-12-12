@@ -20,6 +20,8 @@ class CreateOrderDetailsTable extends Migration
             $table->double('unit_cost')->nullable();
             $table->double('unit_price')->nullable();
             $table->double('quantity')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

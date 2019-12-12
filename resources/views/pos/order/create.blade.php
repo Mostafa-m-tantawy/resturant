@@ -1,8 +1,41 @@
 @extends('.pos.layout.pos_app')
 @section('content')
+    <meta name="service" content="  {{$systemconf->where('name','service')->first()->value}}">
+    <meta name="vat" content="{{$systemconf->where('name','vat')->first()->value}}">
+    <meta name="type" content="{{$type}}">
 
-    <link href="css/demo1/pages/general/invoices/invoice-2.css" rel="stylesheet" type="text/css" />
 
+
+
+<style>
+    span {cursor:pointer; }
+    .number{
+        margin:100px;
+    }
+    .minus, .plus{
+        width:30px;
+        height:30px;
+        background:#f2f2f2;
+        border-radius:4px;
+        padding:2px 0px 2px 0px;
+        border:1px solid #ddd;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+    }
+    .quantity {
+        height:25px;
+        width: 40px;
+        text-align: center;
+        font-size: 26px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: inline-block;
+        vertical-align: middle;
+    }.table th, .table td {
+        padding: unset;
+         }
+</style>
     <div class="row">
         <div class="col-7">
             <div class="kt-portlet">
@@ -16,439 +49,74 @@
                 <div class="kt-portlet__body">
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                        </li>
+
+                        @foreach($categories as $category)
+                            <li class="nav-item">
+
+                                <a class="nav-link @if($loop->first) active @endif" id="{{$category->name}}-tab"
+                                   data-toggle="tab" href="#{{$category->name}}" role="tab"
+                                   aria-controls="{{$category->name}}" aria-selected="true">{{$category->name}}</a>
+                            </li>
+                        @endforeach
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home"
-                             role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
+                        @foreach($categories as $category)
 
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
+
+                            <div class="tab-pane fade @if($loop->first) show active @endif" id="{{$category->name}}"
+                                 role="tabpanel" aria-labelledby="{{$category->name}}-tab">
+                                <div class="row">
+                                    @foreach($category->dishes as $dish)
+
+                                        <div class="col-2">
+                                            <div class="kt-portlet kt-portlet--height-fluid">
+                                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
+                                                <div class="kt-portlet__body kt-portlet__body--fit-y">
+                                                    <!--begin::Widget -->
+                                                    <div class="kt-widget kt-widget--user-profile-4">
+                                                        <div class="kt-widget__head">
+                                                            <a onclick="newDish({{$dish->id}})">
+                                                                <div class="kt-widget__media">
+                                                                    <img class="kt-widget__img kt-hidden-"
+                                                                         src="/media/users/300_21.jpg"
+                                                                         alt="image">
+                                                                </div>
                                                             </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
+                                                            <div class="kt-widget__content">
+                                                                <div class="kt-widget__section">
+                                                                    <a onclick="newDish({{$dish->id}})"
+                                                                       class="kt-widget__username">
+                                                                        {{$dish->name}}
+                                                                    </a>
+                                                                    <div class="kt-widget__button">
+                                                                        <span class="btn btn-label-warning btn-sm">Active</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <!--end::Widget -->
                                                 </div>
                                             </div>
-
-                                            <!--end::Widget -->
                                         </div>
-                                    </div>
-                                </div>
 
 
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
 
 
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xl-2">
-                                    <div class="kt-portlet kt-portlet--height-fluid">
-                                        <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                            <!--begin::Widget -->
-                                            <div class="kt-widget kt-widget--user-profile-4">
-                                                <div class="kt-widget__head">
-                                                    <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                                    </div>
-                                                    <div class="kt-widget__content">
-                                                        <div class="kt-widget__section">
-                                                            <a href="#" class="kt-widget__username">
-                                                                John Beans
-                                                            </a>
-                                                            <div class="kt-widget__button">
-                                                                <span class="btn btn-label-warning btn-sm">Active</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--end::Widget -->
-                                        </div>
-                                    </div>
                                 </div>
 
                             </div>
 
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">..dddddd.</div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">..sssssssss.</div>
+                        @endforeach
+
                     </div>
 
                 </div>
             </div>
 
-            <h1><a title="update"
-                   data-toggle="modal" data-target=".sizes_modal">
-                    modal 1</a></h1>
         </div>
         <div class="col-5">
 
@@ -464,37 +132,21 @@
                             </div>
                         </div>
                         <div class="kt-portlet__body">
-
-                            <table class="table table-borderless">
+                       <table class="table table-borderless"  id="invoice">
                                 <thead>
-                                <tr> <th>dish</th>
-                                    <th>quantity</th>
-                                    <th>price</th>
-                                </tr></thead>
-                                <tbody>
                                 <tr>
-                                    <td> dfsdf fsdfsdf
-                                        sdfsdfsdfdsfsdf
-                                        sdfsdfsdfsdfsdfs
-                                        <br><br>11111111dddsdfsdfsdfsdfsd
-                                    </td>
-                                    <td>11</td>
-                                    <td>11</td>
+                                    <th>{{trans('main.dish')}}</th>
+                                    <th>{{trans('main.size')}}</th>
+                                    <th>{{trans('main.quantity')}}</th>
+                                    <th>{{trans('main.price')}}</th>
+                                    <th>{{trans('main.del')}}</th>
                                 </tr>
+                                </thead>
+                                <tbody>
+
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th>sub total</th>
-                                    <th colspan="2">2444</th>
-                                </tr>
-                                <tr>
-                                    <th> total</th>
-                                    <th colspan="2">2444</th>
-                                </tr>
-                                <tr>
-                                    <th> total</th>
-                                    <th colspan="2">2444</th>
-                                </tr>
+
                                 </tfoot>
                             </table>
 
@@ -512,7 +164,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{trans('main.delete')}} <span class="name"></span></h5>
+                    <h5 class="modal-title">{{trans('main.sizes')}} <span class="name"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -520,104 +172,28 @@
 
                 <div class="modal-body">
                     <div class="row">
+                        <div class="col-8">
+                            <div class="row" id="sizes">
 
 
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
-                                </div>
                             </div>
                         </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1> {{trans('main.details')}}</h1>
+                                    <table class="table dish_details">
+                                        <tbody>
 
-
-
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+
                         </div>
-
-
-
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="col-12 pull-left">
-                        <button class="btn btn-primary" onclick="DishSizes(1,'small',10)"> sides</button>
-                    </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -626,110 +202,50 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{trans('main.delete')}} <span class="name"></span></h5>
+                    <h5 class="modal-title">{{trans('main.sides')}} </h5>
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+
                 </div>
 
                 <div class="modal-body">
+
                     <div class="row">
-
-
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
-                                </div>
-                            </div>
+                        <div class="col-12">
+                            <h6 class="pull-right">{{trans('main.available sides')}} -
+                                (<span id="available_sides"></span>)
+                            </h6>
                         </div>
-
-
-
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row" id="sides">
+
+
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1> {{trans('main.details')}}</h1>
+                                    <table class="table dish_details">
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <div class="col-12 pull-left">
-                        <button class="btn btn-primary" onclick="DishSides(1,[1,2],['ris','pasta'])"> extra</button>
-                        finish</button>
+                        <button class="btn btn-primary" onclick="DishSides()">
+                        {{trans('main.extras')}}</button>
                     </div>
                 </div>
 
@@ -742,7 +258,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{trans('main.delete')}} <span class="name"></span></h5>
+                    <h5 class="modal-title">{{trans('main.extras')}} <span class="name"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -750,102 +266,34 @@
 
                 <div class="modal-body">
                     <div class="row">
+                        <div class="col-8">
+                            <div class="row" id="extras">
 
 
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
-                                </div>
                             </div>
                         </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1> {{trans('main.details')}}</h1>
+                                    <table class="table dish_details">
+                                        <tbody>
 
-
-
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+
                         </div>
-
-
-
-                        <div class="col-xl-2">
-                            <div class="kt-portlet kt-portlet--height-fluid">
-                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                <div class="kt-portlet__body kt-portlet__body--fit-y">
-                                    <!--begin::Widget -->
-                                    <div class="kt-widget kt-widget--user-profile-4">
-                                        <div class="kt-widget__head">
-                                            <div class="kt-widget__media">
-                                                <img class="kt-widget__img kt-hidden-" src="./assets/media/users/300_21.jpg" alt="image">
-                                            </div>
-                                            <div class="kt-widget__content">
-                                                <div class="kt-widget__section">
-                                                    <a href="#" class="kt-widget__username">
-                                                        John Beans
-                                                    </a>
-                                                    <div class="kt-widget__button">
-                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end::Widget -->
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <div class="col-12 pull-left">
-                        <button class="btn btn-primary" onclick="DishExtra(1,[1,2],['cheeas','onion'],[10,11])"> finish</button>
+                        <button class="btn btn-primary" onclick="DishExtra()">
+                            {{trans('main.finish')}}
+                        </button>
                     </div>
                 </div>
 
@@ -854,28 +302,12 @@
     </div>
 
 @stop
-@section('scripts')
-    {{----}}
-    <script src="{{ url('/app_js/posneworder.js') }}"></script>
 
+
+@section('scripts')
+     <script src="{{ url('/app_js/posneworder.js') }}"></script>
     <script>
 
-        $(document).ready(function () {
-//
-            {{--            $('#updateAsset').on('show.bs.modal', function (e) {--}}
-            {{--                var Id = $(e.relatedTarget).data('id');--}}
-            {{--                var name = $(e.relatedTarget).data('name');--}}
-            {{--                var from = $(e.relatedTarget).data('from');--}}
-            {{--                var to = $(e.relatedTarget).data('to');--}}
-            {{--                $(e.currentTarget).find('input[name="id"]').val(Id);--}}
-            {{--                $(e.currentTarget).find('input[name="name"]').val(name);--}}
-            {{--                $(e.currentTarget).find('input[name="from"]').val(from);--}}
-            {{--                $(e.currentTarget).find('input[name="to"]').val(to);--}}
-            {{--                $(e.currentTarget).find('form').attr('action', "{{url('hr/holiday/')}}/" + Id);--}}
-            {{--            });--}}
 
-
-        })
     </script>
-
 @stop

@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->double('service')->default(0)->nullable();
             $table->double('vat')->default(0)->nullable();
             $table->boolean('is_staff')->default(0)->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

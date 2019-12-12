@@ -5,10 +5,10 @@
 
 @section('content')
     <input type="hidden" id='order_id'name="order_id" value="{{$order->id}}">
-    <input type="hidden" name="vatPercentage" value="{{$order->getOriginal('vat')}}">
-    <input type="hidden" name="servicePercentage" value="{{$order->getOriginal('service')}}">
-    <input type="hidden" name="discount" value="{{$order->discount}}">
-    <input type="hidden" name="staff" value="{{$order->is_staff}}">
+    <input type="hidden" name="vatPercentage" value="{{$systemconf->where('name','vat')->first()->value}}">
+    <input type="hidden" name="servicePercentage" value="{{$systemconf->where('name','service')->first()->value}}">
+
+
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
         <div class="kt-portlet kt-portlet--mobile">
