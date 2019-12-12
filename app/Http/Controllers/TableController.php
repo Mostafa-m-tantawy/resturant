@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DishCategory;
+use App\Hall;
+use App\Table;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class DishCategoryController extends Controller
+class TableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,9 @@ class DishCategoryController extends Controller
      */
     public function index()
     {
-        $categories=DishCategory::all();;
-        return  view('frontend.dish_category.index')->with(compact('categories'));;
+        $halls = Hall::all();
+        $tables = Table::all();
+        return view('conf.table.index')->with(compact('halls','tables'));
 
     }
 
@@ -39,22 +40,22 @@ class DishCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255','unique:dish_categories'],
-            'description' => ['nullable', 'string', 'max:255'],
-
+            'name' => ['required', 'string', 'unique:tables'],
+            'hall' => ['required', 'Integer',],
         ]);
 
-        $category=new DishCategory();
-        $category->name=$request->name;
-        $category->description=$request->description;
-        $category->restaurant_id = Auth::user()->restaurant->id;
-        if($request->show=='on')
-            $category->show = 1;
-        else
-        $category->show = 0;
-        $category->save();
+        $table = new Table();
+        $table->name = $request->name;
+        $table->hall_id = $request->hall;
+        if ($request->status == 'on') {
+            $table->status = 1;
 
-        return  redirect()->back();
+        } else {
+            $table->status = 0;
+
+        }
+        $table->save();
+        return redirect()->back();
     }
 
     /**
@@ -86,25 +87,26 @@ class DishCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-
-        $category=DishCategory::findOrFail($request->id);
         $request->validate([
-            'name' => ['required', 'string', 'max:255','unique:dish_categories,name,'.$request->id],
-            'description' => ['nullable', 'string', 'max:255'],
-
+            'name' => ['required', 'string', 'unique:tables,name,'.$id],
+            'hall' => ['required', 'Integer',],
         ]);
 
-        $category->name=$request->name;
-        $category->description=$request->description;
-        if($request->show=='on')
-            $category->show = 1;
-        else
-            $category->show = 0;
-        $category->save();
 
-        return  redirect()->back();
+        $table = Table::find($id);
+        $table->name = $request->name;
+        $table->hall_id = $request->hall;
+        if ($request->status == 'on') {
+            $table->status = 1;
+
+        } else {
+            $table->status = 0;
+
+        }
+        $table->save();
+        return redirect()->back();
     }
 
     /**

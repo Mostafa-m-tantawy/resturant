@@ -11,64 +11,45 @@
 |
 */
 
-Route::get('/','HomeController@index');
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('states','SupplierController@states');
+Route::post('states', 'SupplierController@states');
 Auth::routes();
-Route::resource('restaurant','RestaurantController')->only([
+Route::resource('restaurant', 'RestaurantController')->only([
     'store',
 ]);
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get ('download',     'DashboardController@download');
-    Route::post ('chang-lang',     'DashboardController@changLang');
+    Route::get('download', 'DashboardController@download');
+    Route::post('chang-lang', 'DashboardController@changLang');
+
+    Route::post('address/update', 'SupplierController@updateAddress');
+    Route::post('phone/update', 'SupplierController@updatePhone');
+    Route::post('delete/address-phones', 'SupplierController@deleteAddressPhones');
 
 
-
-Route::post ('address/update',     'SupplierController@updateAddress');
-Route::post ('phone/update',     'SupplierController@updatePhone');
-Route::post ('delete/address-phones',     'SupplierController@deleteAddressPhones');
-
-
-
-
-
-
-
-
-
-    Route::prefix('stock')->group(function () {
-
-
+    Route::prefix('stock')->middleware(['auth'])->group(function () {
 // -------------------------restaurant  routes--------------------------------
-        Route::resource('restaurant','RestaurantController')->except(['store']);;
-        Route::post ('restaurant/{id}/stock','RestaurantController@stock')->name('restaurant.stock');
-
-
+        Route::resource('restaurant', 'RestaurantController')->except(['store']);;
+        Route::post('restaurant/{id}/stock', 'RestaurantController@stock')->name('restaurant.stock');
         Route::any('/dashboard', 'DashboardController@stockDashboard')->name('dashboard.stock');
         include('stock/department.php');
         include('stock/product.php');
         include('stock/supplier.php');
         include('stock/unit.php');
-// -------------------------stock reports --------------------------------
-        Route::any('stock/index','StockController@index')->name('stock.index');
-
-       include('stock/purchase.php');
-       include('stock/assign.php');
+        Route::any('stock/index', 'StockController@index')->name('stock.index');
+        include('stock/purchase.php');
+        include('stock/assign.php');
         include('stock/payment.php');
         include('stock/refund.php');
         include('stock/ruined.php');
-
-
-
-// -----------------expenses ----------------------------
-        Route::resource ('expenses','ExpensesController');
+        include('stock/expense.php');
 
     });
 
 
-    Route::prefix('hr')->group(function () {
+    Route::prefix('hr')->middleware(['auth'])->group(function () {
 
         Route::any('/dashboard', 'DashboardController@hrDashboard')->name('dashboard.hr');
 
@@ -88,7 +69,7 @@ Route::post ('delete/address-phones',     'SupplierController@deleteAddressPhone
     });
 
 
-    Route::prefix('cost')->group(function () {
+    Route::prefix('cost')->middleware(['auth'])->group(function () {
         Route::any('/dashboard', 'DashboardController@salesDashboard')->name('dashboard.cost');
 
         include('order/dish.php');
@@ -100,23 +81,21 @@ Route::post ('delete/address-phones',     'SupplierController@deleteAddressPhone
         include('order/recipe.php');
     });
 
-    Route::prefix('pos')->group(function () {
+    Route::prefix('pos')->middleware(['auth'])->group(function () {
         Route::any('/dashboard', 'DashboardController@posDashboard')->name('dashboard.pos');
         include('pos/order.php');
 
     });
+    Route::prefix('conf')->middleware(['auth'])->group(function () {
+        include('conf/conf.php');
+        include('conf/hall.php');
+        include('conf/table.php');
 
-
-
-
-//------------- system configuration  --------------------------
-    Route::get ('system-configuration',             'systemConfigurationController@index')   ->name('system-conf.index');;
-    Route::post ('system-configuration/store',      'systemConfigurationController@store')   ->name('system-conf.store');;
-
+    });
 
 
     Route::any('/dashboard', 'DashboardController@dashboard')->name('dashboard');
-    Route::get('/logout', function (){
+    Route::get('/logout', function () {
         Auth::logout();
         return redirect(route('home'));
     });

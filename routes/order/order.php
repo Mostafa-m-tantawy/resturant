@@ -3,7 +3,7 @@
 //------------- order  --------------------------
 Route::get ('order',                'OrderController@index')                ->name('order.index');;
 Route::get ('order/create',         'OrderController@newOrder')             ->name('order.create');;
-Route::get ('order/cost',           'OrderController@costOrder')             ->name('order.cost');;
+Route::get ('order/cost',           'OrderController@costOrder')            ->name('order.cost');;
 Route::post('save-order',           'OrderController@saveOrder')            ->name('order.save');;
 Route::post('dish-available-units', 'OrderController@dishAvailableUnits')   ->name('order.dish.available');;
 Route::post('all-delete-pending',   'OrderController@allDeletePending')     ->name('order.delete.pending');;

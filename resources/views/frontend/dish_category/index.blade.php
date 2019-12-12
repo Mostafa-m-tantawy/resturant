@@ -49,6 +49,7 @@
                         <th>{{trans('main.id')}}</th>
                         <th>{{trans('main.name')}}</th>
                         <th>{{trans('main.description')}}</th>
+                        <th>{{trans('main.show')}}</th>
                         <th>{{trans('main.action')}}</th>
                     </tr>
                     </thead>
@@ -59,11 +60,12 @@
                             <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
                             <td>{{$category->description}}</td>
+                            <td>{{$category->show?'yes':'no'}}</td>
                             <td>
                                 <a title="update"
-                                   data-toggle="modal" data-target=".bd-example-modal-lg"
+                                   data-toggle="modal" data-target=".updatemodel"
                                    data-name="{{$category->name}}" data-id="{{$category->id}}"
-                                   data-description="{{$category->description}}">
+                                   data-description="{{$category->description}}" data-isshow="{{$category->show}}">
                                     <i class="flaticon-edit-1"></i>
                                 </a>
                             </td>
@@ -80,11 +82,11 @@
 
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="updatemodel" tabindex="-1" role="dialog"
+    <div class="modal fade updatemodel" id="updatemodel" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="dish-category/update" method="post">
+                <form  method="post">
                     {{--                    {{url('unit/update)}}--}}
                     @csrf
                     <div class="modal-header">
@@ -111,7 +113,15 @@
                                     <label>{{trans('main.description')}}</label>
                                     <input type="text" class="form-control" name="description">
                                 </div>
-
+                                <div class="form-group col-12">
+                                    <label style="display: block;"> {{trans('main.show')}}</label>
+                                    <span class="kt-switch kt-switch--lg kt-switch--icon">
+											<label>
+											<input type="checkbox" id="show" name="show" class="form-control">
+												<span></span>
+												</label>
+											</span>
+                                </div>
                             </div>
                         </div>
 
@@ -154,6 +164,15 @@
                                         <label>{{trans('main.description')}}</label>
                                         <input type="text" class="form-control" name="description">
                                     </div>
+                                    <div class="form-group ">
+                                        <label style="display: block;"> {{trans('main.show')}}</label>
+                                        <span class="kt-switch kt-switch--lg kt-switch--icon">
+											<label>
+											<input type="checkbox" id="show" name="show" class="form-control">
+												<span></span>
+												</label>
+											</span>
+                                    </div>
 
                                 </div>
 
@@ -186,9 +205,16 @@
                 var Id = $(e.relatedTarget).data('id');
                 var name = $(e.relatedTarget).data('name');
                 var description = $(e.relatedTarget).data('description');
+                var show = $(e.relatedTarget).data('show');
                 $(e.currentTarget).find('input[name="id"]').val(Id);
                 $(e.currentTarget).find('input[name="name"]').val(name);
                 $(e.currentTarget).find('input[name="description"]').val(description);
+
+                console.log(show);
+              if(show!=0 && show!=null)
+                  $(e.currentTarget).find('input[name="show"]').attr('checked',true);
+
+                $(e.currentTarget).find('form').attr('action', "{{url('cost/dish-category/update')}}" );
             });
 
         })

@@ -315,6 +315,78 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="kt-portlet kt-portlet--height-fluid">
+
+                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <!--begin::Widget -->
+                                            <div class="kt-widget kt-widget--user-profile-4">
+                                                <div class="kt-widget__head">
+                                                    <div class="kt-widget__media">
+                                                        <a href="{{route('system-conf.index')}}" >
+
+                                                            <img class="kt-widget__img kt-hidden-"
+                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        </a>
+
+                                                    </div>
+                                                    <div class="kt-widget__content">
+                                                        <div class="kt-widget__section">
+                                                            <a href="{{route('system-conf.index')}}" class="kt-widget__username">
+                                                                {{trans('main.configration')}}
+                                                            </a>
+
+                                                            <div class="kt-portlet__body">
+                                                                <div class="tab-content">
+
+
+                                                                    <div class="tab-pane active"
+                                                                         id="kt_widget2_tab1_content">
+                                                                        <div class="kt-widget2">
+                                                                            <div
+                                                                                class="kt-widget2__item kt-widget2__item--primary">
+                                                                                <div class="kt-widget2__checkbox">
+                                                                                </div>
+                                                                                <div class="kt-widget2__info">
+                                                                                    <a href="{{route('system-conf.index')}}"
+                                                                                       class="kt-widget2__title">
+                                                                                        Make Metronic Great Again.Lorem
+                                                                                        Ipsum Amet
+                                                                                    </a>
+                                                                                    <a href="{{route('system-conf.index')}}"
+                                                                                       class="kt-widget2__username">
+                                                                                        By Bob Make Metronic Great
+                                                                                        Again.Lorem Ipsum Amet
+                                                                                        Make Metronic Great Again.Lorem
+                                                                                        Ipsum Amet
+                                                                                        Make Metronic Great Again.Lorem
+                                                                                        Ipsum Amet
+                                                                                        Make Metronic Great Again.Lorem
+                                                                                        Ipsum Amet
+
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--end::Widget -->
+                                        </div>
+                                    </div>
+                                </div>
 
 
                             </div>

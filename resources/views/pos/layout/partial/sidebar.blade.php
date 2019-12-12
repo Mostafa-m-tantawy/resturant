@@ -22,45 +22,48 @@
              data-ktmenu-scroll="0">
             <ul class="kt-menu__nav ">
                 <li class="kt-menu__item">
-                    <a href="{{url('')}}" class="kt-menu__link ">
+                    <a href="{{route('dashboard.pos')}}" class="kt-menu__link ">
                         <img class="img-fluid"style=" height: 100%"  src="{{asset('media/icons/dasbaoard.png')}}"/>
                     </a>
 
-                    <span style=" text-align: center">{{trans('dashboard')}}</span>
+                    <span style=" text-align: center">{{trans('main.dashboard')}}</span>
                 </li>
+                <li class="kt-menu__item">
+                    <a href="{{url('pos/order')}}?type=restaurant" class="kt-menu__link ">
+                        <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/order_list.png')}}"/>
+                    </a>
+
+                    <span style="text-align: center"> {{trans('main.order List')}} </span>
+                </li>
+
                 <li class="kt-menu__item">
                     <a href="{{route('order.create')}}?type=restaurant" class="kt-menu__link ">
                         <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/resturant.png')}}"/>
                     </a>
 
-                    <span style="text-align: center"> food court </span>
+                    <span style="text-align: center"> {{trans('main.food court')}} </span>
                 </li>
                 <li class="kt-menu__item">
                     <a  href="{{route('order.create')}}?type=takeaway" class="kt-menu__link ">
-                        <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/delivery1.png')}}"/>
+                        <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/takeaway1.png')}}"/>
                     </a>
 
-                    <span style="text-align: center">takeaway</span>
+                    <span style="text-align: center">{{trans('main.takeaway')}}</span>
                 </li>
                 <li class="kt-menu__item">
                     <a  href="{{route('order.create')}}?type=delivery" class="kt-menu__link ">
                         <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/delivery1.png')}}"/>
                     </a>
 
-                    <span style="text-align: center">delivery</span>
+                    <span style="text-align: center">{{trans('main.delivery')}}</span>
                 </li>
+
+
                 <li class="kt-menu__item">
                     <a href="javascript:;" class="kt-menu__link ">
-                        <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/takeaway.png')}}"/>
+                        <img class="img-fluid" style="height: 100%" src="{{asset('/media/icons/pos/customer.png')}}"/>
                     </a>
-
-                    <span style="text-align: center">order history</span>
-                </li> <li class="kt-menu__item">
-                    <a href="javascript:;" class="kt-menu__link ">
-                        <img class="img-fluid" style="height: 100%" src="{{asset('/media/icons/pos/support-512.png')}}"/>
-                    </a>
-
-                    <span style="text-align: center">order history</span>
+                    <span style="text-align: center">{{trans('main.customer')}}</span>
                 </li>
 
 

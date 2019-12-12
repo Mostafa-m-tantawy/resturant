@@ -16,6 +16,8 @@
               @include('layouts.partials.cost_sidebar')
           @elseif(Request()->route()->getPrefix()=='/pos')
               @include('.pos.layout.partial.sidebar')
+          @elseif(Request()->route()->getPrefix()=='/conf')
+              @include('layouts.partials.conf_SideBar')
 {{--              @else--}}
 {{--              @include('layouts.partials.sidebar')--}}
 
