@@ -9,7 +9,26 @@ class Table extends Model
 {
     use baseTrait;
 
-    public function hall(){
+    public function hall()
+    {
         return $this->belongsTo(Hall::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'table_id');
+    }
+
+    public function getOccupiedAttribute()
+    {
+        $order = $this->orders()->where('status', '<>', 'closed')->get();
+        return ($order->count() > 0) ? true : false;
+    }
+
+    public function getCurrentOrderAttribute()
+    {
+
+        $order = $this->orders()->where('status', '<>', 'closed')->get();
+        return ($order->count() > 0) ? $order->first()->id : 0;
     }
 }

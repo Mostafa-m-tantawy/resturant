@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Hall;
+use App\OrderPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HallController extends Controller
+class OrderPaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class HallController extends Controller
      */
     public function index()
     {
-        $halls = Hall::all();
-        return view('conf.hall.index')->with(compact('halls'));
+        //
     }
 
     /**
@@ -37,22 +36,20 @@ class HallController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'unique:halls'],
-        ]);
-
-        $hall = new Hall();
-        $hall->restaurant_id = Auth::user()->restaurant->id;
-        $hall->name = $request->name;
-        if ($request->status == 'on') {
-            $hall->status = 1;
-
+        $data = $request->all();
+        $payment = new OrderPayment();
+        if ($payment->validate($data)) {
+            $payment->restaurant_id = Auth::user()->restaurant->id;
+            $payment->order_id      = $request->order_id;
+            $payment->amount     = $request->amount;
+            $payment->method     = $request->payment_method;
+            $payment->note = $request->note;
+            $payment->save();
+            return response()->json('ok', '200');
         } else {
-            $hall->status = 0;
-
+            $errors = $payment->errors();
+            return response()->json($errors, '200');
         }
-        $hall->save();
-        return redirect()->back();
     }
 
     /**
@@ -86,21 +83,7 @@ class HallController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'unique:halls,name,'.$id],
-        ]);
-
-        $hall =  Hall::find($id);
-        $hall->name = $request->name;
-        if ($request->status == 'on') {
-            $hall->status = 1;
-
-        } else {
-            $hall->status = 0;
-
-        }
-        $hall->save();
-        return redirect()->back();
+        //
     }
 
     /**
@@ -111,6 +94,7 @@ class HallController extends Controller
      */
     public function destroy($id)
     {
-        //
+        OrderPayment::destroy($id);
+        return  redirect()->back();
     }
 }

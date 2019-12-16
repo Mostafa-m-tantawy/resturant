@@ -19,14 +19,14 @@ class Order extends Model
 
     public function getVatAttribute(){
 
-        return ($this->getOriginal('vat')/100)*($this->sup_total+$this->service);
+        return ($this->getOriginal('vat'))*($this->sup_total+$this->service);
 
     }
 
 
     public function getServiceAttribute(){
 
-        return ($this->getOriginal('service')/100)*$this->sup_total;
+        return ($this->getOriginal('service'))*$this->sup_total;
 
     }
 
@@ -50,8 +50,26 @@ public function getSupTotalCostAttribute(){
 
     public function getGrossTotalAttribute(){
 
-        return $this->sup_total+$this->vat+$this->service;
+        return $this->sup_total+$this->vat+$this->service-$this->discount;
 
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(OrderPayment::class,'order_id');
+    }
+
+
+    public function getDemandAttribute(){
+        return $this->GrossTotal-$this->payment;
+
+    }
+
+    public function getPaymentAttribute(){
+        $total=0;
+        $total = $this->payments->sum('amount');
+
+        return $total;
     }
 
 }

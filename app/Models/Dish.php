@@ -17,5 +17,8 @@ class Dish extends Model
    public  function  department(){
         return $this->belongsTo(Department::class);
     }
+  public  function  category(){
+        return $this->belongsTo(DishCategory::class,'dish_category_id');
+    }
 
 }

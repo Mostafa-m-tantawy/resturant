@@ -122,10 +122,10 @@ class OrderController extends Controller
         $order->discount = $request->discount;
 
         if ($request->vat == 'on')
-            $order->vat = $systemconf->where('name','vat')->first()->value;
+            $order->vat = $systemconf->where('name','vat')->first()->value/100;
 
         if ($request->service == 'on')
-            $order->service =  $systemconf->where('name','service')->first()->value;
+            $order->service =  $systemconf->where('name','service')->first()->value/100;
         if ($request->staff == 'on')
             $order->is_staff = 1;
         else

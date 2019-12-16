@@ -1,9 +1,12 @@
 @extends('.pos.layout.pos_app')
 @section('content')
-    <meta name="service" content="  {{$systemconf->where('name','service')->first()->value}}">
-    <meta name="vat" content="{{$systemconf->where('name','vat')->first()->value}}">
-    <meta name="type" content="{{$type}}">
-    <meta name="order_id" content="{{$order_id}}">
+    <link href="{{asset('/css/easy-numpad.css')}}" rel="stylesheet" type="text/css"/>
+
+    <meta name="service"    content="  {{$systemconf->where('name','service')->first()->value}}">
+    <meta name="vat"        content="{{$systemconf->where('name','vat')->first()->value}}">
+    <meta name="type"       content="{{$order->type}}"  >
+    <meta name="order_id"   content="{{$order->id}}"    >
+    <meta name="status"     content="{{$order->status}}">
 
 
 
@@ -138,9 +141,9 @@
                                 <tr>
                                     <th>{{trans('main.dish')}}</th>
                                     <th>{{trans('main.size')}}</th>
-                                    <th>{{trans('main.quantity')}}</th>
-                                    <th>{{trans('main.price')}}</th>
-                                    <th>{{trans('main.del')}}</th>
+                                    <th style="text-align: center;">{{trans('main.quantity')}}</th>
+                                    <th style="text-align: center;">{{trans('main.price')}}</th>
+                                    <th style="text-align: right;">{{trans('main.del')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -158,8 +161,6 @@
             <!-- end:: Content -->
         </div>
     </div>
-
-
     <div class="modal fade sizes_modal" id="sizes_modal" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -301,13 +302,159 @@
             </div>
         </div>
     </div>
+    <div class="modal fade payment_modal" id="payment_modal" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{trans('main.payment')}} <span class="name"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <form id="payment" method="post" action="{{route('order-payment.store')}}">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4> {{trans('main.demand')}} = {{$order->demand}}</h4>
+
+                                </div>
+                                    @csrf
+                                    <input type="hidden" name="order_id" value="{{$order->id}}">
+
+                                    <div class="form-group col-12">
+                                        <label for="inputPassword4"
+                                               class="control-label">{{trans('main.payment method')}}</label>
+                                        <select class="form-control" id="payment_method" name="payment_method">
+                                            <option value="cash">{{ trans('main.select') }} {{ trans('main.payment') }} </option>
+                                            <option value="cash">{{ trans('main.cash') }} </option>
+                                            <option value="check">{{ trans('main.check') }} </option>
+                                            <option value="creditcard">{{ trans('main.creditcard') }} </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label
+                                            class=" control-label">  {{ trans('main.amount') }}</label>
+                                        <input type="text"  required name="amount"
+                                               class="form-control" id="easy-numpad-output" >
+
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label class=" control-label">{{ trans('main.note') }}</label>
+                                        <input type="text" name="note" class="form-control" id="note">
+
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label class=control-label">{{ trans('main.files') }} :</label>
+                                        <input type="file" name="files[]" multiple class="form-control">
+                                    </div>
+                            </div>
+                            <div class="col-12 pull-left">
+                                <button class="btn btn-primary" >
+                                    {{trans('main.pay')}}
+                                </button>
+                            </div>
+                </form>
+
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+
+
+                                    <div class="easy-numpad-frame" id="easy-numpad-frame">
+                                        <div class="easy-numpad-container">
+
+                                            <div class="easy-numpad-number-container">
+
+
+                                                <table>
+                                                    <tr>
+                                                        <td><a href="7" onclick="easynum()">7</a></td>
+                                                        <td><a href="8" onclick="easynum()">8</a></td>
+                                                        <td><a href="9" onclick="easynum()">9</a></td>
+                                                        <td><a href="Del" class="del" id="del"
+                                                               onclick="easy_numpad_del()">Del</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="4" onclick="easynum()">4</a></td>
+                                                        <td><a href="5" onclick="easynum()">5</a></td>
+                                                        <td><a href="6" onclick="easynum()">6</a></td>
+                                                        <td><a href="Clear" class="clear" id="clear"
+                                                               onclick="easy_numpad_clear()">Clear</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="1" onclick="easynum()">1</a></td>
+                                                        <td><a href="2" onclick="easynum()">2</a></td>
+                                                        <td><a href="3" onclick="easynum()">3</a></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" onclick="easynum()"><a href="0">0</a></td>
+                                                        <td onclick="easynum()"><a href=".">.</a></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{trans('main.id')}}</th>
+                                                    <th>{{trans('main.amount')}}</th>
+                                                    <th>{{trans('main.method')}}</th>
+                                                    <th>{{trans('main.delete')}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($payments as $payment)
+                                                    <tr>
+                                                        <td>{{$payment->id}}</td>
+                                                        <td>{{$payment->amount}}</td>
+                                                        <td>{{$payment->method}}</td>
+                                                        <td>
+                                                            @if($order->status!='closed')    <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.payment')}}')" action="{{route('order-payment.destroy',[$payment->id])}}">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                                                            </form>
+                                                        @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 @stop
 
 
 @section('scripts')
+
     <script src="{{ url('/app_js/posEditOrder.js') }}"></script>
-    <script>
+    <script src="{{ url('/app_js/easy-numpad.js') }}"></script>
+    <script src="{{ url('/app_js/payment.js') }}"></script>
+
+
+
+        <script type="text/javascript">
 
 
     </script>

@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="kt-menu__item">
-                    <a href="{{route('order.create')}}?type=restaurant" class="kt-menu__link ">
+                    <a href="{{url('pos/hall')}}" class="kt-menu__link ">
                         <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/resturant.png')}}"/>
                     </a>
 

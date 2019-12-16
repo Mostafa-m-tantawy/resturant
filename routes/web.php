@@ -21,6 +21,8 @@ Route::resource('restaurant', 'RestaurantController')->only([
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::resource('order-payment', 'OrderPaymentController');
+
     Route::get('download', 'DashboardController@download');
     Route::post('chang-lang', 'DashboardController@changLang');
 
@@ -84,6 +86,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('pos')->middleware(['auth'])->group(function () {
         Route::any('/dashboard', 'DashboardController@posDashboard')->name('dashboard.pos');
         include('pos/order.php');
+        include('pos/hall.php');
 
     });
     Route::prefix('conf')->middleware(['auth'])->group(function () {
