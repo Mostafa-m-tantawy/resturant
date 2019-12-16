@@ -11,6 +11,7 @@ var orderservice = 0;
 var total = 0;
 var isstaff = 0;
 var order_id = 0;
+var status = 0;
 
 search = (key, inputArray) => {
     for (var i = 0; i < inputArray.length; i++) {
@@ -44,7 +45,10 @@ $('document').ready(function () {
     service = $('meta[name="service"]').attr('content') / 100
 
     type = $('meta[name="type"]').attr('content')
-   order_id  = $('meta[name="order_id"]').attr('content')
+
+    order_id  = $('meta[name="order_id"]').attr('content')
+
+    status  = $('meta[name="status"]').attr('content')
     var sides = [];
     var extras = [];
 
@@ -136,11 +140,11 @@ function DrawOrderInvoice() {
         style = (dish.deleted) ? "style='background-color: #ff5959;'" : '';
         action = (dish.deleted) ?
 
-            '<a onclick="undoDelete(' + i + ')"  class="btn btn-danger btn-icon">\n' +
+            '<a onclick="undoDelete(' + i + ')"   style="float: right;"  class="btn btn-danger btn-icon">\n' +
             '    <i class="flaticon-reply"></i>\n' +
             '       </a>'
             :
-            '<a onclick="deleteDish(' + i + ')"  class="btn btn-danger btn-icon">\n' +
+            '<a onclick="deleteDish(' + i + ')"       style="float: right;"  class="btn btn-danger btn-icon">\n' +
             '    <i class="la la-remove"></i>\n' +
             '       </a>';
         $(table).append(
@@ -148,12 +152,14 @@ function DrawOrderInvoice() {
                 $("<th>", {text: dish.name}),
                 $("<th>", {text: dish.size.name}),
                 $("<td>", {
-                    html:
+                    html:'<div style="text-align: center">'+
                         '<span class="minus"  onclick="minus(this)">-</span>\n' +
                         '<input type="number" onchange="changeQuantity(' + i + ',this.value)" class="quantity" value="' + dish.quantity + '" min="0"/>\n' +
-                        '<span class="plus"  onclick="plus(this)">+</span>'
+                        '<span class="plus"  onclick="plus(this)">+</span>'+'</div>'
                 }),
-                $("<td>", {text: ((isstaff) ? dish.size.cost : dish.size.price) * dish.quantity}),
+                $("<td>", {text: ((isstaff) ? dish.size.cost : dish.size.price) * dish.quantity,
+                    style: 'text-align: center;',
+                }),
                 $("<td>", {html: action}),
             )
         )
@@ -195,7 +201,10 @@ function DrawOrderInvoice() {
                         }),
                         $("<td>", {text: extra.extra_size.name}),
                         $("<td>", {text: ''}),
-                        $("<td>", {text: ((isstaff) ? extra.extra_size.cost : extra.extra_size.price) * dish.quantity}),
+                        $("<td>", {text: ((isstaff) ? extra.extra_size.cost : extra.extra_size.price) * dish.quantity,
+                            style: 'text-align: center;',
+
+                        }),
                         $("<td>", {text: ''}),
                     ))
             })
@@ -222,7 +231,7 @@ function DrawOrderInvoice() {
         $("<tr>").append(
             $("<th>", {
                 text: 'staff',
-                colspan: 2
+                colspan: 4
             }),
             $("<td>", {
                 html:
@@ -232,84 +241,104 @@ function DrawOrderInvoice() {
                     '<span></span>\n' +
                     '</label>\n' +
                     '</span>\n',
-                style: 'float:right;',
-                colspan: 3
+                style: 'text-align: right;',
+
             }),
         ), $("<tr>").append(
             $("<th>", {
                 text: 'sub-total',
-                colspan: 2
+                colspan: 4
             }),
             $("<td>", {
                 text: subtotal.toFixed(3),
-                style: 'float:right;',
-                colspan: 3
+                style: 'text-align: right;',
+
             }),
         ), (type == 'restaurant') ? $("<tr>").append(
             $("<th>", {
                 text: 'service',
-                colspan: 2
+                colspan: 4
             }),
             $("<td>", {
                 text: orderservice.toFixed(3),
-                style: 'float:right;',
-                colspan: 3
+                style: 'text-align: right;',
+
             }),
         ) : '',
         $("<tr>").append(
             $("<th>", {
                 text: 'vat',
-                colspan: 2
+                colspan: 4
             }),
             $("<td>", {
                 text: ordervat.toFixed(3),
-                style: 'float:right;',
-                colspan: 3
+                style: 'text-align: right;',
+
             }),
         ),
         (type == 'delivery') ? $("<tr>").append(
             $("<th>", {
                 text: 'delivery',
-                colspan: 2
+                colspan: 4
             }),
             $("<td>", {
                 html: '<input name="delivery" type="number" class="form-control" value="0" min="0">',
-                style: 'float:right;width:50px',
-                colspan: 3
+                style: 'text-align: right;width:50px',
+
             }),
         ) : ''
         , $("<tr>").append(
             $("<th>", {
                 text: 'discount',
-                colspan: 2
+                colspan: 4
             }),
             $("<td>", {
                 html: '<input name="discount" type="number" onchange="changeDiscount(this.value)" class="form-control" value="' + discount + '" min="0">',
-                style: 'float:right;width:100px',
-                colspan: 3
+                style: 'text-align: right;;width:100px',
+
             }),
         )
         , $("<tr>").append(
             $("<th>", {
                 text: 'total',
-                colspan: 2
+                colspan: 4
             }),
             $("<td>", {
                 text: total.toFixed(3),
-                style: 'float:right;',
-                colspan: 3
+                style: 'text-align: right;',
+
             }),
-        ), $("<tr>").append(
-            $("<th>", {
-                html: '<button class="btn btn-primary" onclick="submitOrder()">submit</button>',
+        ), (status=='closed')?
+            $("<tr>").append(
+             $("<th>", {
+                html: '<button class="btn btn-primary" onclick="cancelOrder()">refund</button>',
+                colspan: 2
+            }),
+                $("<th>", {
+                html: '<button class="btn btn-primary" onclick="payment()">Payment</button>',
                 colspan: 2
             }),
             $("<td>", {
-                html: '<button class="btn btn-danger"onclick="cancelOrder()">cancel</button>',
-                style: 'float:right;',
-                colspan: 3
+                html: '<button class="btn btn-danger">print</button>',
+                style: 'text-align: right;',
+
             }),
-        ),
+        ):   $("<tr>").append(
+                $("<th>", {
+                    html: '<button class="btn btn-primary" onclick="submitOrder()">submit</button>',
+                    colspan: 2
+                }),
+                $("<th>", {
+                    html: '<button class="btn btn-primary" onclick="payment()">Payment</button>',
+                }),$("<th>", {
+                    html: '<button class="btn btn-primary" onclick="closeOrder()">close</button>',
+                }),
+                $("<td>", {
+                    html: '<button class="btn btn-danger"onclick="cancelOrder()">cancel</button>',
+                    style: 'text-align: right;',
+                    colspan: 3
+                }),
+            ),
     )
 
 }
@@ -517,7 +546,6 @@ function submitOrder() {
     formdata.append("vat",vat);
     formdata.append("service",service);
     formdata.append("is_staff",isstaff);
-    formdata.append("discount",discount);
 
     if($('input[name=delivery]').val())
         formdata.append("delivery",$('input[name=delivery]').val());
@@ -532,27 +560,75 @@ function submitOrder() {
         processData: false,
         contentType: false,
         success: function (data) {
-            // dishes=data;
-            // console.log(dishes);
-            // console.log( search("1", dishes));
+            location.reload();
+            toastr.success("Submission was successful.");
+
         },
         error: function (data) {
         },
     });
 
 
-    order=[];
+    DrawOrderInvoice();
+}
+
+function closeOrder() {
+    var formdata = new FormData();
+    formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
+
+    $.ajax({
+
+        url: url+'/pos/close-order/'+order_id,
+        type: "post",
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+           status='closed';
+            toastr.success("order closed successful.");
+            DrawOrderInvoice();
+
+        },
+        error: function (data) {
+            toastr.error(data.responseJSON[0]);
+            console.log(data.responseJSON[0]);
+        },
+    });
+
+
     DrawOrderInvoice();
 }
 
 function cancelOrder() {
 
-    var r = confirm("are yo sure canceling order!");
+    var r = confirm("Are you sure canceling order!? all payments will be refunded.");
     if (r == true) {
 
-        order = [];
-        DrawOrderInvoice();
+        var formdata = new FormData();
+        formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
+        formdata.append("_method", 'Delete');
+
+        $.ajax({
+
+            url: url+'/pos/order/'+order_id,
+            type: "post",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+
+                window.location ='/pos/hall';
+
+            },
+            error: function (data) {
+
+                toastr.error(data.responseJSON[0]);
+                console.log(data.responseJSON[0]);
+            },
+        });
+
     }
+
 }
 
 function changeDiscount(value) {

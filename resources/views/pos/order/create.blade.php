@@ -3,39 +3,47 @@
     <meta name="service" content="  {{$systemconf->where('name','service')->first()->value}}">
     <meta name="vat" content="{{$systemconf->where('name','vat')->first()->value}}">
     <meta name="type" content="{{$type}}">
+    <meta name="table" content="{{$table}}">
 
 
 
 
-<style>
-    span {cursor:pointer; }
-    .number{
-        margin:100px;
-    }
-    .minus, .plus{
-        width:30px;
-        height:30px;
-        background:#f2f2f2;
-        border-radius:4px;
-        padding:2px 0px 2px 0px;
-        border:1px solid #ddd;
-        display: inline-block;
-        vertical-align: middle;
-        text-align: center;
-    }
-    .quantity {
-        height:25px;
-        width: 40px;
-        text-align: center;
-        font-size: 26px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        display: inline-block;
-        vertical-align: middle;
-    }.table th, .table td {
-        padding: unset;
-         }
-</style>
+    <style>
+        span {
+            cursor: pointer;
+        }
+
+        .number {
+            margin: 100px;
+        }
+
+        .minus, .plus {
+            width: 30px;
+            height: 30px;
+            background: #f2f2f2;
+            border-radius: 4px;
+            padding: 2px 0px 2px 0px;
+            border: 1px solid #ddd;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .quantity {
+            height: 25px;
+            width: 40px;
+            text-align: center;
+            font-size: 26px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .table th, .table td {
+            padding: unset;
+        }
+    </style>
     <div class="row">
         <div class="col-7">
             <div class="kt-portlet">
@@ -53,9 +61,9 @@
                         @foreach($categories as $category)
                             <li class="nav-item">
 
-                                <a class="nav-link @if($loop->first) active @endif" id="{{$category->name}}-tab"
-                                   data-toggle="tab" href="#{{$category->name}}" role="tab"
-                                   aria-controls="{{$category->name}}" aria-selected="true">{{$category->name}}</a>
+                                <a class="nav-link @if($loop->first) active @endif" id="{{str_replace(' ', '', $category->name)}}-tab"
+                                   data-toggle="tab" href="#{{str_replace(' ', '', $category->name)}}" role="tab"
+                                   aria-controls="{{str_replace(' ', '', $category->name)}}" aria-selected="true">{{$category->name}}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -63,8 +71,8 @@
                         @foreach($categories as $category)
 
 
-                            <div class="tab-pane fade @if($loop->first) show active @endif" id="{{$category->name}}"
-                                 role="tabpanel" aria-labelledby="{{$category->name}}-tab">
+                            <div class="tab-pane fade @if($loop->first) show active @endif" id="{{str_replace(' ', '', $category->name)}}"
+                                 role="tabpanel" aria-labelledby="{{str_replace(' ', '', $category->name)}}-tab">
                                 <div class="row">
                                     @foreach($category->dishes as $dish)
 
@@ -132,14 +140,14 @@
                             </div>
                         </div>
                         <div class="kt-portlet__body">
-                       <table class="table table-borderless"  id="invoice">
+                            <table class="table table-borderless" id="invoice">
                                 <thead>
                                 <tr>
                                     <th>{{trans('main.dish')}}</th>
                                     <th>{{trans('main.size')}}</th>
-                                    <th>{{trans('main.quantity')}}</th>
-                                    <th>{{trans('main.price')}}</th>
-                                    <th>{{trans('main.del')}}</th>
+                                    <th style="text-align: center;">{{trans('main.quantity')}}</th>
+                                    <th style="text-align: center; width: 75px">{{trans('main.price')}}</th>
+                                    <th style="text-align: right;">{{trans('main.del')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -245,7 +253,7 @@
                 <div class="modal-footer">
                     <div class="col-12 pull-left">
                         <button class="btn btn-primary" onclick="DishSides()">
-                        {{trans('main.extras')}}</button>
+                            {{trans('main.extras')}}</button>
                     </div>
                 </div>
 
@@ -305,7 +313,8 @@
 
 
 @section('scripts')
-     <script src="{{ url('/app_js/posneworder.js') }}"></script>
+
+    <script src="{{ url('/app_js/posneworder.js') }}"></script>
     <script>
 
 

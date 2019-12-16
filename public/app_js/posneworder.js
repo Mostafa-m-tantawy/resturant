@@ -24,6 +24,7 @@ var orderservice=0;
 var total=0;
 var isstaff=0;
 var discount=0;
+var table=0;
 
 search = (key, inputArray) => {
     for (var i=0; i < inputArray.length; i++) {
@@ -41,6 +42,7 @@ $('document').ready(function () {
    vat=$('meta[name="vat"]').attr('content')/100
    service=$('meta[name="service"]').attr('content')/100
    type=$('meta[name="type"]').attr('content')
+   table=$('meta[name="table"]').attr('content')
     var formdata = new FormData();
     formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
     $.ajax({
@@ -96,13 +98,16 @@ subtotal+=((isstaff)?dish.size.cost:dish.size.price) *dish.quantity;
         $("<tr>").append(
             $("<th>", {text: dish.name }),
             $("<th>", {text: dish.size.name }),
-            $("<td>", {html:
+            $("<td>", {html:'<div   style="text-align: center;" >'+
                     '<span class="minus"  onclick="minus(this)">-</span>\n' +
                     '<input type="number" onchange="changeQuantity('+i+',this.value)" class="quantity" value="'+dish.quantity+'" min="0"/>\n' +
-                    '<span class="plus"  onclick="plus(this)">+</span>'
+                    '<span class="plus"  onclick="plus(this)">+</span></div>'
                    }),
-            $("<td>", {text: ((isstaff)?dish.size.cost:dish.size.price)*dish.quantity}),
-            $("<td>", {html: '<a onclick="deleteDish('+i+')"  class="btn btn-danger btn-icon">\n' +
+            $("<td>", {text: ((isstaff)?dish.size.cost:dish.size.price)*dish.quantity,
+                style: 'text-align: center;',
+
+            }),
+            $("<td>", {html: '<a onclick="deleteDish('+i+')"   style="float: right;"  class="btn btn-danger btn-icon">\n' +
                     '                                                            <i class="la la-remove"></i>\n' +
                     '                                                        </a>'}),
         ))
@@ -142,7 +147,9 @@ subtotal+=((isstaff)?dish.size.cost:dish.size.price) *dish.quantity;
                     }),
                     $("<td>", {text: extra.extra_size.name}),
                     $("<td>", {text: ''}),
-                    $("<td>", {text: ((isstaff)?extra.extra_size.cost:extra.extra_size.price)*dish.quantity}),
+                    $("<td>", {text: ((isstaff)?extra.extra_size.cost:extra.extra_size.price)*dish.quantity
+                    ,                    style: 'text-align: center;',
+                    }),
                     $("<td>", {text: ''}),
 
                 ))
@@ -171,7 +178,7 @@ subtotal+=((isstaff)?dish.size.cost:dish.size.price) *dish.quantity;
     $(table).append(
         $("<tr>").append(
             $("<th>", {text: 'staff',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {html:
                     '<span class="kt-switch kt-switch--sm kt-switch--icon">\n' +
@@ -181,72 +188,71 @@ subtotal+=((isstaff)?dish.size.cost:dish.size.price) *dish.quantity;
                     '</label>\n' +
                     '</span>\n' ,
                 style:'float:right;',
-                colspan:3
             }),
 
          ),   $("<tr>").append(
             $("<th>", {text: 'sub-total',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {text: subtotal.toFixed(3),
                 style:'float:right;',
-                colspan:3
+
             }),
 
          ), (type=='restaurant')?$("<tr>").append(
             $("<th>", {text: 'service',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {text:orderservice.toFixed(3) ,
                 style:'float:right;',
-                colspan:3
+
             }),
 
          ):'',
         $("<tr>").append(
             $("<th>", {text: 'vat',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {text: ordervat.toFixed(3),
                 style:'float:right;',
-                colspan:3
+
             }),
 
          ),
         (type=='delivery')? $("<tr>").append(
             $("<th>", {text: 'delivery',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {html: '<input name="delivery" type="number" class="form-control" value="0" min="0">',
                 style:'float:right;width:50px',
-                colspan:3
+
             }),
         ):''
         ,  $("<tr>").append(
             $("<th>", {text: 'discount',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {html: '<input name="discount" type="number" onchange="changeDiscount(this.value)" class="form-control" value="'+discount+'" min="0">',
                 style:'float:right;width:100px',
-                colspan:3
+
             }),
         )
         ,$("<tr>").append(
             $("<th>", {text: 'total',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {text: total.toFixed(3),
                 style:'float:right;',
-                colspan:3
+
             }),
 
          ),$("<tr>").append(
             $("<th>", {html: '<button class="btn btn-primary" onclick="submitOrder()">submit</button>',
-                    colspan:2
+                    colspan:3
             }),
             $("<td>", {html: '<button class="btn btn-danger"onclick="cancelOrder()">cancel</button>',
                 style:'float:right;',
-                colspan:3
+
             }),
 
          ),
@@ -447,6 +453,7 @@ function submitOrder() {
     var json_arr = JSON.stringify(order);
     formdata.append("_token", $('meta[name="csrf-token"]').attr('content'));
     formdata.append("type", type);
+    formdata.append("table", table);
     formdata.append("order",json_arr);
     formdata.append("vat",vat);
     formdata.append("service",service);

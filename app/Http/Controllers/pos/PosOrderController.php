@@ -7,6 +7,7 @@ use App\DishCategory;
 use App\DishSize;
 use App\Order;
 use App\OrderDetails;
+use App\OrderPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,9 +34,12 @@ class PosOrderController extends Controller
      */
     public function create(Request $request)
     {
-        $categories = DishCategory::all();
+        $categories = DishCategory::where('show', 1)->get();
+
+        $table = $request->table;
         $type = $request->type;
-        return view('pos.order.create')->with(compact('categories', 'type'));
+        return view('pos.order.create')
+            ->with(compact('categories', 'type', 'table'));
     }
 
     /**
@@ -54,6 +58,7 @@ class PosOrderController extends Controller
         $order->service = $request->service;
         $order->is_staff = $request->is_staff;
         $order->type = $request->type;
+        $order->table = $request->table;
 
 
         if ($order->save()) {
@@ -129,13 +134,14 @@ class PosOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {     $categories = DishCategory::all();
+    {
+        $categories = DishCategory::all();
 //
-        $order=Order::find($id);
-        $order_id=$id;
-        $type=$order->type;
+        $order = Order::find($id);
+        $payments =OrderPayment::where('order_id',$order->id)->get();
 
-        return view('pos.order.edit')->with(compact('categories','order_id','type'));
+
+        return view('pos.order.edit')->with(compact('categories', 'payments','order'));
     }
 
     /**
@@ -149,7 +155,7 @@ class PosOrderController extends Controller
     {
 
 
-        $order =  Order::find($id);
+        $order = Order::find($id);
 
         $order->discount = $request->discount;
         $order->vat = $request->vat;
@@ -162,55 +168,55 @@ class PosOrderController extends Controller
                 $size = $orderDish->size;
                 $extras = $orderDish->extras;
                 $sides = $orderDish->sides;
-            if($orderDish->id=='' )
-            {   $order_details = new OrderDetails;
-                $order_details->order_id = $order->id;
-                $order_details->dish_size_id = $size->id;
-                $order_details->unit_cost = $size->cost;
-                $order_details->unit_price = $size->price;
-                $order_details->quantity = $orderDish->quantity;
+                if ($orderDish->id == '') {
+                    $order_details = new OrderDetails;
+                    $order_details->order_id = $order->id;
+                    $order_details->dish_size_id = $size->id;
+                    $order_details->unit_cost = $size->cost;
+                    $order_details->unit_price = $size->price;
+                    $order_details->quantity = $orderDish->quantity;
 
-                if ($order_details->save()) {
+                    if ($order_details->save()) {
 
-                    foreach ($sides as $sideDish) {
+                        foreach ($sides as $sideDish) {
 
-                        $side = new OrderDetails;
-                        $side->order_id = $order->id;
+                            $side = new OrderDetails;
+                            $side->order_id = $order->id;
 
-                        $side->dish_size_id = $sideDish->side_size->id;
-                        $side->unit_cost = $sideDish->side_size->cost;
-                        $side->unit_price = $sideDish->side_size->price;
-                        $side->quantity = $orderDish->quantity;
+                            $side->dish_size_id = $sideDish->side_size->id;
+                            $side->unit_cost = $sideDish->side_size->cost;
+                            $side->unit_price = $sideDish->side_size->price;
+                            $side->quantity = $orderDish->quantity;
 
-                        $side->parent_id = $order_details->id;
-                        $side->type = 'side';
-                        $side->save();
+                            $side->parent_id = $order_details->id;
+                            $side->type = 'side';
+                            $side->save();
+                        }
+                        foreach ($extras as $extraDish) {
+
+                            $extra = new OrderDetails;
+                            $extra->order_id = $order->id;
+
+                            $extra->dish_size_id = $extraDish->extra_size->id;
+                            $extra->unit_cost = $extraDish->extra_size->cost;
+                            $extra->unit_price = $extraDish->extra_size->price;
+                            $extra->quantity = $orderDish->quantity;
+
+                            $extra->parent_id = $order_details->id;
+                            $extra->type = 'extra';
+                            $extra->save();
+                        }
+                    } else {
+                        OrderDetails::where('order_id', $order->id)->delete();
+                        Order::destroy($order->id);
+                        return response()->json('Internal Serer Error', 500);
                     }
-                    foreach ($extras as $extraDish) {
+                } elseif ($orderDish->deleted) {
 
-                        $extra = new OrderDetails;
-                        $extra->order_id = $order->id;
+                    OrderDetails::where('parent_id', $orderDish->id)->delete();
+                    OrderDetails::where('id', $orderDish->id)->delete();
 
-                        $extra->dish_size_id = $extraDish->extra_size->id;
-                        $extra->unit_cost = $extraDish->extra_size->cost;
-                        $extra->unit_price = $extraDish->extra_size->price;
-                        $extra->quantity = $orderDish->quantity;
-
-                        $extra->parent_id = $order_details->id;
-                        $extra->type = 'extra';
-                        $extra->save();
-                    }
-                } else {
-                    OrderDetails::where('order_id', $order->id)->delete();
-                    Order::destroy($order->id);
-                    return response()->json('Internal Serer Error', 500);
                 }
-            }elseif($orderDish->deleted){
-
-                OrderDetails::where('parent_id', $orderDish->id)->delete();
-                OrderDetails::where('id', $orderDish->id)->delete();
-
-            }
             }
 
 
@@ -227,7 +233,11 @@ class PosOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        OrderDetails::where('order_id', $id)->delete();
+        OrderPayment::where('order_id', $id)->delete();
+        Order::destroy($id);
+        return response()->json(['ok'], 200);
+
     }
 
     public function allDishes()
@@ -243,7 +253,9 @@ class PosOrderController extends Controller
                         $qqq->with('dish');
                     }]);
                 }]);
-        }])->get();
+        }])->whereHas('category', function ($q) {
+            $q->where('status', '1');
+        })->get();
 
         return response()->json($dishes, 200);
     }
@@ -252,10 +264,10 @@ class PosOrderController extends Controller
     public function getOrder(Request $request)
     {
 
-        $order =  $order = Order::with(['orderDetails' => function ($q) {
+        $order = $order = Order::with(['orderDetails' => function ($q) {
             $q->with(['dishSize' => function ($qq) {
                 $qq->with(['dish']);
-            }])->with(['sides','extras'])->where('type',null);
+            }])->with(['sides', 'extras'])->where('type', null);
         }])->find($request->order_id);
 
 
@@ -270,9 +282,27 @@ class PosOrderController extends Controller
                         $qqq->with('dish');
                     }]);
                 }]);
-        }])->get();
+        }])->whereHas('category', function ($q) {
+            $q->where('status', '1');
+        })->get();
 
-        return response()->json(['dishes'=>$dishes,'order'=>$order], 200);
+        return response()->json(['dishes' => $dishes, 'order' => $order], 200);
+    }
+
+    public function closeOrder(Request $request, $id)
+    {
+
+        $order = Order::find($id);
+        if ($order->demand > 0) {
+            return response()->json(['pay first please!'], 422);
+
+        } else {
+            $order->status = 'closed';
+            $order->save();
+
+        }
+
+        return response()->json(['ok'], 200);
     }
 
 
