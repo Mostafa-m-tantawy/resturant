@@ -21,7 +21,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                            <a href="{{route('department.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <a href="{{route('employee.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>
                                 {{trans('main.new')}} {{trans('main.record')}}
                             </a>
@@ -65,7 +65,7 @@
                             <td>{{$employee->bank_name}}</td>
 
                             <td>
-                                <a href="{{url('employee/'.$employee->id)}}" title="products">
+                                <a href="{{route('employee.show',[$employee->id])}}" title="products">
                                     <span>{{trans('main.profile')}}</span>
                                     <i  class="la la-edit" style="font-size: 25px;"></i></a>
                             </td>

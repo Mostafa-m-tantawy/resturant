@@ -64,4 +64,6 @@
 
     <!--end::Layout Skins -->
     <link rel="shortcut icon" href="{{asset('/media/logos/favicon.ico')}}" />
+
+    @yield('head')
 </head>

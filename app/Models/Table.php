@@ -16,7 +16,7 @@ class Table extends Model
 
     public function orders()
     {
-        return $this->hasMany(Order::class, 'table_id');
+        return $this->belongsToMany(Order::class);
     }
 
     public function getOccupiedAttribute()

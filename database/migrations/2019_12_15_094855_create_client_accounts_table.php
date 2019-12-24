@@ -19,6 +19,7 @@ class CreateClientAccountsTable extends Migration
             $table->double              ('amount');
             $table->enum                ('method',['check','cash','creditcard'])->nullable();
             $table->string              ('note')->nullable();
+            $table->unsignedBigInteger  ('employee_id')->nullable();
             $table->timestamps();
         });
     }

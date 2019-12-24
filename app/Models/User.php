@@ -4,6 +4,7 @@ namespace App;
 
 use App\Http\Traits\baseTrait;
 use App\Scopes\restaurantScope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasRoles,baseTrait;
+    use Notifiable,HasRoles,baseTrait,SoftDeletes;
 
 
     /**

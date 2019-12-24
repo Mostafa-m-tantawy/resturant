@@ -21,6 +21,7 @@ class CreateEmployeesTable extends Migration
 //            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('restaurant_id')->nullable();
 //            $table->foreign('department_id')->references('id')->on('hr_departments');//->onDelete('cascade')->onUpdate('cascade');
 
 
@@ -41,6 +42,9 @@ class CreateEmployeesTable extends Migration
             $table->string('bank_account')->nullable();
 
             $table->string('bank_name')->nullable();
+
+            $table->double('balance')->nullable();
+            $table->dateTime('last_balance_update')->nullable();
 
 
             $table->softDeletes();

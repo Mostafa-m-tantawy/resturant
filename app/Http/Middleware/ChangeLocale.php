@@ -32,7 +32,7 @@ class ChangeLocale
 
             }
         }else{
-            App::setLocale('ar');
+            App::setLocale('en');
 
         }
 

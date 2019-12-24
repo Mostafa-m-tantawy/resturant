@@ -18,6 +18,7 @@ class CreateSuppliersTable extends Migration
             $table->unsignedBigInteger('restaurant_id');
             $table->double('start_balance')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();;
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@ class Purse extends Model
 
 
 
-    public function gettotalAttribute()
+    public function getTotalAttribute()
     {
 
         return $this->pursesProducts->sum(function($t){
@@ -42,7 +42,7 @@ class Purse extends Model
         });
 
     }
-    public function getvatAttribute()
+    public function getVatAttribute()
     {
 
         return $this->pursesProducts->sum(function($t){

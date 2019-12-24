@@ -36,6 +36,7 @@ class OrderPaymentController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->all();
         $payment = new OrderPayment();
         if ($payment->validate($data)) {
@@ -43,6 +44,9 @@ class OrderPaymentController extends Controller
             $payment->order_id      = $request->order_id;
             $payment->amount     = $request->amount;
             $payment->method     = $request->payment_method;
+            if($payment->method=='account'){
+                $payment->client_id     = $request->client_id;
+            }
             $payment->note = $request->note;
             $payment->save();
             return response()->json('ok', '200');

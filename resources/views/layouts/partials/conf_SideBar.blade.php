@@ -80,6 +80,14 @@
                     </a>
                 </li>
                 <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="{{route('coupon.index')}}" class="kt-menu__link ">
+                     <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/Setting.png')}}" height="34"width="34">
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.coupon')}}
+                        </span>
+                    </a>
+                </li>  <li class="kt-menu__item " aria-haspopup="true">
                     <a href="{{route('system-conf.index')}}" class="kt-menu__link ">
                      <span class="kt-menu__link-icon">
                          <img class="img-fluid" src="{{url('media/icons/Setting.png')}}" height="34"width="34">
@@ -87,7 +95,8 @@
                         <span class="kt-menu__link-text">{{trans('main.system configuration')}}
                         </span>
                     </a>
-                </li> </ul>
+                </li>
+            </ul>
         </div>
     </div>
 

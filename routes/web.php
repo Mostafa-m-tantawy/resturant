@@ -87,10 +87,20 @@ Route::middleware(['auth'])->group(function () {
         Route::any('/dashboard', 'DashboardController@posDashboard')->name('dashboard.pos');
         include('pos/order.php');
         include('pos/hall.php');
+        include('pos/client.php');
+        include('pos/print.php');
+        include('pos/lifekitchen.php');
+
+    });
+    Route::prefix('cashier')->middleware(['auth'])->group(function () {
+        Route::any('/dashboard', 'DashboardController@cashierDashboard')->name('dashboard.cashier');
+
+        include('cashier/cashier.php');
 
     });
     Route::prefix('conf')->middleware(['auth'])->group(function () {
         include('conf/conf.php');
+        include('conf/coupon.php');
         include('conf/hall.php');
         include('conf/table.php');
 

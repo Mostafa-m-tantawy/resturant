@@ -76,14 +76,6 @@ class Product extends Model
 
 
 
-    public function vat($supplier)
-    {
-        $vat = $supplier->products->where('id', $this->id)->first()->pivot->vat;
-        return $vat != null ? $vat : 0;
-    }
-
-
-
     //check out if quantity more than 0
     // return boolian
     public function getQuantityAvailableAttribute()

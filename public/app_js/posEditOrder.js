@@ -1,6 +1,7 @@
 var order = [];
 var dish = {};
 var dishes;
+var coupons;
 var url = "";
 var vat = "";
 var service = "";
@@ -12,6 +13,9 @@ var total = 0;
 var isstaff = 0;
 var order_id = 0;
 var status = 0;
+var selected_coupon = 0;
+var selected_value = 0;
+var delivery = 0;
 
 search = (key, inputArray) => {
     for (var i = 0; i < inputArray.length; i++) {
@@ -66,9 +70,12 @@ $('document').ready(function () {
         success: function (data) {
             dishes = data['dishes'];
             // console.log(data['order']);
-
+            coupons = data['coupons'];
             isstaff = data['order'].is_staff;
             discount = data['order'].discount;
+            delivery = data['order'].delivery;
+            selected_coupon = data['order'].coupon;
+            // console.log(data['order']);
 
             $.each(data['order'].order_details, function (i, item) {
                 var temp = search(item.dish_size.dish.id, dishes);
@@ -95,7 +102,7 @@ $('document').ready(function () {
 
 
             });
-            console.log(order);
+            // console.log(order);
 
             DrawOrderInvoice();
 
@@ -129,10 +136,13 @@ function DrawOrderInvoice() {
     ordervat = 0;
     orderservice = 0;
     total = 0;
-
+var CouponsSelect=''
     var table = $('#invoice tbody');
     $(table).html('');
-
+    CouponsSelect +='<option value=""> coupon</option>';
+    $.each(coupons, function (i, coupon) {
+        CouponsSelect +='<option value="'+coupon.percentage/100+'">'+coupon.name +' - '+coupon.percentage+'</option>'
+    });
 
     $.each(order, function (i, dish) {
 
@@ -223,11 +233,25 @@ function DrawOrderInvoice() {
             $("<th>", {html: '', colspan: 5, style: 'height:50px;'}),
         ))
 
-    orderservice = (type == 'restaurant') ? subtotal * service : 0;
-    ordervat = (subtotal + orderservice) * vat;
 
-    total = subtotal + orderservice + ordervat - discount;
-    $(table).append(
+  // console.log(selected_coupon);
+    selected_value= subtotal * selected_coupon;
+    orderservice = (type == 'restaurant') ? (subtotal-selected_value) * service : 0;
+    ordervat = ((subtotal-selected_value) + orderservice) * vat;
+    total = (subtotal-selected_value) + orderservice + ordervat - discount + parseFloat( delivery);
+
+    $(table).append( $("<tr>").append(
+        $("<th>", {
+            text: 'coupon',
+            colspan: 4
+        }),
+        $("<td>",{
+                html: '<select onchange="changeCoupon(this)" name="coupon" class="form-control"> ' +
+                    CouponsSelect+
+                    '</select>',
+            }
+        ),
+        ),
         $("<tr>").append(
             $("<th>", {
                 text: 'staff',
@@ -250,7 +274,7 @@ function DrawOrderInvoice() {
                 colspan: 4
             }),
             $("<td>", {
-                text: subtotal.toFixed(3),
+                text: (subtotal-selected_value).toFixed(3),
                 style: 'text-align: right;',
 
             }),
@@ -282,8 +306,8 @@ function DrawOrderInvoice() {
                 colspan: 4
             }),
             $("<td>", {
-                html: '<input name="delivery" type="number" class="form-control" value="0" min="0">',
-                style: 'text-align: right;width:50px',
+                html: '<input name="delivery"  onchange="changeDelivery()" type="number" class="form-control" value="'+delivery+'" min="0">',
+                style: 'text-align: right;width:100px',
 
             }),
         ) : ''
@@ -336,11 +360,26 @@ function DrawOrderInvoice() {
                 $("<td>", {
                     html: '<button class="btn btn-danger"onclick="cancelOrder()">cancel</button>',
                     style: 'text-align: right;',
-                    colspan: 3
+
                 }),
-            ),
+            ),  $("<tr>").append(
+            $("<th>", {html: '', colspan: 5, style: 'height:20px;'}),
+        ),
+        $("<tr>").append(
+            $("<th>", {
+                html: '<a href="'+url+'/pos/print/client/'+order_id+'" class="btn btn-primary" ">Clinet Print </a>',
+                colspan: 2
+            }),
+
+            $("<td>", {
+                html: '<a href="'+url+'/pos/print/department/'+order_id+'" class="btn btn-primary"">department Print</a>',
+                style: 'text-align: right;',
+
+            }),
+        ),
     )
 
+$('select[name=coupon]').val(selected_coupon);
 }
 
 
@@ -416,7 +455,7 @@ function undoDelete(index) {
 function newDish(id) {
 
     tempdish = search(id, dishes);
-    console.log(dishes);
+    // console.log(dishes);
     dish = {
         deleted: false,          //order_details_id
         id: '',
@@ -513,7 +552,7 @@ function DishSides() {
 
 function addExtra(id) {
     dish.extras.push(search(id, dish.size.extras));
-    console.log(dish.extras);
+    // console.log(dish.extras);
     DrawDishDetailsTable($('#extra_modal'));
 
 }
@@ -546,8 +585,9 @@ function submitOrder() {
     formdata.append("vat",vat);
     formdata.append("service",service);
     formdata.append("is_staff",isstaff);
+    formdata.append("coupon",selected_coupon);
 
-    if($('input[name=delivery]').val())
+    if($('input[name=delivery]').val() &&type=='delivery')
         formdata.append("delivery",$('input[name=delivery]').val());
 
     formdata.append("discount",$('input[name=discount]').val());
@@ -591,7 +631,7 @@ function closeOrder() {
         },
         error: function (data) {
             toastr.error(data.responseJSON[0]);
-            console.log(data.responseJSON[0]);
+            // console.log(data.responseJSON[0]);
         },
     });
 
@@ -623,7 +663,7 @@ function cancelOrder() {
             error: function (data) {
 
                 toastr.error(data.responseJSON[0]);
-                console.log(data.responseJSON[0]);
+                // console.log(data.responseJSON[0]);
             },
         });
 
@@ -634,7 +674,20 @@ function cancelOrder() {
 function changeDiscount(value) {
     discount = value;
     DrawOrderInvoice();
-    console.log(value);
+    // console.log(value);
 
 }
 
+
+function changeCoupon(value) {
+    selected_coupon = $(value).find( 'option:selected').val();
+    DrawOrderInvoice();
+    // console.log(value);
+
+}
+
+function changeDelivery() {
+    delivery = $('input[name=delivery]').val();
+    DrawOrderInvoice();
+console.log(delivery)
+}

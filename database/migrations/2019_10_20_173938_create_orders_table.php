@@ -19,9 +19,10 @@ class CreateOrdersTable extends Migration
             $table->double('discount')->default(0)->nullable();
             $table->double('service')->default(0)->nullable();
             $table->double('vat')->default(0)->nullable();
+            $table->double('delivery')->default(0)->nullable();
             $table->boolean('is_staff')->default(0)->nullable();
+            $table->string('coupon')->default(0)->nullable();
             $table->string('type')->nullable();
-            $table->string('table_id')->nullable();
             $table->enum('status',['pending','cooking','completed','closed'])->default('pending')->nullable();
 
             $table->timestamps();

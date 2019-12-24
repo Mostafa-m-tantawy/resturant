@@ -57,10 +57,8 @@
 
                             <td>
                                 <a title="Show" href="{{url('stock/purchase/show/'.$purchase->id)}}"> <i  class="fa fa-book-open"></i></a>
-
-{{--                                <a title="delete" href="{{url('product/delete/'.$product->id)}}"> <i style="color: red"--}}
-{{--                                                                                                     class="flaticon-delete"></i></a>--}}
                             </td>
+
                             <td>
                                @foreach($purchase->files as $file)
                                     <a title="Show" href="{{url('/download?url='.$file->url)}}">

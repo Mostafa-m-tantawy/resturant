@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
 class HrEmployee extends Model
-{
 
-    use baseTrait;
+
+{ use baseTrait,restaurantScopeTrait;
 
     protected $rules = array(
 
@@ -58,5 +58,37 @@ class HrEmployee extends Model
         if( $shift  )
        return $shift->name;
 
+    }
+
+
+    public function getBalanceAttribute()
+    {
+        $balance=$this->getOriginal('balance');
+
+        $last_transfer = MoneyTransfer::where('status',1)
+            ->where('sender_id', $this->id)
+            ->orderBy('created_at', 'DESC')
+            ->first();
+
+        $payments = OrderPayment::where('employee_id',$this->id)  ->whereIn('method',['cash','check']);;
+        $paymentAccount=ClientAccount::where('employee_id',$this->id)  ->whereIn('method',['cash','check']);;
+
+        if ($last_transfer) {
+
+            $start_payment = OrderPayment::find($last_transfer->payment_id);
+
+            if ($start_payment){
+
+                $payments = $payments->
+                    where('created_at', '>', $start_payment->created_at);
+
+
+                $paymentAccount=$paymentAccount->
+                where('created_at', '>', $start_payment->created_at)
+                    ;
+            }
+        }
+
+        return $balance + $payments->sum('amount')+$paymentAccount->sum('amount');
     }
 }
