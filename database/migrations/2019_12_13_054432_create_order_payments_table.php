@@ -20,9 +20,10 @@ class CreateOrderPaymentsTable extends Migration
             $table->unsignedBigInteger  ('order_id');
             $table->unsignedBigInteger  ('client_id')->nullable();
             $table->double              ('amount');
-            $table->enum                ('method',['check','cash','creditcard'])->nullable();
+            $table->enum                ('method',['account','check','cash','creditcard'])->nullable();
             $table->string              ('note')->nullable();
             $table->date                ('due_date')->nullable();
+            $table->unsignedBigInteger  ('employee_id')->nullable();
             $table->timestamps();
 
         });

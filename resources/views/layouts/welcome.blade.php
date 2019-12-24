@@ -18,6 +18,8 @@
               @include('.pos.layout.partial.sidebar')
           @elseif(Request()->route()->getPrefix()=='/conf')
               @include('layouts.partials.conf_SideBar')
+          @elseif(Request()->route()->getPrefix()=='/cashier')
+              @include('layouts.partials.cashier_SideBar')
 {{--              @else--}}
 {{--              @include('layouts.partials.sidebar')--}}
 

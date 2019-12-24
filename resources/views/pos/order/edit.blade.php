@@ -2,33 +2,38 @@
 @section('content')
     <link href="{{asset('/css/easy-numpad.css')}}" rel="stylesheet" type="text/css"/>
 
-    <meta name="service"    content="  {{$systemconf->where('name','service')->first()->value}}">
-    <meta name="vat"        content="{{$systemconf->where('name','vat')->first()->value}}">
-    <meta name="type"       content="{{$order->type}}"  >
-    <meta name="order_id"   content="{{$order->id}}"    >
-    <meta name="status"     content="{{$order->status}}">
+    <meta name="service" content="  {{$systemconf->where('name','service')->first()->value}}">
+    <meta name="vat" content="{{$systemconf->where('name','vat')->first()->value}}">
+    <meta name="type" content="{{$order->type}}">
+    <meta name="order_id" content="{{$order->id}}">
+    <meta name="status" content="{{$order->status}}">
 
 
 
 
     <style>
-        span {cursor:pointer; }
-        .number{
-            margin:100px;
+        span {
+            cursor: pointer;
         }
-        .minus, .plus{
-            width:30px;
-            height:30px;
-            background:#f2f2f2;
-            border-radius:4px;
-            padding:2px 0px 2px 0px;
-            border:1px solid #ddd;
+
+        .number {
+            margin: 100px;
+        }
+
+        .minus, .plus {
+            width: 30px;
+            height: 30px;
+            background: #f2f2f2;
+            border-radius: 4px;
+            padding: 2px 0px 2px 0px;
+            border: 1px solid #ddd;
             display: inline-block;
             vertical-align: middle;
             text-align: center;
         }
+
         .quantity {
-            height:25px;
+            height: 25px;
             width: 40px;
             text-align: center;
             font-size: 26px;
@@ -36,9 +41,11 @@
             border-radius: 4px;
             display: inline-block;
             vertical-align: middle;
-        }.table th, .table td {
-             padding: unset;
-         }
+        }
+
+        .table th, .table td {
+            padding: unset;
+        }
     </style>
     <div class="row">
         <div class="col-7">
@@ -136,7 +143,7 @@
                             </div>
                         </div>
                         <div class="kt-portlet__body">
-                            <table class="table table-borderless"  id="invoice">
+                            <table class="table table-borderless" id="invoice">
                                 <thead>
                                 <tr>
                                     <th>{{trans('main.dish')}}</th>
@@ -317,30 +324,49 @@
                     <div class="row">
                         <div class="col-6">
                             <form id="payment" method="post" action="{{route('order-payment.store')}}">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h4> {{trans('main.demand')}} = {{$order->demand}}</h4>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4> {{trans('main.demand')}} = {{$order->demand}}</h4>
 
-                                </div>
+                                    </div>
                                     @csrf
                                     <input type="hidden" name="order_id" value="{{$order->id}}">
 
                                     <div class="form-group col-12">
                                         <label for="inputPassword4"
                                                class="control-label">{{trans('main.payment method')}}</label>
-                                        <select class="form-control" id="payment_method" name="payment_method">
-                                            <option value="cash">{{ trans('main.select') }} {{ trans('main.payment') }} </option>
+                                        <select class="form-control" onchange=" methodChange()"
+                                                id="payment_method" name="payment_method">
+                                            <option
+                                                value="">{{ trans('main.select') }} {{ trans('main.payment') }} </option>
                                             <option value="cash">{{ trans('main.cash') }} </option>
                                             <option value="check">{{ trans('main.check') }} </option>
                                             <option value="creditcard">{{ trans('main.creditcard') }} </option>
+                                            <option value="account">{{ trans('main.account') }} </option>
                                         </select>
                                     </div>
 
+                                    <div class="form-group col-12" id="clientDiv" style="display:none;">
+                                        <label
+                                            class=" control-label">  {{ trans('main.client') }}</label>
+                                        <select class="form-control" id="client_id" name="client_id" onchange="clientChange()">
+                                            <option data-money="0" value="">
+                                                {{ trans('main.select') }} {{ trans('main.client') }}
+                                            </option>
+
+                                            @foreach($clients as $client)
+                                                <option data-money="{{$client->hisMoney}}" value="{{$client->id}}">
+                                                    {{ $client->name .' - '.$client->phone1}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
                                     <div class="form-group col-12">
                                         <label
                                             class=" control-label">  {{ trans('main.amount') }}</label>
-                                        <input type="text"  required name="amount"
-                                               class="form-control" id="easy-numpad-output" >
+                                        <input type="number" required name="amount" max="1000000000"
+                                               class="form-control" step="0.001" min="0"  id="easy-numpad-output">
 
                                     </div>
                                     <div class="form-group col-12">
@@ -352,13 +378,13 @@
                                         <label class=control-label">{{ trans('main.files') }} :</label>
                                         <input type="file" name="files[]" multiple class="form-control">
                                     </div>
-                            </div>
-                            <div class="col-12 pull-left">
-                                <button class="btn btn-primary" >
-                                    {{trans('main.pay')}}
-                                </button>
-                            </div>
-                </form>
+                                </div>
+                                <div class="col-12 pull-left">
+                                    <button class="btn btn-primary">
+                                        {{trans('main.pay')}}
+                                    </button>
+                                </div>
+                            </form>
 
                         </div>
                         <div class="col-6">
@@ -406,6 +432,7 @@
                                                     <th>{{trans('main.id')}}</th>
                                                     <th>{{trans('main.amount')}}</th>
                                                     <th>{{trans('main.method')}}</th>
+                                                    <th>{{trans('main.account')}}</th>
                                                     <th>{{trans('main.delete')}}</th>
                                                 </tr>
                                                 </thead>
@@ -415,13 +442,18 @@
                                                         <td>{{$payment->id}}</td>
                                                         <td>{{$payment->amount}}</td>
                                                         <td>{{$payment->method}}</td>
+                                                        <td>{{$payment->client_id}}</td>
                                                         <td>
-                                                            @if($order->status!='closed')    <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.payment')}}')" action="{{route('order-payment.destroy',[$payment->id])}}">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button class="btn btn-danger"> {{trans('main.delete')}}</button>
-                                                            </form>
-                                                        @endif
+                                                            @if($order->status!='closed')
+                                                                <form method="post"
+                                                                      onsubmit="deleteConfirm(event,'{{trans('main.payment')}}')"
+                                                                      action="{{route('order-payment.destroy',[$payment->id])}}">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button
+                                                                        class="btn btn-danger"> {{trans('main.delete')}}</button>
+                                                                </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -454,7 +486,7 @@
 
 
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
 
     </script>

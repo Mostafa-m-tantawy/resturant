@@ -38,12 +38,15 @@ class DashboardController extends Controller
 
        ///  order  details
             $orders = Order::whereBetween('created_at', [$from, $to])->get();
-            $total = $orders->sum('GrossTotal');
-            $sup_total = $orders->sum('SupTotal');
-            $vat = $orders->sum('vat');
-            $service = $orders->sum('Service');;
+        $total = $orders->sum('grossTotal');
+        $sup_total = $orders->sum('SupTotal');
+        $vat = $orders->sum('vat');
+        $service = $orders->sum('Service');;
+        $coupon= $orders->sum('CouponValue');;
+        $discount= $orders->sum('discount');;
+        $delivery= $orders->sum('delivery');;
 
-         ///top sales dishes
+        ///top sales dishes
             $orderdetails= OrderDetails::select('dish_size_id', DB::raw('SUM(quantity) as total_points'))
                 ->whereBetween('created_at', [$from, $to])
                 ->groupBy('dish_size_id')
@@ -57,7 +60,7 @@ class DashboardController extends Controller
         return view('frontend.salesDashboard')
             ->with(compact('total','sup_total',
             'vat','service','orderdetails',
-            'from','to'
+            'from','to','delivery','discount','coupon'
 
             ));
     }
@@ -118,22 +121,43 @@ class DashboardController extends Controller
 
     public function posDashboard(Request $request)
     {
-
         if($request->range) {
         // lenght 10 date = (01/01/2001) =10
         $from = substr($request->range, 0, 10);
         // start  13 date = (01/01/2001 */*)=13
         $to = substr($request->range, 13, 10);
     }else{
-
         // lenght 10 date = (01/01/2001) =10
         $from = \Carbon\Carbon::today()->format('Y-m-d');
         // start  13 date = (01/01/2001 */*)=13
         $to = \Carbon\Carbon::today()->format('Y-m-d');
-
     }
+
+        $orders = Order::whereDate('created_at', '>=',$from)
+            ->whereDate('created_at', '<=',$to)->get();
+
+        $closedOrders=$orders->where('status','closed')->count();
+        $openOrders=$orders->where('status','<>','closed')->count();
+
+        $cash=$orders  ->sum('cash');;
+        $credit_card=$orders  ->sum('CreditCard');;
+        $check=$orders  ->sum('Check');;
+        $account=$orders  ->sum('account');;
+        $total_payment=$cash+$credit_card+$check+$account;
+
+
+        $total = $orders->sum('grossTotal');
+        $sup_total = $orders->sum('SupTotal');
+        $vat = $orders->sum('vat');
+        $service = $orders->sum('Service');;
+        $coupon= $orders->sum('CouponValue');;
+        $discount= $orders->sum('discount');;
+        $delivery= $orders->sum('delivery');;
+
         return view('pos.dashboard') ->with(compact(
-            'from','to'
+            'from','to','closedOrders','openOrders','orders',
+            'check','cash','credit_card','account','delivery','total_payment',
+            'sup_total','vat','service','coupon','total','discount'
 
         ));;
 
@@ -167,6 +191,12 @@ class DashboardController extends Controller
 
 
         return back();
+
+    }    public function cashierDashboard()
+    {
+
+
+        return view('cashier.dashboard');
 
     }
 }

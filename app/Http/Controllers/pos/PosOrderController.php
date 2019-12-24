@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
+use App\Coupon;
 use App\Dish;
 use App\DishCategory;
 use App\DishSize;
 use App\Order;
 use App\OrderDetails;
 use App\OrderPayment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +24,7 @@ class PosOrderController extends Controller
      */
     public function index()
     {
+
         $allorders = Order::orderByDesc('created_at')->get()->groupBy(function ($item) {
             return $item->created_at->format('d-M-y');
         });
@@ -58,11 +62,19 @@ class PosOrderController extends Controller
         $order->service = $request->service;
         $order->is_staff = $request->is_staff;
         $order->type = $request->type;
-        $order->table = $request->table;
+        $order->coupon = $request->coupon;
 
+        if ($request->type=='delivery')
+        {
+            $order->delivery = $request->delivery;
 
+        }
         if ($order->save()) {
-            foreach (json_decode($request->get('order')) as $orderDish) {
+            if ($request->type=='restaurant')
+            {
+                $order->tables()->syncWithoutDetaching($request->table);
+
+            }  foreach (json_decode($request->get('order')) as $orderDish) {
                 $size = $orderDish->size;
                 $extras = $orderDish->extras;
                 $sides = $orderDish->sides;
@@ -139,9 +151,12 @@ class PosOrderController extends Controller
 //
         $order = Order::find($id);
         $payments =OrderPayment::where('order_id',$order->id)->get();
+        $clients =Client::all();
 
 
-        return view('pos.order.edit')->with(compact('categories', 'payments','order'));
+        return view('pos.order.edit')
+            ->with(compact('categories',
+                'payments','order','clients'));
     }
 
     /**
@@ -161,6 +176,7 @@ class PosOrderController extends Controller
         $order->vat = $request->vat;
         $order->service = $request->service;
         $order->is_staff = $request->is_staff;
+        $order->coupon = $request->coupon;
 
 
         if ($order->save()) {
@@ -242,6 +258,7 @@ class PosOrderController extends Controller
 
     public function allDishes()
     {
+        $coupons=Coupon::where('from','<=',Carbon::now()->toDate())->where('to','>=',Carbon::now()->toDate())->get();
         $dishes = Dish::where('status', '1')->with(['sizes' => function ($q) {
             $q->where('status', '1')
                 ->with(['sides' => function ($qq) {
@@ -257,12 +274,13 @@ class PosOrderController extends Controller
             $q->where('status', '1');
         })->get();
 
-        return response()->json($dishes, 200);
+        return response()->json(['dishes'=>$dishes,'coupons'=>$coupons], 200);
     }
 
 
     public function getOrder(Request $request)
     {
+        $coupons=Coupon::where('from','<=',Carbon::now()->toDate())->where('to','>=',Carbon::now()->toDate())->get();
 
         $order = $order = Order::with(['orderDetails' => function ($q) {
             $q->with(['dishSize' => function ($qq) {
@@ -286,7 +304,7 @@ class PosOrderController extends Controller
             $q->where('status', '1');
         })->get();
 
-        return response()->json(['dishes' => $dishes, 'order' => $order], 200);
+        return response()->json(['coupons' => $coupons,'dishes' => $dishes, 'order' => $order], 200);
     }
 
     public function closeOrder(Request $request, $id)

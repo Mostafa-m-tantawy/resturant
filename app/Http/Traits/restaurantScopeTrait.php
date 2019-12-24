@@ -2,6 +2,7 @@
 namespace App\Http\Traits;
 
 
+use App\Restaurant;
 use App\Scopes\restaurantScope;
 
 trait restaurantScopeTrait {
@@ -12,5 +13,7 @@ trait restaurantScopeTrait {
         static::addGlobalScope(new restaurantScope());
     }
 
-
+public  function restaurant(){
+        return $this->belongsTo(Restaurant::class);
+}
 }

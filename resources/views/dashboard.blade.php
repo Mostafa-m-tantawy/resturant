@@ -40,7 +40,7 @@
                         <div class="col-11">
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="kt-portlet kt-portlet--height-fluid">
 
                                         <div class="kt-portlet__body kt-portlet__body--fit-y">
@@ -82,9 +82,7 @@
                                                                                     <a href="{{url('product')}}"
                                                                                        class="kt-widget2__username">
                                                                                         By Bob Make Metronic Great
-                                                                                        Again.Lorem Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                         Ipsum Amet
 
                                                                                     </a>
                                                                                 </div>
@@ -106,7 +104,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="kt-portlet kt-portlet--height-fluid">
 
                                         <div class="kt-portlet__body kt-portlet__body--fit-y">
@@ -148,9 +146,7 @@
                                                                                     </a>
                                                                                     <a href="{{route('dashboard.stock')}}"
                                                                                        class="kt-widget2__username">
-                                                                                        By Bob Make Metronic Great
-                                                                                        Again.Lorem Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
+                                                                                       Make Metronic Great Again.Lorem
                                                                                         Ipsum Amet
 
                                                                                     </a>
@@ -173,10 +169,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="kt-portlet kt-portlet--height-fluid">
 
                                         <div class="kt-portlet__body kt-portlet__body--fit-y">
@@ -189,8 +182,8 @@
                                                     <div class="kt-widget__media">
                                                         <a href="{{route('dashboard.cost')}}" >
 
-                                                         <img class="kt-widget__img kt-hidden-"
-                                                             src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                            <img class="kt-widget__img kt-hidden-"
+                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
                                                         </a>
                                                     </div>
                                                     <div class="kt-widget__content">
@@ -219,7 +212,7 @@
                                                                                     <a href="{{route('dashboard.cost')}}"
                                                                                        class="kt-widget2__username">
                                                                                         By Bob Make Metronic Great
-                                                                                     Ipsum Amet
+                                                                                        Ipsum Amet
                                                                                         Make Metronic Great Again.Lorem
                                                                                         Ipsum Amet
 
@@ -243,7 +236,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
                                     <div class="kt-portlet kt-portlet--height-fluid">
 
                                         <div class="kt-portlet__body kt-portlet__body--fit-y">
@@ -290,10 +286,6 @@
                                                                                         Again.Lorem Ipsum Amet
                                                                                         Make Metronic Great Again.Lorem
                                                                                         Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
 
                                                                                     </a>
                                                                                 </div>
@@ -315,7 +307,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="kt-portlet kt-portlet--height-fluid">
 
                                         <div class="kt-portlet__body kt-portlet__body--fit-y">
@@ -336,7 +328,7 @@
                                                     <div class="kt-widget__content">
                                                         <div class="kt-widget__section">
                                                             <a href="{{route('system-conf.index')}}" class="kt-widget__username">
-                                                                {{trans('main.configration')}}
+                                                                {{trans('main.Configuration')}}
                                                             </a>
 
                                                             <div class="kt-portlet__body">
@@ -359,12 +351,74 @@
                                                                                     <a href="{{route('system-conf.index')}}"
                                                                                        class="kt-widget2__username">
                                                                                         By Bob Make Metronic Great
-                                                                                        Again.Lorem Ipsum Amet
+                                                                                       Great Again.Lorem
+                                                                                        Ipsum Amet
+
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--end::Widget -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="kt-portlet kt-portlet--height-fluid">
+
+                                        <div class="kt-portlet__body kt-portlet__body--fit-y">
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <!--begin::Widget -->
+                                            <div class="kt-widget kt-widget--user-profile-4">
+                                                <div class="kt-widget__head">
+                                                    <div class="kt-widget__media">
+                                                        <a href="{{route('cashier.request')}}" >
+
+                                                            <img class="kt-widget__img kt-hidden-"
+                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                        </a>
+
+                                                    </div>
+                                                    <div class="kt-widget__content">
+                                                        <div class="kt-widget__section">
+                                                            <a href="{{route('cashier.request')}}" class="kt-widget__username">
+                                                                {{trans('main.Money Transfer')}}
+                                                            </a>
+
+                                                            <div class="kt-portlet__body">
+                                                                <div class="tab-content">
+
+
+                                                                    <div class="tab-pane active"
+                                                                         id="kt_widget2_tab1_content">
+                                                                        <div class="kt-widget2">
+                                                                            <div
+                                                                                class="kt-widget2__item kt-widget2__item--primary">
+                                                                                <div class="kt-widget2__checkbox">
+                                                                                </div>
+                                                                                <div class="kt-widget2__info">
+                                                                                    <a href="{{route('cashier.request')}}"
+                                                                                       class="kt-widget2__title">
                                                                                         Make Metronic Great Again.Lorem
                                                                                         Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
+                                                                                    </a>
+                                                                                    <a href="{{route('cashier.request')}}"
+                                                                                       class="kt-widget2__username">
+                                                                                        By Bob Make Metronic Great
+                                                                                       Great Again.Lorem
                                                                                         Ipsum Amet
 
                                                                                     </a>

@@ -49,7 +49,7 @@
                                 <div class="kt-portlet__head-label">
                                     <h3 class="kt-portlet__head-title">
                                         {{trans('main.sales')}}
-                                        <small> {{trans('main.total')}}  {{trans('main.sales')}}</small>
+                                        <small>{{trans('main.total sales')}}</small>
                                     </h3>
                                 </div>
                             </div>
@@ -57,20 +57,22 @@
                                 <div class="kt-widget25">
                                     <span class="kt-widget25__stats m-font-brand">${{$total}}</span>
                                     <span class="kt-widget25__subtitle">
-                                        {{trans('main.total')}} {{trans('main.sales')}}
-                                        {{trans('main.from')}} {{$from}} {{trans('main.to')}} {{$to}} </span>
+                                        <br>
+                                        {{trans('main.total sales')}}
+                                        <br>
+                                        {{trans('main.from')}} {{$from}} -  {{trans('main.to')}} - {{$to}}</span>
                                     <div class="kt-widget25__items">
                                         <div class="kt-widget25__item">
 														<span class="kt-widget25__number">
 															${{$sup_total}}
 														</span>
                                             <div class="progress kt-progress--sm">
-                                                <div class="progress-bar kt-bg-danger" role="progressbar"
-                                                     style="width: @if($total!=0){{($sup_total/$total)*100}}% @else 0% @endif" aria-valuenow="50" aria-valuemin="0"
+                                                <div class="progress-bar kt-bg-success" role="progressbar"
+                                                     style="width: {{100*$sup_total/(($total)?$total:1)}}% " aria-valuenow="50" aria-valuemin="0"
                                                      aria-valuemax="100"></div>
                                             </div>
                                             <span class="kt-widget25__desc">
-															{{trans('main.sup-total')}}
+															{{trans('main.sub total')}}
 														</span>
                                         </div>
                                         <div class="kt-widget25__item">
@@ -78,8 +80,8 @@
 															${{$service}}
 														</span>
                                             <div class="progress m-progress--sm">
-                                                <div class="progress-bar kt-bg-success" role="progressbar"
-                                                     style="  width: @if($total!=0){{($service/$total)*100}}% @else 0% @endif; " aria-valuenow="50" aria-valuemin="0"
+                                                <div class="progress-bar kt-bg-warning " role="progressbar"
+                                                     style="  width: {{100*$service/(($total)?$total:1)}}% ; " aria-valuenow="50" aria-valuemin="0"
                                                      aria-valuemax="100"></div>
                                             </div>
                                             <span class="kt-widget25__desc">
@@ -92,11 +94,52 @@
 														</span>
                                             <div class="progress m-progress--sm">
                                                 <div class="progress-bar kt-bg-warning" role="progressbar"
-                                                     style=" width: @if($total!=0){{($vat/$total)*100}}% @else 0% @endif;" aria-valuenow="50" aria-valuemin="0"
+                                                     style=" width: {{100*$vat/(($total)?$total:1)}}% ;" aria-valuenow="50" aria-valuemin="0"
                                                      aria-valuemax="100"></div>
                                             </div>
                                             <span class="kt-widget25__desc">
 															{{trans('main.vat')}}
+														</span>
+                                        </div>
+                                        <div class="kt-widget25__item">
+														<span class="kt-widget25__number">
+															${{$discount}}
+														</span>
+                                            <div class="progress m-progress--sm">
+                                                <div class="progress-bar kt-bg-danger" role="progressbar"
+                                                     style=" width: {{100*$discount/(($total)?$total:1)}}% ;" aria-valuenow="50" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                            <span class="kt-widget25__desc">
+															{{trans('main.discount')}}
+														</span>
+                                        </div>
+                                        <div class="kt-widget25__item">
+														<span class="kt-widget25__number">
+																${{$delivery}}
+														</span>
+                                            <div class="progress m-progress--sm">
+                                                <div class="progress-bar kt-bg-warning" role="progressbar"
+                                                     style=" width: {{100*$delivery/(($total)?$total:1)}}% ;" aria-valuenow="50" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+
+                                            <span class="kt-widget25__desc">
+															{{trans('main.delivery')}}
+														</span>
+                                        </div>
+                                        <div class="kt-widget25__item">
+														<span class="kt-widget25__number">
+															${{$coupon}}
+														</span>
+                                            <div class="progress m-progress--sm">
+                                                <div class="progress-bar  kt-bg-danger " role="progressbar"
+                                                     style=" width: {{100*$coupon/(($total)?$total:1)}}% ;" aria-valuenow="50" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+
+                                            <span class="kt-widget25__desc">
+															{{trans('main.coupon')}}
 														</span>
                                         </div>
                                     </div>
@@ -144,6 +187,7 @@
                         <!--end:: Widgets/Authors Profit-->
                     </div>
 
+                </div>
                 </div>
 
             </div>

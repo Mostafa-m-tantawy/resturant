@@ -7,10 +7,11 @@ use App\Http\Traits\restaurantScopeTrait;
 use App\Scopes\restaurantScope;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Supplier extends Model
-{    use baseTrait,restaurantScopeTrait;
+{    use baseTrait,restaurantScopeTrait,SoftDeletes;
 
     public function purchases()
     {

@@ -1,5 +1,8 @@
 @extends('.pos.layout.pos_app')
+@section('head')
+    <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 
+@stop
 @section('content')
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">

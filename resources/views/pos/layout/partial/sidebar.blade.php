@@ -29,6 +29,13 @@
                     <span style=" text-align: center">{{trans('main.dashboard')}}</span>
                 </li>
                 <li class="kt-menu__item">
+                    <a href="{{url('pos/life-kitchen')}}" class="kt-menu__link ">
+                        <img class="img-fluid"style=" height: 100%"  src="{{asset('media/icons/camera.png')}}"/>
+                    </a>
+
+                    <span style=" text-align: center">{{trans('main.dashboard')}}</span>
+                </li>
+                <li class="kt-menu__item">
                     <a href="{{url('pos/order')}}?type=restaurant" class="kt-menu__link ">
                         <img class="img-fluid"style="height: 100%"  src="{{asset('/media/icons/pos/order_list.png')}}"/>
                     </a>
@@ -60,7 +67,7 @@
 
 
                 <li class="kt-menu__item">
-                    <a href="javascript:;" class="kt-menu__link ">
+                    <a  href="{{route('client.index')}}"  class="kt-menu__link ">
                         <img class="img-fluid" style="height: 100%" src="{{asset('/media/icons/pos/customer.png')}}"/>
                     </a>
                     <span style="text-align: center">{{trans('main.customer')}}</span>
