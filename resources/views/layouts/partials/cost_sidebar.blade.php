@@ -128,11 +128,6 @@
                                         {{trans('main.all')}} {{trans('main.orders')}}</span></a>
                             </li>
 
-                            <li class="kt-menu__item " aria-haspopup="true">
-                                <a href="{{url('cost/order/create')}}" class="kt-menu__link ">
-                                    <span  class="kt-menu__link-text">
-                                        {{trans('main.create')}} {{trans('main.order')}}</span></a>
-                            </li>
 
                             <li class="kt-menu__item " aria-haspopup="true">
                                 <a href="{{url('cost/order/cost')}}" class="kt-menu__link ">

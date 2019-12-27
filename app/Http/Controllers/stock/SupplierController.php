@@ -93,7 +93,7 @@ class SupplierController extends Controller
                 }
             }
         }
-        return  redirect()->back();
+        return redirect()->back();
 
 
         //
@@ -141,11 +141,11 @@ class SupplierController extends Controller
         $user = $supplier->user;
 
         $request->validate([
-            'name' => ['required', 'string', 'max:255','unique:users,name,'.$user->id],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'phone_g.*.phone'=> ['required'],
-            'phone_g.*.type'=> ['required'],
-            'address_g.*.address'=> ['required'],  ]);
+            'name' => ['required', 'string', 'max:255', 'unique:users,name,' . $user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'phone_g.*.phone' => ['required'],
+            'phone_g.*.type' => ['required'],
+            'address_g.*.address' => ['required'],]);
 
 
         $supplier->start_balance = $request->balance;
@@ -177,7 +177,7 @@ class SupplierController extends Controller
                 }
             }
 
-        return  redirect()->back();
+        return redirect()->back();
 
     }
 
@@ -189,7 +189,15 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        if ($supplier->canDeleted) {
+            User::destroy($supplier->user_id);
+            $supplier->delete();
+            return redirect()->back();
+        } else {
+            $error = 'supplier has payments or purchases!';
+            return redirect()->back()->withErrors($error);
+        }
     }
 
     public function states(Request $request)
@@ -218,12 +226,12 @@ class SupplierController extends Controller
         return redirect()->back();
         //
     }
+
     public function deleteAddressPhones(Request $request)
     {
-        if($request->type =='phone'){
+        if ($request->type == 'phone') {
             Phone::destroy($request->id);
-        }
-        elseif($request->type =='address') {
+        } elseif ($request->type == 'address') {
             Address::destroy($request->id);
         }
 

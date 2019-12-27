@@ -71,6 +71,24 @@
                     </a>
                 </li>
                 <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="{{url('conf/role')}}" class="kt-menu__link ">
+                     <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/dasbaoard.png')}}" height="34"width="34">
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.role')}}
+                        </span>
+                    </a>
+                </li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="{{url('conf/permission')}}" class="kt-menu__link ">
+                     <span class="kt-menu__link-icon">
+                         <img class="img-fluid" src="{{url('media/icons/dasbaoard.png')}}" height="34"width="34">
+                     </span>
+                        <span class="kt-menu__link-text">{{trans('main.permission')}}
+                        </span>
+                    </a>
+                </li>
+                <li class="kt-menu__item " aria-haspopup="true">
                     <a href="{{url('conf/table')}}" class="kt-menu__link ">
                      <span class="kt-menu__link-icon">
                          <img class="img-fluid" src="{{url('media/icons/dasbaoard.png')}}" height="34"width="34">

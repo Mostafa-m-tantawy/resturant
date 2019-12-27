@@ -107,6 +107,13 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = ProductCategory::find($id);
+        if ($category->canDeleted) {
+            $category->delete();
+            return redirect()->back();
+        } else {
+            $error = 'category has products!';
+            return redirect()->back()->withErrors($error);
+        }
     }
 }

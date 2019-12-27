@@ -2,6 +2,7 @@
 @section('content')
     <meta name="service" content="  {{$systemconf->where('name','service')->first()->value}}">
     <meta name="vat" content="{{$systemconf->where('name','vat')->first()->value}}">
+    <meta name="delivery" content="{{$systemconf->where('name','delivery')->first()->value}}">
     <meta name="type" content="{{$type}}">
     <meta name="table" content="{{$table}}">
 

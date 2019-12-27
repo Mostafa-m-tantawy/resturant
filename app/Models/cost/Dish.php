@@ -21,4 +21,15 @@ class Dish extends Model
         return $this->belongsTo(DishCategory::class,'dish_category_id');
     }
 
+    public  function  getStockAvailableAttribute(){
+        $available=false;
+        foreach ($this->sizes as $size){
+        if($size->quantity>0){
+            $available=  true;
+            break;
+        }
+         }
+    return ($available)?'available':'not Available';
+    }
+
 }

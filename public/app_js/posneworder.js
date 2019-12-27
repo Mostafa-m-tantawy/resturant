@@ -44,6 +44,7 @@ $('document').ready(function () {
     url = $('meta[name="url"]').attr('content')
     vat = $('meta[name="vat"]').attr('content') / 100
     service = $('meta[name="service"]').attr('content') / 100
+    delivery = $('meta[name="delivery"]').attr('content')
     type = $('meta[name="type"]').attr('content')
     table = $('meta[name="table"]').attr('content')
     var formdata = new FormData();
@@ -184,7 +185,7 @@ function DrawOrderInvoice() {
     orderservice = (type == 'restaurant') ? (subtotal-selected_value) * service : 0;
     ordervat = ((subtotal-selected_value) + orderservice) * vat;
 
-    total = (subtotal-selected_value) + orderservice + ordervat - discount + delivery;
+    total = (subtotal-selected_value) + orderservice + ordervat - discount + parseFloat( delivery);
     $(table).append(
         $("<tr>").append(
             $("<th>", {
@@ -501,6 +502,8 @@ function submitOrder() {
         processData: false,
         contentType: false,
         success: function (data) {
+            window.location.href = url+'/pos/order';
+
             // dishes=data;
             // console.log(dishes);
             // console.log( search("1", dishes));

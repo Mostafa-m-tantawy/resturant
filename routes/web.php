@@ -103,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
         include('conf/coupon.php');
         include('conf/hall.php');
         include('conf/table.php');
+        include('conf/permission.php');
 
     });
 

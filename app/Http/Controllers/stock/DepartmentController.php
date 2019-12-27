@@ -63,7 +63,13 @@ class DepartmentController extends Controller
     public function show($id)
     {
         $department= Department::findOrFail($id);
-        return view('frontend.department.show')->with(compact('department'));
+        $products=Product::whereHas('assignDetails',function ($q)use($department){
+            $q->whereHas('assignHeader',function ($qq)use($department){
+
+                $qq->where('assignable_id',$department->id)->where('assignable_type','App\Department');
+            });
+        })->get();
+        return view('frontend.department.show')->with(compact('products','department'));
 
     }
 

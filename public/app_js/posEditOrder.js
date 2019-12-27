@@ -600,8 +600,8 @@ function submitOrder() {
         processData: false,
         contentType: false,
         success: function (data) {
-            location.reload();
             toastr.success("Submission was successful.");
+            window.location.href = url+'/pos/order';
 
         },
         error: function (data) {

@@ -43,6 +43,7 @@
                 <th>{{trans('main.note')}}</th>
                 <th> {{ trans('main.attachments') }}</th>
                 <th>{{trans('main.created_at')}}</th>
+                <th>{{trans('main.delete')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -62,7 +63,14 @@
 
                    </td>
                     <td>{{$expense->created_at}}</td>
-
+                   <td>
+                           <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.expenses')}}')"
+                                 action="{{route('expenses.destroy',[$expense->id])}}">
+                               @csrf
+                               @method('DELETE')
+                               <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                           </form>
+                   </td>
             </tr>
                @endforeach
 
