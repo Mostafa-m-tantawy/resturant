@@ -50,6 +50,7 @@
                         <th>{{ trans('main.unit price') }}</th>
                         <th>{{ trans('main.gross') }}</th>
                         <th>{{ trans('main.note') }}</th>
+                        <th>{{ trans('main.delete') }}</th>
 
                     </tr>
                     </thead>
@@ -67,11 +68,16 @@
                             <td>{{$ruin->price_unit}}</td>
                             <td>{{($ruin->quantity*$ruin->price_unit)}}</td>
                             <td>{{$ruin->note}}</td>
+<td>
 
-{{--                             <td>--}}
-{{--                                <a href="{{url('refund/delete/'.$refund->id)}}" title="delete">--}}
-{{--                                    <i style="color: red" class="flaticon-delete"></i>--}}
-{{--                                </a> </td>--}}
+        <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.ruined')}}')"
+              action="{{route('ruined.destroy',[$ruin->id])}}">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+        </form>
+
+</td>
                         </tr>
                     @endforeach
 

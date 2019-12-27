@@ -7,10 +7,11 @@ use App\Http\Traits\restaurantScopeTrait;
 use App\Http\Traits\uploadFileTrait;
 use App\Scopes\restaurantScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Expense extends Model
 {
-    use uploadFileTrait,baseTrait,restaurantScopeTrait;
+    use uploadFileTrait,baseTrait,restaurantScopeTrait,SoftDeletes;
 
 
     //

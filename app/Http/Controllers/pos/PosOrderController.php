@@ -58,8 +58,10 @@ class PosOrderController extends Controller
 
         $order->restaurant_id = Auth::user()->restaurant->id;
         $order->discount = $request->discount;
+
         $order->vat = $request->vat;
-        $order->service = $request->service;
+
+
         $order->is_staff = $request->is_staff;
         $order->type = $request->type;
         $order->coupon = $request->coupon;
@@ -67,6 +69,9 @@ class PosOrderController extends Controller
         if ($request->type=='delivery')
         {
             $order->delivery = $request->delivery;
+
+        }elseif($request->type=='restaurant'){
+            $order->service = $request->service;
 
         }
         if ($order->save()) {
@@ -174,10 +179,14 @@ class PosOrderController extends Controller
 
         $order->discount = $request->discount;
         $order->vat = $request->vat;
-        $order->service = $request->service;
         $order->is_staff = $request->is_staff;
         $order->coupon = $request->coupon;
 
+        if ($request->type=='delivery')
+        {
+            $order->delivery = $request->delivery;
+
+        }
 
         if ($order->save()) {
             foreach (json_decode($request->get('order')) as $orderDish) {

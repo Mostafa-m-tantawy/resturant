@@ -35,7 +35,15 @@
                 </div>
             </div>
     <div class="kt-portlet__body">
-
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+    @endif
         <!--begin: Datatable -->
         <table id="datatable-responsive"
                class="display table table-striped table-bordered " cellspacing="0"
@@ -46,6 +54,7 @@
                 <th>{{trans('main.email')}}</th>
                 <th>{{trans('main.products')}}</th>
                 <th>{{trans('main.profile')}}</th>
+                <th>{{trans('main.Delete')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -67,6 +76,16 @@
                            <i class="socicon-persona"style=" padding:5px; top:10px;font-size: 25px;">
                            </i>
                        </a>
+                   </td>
+                   <td>
+                  @if($supplier->canDeleted)
+                           <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.supplier')}}')"
+                             action="{{route('supplier.destroy',[$supplier->id])}}">
+                           @csrf
+                           @method('DELETE')
+                           <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                       </form>
+                       @endif
                    </td>
             </tr>
                @endforeach

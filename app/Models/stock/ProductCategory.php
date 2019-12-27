@@ -14,4 +14,13 @@ class ProductCategory extends Model
     public function products(){
         return $this->hasMany(Product::class);
     }
+
+
+    public function getCanDeletedAttribute()
+    {
+        if ($this->products->count() > 0 ) {
+            return false;
+        }
+        return true;
+    }
 }

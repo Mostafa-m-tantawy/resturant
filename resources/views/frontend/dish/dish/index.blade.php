@@ -38,25 +38,25 @@
                 <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper" style="height: 100%">
 
 
-           @if($categories->count()>0)
+                    @if($categories->count()>0)
 
                         <div class="row" style="height: 100%">
-                        <div class="col-2" style=" padding-right:unset;height: 100%">
-                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
-                                 aria-orientation="vertical">
-                                <div style="height: 100px; background-color: darkslategrey"></div>
-                                @foreach($categories as $category)
-                                    <a class="nav-link @if($loop->first) active @endif"
-                                       id="v-pills-{{$category->id}}-tab"
-                                       data-toggle="pill" href="#v-pills-{{$category->id}}"
-                                       role="tab" aria-controls="v-pills-{{$category->id}}"
-                                       aria-selected="@if($loop->first)true @else false @endif">{{$category->name}}</a>
-                                @endforeach
+                            <div class="col-2" style=" padding-right:unset;height: 100%">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                     aria-orientation="vertical">
+                                    <div style="height: 100px; background-color: darkslategrey"></div>
+                                    @foreach($categories as $category)
+                                        <a class="nav-link @if($loop->first) active @endif"
+                                           id="v-pills-{{$category->id}}-tab"
+                                           data-toggle="pill" href="#v-pills-{{$category->id}}"
+                                           role="tab" aria-controls="v-pills-{{$category->id}}"
+                                           aria-selected="@if($loop->first)true @else false @endif">{{$category->name}}</a>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-10" style="padding-left:unset;height: 100%">
-                            <div class="tab-content" id="v-pills-tabContent" style="height: 100%">
-                                @foreach($categories as $category)
+                            <div class="col-10" style="padding-left:unset;height: 100%">
+                                <div class="tab-content" id="v-pills-tabContent" style="height: 100%">
+                                    @foreach($categories as $category)
 
 
                                         <div class="tab-pane fade  @if($loop->first) show active @endif"
@@ -85,33 +85,56 @@
 
                                                                     <div class="kt-portlet__body" style="padding:10px">
                                                                         @foreach($category->dishes as $dish)
-                                                                        <div class="kt-widget5">
-                                                                            <div class="kt-widget5__item" style="padding: unset; ">
-                                                                                <div class="kt-widget5__content">
-                                                                                    <div class="kt-widget5__pic">
-                                                                                        <img class="kt-widget7__img"
-                                                                                             src="/media//products/product27.jpg"
-                                                                                             alt="">
-                                                                                    </div>
-                                                                                    <div class="kt-widget5__section">
-                                                                                        <a href="#"
-                                                                                           class="kt-widget5__title">
-                                                                                            {{$dish->name}}
-                                                                                        </a>
-                                                                                        <p class="kt-widget5__desc">
-                                                                                            {{$dish->discription}}
-                                                                                        </p>
-                                                                                        <div class="kt-widget5__info">
-{{--                                                                                            <span>Author:</span>--}}
-{{--                                                                                            <span class="kt-font-info">Keenthemes</span>--}}
-{{--                                                                                            <span>Released:</span>--}}
-{{--                                                                                            <span--}}
-{{--                                                                                                class="kt-font-info">23.08.17</span>--}}
+                                                                            <div class="kt-widget5">
+                                                                                <div class="kt-widget5__item"
+                                                                                     style="padding: unset; ">
+                                                                                    <div class="kt-widget5__content">
+                                                                                        <div class="kt-widget5__pic">
+                                                                                            <img class="kt-widget7__img"
+                                                                                                 src="/media//products/product27.jpg"
+                                                                                                 alt="">
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="kt-widget5__section">
+                                                                                            <a href="#"
+                                                                                               class="kt-widget5__title">
+                                                                                                {{$dish->name}}
+                                                                                            </a>
+                                                                                            <p class="kt-widget5__desc">
+                                                                                                {{$dish->description}}
+                                                                                            </p>
+                                                                                            <p class="kt-widget5__desc">
+
+                                                                                                @if($dish->status)
+                                                                                                    <span
+                                                                                                        class="btn btn-label-success btn-sm">Active</span>
+
+                                                                                                @else
+                                                                                                    <span
+                                                                                                        class="btn btn-label-danger btn-sm">InActive</span>
+
+                                                                                                @endif
+                                                                                                </p>
+                                                                                            <p class="kt-widget5__desc">
+                                                                                            @if($dish->status)
+                                                                                                    <span
+                                                                                                        class="btn btn-label-success btn-sm">{{$dish->StockAvailable}}</span>
+
+
+                                                                                                @endif
+                                                                                                </p>
+                                                                                                <div
+                                                                                                    class="kt-widget5__info">
+                                                                                                    {{--                                                                                            <span>Author:</span>--}}
+                                                                                                    {{--                                                                                            <span class="kt-font-info">Keenthemes</span>--}}
+                                                                                                    {{--                                                                                            <span>Released:</span>--}}
+                                                                                                    {{--                                                                                            <span--}}
+                                                                                                    {{--                                                                                                class="kt-font-info">23.08.17</span>--}}
+                                                                                                </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="kt-widget5__content">
-                                                                                    <div class="kt-widget5__stats">
+                                                                                    <div class="kt-widget5__content">
+                                                                                        <div class="kt-widget5__stats">
                                                                                 <span
                                                                                     class="kt-widget5__number">
                                                                                     <a href="{{url('cost/dish/'.$dish->id.'/edit')}}">
@@ -120,24 +143,23 @@
                                                                                     </a>
                                                                                 </span>
 
-                                                                                        <span
-                                                                                            class="kt-widget5__sales">{{trans('main.update')}} </span>
-                                                                                    </div>
-                                                                                    <div class="kt-widget5__stats">
+                                                                                            <span
+                                                                                                class="kt-widget5__sales">{{trans('main.update')}} </span>
+                                                                                        </div>
+                                                                                        <div class="kt-widget5__stats">
                                                                                 <span class="kt-widget5__number">
                                                                                      <a href="{{url('cost/dish/'.$dish->id.'/edit')}}">
                                                                                      <img style="height: 50px"
                                                                                           src="media/icons/svg/Communication/Clipboard-list.svg"/>
                                                                                      </a>
                                                                                 </span>
-                                                                                        <span
-                                                                                            class="kt-widget5__votes">{{trans('main.recipe')}} </span>
+                                                                                            <span
+                                                                                                class="kt-widget5__votes">{{trans('main.recipe')}} </span>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
                                                                         @endforeach
-
 
 
                                                                     </div>
@@ -153,20 +175,20 @@
 
                                         </div>
 
-                                @endforeach
+                                    @endforeach
 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-             @else
-               <div class="row" style="height: 100%">
-                   <div class="col" style="    text-align: center;align-self: center;">
+                    @else
+                        <div class="row" style="height: 100%">
+                            <div class="col" style="    text-align: center;align-self: center;">
 
-                       <h3>{{trans('main.There Is No Menu To show')}}
-                       </h3>
-                   </div>
-               </div>
+                                <h3>{{trans('main.There Is No Menu To show')}}
+                                </h3>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>

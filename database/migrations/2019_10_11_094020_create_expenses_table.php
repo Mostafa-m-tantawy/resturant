@@ -20,6 +20,7 @@ class CreateExpensesTable extends Migration
             $table->string              ('payment_method');
             $table->date                ('due_date')->nullable();
             $table->string('note')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('ruined-products','RuinedController@ruinedProducts');
     Route::post('get-product-cost/{id}','RuinedController@getProductQuantity');
     Route::post('/save-ruined','RuinedController@saveRuined')->name('ruined.store');;
+    Route::delete('ruined/{id}','RuinedController@destroy')->name('ruined.destroy');;
 
 
 });

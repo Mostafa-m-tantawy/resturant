@@ -71,6 +71,12 @@
                                             <i class="flaticon2-calendar-3"></i> {{trans('main.personal')}}
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " data-toggle="tab" href="#stock_tab"
+                                           role="tab">
+                                            <i class="flaticon2-calendar-3"></i> {{trans('main.stock')}}
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -119,6 +125,32 @@
                                             </div>
                                         </div>
                                     </form>
+                                </div>
+                                <div class="tab-pane " id="stock_tab" role="tabpanel">
+                                       <div class="kt-portlet__body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table class="datatable-responsive display table table-striped table-bordered " cellspacing="0">         <thead>
+                                                        <tr>
+                                                            <th> {{trans('main.name')}}</th>
+                                                            <th> {{trans('main.quantity')}}  {{trans('main.available')}}</th>
+                                                            <th> {{trans('main.unit')}} {{trans('main.price')}}</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($products as $product)
+                                                            <tr>
+                                                                <td>{{$product->name}}</td>
+                                                                <td>{{$product->departmentquantity($department) }}</td>
+                                                                <td>{{$product->cost }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
 
                                 <!--End:: Tab Content-->

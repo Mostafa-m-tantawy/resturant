@@ -113,6 +113,8 @@ class RestaurantController extends Controller
 
         SystemConf::create(
                  ['restaurant_id'=>$restaurant->id,'name' => 'months','value'=>'6']         );
+    SystemConf::create(
+                 ['restaurant_id'=>$restaurant->id,'name' => 'delivery','value'=>'0']         );
 
 
         return  redirect()->back();

@@ -28,6 +28,17 @@ class RuinedController extends Controller
     {
         return view('frontend.ruined.new_ruined');
     }
+  public function destroy($id)
+    {
+        $product = RuinedProduct::find($id);
+        $product->delete();
+        $header=$product->ruinedHeader;
+        if($header->products->count() ==0){
+           $header->delete();
+       }
+            return redirect()->back();
+
+    }
 
     public function getAssignable($from)
     {

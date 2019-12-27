@@ -15,6 +15,8 @@ class RuinedHeader extends Model
     public  function ruinedable(){
         return $this->morphTo();
     }
-
+    public  function products(){
+        return $this->hasMany(RuinedProduct::class,'ruined_header_id');
+    }
 
 }

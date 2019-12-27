@@ -105,6 +105,7 @@ class ExpensesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Expense::destroy($id);
+        return  redirect()->back();
     }
 }
