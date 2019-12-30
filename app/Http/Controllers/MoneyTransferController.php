@@ -25,7 +25,10 @@ class MoneyTransferController extends Controller
 
      return view('cashier.request')->with(compact('requests','employees'));
     }
-   public function receive()
+
+
+
+    public function receive()
     {
      $receives=MoneyTransfer::
      where('receiver_id',Auth::user()->employee->id)

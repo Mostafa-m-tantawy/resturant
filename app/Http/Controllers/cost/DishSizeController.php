@@ -11,6 +11,16 @@ class DishSizeController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->middleware(['permission:index dish size'],['only'=>['index']]);
+        $this->middleware(['permission:create dish size'],['only'=>['store']]);
+        $this->middleware(['permission:update dish size'],['only'=>['update']]);
+//        $this->middleware(['permission:delete dish size'],['only'=>['delete']]);
+    }
+
+
+
     public function index($id)
     {
         $dish = Dish::findOrFail($id);

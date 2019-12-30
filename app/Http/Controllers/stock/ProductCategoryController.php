@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductCategoryController extends Controller
 {
+
+    public function __construct()
+{
+    $this->middleware(['permission:index product category'],['only'=>['index']]);
+    $this->middleware(['permission:create product category'],['only'=>['create','store']]);
+    $this->middleware(['permission:update product category'],['only'=>['update','edit']]);
+    $this->middleware(['permission:delete product category'],['only'=>['destroy']]);
+}
+
     /**
      * Display a listing of the resource.
      *
@@ -115,5 +124,6 @@ class ProductCategoryController extends Controller
             $error = 'category has products!';
             return redirect()->back()->withErrors($error);
         }
+
     }
 }

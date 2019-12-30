@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class DishRuinedController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index ruined dish'], ['only' => ['index']]);
+        $this->middleware(['permission:create ruined dish'], ['only' => ['create', 'store']]);
+//        $this->middleware(['permission:update ruined dish'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete ruined dish'], ['only' => ['delete']]);
+    }
+
+
     public function index()
     {
         $ruined = RuinedDish::all();
@@ -28,13 +38,13 @@ class DishRuinedController extends Controller
 
     public function saveOrder(Request $request)
     {
-$systemconf=SystemConf::all();
+        $systemconf = SystemConf::all();
 // save Order Header with vat service and if staff
         $restaurant = Auth::user()->restaurant;
         $ruined = new RuinedDish();
         $ruined->restaurant_id = $restaurant->id;
         if ($request->vat == 'on')
-            $ruined->vat = $systemconf->where('name','vat')->first()->value;
+            $ruined->vat = $systemconf->where('name', 'vat')->first()->value;
         if ($request->staff == 'on')
             $ruined->is_staff = 1;
 

@@ -10,7 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class HrApproveRequestController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware(['permission:my requests'],['only'=>['myRequests']]);
+        $this->middleware(['permission:my approves'],['only'=>['myApproves']]);
+        $this->middleware(['permission:response approve'],['only'=>['response']]);
+      }
 
     public function myRequests()
     {

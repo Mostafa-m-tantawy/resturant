@@ -272,7 +272,7 @@ return [
     'new permission' => 'new permission',
     'permission association' => 'permission association',
     'role association' => 'role association',
-    '' => '',
+    'insurance' => 'insurance',
     '' => '',
     '' => '',
     '' => '',

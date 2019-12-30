@@ -8,6 +8,7 @@ use App\HrAttendance;
 use App\HrEmployee;
 use App\HrPayroll;
 use App\Phone;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,14 @@ use Illuminate\Support\Facades\Hash;
 
 class HrEmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index employee'],['only'=>['index']]);
+        $this->middleware(['permission:show employee'],['only'=>['show']]);
+        $this->middleware(['permission:create employee'],['only'=>['create','store']]);
+        $this->middleware(['permission:update employee'],['only'=>['edit','update']]);
+//    $this->middleware(['permission:delete employee'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -122,7 +131,8 @@ class HrEmployeeController extends Controller
     {
         $employee = HrEmployee::find($id);
         $departments = Department::all();
-
+        $roles=$employee->user->roles;
+        $allRoles=Role::all();
         $lastPayroll=HrPayroll::whereHas('payslips',function ($q)use($employee){
            $q->where('hr_employee_id',$employee->id);
        })->whereHas('approve_request',function ($q){
@@ -135,7 +145,9 @@ class HrEmployeeController extends Controller
 
         $attendances=$attendances->get();
 
-        return view('hr.employee.show')->with(compact('employee', 'departments','attendances'));
+        return view('hr.employee.show')
+            ->with(compact('employee', 'roles',
+                'departments','attendances','allRoles'));
     }
 
     /**
@@ -219,5 +231,32 @@ class HrEmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function associate(Request $request,$id)
+    {
+        $employee=HrEmployee::find($id);
+        $user=$employee->user;
+        $user->assignRole($request->role);
+        return redirect()->back();
+
+        //
+    }    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function dissociate(Request $request,$id)
+    {
+
+        $employee=HrEmployee::find($id);
+        $user=$employee->user;
+        $user->removeRole($request->role);
+        return redirect()->back();
     }
 }

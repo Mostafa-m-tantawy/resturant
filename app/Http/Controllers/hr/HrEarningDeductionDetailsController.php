@@ -11,7 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HrEarningDeductionDetailsController extends Controller
+{ public function __construct()
 {
+    $this->middleware(['permission:index earning'],['only'=>['index']]);
+    $this->middleware(['permission:create earning'],['only'=>['create','store']]);
+    $this->middleware(['permission:update earning'],['only'=>['edit','update']]);
+//    $this->middleware(['permission:delete unit'],['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *

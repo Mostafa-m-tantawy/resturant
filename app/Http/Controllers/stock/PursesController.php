@@ -14,29 +14,26 @@ use Illuminate\Support\Facades\Auth;
 
 class PursesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create purchase'],['only'=>['addPurchase','']]);
+        $this->middleware(['permission:update purchase'],['only'=>['editPurses','savePursesProduct']]);
+        $this->middleware(['permission:summery purchase'],['only'=>['SummeryIndex']]);
+        $this->middleware(['permission:details purchase'],['only'=>['detailedIndex']]);
+    }
 
-    /**
-     * Show new purses form
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
     public function addPurchase()
     {
 
         $products = Product::orderBy('name')->get();
         $suppliers = Supplier::all();
         $units = Unit::all();
-        return view('frontend.purchase.new-purses',[
-            'products'          =>      $products,
-            'units'             =>      $units,
-            'suppliers'         =>      $suppliers
-        ]);
+        return view('frontend.purchase.new-purses')
+            ->with(compact('products','units','suppliers'));
     }
 
 
-    /**
-     * All purses
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function SummeryIndex()
     {
         $purses = Purse::where('restaurant_id',Auth::user()->restaurant->id)->get();
@@ -55,11 +52,6 @@ class PursesController extends Controller
         ]);
     }
 
-    /**
-     * Eidt purses
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function editPurses($id)
     {
         $purses = Purse::findOrFail($id);
@@ -67,12 +59,8 @@ class PursesController extends Controller
 
         $suppliers = Supplier::all();
         $unit = Unit::all();
-        return view('frontend.purchase.edit-purses',[
-            'products'          =>      $products,
-            'units'             =>      $unit,
-            'suppliers'         =>      $suppliers,
-            'purses'            =>      $purses
-        ]);
+        return view('frontend.purchase.edit-purses')
+            ->with(compact('purses','products','suppliers','unit'));
     }
 
 

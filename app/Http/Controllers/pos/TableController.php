@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class TableController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index table'],['only'=>['index']]);
+        $this->middleware(['permission:create table'],['only'=>['create','store']]);
+        $this->middleware(['permission:update table'],['only'=>['edit','update']]);
+    }
     /**
      * Display a listing of the resource.
      *

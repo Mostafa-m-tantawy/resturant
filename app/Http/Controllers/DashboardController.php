@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:cost dashboard'],['only'=>['salesDashboard']]);
+        $this->middleware(['permission:hr dashboard'],['only'=>['hrDashboard']]);
+        $this->middleware(['permission:pos dashboard'],['only'=>['posDashboard']]);
+        $this->middleware(['permission:stock dashboard'],['only'=>['stockDashboard']]);
+    }
+
+
     public function dashboard(Request $request)
     {
         return view('dashboard');
@@ -192,7 +201,8 @@ class DashboardController extends Controller
 
         return back();
 
-    }    public function cashierDashboard()
+    }
+    public function cashierDashboard()
     {
 
 

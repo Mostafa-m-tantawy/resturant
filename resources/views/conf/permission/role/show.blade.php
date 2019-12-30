@@ -102,8 +102,8 @@
 
                                 <div class="form-group">
                                     <label>{{trans('main.permission')}}</label>
-                                    <select name="permission_id" class="form-control">
-                                        <option value="">{{trans('main.select')}} {{trans('main.permission')}} </option>
+                                    <select id="permission_id[]" name="permission_id[]" class="form-control kt-selectpicker" multiple>
+                                        <option  disabled selected value="">{{trans('main.select')}} {{trans('main.permission')}} </option>
                                         @foreach($permissions as $permission)
                                             <option value="{{$permission->id}}">{{$permission->name}} </option>
                                         @endforeach
@@ -130,4 +130,16 @@
             </div>
         </div>
     </div>
+@stop
+@section('scripts')
+    <script src="{{asset('/js/demo1/pages/crud/forms/widgets/bootstrap-select.js')}}" type="text/javascript"></script>
+<script>
+    $('document').ready(function () {
+
+        $('#permission_id').val([@foreach($rolePermissions as $per){{($loop->first)? $per->id:','.$per->id }}@endforeach]);
+        // $('#permission_id').val([1,2,3,4]);
+        $('select[name=permission_id]').change();
+
+    });
+</script>
 @stop

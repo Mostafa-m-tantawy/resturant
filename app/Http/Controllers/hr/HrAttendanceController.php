@@ -9,7 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HrAttendanceController extends Controller
+{ public function __construct()
 {
+    $this->middleware(['permission:index attendance'],['only'=>['index']]);
+    $this->middleware(['permission:history attendance'],['only'=>['history']]);
+    $this->middleware(['permission:update attendance'],['only'=>['edit','update']]);
+    $this->middleware(['permission:check in attendance'],['only'=>['store']]);
+    $this->middleware(['permission:check out attendance'],['only'=>['checkout']]);
+}
     /**
      * Display a listing of the resource.
      *

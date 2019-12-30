@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class HallController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index hall'],['only'=>['index']]);
+        $this->middleware(['permission:create hall'],['only'=>['create','store']]);
+        $this->middleware(['permission:update hall'],['only'=>['edit','update']]);
+//        $this->middleware(['permission:delete unit'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

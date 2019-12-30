@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UnitController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index unit'],['only'=>['index']]);
+        $this->middleware(['permission:create unit'],['only'=>['create','store']]);
+        $this->middleware(['permission:update unit'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete unit'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -118,8 +125,14 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        Unit::destroy($id);
-        return redirect()->back();
-        //
+        $unit = Unit::find($id);
+        if (!$unit->products->count()>0) {
+            $unit->delete();
+            return redirect()->back();
+        } else {
+            $error = 'unit has products!';
+            return redirect()->back()->withErrors($error);
+        }
+       //
     }
 }

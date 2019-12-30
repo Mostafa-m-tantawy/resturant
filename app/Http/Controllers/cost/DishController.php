@@ -13,6 +13,16 @@ class DishController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->middleware(['permission:index dish'],['only'=>['index']]);
+        $this->middleware(['permission:create dish'],['only'=>['create','store']]);
+        $this->middleware(['permission:update dish'],['only'=>['edit','update']]);
+//        $this->middleware(['permission:delete dish category'],['only'=>['destroy']]);
+    }
+
+
+
     public function index(){
         $categories=DishCategory::with('dishes')->get();
 //        dd($categories);

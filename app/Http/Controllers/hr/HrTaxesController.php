@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HrTaxesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

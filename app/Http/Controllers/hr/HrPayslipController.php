@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Auth;
 
 class HrPayslipController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware(['permission:index pay slip'],['only'=>['index']]);
+    $this->middleware(['permission:create pay slip'],['only'=>['create','store']]);
+    $this->middleware(['permission:update pay slip'],['only'=>['edit','update']]);
+    $this->middleware(['permission:show pay slip'],['only'=>['show']]);
+    $this->middleware(['permission:delete pay slip'],['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *
@@ -220,7 +228,8 @@ return compact('basic_employee','basic_employer','dynamic_employee','dynamic_emp
       *
       * @param int $id
       * @return \Illuminate\Http\Response
-      */ public function calculateTaxes(Request $request)
+      */
+     public function calculateTaxes(Request $request)
     {$number=$request->number;
         $levels = HrTax::all();
         $free = 7000;

@@ -451,7 +451,16 @@ function undoDelete(index) {
     }
     DrawOrderInvoice();
 }
+function OrderDishSizeQuantity(size) {
+    var quantity = 0;
+    $.each(order, function (i, dish) {
+        if (dish.size.id == size.id) {
+            quantity += dish.quantity;
+        }
 
+    });
+    return quantity;
+}
 function newDish(id) {
 
     tempdish = search(id, dishes);
@@ -473,6 +482,7 @@ function newDish(id) {
     $(sizes).html('');
     $.each(tempdish.sizes, function (i, size) {
         // console.log(size);
+        if (size.quantity > 0 && size.quantity > OrderDishSizeQuantity(size)) {
 
         $(sizes).append(' <div class="col-4 justify-content-center align-content-center">\n' +
             '                            <div style="padding: 30px;">    \n' +
@@ -480,6 +490,7 @@ function newDish(id) {
             '                     <br>           price : ' + size.price + ' \n' +
             '                         </div>\n' +
             '                        </div>\n');
+        }
     })
     DrawDishDetailsTable($('#sizes_modal'));
 

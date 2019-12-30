@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Auth;
 class AssignController extends Controller
 {
 
+    public function __construct()
+{
+    $this->middleware(['permission:index assign stock'],['only'=>['index']]);
+    $this->middleware(['permission:create assign stock'],['only'=>['CreateAssign']]);
+    }
+
     public function index(){
         $assigns=AssignStock::all();
         return view('frontend.assign.index')->with(compact('assigns'));
     }
+
+
     public function CreateAssign()
     {
         $restaurant = Auth::user()->restaurant;
@@ -42,6 +50,9 @@ class AssignController extends Controller
         }
 
     }
+
+
+
     public function getSourceProducts(Request $request)
     {
         if ($request->type == 'restaurant') {

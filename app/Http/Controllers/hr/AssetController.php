@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AssetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index asset'],['only'=>['index']]);
+        $this->middleware(['permission:create asset'],['only'=>['create','store']]);
+        $this->middleware(['permission:update asset'],['only'=>['edit','update']]);
+        $this->middleware(['permission:show asset'],['only'=>['show']]);
+        $this->middleware(['permission:delete asset'],['only'=>['destroy']]);
+        $this->middleware(['permission:attach employee asset'],['only'=>['attachEmployee']]);
+        $this->middleware(['permission:detach employee asset'],['only'=>['detachEmployee']]);
+    }
     /**
      * Display a listing of the resource.
      *

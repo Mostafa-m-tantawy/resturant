@@ -9,6 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class PermissionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index Permission'],['only'=>['index']]);
+        $this->middleware(['permission:create Permission'],['only'=>['create','store']]);
+        $this->middleware(['permission:update Permission'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete Permission'],['only'=>['destroy']]);
+        $this->middleware(['permission:associate Permission role'],['only'=>['association']]);
+        $this->middleware(['permission:dissociate Permission role'],['only'=>['dissociation']]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *

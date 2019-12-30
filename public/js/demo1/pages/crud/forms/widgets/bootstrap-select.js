@@ -1,17 +1,19 @@
 // Class definition
 
 var KTBootstrapSelect = function () {
-    
+
     // Private functions
     var demos = function () {
         // minimum setup
-        $('.kt-selectpicker').selectpicker();
+        $('.kt-selectpicker').selectpicker({
+            actionsBox:true
+        });
     }
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();

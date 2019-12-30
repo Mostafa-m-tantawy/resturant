@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class HrPayrollController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index payroll'],['only'=>['index']]);
+        $this->middleware(['permission:create payroll'],['only'=>['create','store']]);
+        $this->middleware(['permission:update payroll'],['only'=>['edit','update']]);
+//    $this->middleware(['permission:delete unit'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -152,8 +159,7 @@ class HrPayrollController extends Controller
          * @param int $id
          * @return \Illuminate\Http\Response
          */
-        public
-        function destroy($id)
+        public function destroy($id)
         {
             //
         }

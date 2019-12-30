@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class DishCategoryController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index dish category'],['only'=>['index']]);
+        $this->middleware(['permission:create dish category'],['only'=>['create','store']]);
+        $this->middleware(['permission:update dish category'],['only'=>['edit','update']]);
+//        $this->middleware(['permission:delete dish category'],['only'=>['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

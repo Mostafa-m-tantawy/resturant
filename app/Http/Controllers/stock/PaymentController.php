@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+//        $this->middleware(['permission:index stock payment'],['only'=>['index']]);
+        $this->middleware(['permission:create stock payment'],['only'=>['savePayment']]);
+//        $this->middleware(['permission:update stock payment'],['only'=>['update','edit']]);
+        $this->middleware(['permission:delete stock payment'],['only'=>['deletePayment']]);
+    }
+
 
     public function savePayment(Request $request)
     {

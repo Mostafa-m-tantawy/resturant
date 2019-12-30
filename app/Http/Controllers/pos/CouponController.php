@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index coupon'],['only'=>['index']]);
+        $this->middleware(['permission:create coupon'],['only'=>['create','store']]);
+        $this->middleware(['permission:update coupon'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete coupon'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -112,6 +119,7 @@ class CouponController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Coupon::destroy($id);
+        return  redirect()->back();
     }
 }
