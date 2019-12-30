@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class HrPayrollTypeController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware(['permission:index payroll type'],['only'=>['index']]);
+    $this->middleware(['permission:create payroll type'],['only'=>['create','store']]);
+    $this->middleware(['permission:update payroll type'],['only'=>['edit','update']]);
+//    $this->middleware(['permission:delete unit'],['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *

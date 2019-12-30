@@ -15,6 +15,16 @@ use Illuminate\Http\Request;
 class RecipeController extends Controller
 {
 
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index dish recipe'],['only'=>['index']]);
+        $this->middleware(['permission:create dish recipe'],['only'=>['store']]);
+//        $this->middleware(['permission:update dish size'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete dish recipe'],['only'=>['delete']]);
+    }
+
+
     public function index($id)
     {
         $dish_size = DishSize::findOrFail($id);

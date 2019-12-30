@@ -274,6 +274,7 @@ return [
     'new permission' => 'صلاحية جديده',
     'permission association' => 'ارتباط الصلاحيات',
     'role association' => 'ارتباط الدور',
+    'insurance' => 'تامين',
     '' => '',
 
 

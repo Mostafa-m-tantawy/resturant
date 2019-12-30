@@ -19,6 +19,16 @@ use Illuminate\Support\Facades\Hash;
 
 class RestaurantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index restaurant'],['only'=>['index']]);
+        $this->middleware(['permission:create restaurant'],['only'=>['create','store']]);
+        $this->middleware(['permission:update restaurant'],['only'=>['edit','update']]);
+        $this->middleware(['permission:show restaurant'],['only'=>['show']]);
+        $this->middleware(['permission:stock restaurant'],['only'=>['destroy']]);
+    }
+
+
     public function index()
     {
 //        $branches = Restaurant::where('parent_id', Auth::user()->id)->get();
@@ -209,37 +219,12 @@ class RestaurantController extends Controller
         //
     }
 
-    public function states(Request $request)
-    {
-        $cities = State::where('country_id', $request->id)->get();
-        return response()->json($cities, 200);
-        //
-    }
 
-    public function updateAddress(Request $request)
-    {
-        $address = Address::findOrFail($request->id);
-        $address->address = $request->address;
-        $address->city_id = $request->city_id;
-        $address->save();
-        return redirect()->back();
-        //
-    }
-
-    public function updatePhone(Request $request)
-    {
-        $phone = Phone::findOrFail($request->id);
-        $phone->phone = $request->phone;
-        $phone->type = $request->type;
-        $phone->save();
-        return redirect()->back();
-        //
-    }
     public function stock(Request $request,$id)
     {
         $purchases=Purse::where('restaurant_id',$id)->get();
-       $from  =null;
-       $to    =null;
+        $from  =null;
+        $to    =null;
         $method=$request->price_math_method;
         if($request->price_math_method!='last_price'){
 

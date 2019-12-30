@@ -10,6 +10,14 @@ use vendor\project\StatusTest;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index department'],['only'=>['index']]);
+        $this->middleware(['permission:create department'],['only'=>['create','store']]);
+        $this->middleware(['permission:update department'],['only'=>['edit','update']]);
+        $this->middleware(['permission:show department'],['only'=>['show']]);
+        $this->middleware(['permission:stock department'],['only'=>['stock']]);
+    }
     /**
      * Display a listing of the resource.
      *

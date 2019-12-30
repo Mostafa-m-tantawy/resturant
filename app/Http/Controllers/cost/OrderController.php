@@ -38,6 +38,16 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index order cost'],['only'=>['costOrder']]);
+//        $this->middleware(['permission:create dish category'],['only'=>['create','store']]);
+//        $this->middleware(['permission:update dish category'],['only'=>['edit','update']]);
+//        $this->middleware(['permission:delete dish category'],['only'=>['destroy']]);
+    }
+
+
     public function index()
     {
         $orders = Order::all();

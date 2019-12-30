@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class lifeKitchenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:life kitchen'],['only'=>['lifeKitchen']]);
+    }
+
 
     public function lifeKitchen(Request $request)
     {

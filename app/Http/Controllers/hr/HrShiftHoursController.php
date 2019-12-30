@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class HrShiftHoursController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index shift hour'],['only'=>['index']]);
+        $this->middleware(['permission:create shift hour'],['only'=>['create','store']]);
+        $this->middleware(['permission:update shift hour'],['only'=>['edit','update']]);
+//    $this->middleware(['permission:delete unit'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

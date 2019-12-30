@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index client'],['only'=>['index']]);
+        $this->middleware(['permission:create client'],['only'=>['create','store']]);
+        $this->middleware(['permission:update client'],['only'=>['edit','update']]);
+//        $this->middleware(['permission:delete dish category'],['only'=>['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

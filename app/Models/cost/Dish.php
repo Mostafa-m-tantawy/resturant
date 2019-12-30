@@ -20,6 +20,7 @@ class Dish extends Model
   public  function  category(){
         return $this->belongsTo(DishCategory::class,'dish_category_id');
     }
+//    protected $appends = ['stock_available'];
 
     public  function  getStockAvailableAttribute(){
         $available=false;

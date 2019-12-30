@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class HrLeaveController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index leave'],['only'=>['index']]);
+        $this->middleware(['permission:create leave'],['only'=>['create','store']]);
+//        $this->middleware(['permission:update earning'],['only'=>['edit','update']]);
+    $this->middleware(['permission:delete leave'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -63,9 +70,9 @@ class HrLeaveController extends Controller
 
                 $leave->approve_request()->create([
                     'name'              => "Leave Request",
-                    'restaurant_id'              => auth()->user()->restaurant->id,
-                    'hr_employee_id'       => auth()->user()->employee->id,
-                    'hr_approval_type_id'  => $approval_type_id,
+                    'restaurant_id'     => auth()->user()->restaurant->id,
+                    'hr_employee_id'    => auth()->user()->employee->id,
+                    'hr_approval_type_id'=> $approval_type_id,
                     'subject'           => $leave->type->name,
                     'details'           => $leave->reason,
                 ]);
@@ -129,6 +136,7 @@ class HrLeaveController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
+
 }

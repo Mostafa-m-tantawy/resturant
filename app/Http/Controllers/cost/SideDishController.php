@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class SideDishController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index side dish'],['only'=>['index']]);
+        $this->middleware(['permission:create side dish'],['only'=>['store']]);
+//        $this->middleware(['permission:update dish size'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete side dish'],['only'=>['delete']]);
+    }
+
+
     public  function  index($size_id){
 
         $dish_size = DishSize::findOrFail($size_id);

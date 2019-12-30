@@ -75,7 +75,8 @@
                             <div class="tab-pane fade @if($loop->first) show active @endif" id="{{str_replace(' ', '', $category->name)}}"
                                  role="tabpanel" aria-labelledby="{{str_replace(' ', '', $category->name)}}-tab">
                                 <div class="row">
-                                    @foreach($category->dishes as $dish)
+                                    @foreach($category->dishes->where('StockAvailable','available') as $dish)
+{{--                                        ->where('StockAvailable','available')--}}
 
                                         <div class="col-2">
                                             <div class="kt-portlet kt-portlet--height-fluid">

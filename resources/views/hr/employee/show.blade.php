@@ -166,10 +166,17 @@
                                            role="tab">
                                             <i class="flaticon2-user-outline-symbol"></i> {{trans('main.emergency')}}
                                         </a>
-                                    </li>    <li class="nav-item">
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#kt_apps_attendance"
                                            role="tab">
                                             <i class="flaticon2-user-outline-symbol"></i> {{trans('main.attendance')}}
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#kt_apps_role"
+                                           role="tab">
+                                            <i class="flaticon2-user-outline-symbol"></i> {{trans('main.role')}}
                                         </a>
                                     </li>
 
@@ -717,6 +724,91 @@
                                 </div>
                                 <!--End:: Tab Content-->
 
+                               <!--Begin:: Tab Content-->
+                                <div class="tab-pane" id="kt_apps_role" role="tabpanel">
+
+
+                                    <div class="kt-portlet__head kt-portlet__head--lg">
+                                        <div class="kt-portlet__head-label">
+										<span class="kt-portlet__head-icon">
+											<i class="kt-font-brand flaticon2-line-chart"></i>
+										</span>
+                                            <h3 class="kt-portlet__head-title">
+                                                {{trans('main.roles')}}
+                                            </h3>
+                                        </div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="kt-portlet__head-wrapper">
+                                                <div class="kt-portlet__head-actions">
+
+                                                    <a href="#"
+                                                       class="btn btn-brand btn-elevate btn-icon-sm"
+                                                       data-toggle="modal" data-target=".new_role"><i
+                                                            class="la la-plus"></i>
+                                                        {{trans('main.new')}} {{trans('main.role')}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-portlet__body" style="padding: unset">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table id="datatable-responsive"
+                                                           class="display table table-striped table-bordered " cellspacing="0"
+                                                           style="width:100%">
+
+                                                        <thead>
+                                                        <tr>
+                                                            <th> {{trans('main.id')}}</th>
+                                                            <th>{{trans('main.role')}}</th>
+                                                            <th>{{trans('main.delete')}}</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($roles as $role)
+                                                            <tr>
+                                                                <td>{{$role->id}}</td>
+                                                                <td>{{$role->name}}</td>
+                                                                <td>
+                                                                    <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.association role')}}')"
+                                                                          action="{{route('employee.dissociate-role',[$employee->id])}}">
+                                                                        @csrf
+                                                                        <input type="hidden" name="role" value="{{$role->name}}">
+                                                                        <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                                                                    </form>
+
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                        </tbody>
+                                                    </table>
+
+
+                                                            </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="kt-portlet__foot">
+                                            <div class="kt-form__actions">
+                                                <div class="row">
+                                                    <div class="col-lg-4"></div>
+                                                    <div class="col-lg-8">
+                                                        <button type="submit"
+                                                                class="btn btn-primary">{{trans('main.submit')}}</button>
+                                                        <button type="reset"
+                                                                class="btn btn-secondary">{{trans('main.cancel')}}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <!--End:: Tab Content-->
+
                             </div>
 
 
@@ -738,6 +830,53 @@
 
 
 
+    <div class="modal fade new_role" id="new_role" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="{{route('employee.associate-role',[$employee->id])}}" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{trans('main.payment')}} </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        @csrf
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="form-group col-12">
+                                    <label for="inputPassword4"
+                                           class="control-label">{{ trans('main.role') }} {{ trans('main.method') }}</label>
+
+                                    <select class="form-control" id="role"
+                                            name="role">
+                                        <option value="">{{ trans('main.select') }}{{ trans('main.role') }} </option>
+
+                                        @foreach($allRoles as $role)
+                                            <option value="{{$role->name}}">{{ $role->name}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-12 pull-left">
+                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">{{ trans('main.pay') }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
     @include('.frontend.modals.update-address')
     @include('.frontend.modals.update-phone')

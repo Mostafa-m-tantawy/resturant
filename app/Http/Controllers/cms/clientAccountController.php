@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class clientAccountController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create client payment'],['only'=>['Store']]);
+        $this->middleware(['permission:delete client payment'],['only'=>['destroy']]);
+//        $this->middleware(['permission:delete dish category'],['only'=>['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

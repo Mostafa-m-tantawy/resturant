@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class HrLeaveTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index leave type'],['only'=>['index']]);
+        $this->middleware(['permission:create leave type'],['only'=>['create','store']]);
+//        $this->middleware(['permission:update leave type'],['only'=>['edit','update']]);
+    $this->middleware(['permission:delete leave type'],['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

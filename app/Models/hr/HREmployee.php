@@ -6,11 +6,11 @@ use App\Http\Traits\baseTrait;
 use App\Http\Traits\restaurantScopeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Traits\HasRoles;
 
 class HrEmployee extends Model
-
-
-{ use baseTrait,restaurantScopeTrait;
+{
+    use baseTrait,restaurantScopeTrait,HasRoles;
 
     protected $rules = array(
 

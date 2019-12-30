@@ -1,2 +1,2 @@
 <?php
-Route::resource('table','tableController');;
+Route::resource('table','TableController');;

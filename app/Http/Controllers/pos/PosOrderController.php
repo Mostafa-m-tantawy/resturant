@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\DB;
 
 class PosOrderController extends Controller
 {
+    public function __construct()
+    {
+//        $this->middleware(['permission:index order'],['only'=>['index']]);
+//        $this->middleware(['permission:create order'],['only'=>['create','store']]);
+//        $this->middleware(['permission:update order'],['only'=>['edit','update']]);
+//        $this->middleware(['permission:delete order'],['only'=>['destroy']]);
+//        $this->middleware(['permission:close order'],['only'=>['closeOrder']]);
+//    }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +47,9 @@ class PosOrderController extends Controller
      */
     public function create(Request $request)
     {
-        $categories = DishCategory::where('show', 1)->get();
+        $categories = DishCategory::where('show', 1)->with(['dishes'=>function($q){
+            $q->where('status',1);
+        }])->get();
 
         $table = $request->table;
         $type = $request->type;
@@ -267,7 +278,9 @@ class PosOrderController extends Controller
 
     public function allDishes()
     {
+
         $coupons=Coupon::where('from','<=',Carbon::now()->toDate())->where('to','>=',Carbon::now()->toDate())->get();
+//        $dishes = [];
         $dishes = Dish::where('status', '1')->with(['sizes' => function ($q) {
             $q->where('status', '1')
                 ->with(['sides' => function ($qq) {
@@ -282,7 +295,6 @@ class PosOrderController extends Controller
         }])->whereHas('category', function ($q) {
             $q->where('status', '1');
         })->get();
-
         return response()->json(['dishes'=>$dishes,'coupons'=>$coupons], 200);
     }
 

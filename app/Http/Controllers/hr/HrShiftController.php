@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class HrShiftController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index shift'],['only'=>['index']]);
+        $this->middleware(['permission:create shift'],['only'=>['create','store']]);
+        $this->middleware(['permission:update shift'],['only'=>['edit','update']]);
+    $this->middleware(['permission:detach shift employee'],['only'=>['detachShift']]);
+    $this->middleware(['permission:attach shift employee'],['only'=>['attachShift']]);
+    $this->middleware(['permission:index shift employee'],['only'=>['shiftEmployees']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +24,7 @@ class HrShiftController extends Controller
      */
     public function index()
     {
-        $shifts=HrShift::all();
+        $shifts = HrShift::all();
         return view('hr.shifts.shifts')->with(compact('shifts'));
     }
 
@@ -32,7 +41,7 @@ class HrShiftController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -40,19 +49,16 @@ class HrShiftController extends Controller
         $data = $request->all();
         $shift = new HrShift();
 
-        if ($shift->validate($data))
-        {
-            $shift->restaurant_id     = auth()->user()->restaurant->id;
-            $shift->type     = $request->get('type');
-            $shift->name        = $request->get('name');
-            $shift->threshold          = $request->get('threshold');
+        if ($shift->validate($data)) {
+            $shift->restaurant_id = auth()->user()->restaurant->id;
+            $shift->type = $request->get('type');
+            $shift->name = $request->get('name');
+            $shift->threshold = $request->get('threshold');
             $shift->save();
 
 
-                return redirect()->back();
-            }
-        else
-        {
+            return redirect()->back();
+        } else {
             $errors = $shift->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
@@ -62,7 +68,7 @@ class HrShiftController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,7 +79,7 @@ class HrShiftController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -84,28 +90,25 @@ class HrShiftController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $shift =  HrShift::find($id);
+        $shift = HrShift::find($id);
 
-        if ($shift->validate($data))
-        {
+        if ($shift->validate($data)) {
 
-            $shift->type     = $request->get('type');
-            $shift->name        = $request->get('name');
-            $shift->threshold          = $request->get('threshold');
+            $shift->type = $request->get('type');
+            $shift->name = $request->get('name');
+            $shift->threshold = $request->get('threshold');
             $shift->save();
 
 
             return redirect()->back();
-        }
-        else
-        {
+        } else {
             $errors = $shift->errors();
             return redirect()->back()->withInput()->withErrors($errors);
         }
@@ -114,46 +117,52 @@ class HrShiftController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-    } /**
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function attachShift(Request $request)
     {
-$shift=HrShift::find($request->shift_id);
+        $shift = HrShift::find($request->shift_id);
         $shift->employees()->attach($request->employee_id);;
 
-        return  redirect()->back();
+        return redirect()->back();
 
-    } /**
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function detachShift(Request $request)
     {
-        $shift=HrShift::find($request->shift_id);
+        $shift = HrShift::find($request->shift_id);
 
         $shift->employees()->detach($request->employee_id);
 
 
-        return  redirect()->back();
+        return redirect()->back();
         //
-    }  public function shifEmployees(Request $request)
-    {
-        $shift=HrShift::find($request->id);
-$employees=HrEmployee::whereDoesntHave('shift')->get();
+    }
 
-        return view('hr.shifts.shifts_employee')->with(compact('shift','employees'));
+    public function shiftEmployees(Request $request)
+    {
+        $shift = HrShift::find($request->id);
+        $employees = HrEmployee::whereDoesntHave('shift')->get();
+
+        return view('hr.shifts.shifts_employee')->with(compact('shift', 'employees'));
         //
     }
 }

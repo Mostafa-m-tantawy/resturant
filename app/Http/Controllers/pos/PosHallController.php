@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class PosHallController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:pos hall index'],['only'=>['index']]);
+        $this->middleware(['permission:pos hall transfer'],['only'=>['transfer']]);
+        $this->middleware(['permission:post hall merge'],['only'=>['merge']]);
+     }
+
+
     public function index()
     {
         $halls = Hall::with(['tables' => function ($q) {

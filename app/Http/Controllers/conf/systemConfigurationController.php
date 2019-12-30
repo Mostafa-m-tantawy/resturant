@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class systemConfigurationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:system configuration'],['only'=>['index']]);
+    }
+
+
     public function index(){
         return view('frontend.systemconf.index');
     }

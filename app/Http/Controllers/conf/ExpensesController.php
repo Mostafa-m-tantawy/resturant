@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ExpensesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index expense'],['only'=>['index']]);
+        $this->middleware(['permission:create expense'],['only'=>['create','store']]);
+//        $this->middleware(['permission:update expense'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete expense'],['only'=>['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderPaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create order payment'],['only'=>['store']]);
+        $this->middleware(['permission:delete order payment'],['only'=>['destroy']]);
+        }
     /**
      * Display a listing of the resource.
      *

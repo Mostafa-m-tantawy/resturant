@@ -9,7 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HrApproversController extends Controller
+{ public function __construct()
 {
+    $this->middleware(['permission:index approver'],['only'=>['index']]);
+    $this->middleware(['permission:create approver'],['only'=>['create','store']]);
+    $this->middleware(['permission:update unapproverit'],['only'=>['edit','update']]);
+    $this->middleware(['permission:delete approver'],['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *

@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index product'],['only'=>['index']]);
+        $this->middleware(['permission:create product'],['only'=>['create','store']]);
+        $this->middleware(['permission:update product'],['only'=>['update','edit']]);
+        $this->middleware(['permission:show product'],['only'=>['show']]);
+        $this->middleware(['permission:delete product'],['only'=>['destroy']]);
+        $this->middleware(['permission:attach product to supplier'],['only'=>['products']]);
+        $this->middleware(['permission:detach product to supplier'],['only'=>['deleteProduct']]);
+    }
     //
 
     public  function index(){

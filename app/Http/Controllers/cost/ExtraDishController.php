@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class ExtraDishController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index extra dish'],['only'=>['index']]);
+        $this->middleware(['permission:create extra dish'],['only'=>['store']]);
+//        $this->middleware(['permission:update extra dish'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete extra dish'],['only'=>['delete']]);
+    }
+
+
     public  function  index($size_id){
 
         $dish_size = DishSize::findOrFail($size_id);

@@ -57,7 +57,7 @@ $('document').ready(function () {
         processData: false,
         contentType: false,
         success: function (data) {
-            dishes  = data['dishes'];
+            dishes = data['dishes'];
             coupons = data['coupons'];
         },
         error: function (data) {
@@ -89,13 +89,13 @@ function DrawOrderInvoice() {
     ordervat = 0;
     orderservice = 0;
     total = 0;
-    var CouponsSelect='';
+    var CouponsSelect = '';
     var table = $('#invoice tbody');
     $(table).html('');
 
-    CouponsSelect +='<option value="0"> coupon</option>';
+    CouponsSelect += '<option value="0"> coupon</option>';
     $.each(coupons, function (i, coupon) {
-        CouponsSelect +='<option value="'+coupon.percentage/100+'">'+coupon.name +' - '+coupon.percentage+'</option>'
+        CouponsSelect += '<option value="' + coupon.percentage / 100 + '">' + coupon.name + ' - ' + coupon.percentage + '</option>'
     });
 
     $.each(order, function (i, dish) {
@@ -181,21 +181,21 @@ function DrawOrderInvoice() {
         $("<tr>").append(
             $("<th>", {html: '', colspan: 5, style: 'height:50px;'}),
         ))
-    selected_value= subtotal * selected_coupon;
-    orderservice = (type == 'restaurant') ? (subtotal-selected_value) * service : 0;
-    ordervat = ((subtotal-selected_value) + orderservice) * vat;
+    selected_value = subtotal * selected_coupon;
+    orderservice = (type == 'restaurant') ? (subtotal - selected_value) * service : 0;
+    ordervat = ((subtotal - selected_value) + orderservice) * vat;
 
-    total = (subtotal-selected_value) + orderservice + ordervat - discount + parseFloat( delivery);
+    total = (subtotal - selected_value) + orderservice + ordervat - discount + parseFloat(delivery);
     $(table).append(
         $("<tr>").append(
             $("<th>", {
                 text: 'coupon',
                 colspan: 3
             }),
-            $("<td>",{
-                html: '<select onchange="changeCoupon(this)" name="coupon" class="form-control"> ' +
-                    CouponsSelect+
-                    '</select>',
+            $("<td>", {
+                    html: '<select onchange="changeCoupon(this)" name="coupon" class="form-control"> ' +
+                        CouponsSelect +
+                        '</select>',
                 }
             ),
         ), $("<tr>").append(
@@ -219,7 +219,7 @@ function DrawOrderInvoice() {
                 colspan: 3
             }),
             $("<td>", {
-                text: (subtotal-selected_value).toFixed(3),
+                text: (subtotal - selected_value).toFixed(3),
                 style: 'float:right;',
 
             }),
@@ -251,7 +251,7 @@ function DrawOrderInvoice() {
                 colspan: 3
             }),
             $("<td>", {
-                html: '<input name="delivery" type="number" onchange="changeDelivery()" class="form-control" value="'+delivery+'" min="0">',
+                html: '<input name="delivery" type="number" onchange="changeDelivery()" class="form-control" value="' + delivery + '" min="0">',
                 style: 'float:right;width:100px',
 
             }),
@@ -289,6 +289,7 @@ function DrawOrderInvoice() {
             }),
         ),
     )
+    $('select[name=coupon]').val(selected_coupon);
 
 }
 
@@ -351,6 +352,17 @@ function deleteDish(index) {
     DrawOrderInvoice();
 }
 
+function OrderDishSizeQuantity(size) {
+    var quantity = 0;
+    $.each(order, function (i, dish) {
+        if (dish.size.id == size.id) {
+            quantity += dish.quantity;
+        }
+
+    });
+    return quantity;
+}
+
 function newDish(id) {
 
     tempdish = search(id, dishes);
@@ -370,14 +382,15 @@ function newDish(id) {
     var sizes = $('#sizes_modal').find('#sizes');
     $(sizes).html('');
     $.each(tempdish.sizes, function (i, size) {
-        // console.log(size);
-
-        $(sizes).append(' <div class="col-4 justify-content-center align-content-center">\n' +
-            '                            <div style="padding: 30px;">    \n' +
-            '                                <button class="btn btn-primary" onclick="DishSizes(' + size.id + ')" >' + size.name + '</button>\n' +
-            '                     <br>           price : ' + size.price + ' \n' +
-            '                         </div>\n' +
-            '                        </div>\n');
+        console.log(size.quantity);
+        if (size.quantity > 0 && size.quantity > OrderDishSizeQuantity(size)) {
+            $(sizes).append(' <div class="col-4 justify-content-center align-content-center">\n' +
+                '                            <div style="padding: 30px;">    \n' +
+                '                                <button class="btn btn-primary" onclick="DishSizes(' + size.id + ')" >' + size.name + '</button>\n' +
+                '                     <br>           price : ' + size.price + ' \n' +
+                '                         </div>\n' +
+                '                        </div>\n');
+        }
     })
     DrawDishDetailsTable($('#sizes_modal'));
 
@@ -502,7 +515,7 @@ function submitOrder() {
         processData: false,
         contentType: false,
         success: function (data) {
-            window.location.href = url+'/pos/order';
+            window.location.href = url + '/pos/order';
 
             // dishes=data;
             // console.log(dishes);
@@ -538,7 +551,7 @@ function changeDiscount(value) {
 
 
 function changeCoupon(value) {
-    selected_coupon = $(value).find( 'option:selected').val();
+    selected_coupon = $(value).find('option:selected').val();
     DrawOrderInvoice();
     console.log(value);
 

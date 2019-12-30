@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class RuinedController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:index ruined product'],['only'=>['index']]);
+        $this->middleware(['permission:create ruined product'],['only'=>['newRuined']]);
+        $this->middleware(['permission:delete ruined product'],['only'=>['destroy']]);
+    }
 
     public function index()
     {
@@ -28,6 +34,9 @@ class RuinedController extends Controller
     {
         return view('frontend.ruined.new_ruined');
     }
+
+
+
   public function destroy($id)
     {
         $product = RuinedProduct::find($id);
@@ -131,12 +140,7 @@ class RuinedController extends Controller
 
         }
 
-        public function deleteRefund($id)
-        {
-            RefundProduct::destroy($id);
-            return redirect()->back();
-        }
-    public function getProductQuantity(Request $request,$id)
+        public function getProductQuantity(Request $request,$id)
         {
             if($request->ruined_type=='restaurant'){
                 $quantity=Product::find($id)->quantity;

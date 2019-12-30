@@ -51,7 +51,8 @@
                         <th>{{trans('main.unit')}}</th>
                         <th>{{trans('main.child unit')}} </th>
                         <th>{{trans('main.convert_rate')}}</th>
-                        <th>{{trans('main.action')}}</th>
+                        <th>{{trans('main.update')}}</th>
+                        <th>{{trans('main.delete')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,7 +71,15 @@
                                     <i class="flaticon-edit-1"></i>
                                 </a>
                                 </td>
-{{----}}
+{{----}}  <td>
+                                    <form method="post"  onsubmit="deleteConfirm(event,'{{trans('main.unit')}}')"
+                                          action="{{route('unit.destroy',[$unit->id])}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger"> {{trans('main.delete')}}</button>
+                                    </form>
+
+                            </td>
                         </tr>
                     @endforeach
 

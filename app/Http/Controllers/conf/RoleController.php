@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:index role'],['only'=>['index']]);
+        $this->middleware(['permission:create role'],['only'=>['create','store']]);
+        $this->middleware(['permission:update role'],['only'=>['edit','update']]);
+        $this->middleware(['permission:delete role'],['only'=>['destroy']]);
+        $this->middleware(['permission:associate role employee'],['only'=>['association']]);
+        $this->middleware(['permission:dissociate role employee'],['only'=>['dissociation']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -62,8 +74,10 @@ class RoleController extends Controller
     {
         $role= Role::find($id);
         $permissions=Permission::all();
-//        dd($role->permissions);
-        return view('conf.permission.role.show')->with(compact('role','permissions'));
+        $rolePermissions=$role->permissions;
+//       dd($rolePermissions);
+       return view('conf.permission.role.show')
+            ->with(compact('role','permissions','rolePermissions'));
 
     }
 
@@ -119,7 +133,7 @@ class RoleController extends Controller
     public function association(Request $request)
     {
         $role=Role::find($request->role_id);
-        $role->permissions()->syncWithoutDetaching(($request->permission_id));
+        $role->permissions()->sync($request->permission_id);
 
         return redirect()->back();
     }

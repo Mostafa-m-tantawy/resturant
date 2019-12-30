@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use vendor\project\StatusTest;
 
 class HrApproveTypeController extends Controller
+{ public function __construct()
 {
+    $this->middleware(['permission:index approve type'],['only'=>['index']]);
+    $this->middleware(['permission:create approve type'],['only'=>['create','store']]);
+    $this->middleware(['permission:update approve type'],['only'=>['edit','update']]);
+    $this->middleware(['permission:delete unit'],['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *
