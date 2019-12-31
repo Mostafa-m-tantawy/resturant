@@ -63,7 +63,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- begin:: Content -->
 
                 <!-- begin:: Content -->
-                <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+{{--                <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">--}}
 
                     <!--Begin::Dashboard 7-->
 
@@ -72,7 +72,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                 <!-- end:: Page -->
                     <!--End::Dashboard 7-->
-                </div>
+{{--                </div>--}}
 
                 <!-- end:: Content -->
 
