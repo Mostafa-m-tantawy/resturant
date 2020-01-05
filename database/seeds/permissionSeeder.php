@@ -248,10 +248,10 @@ class permissionSeeder extends Seeder
   Permission::create([ 'name'=> 'create client payment']);
   Permission::create([ 'name'=> 'delete client payment']);
 ////
-  Permission::create([ 'name'=> 'index transfer money ']);
-  Permission::create([ 'name'=> 'index received money ']);
-  Permission::create([ 'name'=> 'index transfer money ']);
-  Permission::create([ 'name'=> 'index received money ']);
+  Permission::create([ 'name'=> 'index transfer money']);
+  Permission::create([ 'name'=> 'index received money']);
+  Permission::create([ 'name'=> 'request transfer money']);
+  Permission::create([ 'name'=> 'response received money']);
 //
   Permission::create([ 'name'=> 'pos dashboard']);
   Permission::create([ 'name'=> 'hr dashboard']);

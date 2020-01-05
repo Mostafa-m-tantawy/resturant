@@ -3,6 +3,13 @@
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
 
+
+@section('title')
+    {{trans('main.attendance history')}}
+@stop
+
+
+
 @section('content')
     <!-- begin:: Content -->
 
@@ -15,7 +22,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.approve types')}}
+                        {{trans('main.attendance history')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">

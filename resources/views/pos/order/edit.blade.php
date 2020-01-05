@@ -1,4 +1,11 @@
 @extends('.pos.layout.pos_app')
+
+@section('title')
+    {{trans('main.create order')}}
+@stop
+
+
+
 @section('content')
     <link href="{{asset('/css/easy-numpad.css')}}" rel="stylesheet" type="text/css"/>
 
@@ -89,7 +96,7 @@
                                                             <a onclick="newDish({{$dish->id}})">
                                                                 <div class="kt-widget__media">
                                                                     <img class="kt-widget__img kt-hidden-"
-                                                                         src="/media/users/300_21.jpg"
+                                                                         src="{{asset($dish->image)}}"
                                                                          alt="image">
                                                                 </div>
                                                             </a>

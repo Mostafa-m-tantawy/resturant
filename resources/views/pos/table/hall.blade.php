@@ -1,5 +1,12 @@
 @extends('.pos.layout.pos_app')
 
+
+@section('title')
+    {{trans('main.Pos Hall')}}
+@stop
+
+
+
 @section('content')
     <div class="row">
         <div class="col-12">

@@ -2,6 +2,10 @@
 @section('head')
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
+
+@section('title')
+    {{trans('main.index product')}}
+@stop
 @section('content')
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
@@ -20,7 +24,8 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
 
-                                                        <a href="{{url('stock/product/create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                                                        <a href="#" title="create"
+                                                           data-toggle="modal" data-target=".create_product"class="btn btn-brand btn-elevate btn-icon-sm">
                                                             <i class="la la-plus"></i>
                                                             {{trans('main.new')}} {{trans('main.record')}}
                                                         </a>
@@ -92,6 +97,85 @@
 
     </div>
 
+    <div class="modal fade create_product" id="create_product" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="{{route('product.store')}}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{trans('main.new')}} {{trans('main.product')}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        @csrf
+                        <div class="container">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label> {{trans('main.name')}}</label>
+                                    <input type="text"required name="name" class="form-control" placeholder="Enter full name">
+                                </div>
+
+                                <div class="col-12">
+                                    <label class=""> {{trans('main.unit')}} </label>
+                                    <select name="unit" class="form-control">
+                                        <option value=""> {{trans('main.select')}}  {{trans('main.unit')}}</option>
+                                        @foreach($units as $unit )
+                                            <option value="{{$unit->id}}">{{$unit->unit}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="">{{trans('main.category')}} </label>
+                                    <select name="category" class="form-control">
+                                        <option value="">select Category</option>
+
+                                        @foreach($categories as $category )
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <label  style="display: table-cell" class="">{{trans('main.stockable')}} </label>
+                                    <span class="kt-switch kt-switch--lg kt-switch--icon">
+											<label>
+											<input type="checkbox" checked="checked" name="is_stockable">
+												<span></span>
+												</label>
+											</span>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="">{{trans('main.re-order point')}} :</label>
+                                    <input type="number" min="0" step=".001" name="reorder_point" class="form-control" placeholder="Enter description">
+
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="">{{trans('main.barcode')}} </label>
+                                    <input type="text" name="barcode" class="form-control" placeholder="Enter barcode">
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-12 pull-left">
+                            <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.submit')}}</button>
+                        </div>
+                    </div>                    </form>
+
+            </div>
+        </div>
+    </div>
     <div class="modal fade bd-example-modal-lg" id="updatemodel" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

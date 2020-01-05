@@ -16,7 +16,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('states', 'SupplierController@states');
 Auth::routes();
 Route::resource('restaurant', 'RestaurantController')->only([
-    'store',
+    'store'
 ]);
 
 
@@ -46,7 +46,6 @@ Route::middleware(['auth'])->group(function () {
         include('stock/payment.php');
         include('stock/refund.php');
         include('stock/ruined.php');
-        include('stock/expense.php');
 
     });
 
@@ -104,8 +103,10 @@ Route::middleware(['auth'])->group(function () {
         include('conf/hall.php');
         include('conf/table.php');
         include('conf/permission.php');
+        include('conf/expense.php');
 
     });
+
 
 
     Route::any('/dashboard', 'DashboardController@dashboard')->name('dashboard');

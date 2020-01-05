@@ -5,7 +5,7 @@
 
     <!--end::Base Path -->
     <meta charset="utf-8" />
-    <title>Metronic | Dashboard</title>
+    <title>@yield('title')</title>
     <meta name="description" content="Updates and statistics">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{!! csrf_token() !!}">
@@ -91,7 +91,7 @@
 </head>
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
     <div class="kt-header-mobile__logo">
-        <a href="demo1/index.html">
+        <a href="{{url('/')}}">
             <img alt="Logo" src="{{asset('/media/logos/logo-light.png')}}" />
         </a>
     </div>

@@ -3,6 +3,11 @@
     <link href="{{asset('css/demo1/pages/general/wizard/wizard-1.css')}}" rel="stylesheet" type="text/css"/>
 
 @endsection
+
+@section('title')
+    {{trans('main.add dish extra')}}
+@stop
+
 @section('content')
 
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">

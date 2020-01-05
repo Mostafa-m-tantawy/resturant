@@ -1,7 +1,56 @@
 @extends('layouts.welcome')
+
+@section('title')
+    {{trans('main.edit dish')}}
+@stop
 @section('head')
     <link href="{{asset('css/demo1/pages/general/wizard/wizard-1.css')}}" rel="stylesheet" type="text/css"/>
+    <style>
 
+        .upload_image {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            text-align: center;
+            border: 5px dashed #ececec;
+
+        }
+
+        input[type="file"] {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            opacity: 0;
+            left: 0;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .upload_icon {
+            width: 150px;
+            margin-top: 20px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 40px;
+        }
+
+        #blah {
+            height: 240px;
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+
+
+
+    </style>
 @endsection
 @section('content')
 
@@ -102,12 +151,14 @@
                                     class="kt-heading kt-heading--md">{{trans('main.create')}} {{trans('main.dish')}}</div>
                                 <div class="kt-form__section kt-form__section--first">
                                     <div class="kt-wizard-v1__form">
-                                        <div class="form-group">
-                                            <label>{{trans('main.photo')}}</label>
-                                            <img href="{{$dish->image}}" class="img-fluid" style="height: 100px">
-                                            <input type="file" class="form-control" name="image">
-                                            <span class="form-text text-muted">{{trans('main.dish')}} {{trans('main.photo')}} </span>
+                                        <div class="upload_image form-group" >
+
+                                            <input type="file" name="image"  id="imgInp" />
+                                            <img class="upload_icon" src="{{asset('images/upload_img.png')}}" alt="">
+                                            <img id="blah"class="img-fluid" src="{{asset($dish->image)}}" />
+
                                         </div>
+
                                         <div class="form-group">
                                             <label>{{trans('main.name')}} </label>
                                             <input type="text" class="form-control" name="name"
@@ -158,7 +209,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label>{{trans('main.Status')}} </label>
+                                        <label>{{trans('main.status')}} </label>
                                         <span class="kt-switch kt-switch--lg kt-switch--icon">
 											<label>
 											<input type="checkbox"  @if($dish->status==1)checked="checked" @endif name="status">
@@ -195,6 +246,7 @@
 @section('scripts')
     <script src="{{asset('js/demo1/pages/crud/forms/widgets/form-repeater.js')}}" type="text/javascript"></script>
     {{----}}
+    <script src="{{asset('/js/demo1/pages/crud/forms/widgets/dropzone.js')}}" type="text/javascript"></script>
     <script>
 
         $(document).ready(function () {

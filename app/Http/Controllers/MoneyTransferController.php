@@ -14,6 +14,13 @@ class MoneyTransferController extends Controller
 {
     //
 
+    public function __construct()
+    {
+        $this->middleware(['permission:index transfer money'],    ['only'=>['request']]);
+        $this->middleware(['permission:index received money'],      ['only'=>['receive']]);
+        $this->middleware(['permission:request transfer money'],     ['only'=>['storeRequest']]);
+        $this->middleware(['permission:response transfer money'],   ['only'=>['storeApprove']]);
+    }
 
 
     public function request()

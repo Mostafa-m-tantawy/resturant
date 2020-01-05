@@ -1,6 +1,13 @@
 @extends('layouts.welcome')
 
 
+@section('title')
+    {{trans('main.role')}}
+@stop
+
+
+
+
 @section('content')
     <!-- begin:: Content -->
 

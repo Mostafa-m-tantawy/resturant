@@ -2,6 +2,13 @@
 @section('head')
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
+
+@section('title')
+    {{trans('main.show payslip')}}
+@stop
+
+
+
 @section('content')
     <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
 

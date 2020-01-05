@@ -3,6 +3,11 @@
     <link href="{{asset('css/demo1/pages/general/wizard/wizard-1.css')}}" rel="stylesheet" type="text/css"/>
 
 @endsection
+
+@section('title')
+    {{trans('main.add dish recipe')}}
+@stop
+
 @section('content')
 
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
@@ -20,7 +25,7 @@
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <img class="img-fluid" style="height: 100px"
-                                                 src="/media/icons/svg/Food/Burger.svg"/>
+                                                 src="{{asset('/media/icons/svg/Food/Burger.svg')}}"/>
 
 
                                         </div>
@@ -34,7 +39,7 @@
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <img style="height: 100px" class="img-fluid"
-                                                 src="/media/icons/svg/Food/Miso-soup.svg"/>
+                                                 src="{{asset('/media/icons/svg/Food/Miso-soup.svg')}}"/>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label">
 
@@ -47,7 +52,7 @@
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <img style="height: 100px" class="img-fluid"
-                                                 src="/media/icons/svg/Food/Carrot.svg"/>
+                                                 src="{{asset('/media/icons/svg/Food/Carrot.svg')}}"/>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label">
                                             3){{trans('main.dish')}} {{trans('main.recipes')}}
@@ -58,7 +63,7 @@
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <img style="height: 100px" class="img-fluid"
-                                                 src="/media/icons/svg/Food/French Bread.svg"/>
+                                                 src="{{asset('/media/icons/svg/Food/French Bread.svg')}}"/>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label">
                                             4) {{trans('main.dish')}} {{trans('main.sides')}}
@@ -69,7 +74,7 @@
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <img style="height: 100px" class="img-fluid"
-                                                 src="/media/icons/svg/Food/Cheese.svg"/>
+                                                 src="{{asset('/media/icons/svg/Food/Cheese.svg')}}"/>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label">
                                             5) {{trans('main.dish')}} {{trans('main.extras')}}
@@ -130,18 +135,18 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label>{{trans('main.quantity')}} {{trans('main.in')}}  (<span id="unit"></span>)</label>
+                                                    <label>{{trans('main.quantity')}} {{trans('main.in')}}  (<span id="child_unit"></span>)</label>
                                                     <input type="number" min="0" step="0.001" class="form-control"
-                                                           name="quantity" id="quantity">
+                                                           name="child" id="quantity">
                                                     <span class="form-text text-muted">{{trans('main.quantity')}}  </span>
                                                 </div>
                                             </div>
 
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label>{{trans('main.quantity')}} {{trans('main.in')}}  (<span id="child_unit"></span>)</label>
-                                                    <input type="number" min="0" step="0.01" readonly=""
-                                                           class="form-control" id="child" name="child">
+                                                    <label>{{trans('main.quantity')}} {{trans('main.in')}}  (<span id="unit"></span>)</label>
+                                                    <input type="number" min="0"  readonly=""
+                                                           class="form-control" id="parent" name="quantity">
                                                     <span class="form-text text-muted">{{trans('main.quantity')}} </span>
                                                 </div>
                                             </div>
@@ -223,7 +228,7 @@
             $("#product").on('change', function (e) {
 
                 var productId = $("#product").val();
-                $.get('stock/get-unit-of-product/' + productId, function (data) {
+                $.get('{{url('stock/get-unit-of-product/')}}/'+ productId, function (data) {
                     // console.log(data);
                     convertion_rate = parseFloat(data.unit.convert_rate);
                     unitName = data.unit.unit;
@@ -233,7 +238,7 @@
             });
             $("#quantity").on('change keyup', function (e) {
                 console.log('dddddddd');
-                $("#child").val(parseFloat($(this).val() * convertion_rate));
+                $("#parent").val(parseFloat($(this).val() / convertion_rate),6);
 
 
             });

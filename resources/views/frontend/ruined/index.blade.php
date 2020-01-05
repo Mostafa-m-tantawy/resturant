@@ -1,4 +1,9 @@
 @extends('layouts.welcome')
+@section('title')
+    {{trans('main.index ruined dish')}}
+@stop
+
+
 @section('head')
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @stop

@@ -1,4 +1,9 @@
 @extends('layouts.welcome')
+
+@section('title')
+    {{trans('main.system configuration')}}
+@stop
+
 @section('content')
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
@@ -25,7 +30,7 @@
                                         </div>
                                     @endif
 
-                                    <h3> {{trans('main.System')}}  {{trans('main.configuration')}}</h3>
+                                    <h3> {{trans('main.system configuration')}}  </h3>
                                     <div class="row">
                                         <div class="col-12 form-group">
 
@@ -37,7 +42,7 @@
                                             <input type="number" step="0.01" required value="{{$systemconf->where('name','service')->first()->value}}"name="service" class="form-control" placeholder="12">
                                         </div>
                                         <div class="col-12 form-group">
-                                            <label class="">{{trans('main.cost')}} {{trans('main.method')}} :</label>
+                                            <label class="">{{trans('main.cost method')}}:</label>
                                             <select name="methodd" id="methodd" required  class="form-control" >
                                                 <option value="">{{trans('main.select')}}  {{trans('main.method')}} </option>
                                                 <option value="last_cost">{{trans('main.last')}} {{trans('main.cost')}}</option>
@@ -45,7 +50,7 @@
                                             </select>
                                         </div>
                                         <div class="col-12 form-group" id="divmonth" value="{{$systemconf->where('name','months')->first()->value}}" style="display: none">
-                                            <label class="">{{trans('main.number')}} {{trans('main.of')}} {{trans('main.months')}} :</label>
+                                            <label class="">{{trans('main.number of months')}} :</label>
                                             <input type="number" step="1" name="months"value="{{$systemconf->where('name','months')->first()->value}}"  class="form-control" placeholder="6">
                                         </div>
 

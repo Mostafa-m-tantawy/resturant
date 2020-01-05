@@ -1,4 +1,11 @@
 @extends('.pos.layout.pos_app')
+
+@section('title')
+    {{trans('main.create order')}}
+@stop
+
+
+
 @section('content')
     <meta name="service" content="  {{$systemconf->where('name','service')->first()->value}}">
     <meta name="vat" content="{{$systemconf->where('name','vat')->first()->value}}">
@@ -51,7 +58,7 @@
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
                         <h3 class="kt-portlet__head-title">
-                            Adjusted Tabs
+                           {{trans('main.dishes')}}
                         </h3>
                     </div>
                 </div>
@@ -88,7 +95,7 @@
                                                             <a onclick="newDish({{$dish->id}})">
                                                                 <div class="kt-widget__media">
                                                                     <img class="kt-widget__img kt-hidden-"
-                                                                         src="/media/users/300_21.jpg"
+                                                                         src="{{asset($dish->image)}}"
                                                                          alt="image">
                                                                 </div>
                                                             </a>

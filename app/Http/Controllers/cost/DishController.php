@@ -56,6 +56,17 @@ class DishController extends Controller
         $dish->name=$request->name;
         $dish->description=$request->description;
         $dish->dish_category_id=$request->category;
+
+        if($request->file('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $filename_images = date("dmY-his") . $name;
+            $fulllink_images = 'media/dishes/files/';
+            $file->move($fulllink_images, $filename_images);
+
+            $dish->image = $fulllink_images . '/' . $filename_images;
+        }
+
         $dish->department_id=$request->department ;
         $dish->type=$request->type;
         $dish->sides_limit=$request->sides_limit;
@@ -102,10 +113,20 @@ class DishController extends Controller
         $dish->dish_category_id=$request->category;
         $dish->department_id=$request->department;
         $dish->sides_limit=$request->sides_limit;
+        if($request->file('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $filename_images = date("dmY-his") . $name;
+            $fulllink_images = 'media/dishes/files/';
+            $file->move($fulllink_images, $filename_images);
 
+            $dish->image = $fulllink_images . '/' . $filename_images;
+        }
         $dish->type=$request->type;
         if($request->status=='on')
             $dish->status=1;
+        else
+            $dish->status=0;
         $dish->save();
         return redirect(route('dish.size.index',[$dish->id]));
     }
@@ -119,6 +140,7 @@ public function getDishes($id){
         else
         return response()->json(['error'=>trans('main.there is dishes in this category')],422);
 }
+
 
 }
 

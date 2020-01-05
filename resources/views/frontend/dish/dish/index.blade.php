@@ -4,6 +4,10 @@
 
 @endsection
 
+@section('title')
+    {{trans('main.index dish')}}
+@stop
+
 @section('style')
     <style>
         .nav-pills .nav-link {
@@ -33,6 +37,29 @@
 
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content" style="background-color: white">
         <div class="kt-portlet" style="height: 100%">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+										<span class="kt-portlet__head-icon">
+											<i class="kt-font-brand flaticon2-line-chart"></i>
+										</span>
+                    <h3 class="kt-portlet__head-title">
+                        {{trans('main.dishes')}}
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+
+                            <a href="{{route('dish.create')}}"   class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>
+                                {{trans('main.new')}} {{trans('main.record')}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="kt-portlet__body kt-portlet__body--fit" style="height: 100%">
 
                 <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper" style="height: 100%">
@@ -91,7 +118,7 @@
                                                                                     <div class="kt-widget5__content">
                                                                                         <div class="kt-widget5__pic">
                                                                                             <img class="kt-widget7__img"
-                                                                                                 src="/media//products/product27.jpg"
+                                                                                                 src="{{asset($dish->image)}}"
                                                                                                  alt="">
                                                                                         </div>
                                                                                         <div

@@ -3,6 +3,10 @@
     <link href="{{asset('css/demo1/pages/general/login/login-5.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
+@section('title')
+    {{trans('main.dashboard')}}
+@stop
+
 @section('appcontent')
 
 
@@ -18,14 +22,14 @@
                             <a class="kt-login__logo" href="#">
                                 <img class="img-fluid" height="200px" src="{{url('media/logos/logohome.png')}}">
                             </a>
-                            <h3 class="kt-login__title">JOIN OUR GREAT COMMUNITY</h3>
+                            <h3 class="kt-login__title">{{trans('main.System that Satisfies your needs.')}}</h3>
                             <span class="kt-login__desc">
-									The ultimate Bootstrap & Angular 6 admin theme framework for next generation web apps.
-								</span>
+                                {{trans('main.Stock Management System , Cost Management System, Hr Management System and Point of sales all together for make it easy for you.' )}}
+                            </span>
                             <div class="kt-login__actions">
                                 <a href="{{route('register')}}">
                                     <button type="button" id="kt_login_signup" class="btn btn-outline-brand btn-pill">
-                                        Get An Account
+                                        {{trans('main.Get An Account')}}
                                     </button>
                                 </a>
                             </div>
@@ -76,13 +80,12 @@
                                                                                 <div class="kt-widget2__info">
                                                                                     <a href="{{route('dashboard.hr')}}"
                                                                                        class="kt-widget2__title">
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.human Resources Management System')}}
+
                                                                                     </a>
                                                                                     <a href="{{url('product')}}"
                                                                                        class="kt-widget2__username">
-                                                                                        By Bob Make Metronic Great
-                                                                                         Ipsum Amet
+                                                                                        {{trans('main.Manage your employees payrolls and Leaves.')}}
 
                                                                                     </a>
                                                                                 </div>
@@ -141,13 +144,11 @@
                                                                                 <div class="kt-widget2__info">
                                                                                     <a href="{{route('dashboard.stock')}}"
                                                                                        class="kt-widget2__title">
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Stock Management system')}}
                                                                                     </a>
                                                                                     <a href="{{route('dashboard.stock')}}"
                                                                                        class="kt-widget2__username">
-                                                                                       Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Management suppliers ,purchases and department.')}}
 
                                                                                     </a>
                                                                                 </div>
@@ -206,15 +207,11 @@
                                                                                 <div class="kt-widget2__info">
                                                                                     <a href="{{route('dashboard.cost')}}"
                                                                                        class="kt-widget2__title">
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Cost Management System')}}
                                                                                     </a>
                                                                                     <a href="{{route('dashboard.cost')}}"
                                                                                        class="kt-widget2__username">
-                                                                                        By Bob Make Metronic Great
-                                                                                        Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Management your menu ,dishes and recipe.')}}
 
                                                                                     </a>
                                                                                 </div>
@@ -277,15 +274,11 @@
                                                                                 <div class="kt-widget2__info">
                                                                                     <a href="{{route('dashboard.pos')}}"
                                                                                        class="kt-widget2__title">
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Point of Sales')}}
                                                                                     </a>
                                                                                     <a href="{{route('dashboard.pos')}}"
                                                                                        class="kt-widget2__username">
-                                                                                        By Bob Make Metronic Great
-                                                                                        Again.Lorem Ipsum Amet
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.create order , Hall Management ,delivery ,takeaway and clients')}}
 
                                                                                     </a>
                                                                                 </div>

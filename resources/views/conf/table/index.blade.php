@@ -1,6 +1,13 @@
 @extends('layouts.welcome')
 
 
+@section('title')
+    {{trans('main.table')}}
+@stop
+
+
+
+
 @section('content')
     <!-- begin:: Content -->
 
@@ -13,7 +20,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.hall')}}
+                        {{trans('main.table')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -91,7 +98,7 @@
                     @csrf
                     @method('put')
                     <div class="modal-header">
-                        <h5 class="modal-title">{{trans('main.update')}} {{trans('main.hall')}}</h5>
+                        <h5 class="modal-title">{{trans('main.update')}} {{trans('main.table')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -151,7 +158,7 @@
             <div class="modal-content">
                 <form action="{{route('table.store')}}" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title"> {{trans('main.new hall')}} <span
+                        <h5 class="modal-title"> {{trans('main.new table')}} <span
                                 class="model_type"></span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

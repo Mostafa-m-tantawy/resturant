@@ -4,6 +4,12 @@
 {{--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>--}}
 
 @stop
+
+@section('title')
+    {{trans('main.purchase detailed')}}
+@stop
+
+
 @section('content')
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">

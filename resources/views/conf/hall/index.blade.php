@@ -1,6 +1,13 @@
 @extends('layouts.welcome')
 
 
+
+@section('title')
+    {{trans('main.index hall')}}
+@stop
+
+
+
 @section('content')
     <!-- begin:: Content -->
 

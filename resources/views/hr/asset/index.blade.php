@@ -3,6 +3,13 @@
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
 
+@section('title')
+    {{trans('main.index asset')}}
+@stop
+
+
+
+
 @section('content')
     <!-- begin:: Content -->
 

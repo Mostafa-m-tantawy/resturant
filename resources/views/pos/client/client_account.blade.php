@@ -1,4 +1,11 @@
 @extends('.pos.layout.pos_app')
+
+@section('title')
+    {{trans('main.clients')}}
+@stop
+
+
+
 @section('head')
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 

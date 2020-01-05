@@ -3,6 +3,13 @@
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
 
+
+@section('title')
+    {{trans('main.create assign')}}
+@stop
+
+
+
 @section('content')
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
@@ -88,7 +95,7 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th> {{ trans('main.assign') }} {{ trans('main.type') }}</th>
+                                            <th> {{ trans('main.assign') }} {{ trans('main.from') }}</th>
                                             <th> {{ trans('main.assign') }} {{ trans('main.to') }}</th>
                                             <th> {{ trans('main.product') }}</th>
                                             <th > {{ trans('main.quantity')}}</th>

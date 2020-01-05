@@ -1,5 +1,8 @@
 
-@extends( (Request()->route()->getPrefix()=='/pos') ? 'pos.layout.pos_app' : 'layouts.welcome')
+@extends( (!Request()->route())? 'errors.layout':((Request()->route()->getPrefix()=='/pos')?'pos.layout.pos_app' :'layouts.welcome') )
+@section('title')
+    {{trans('main.error')}} - @yield('code')
+@stop
 
 @section('head')
 

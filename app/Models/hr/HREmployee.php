@@ -10,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class HrEmployee extends Model
 {
-    use baseTrait,restaurantScopeTrait,HasRoles;
+    use baseTrait,restaurantScopeTrait;
 
     protected $rules = array(
 

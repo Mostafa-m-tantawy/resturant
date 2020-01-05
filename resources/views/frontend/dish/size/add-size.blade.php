@@ -3,6 +3,12 @@
     <link href="{{asset('css/demo1/pages/general/wizard/wizard-1.css')}}" rel="stylesheet" type="text/css"/>
 
 @endsection
+
+@section('title')
+    {{trans('main.add dish size')}}
+@stop
+
+
 @section('content')
 
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
@@ -101,7 +107,7 @@
                             <div class="kt-wizard-v1__content" data-ktwizard-type="step-content"
                                  data-ktwizard-state="current">
                                 <div
-                                    class="kt-heading kt-heading--md">{{trans('main.create')}} {{trans('main.Dish')}}</div>
+                                    class="kt-heading kt-heading--md">{{trans('main.create')}} {{trans('main.dish size')}} </div>
                                 <div class="kt-form__section kt-form__section--first">
                                     <div class="kt-wizard-v1__form">
                                         <div class="row">

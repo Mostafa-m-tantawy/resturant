@@ -3,6 +3,13 @@
     <link href="{{asset('css/demo1/pages/general/login/login-5.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
+
+@section('title')
+    {{trans('main.login')}}
+@stop
+
+
+
 @section('appcontent')
 
 

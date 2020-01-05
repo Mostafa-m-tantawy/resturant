@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
        if(Schema::hasTable('system_confs'))
         View::share('systemconf', SystemConf::all());
 
-
+        if(Schema::hasTable('countries'))
         View::share('countries', Country::all());
 
         Schema::defaultStringLength(191);

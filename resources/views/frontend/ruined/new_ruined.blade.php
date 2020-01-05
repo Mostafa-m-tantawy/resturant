@@ -1,4 +1,9 @@
 @extends('layouts.welcome')
+@section('title')
+    {{trans('main.create ruined product')}}
+@stop
+
+
 @section('head')
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
@@ -73,7 +78,7 @@
                                         <label class=" control-label"
                                                for="example-email"> {{ trans('main.note') }}</label>
                                         <div class="input-group ">
-                                            <input type="text" required id="note" name="note"
+                                            <input type="text"  id="note" name="note"
                                                    class="form-control">
                                         </div>
                                     </div>

@@ -1,6 +1,14 @@
 @extends('layouts.welcome')
 
 
+@section('title')
+    {{trans('main.transfer received')}}
+@stop
+
+
+
+
+
 @section('content')
     <!-- begin:: Content -->
 

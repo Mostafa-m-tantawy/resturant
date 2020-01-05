@@ -3,6 +3,11 @@
     <link href="{{asset('vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @stop
 
+@section('title')
+    {{trans('main.edit ruined dish')}}
+@stop
+
+
 @section('content')
     <input type="hidden" id='order_id'name="order_id" value="{{$order->id}}">
     <input type="hidden" name="vatPercentage" value="{{$order->getOriginal('vat')}}">

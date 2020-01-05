@@ -39,7 +39,7 @@ $(document).ready(function () {
         clicked_source_type = $(this).val();
     });
     $("#sourceable_type").on('change', function () {
-
+console.log(clicked_source_type);
         if (purses.length != 0) {
             if (clicked_source_type != 0) {
                 $(this).val(clicked_source_type);
@@ -64,7 +64,7 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    // console.log(data);
+                    console.log($('#sourceable_type').val());
 
                 if(clicked_source_type=='department') {
                     $('#sourceable_id').html('');
@@ -333,7 +333,8 @@ $(document).ready(function () {
             $("#pursesDetailsRender").append(
                 $("<tr>").append(
                     $("<th>", {text: index + 1}),
-                    $("<td>", {text: data.assign_to}),
+                    $("<td>", {text: (clicked_source_type!='restaurant')?'department':'restaurant'}),
+                    $("<td>", {text: (clicked_source_type=='restaurant')?'department':'restaurant'}),
                     $("<td>", {text: data.product.productName}),
                     $("<td>").append(
                         $("<input/>", {

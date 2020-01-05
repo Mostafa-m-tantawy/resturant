@@ -1,6 +1,13 @@
 @extends('layouts.welcome')
 
 
+
+@section('title')
+    {{trans('main.permission')}}
+@stop
+
+
+
 @section('content')
     <!-- begin:: Content -->
 
@@ -13,7 +20,7 @@
 											<i class="kt-font-brand flaticon2-line-chart"></i>
 										</span>
                     <h3 class="kt-portlet__head-title">
-                        {{trans('main.role')}}
+                        {{trans('main.permission')}}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">

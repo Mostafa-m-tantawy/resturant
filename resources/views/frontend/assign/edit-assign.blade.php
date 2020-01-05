@@ -1,9 +1,8 @@
 @extends('layouts.welcome')
 
 @section('title')
-    {{ trans('main.purses') }}  {{ trans('main.list') }}
-@endsection
-
+    {{trans('main.edit assign')}}
+@stop
 @section('content')
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 

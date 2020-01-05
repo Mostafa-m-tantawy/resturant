@@ -3,6 +3,13 @@
     <link href="{{asset('/css/demo1/pages/general/login/login-3.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
+
+@section('title')
+    {{trans('main.register')}}
+@stop
+
+
+
 @section('appcontent')
 
 
@@ -37,8 +44,9 @@
                                 </ul>
                             </div>
                         @endif
+
                         <div class="kt-login__signup">
-                            <form class="kt-form kt-form--label-right" method="post" action="{{route('restaurant.store')}}">
+                            <form       method="post" action="{{url('restaurant')}}">
                                 @csrf
                                 <div class="kt-portlet__body">
                                     <div class="row">
@@ -201,9 +209,9 @@
                                     </div>
                                 </div>
                                 <div class="kt-login__actions">
-                                    <button id="kt_login_signup_submit"
-                                            class="btn btn-brand btn-elevate kt-login__btn-primary">Sign Up
-                                    </button>&nbsp;&nbsp;
+                                    <input id="kt_login_signup_submit" type="submit"
+                                            class="btn btn-brand btn-elevate kt-login__btn-primary" value="Sign Up">
+
                                     <button id="kt_login_signup_cancel"
                                             class="btn btn-light btn-elevate kt-login__btn-secondary">Cancel
                                     </button>

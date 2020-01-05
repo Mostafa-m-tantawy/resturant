@@ -1,5 +1,12 @@
 @extends('.pos.layout.pos_app')
 
+
+@section('title')
+    {{trans('main.life kitchen')}}
+@stop
+
+
+
 @section('content')
     <div class="row" >
         <div class="col-12">

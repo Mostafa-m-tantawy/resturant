@@ -275,6 +275,7 @@ return [
     'permission association' => 'ارتباط الصلاحيات',
     'role association' => 'ارتباط الدور',
     'insurance' => 'تامين',
+    'dish size' => 'حجم طبق',
     '' => '',
 
 
