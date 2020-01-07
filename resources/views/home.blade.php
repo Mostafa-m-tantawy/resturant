@@ -22,7 +22,7 @@
                     <div class="kt-login__wrapper">
                         <div class="kt-login__content">
                             <a class="kt-login__logo" href="#">
-                                <img class="img-fluid" height="200px" src="{{url('media/logos/logohome.png')}}">
+                                <img class="img-fluid" height="200px" src="{{url('media/logos/recipe2.png')}}">
                             </a>
                             <h3 class="kt-login__title">JOIN OUR GREAT COMMUNITY</h3>
                             <span class="kt-login__desc">

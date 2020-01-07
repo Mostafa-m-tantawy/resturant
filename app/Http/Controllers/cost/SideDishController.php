@@ -23,7 +23,9 @@ class SideDishController extends Controller
     public  function  index($size_id){
 
         $dish_size = DishSize::findOrFail($size_id);
-
+        if($dish_size->dish->type != 'dish'){
+            return redirect()->route('dish.index');
+        }
         $categories=DishCategory::with(['dishes'=>function($q){
             $q->where('type','side');
         }])->whereHas('dishes',function($q){

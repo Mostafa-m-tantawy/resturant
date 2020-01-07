@@ -5,8 +5,8 @@
     <!-- begin:: Brand -->
     <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
         <div class="kt-aside__brand-logo">
-            <a href="demo7/index.html">
-                <img alt="Logo" src="{{asset('/media/logos/logo-7.png')}}"/>
+            <a href="{{url('/')}}">
+                <img alt="Logo" class="img-fluid" src="{{asset('/media/logos/favicon.ico')}}"/>
             </a>
         </div>
     </div>
@@ -33,7 +33,7 @@
                         <img class="img-fluid"style=" height: 100%"  src="{{asset('media/icons/camera.png')}}"/>
                     </a>
 
-                    <span style=" text-align: center">{{trans('main.dashboard')}}</span>
+                    <span style=" text-align: center">{{trans('main.life kitchen')}}</span>
                 </li>
                 <li class="kt-menu__item">
                     <a href="{{url('pos/order')}}?type=restaurant" class="kt-menu__link ">
@@ -66,27 +66,16 @@
                 </li>
 
 
-                <li class="kt-menu__item">
-                    <a  href="{{route('client.index')}}"  class="kt-menu__link ">
+
+
+
+
+                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--bottom-1" aria-haspopup="true"
+                    data-ktmenu-submenu-toggle="click">    <a  href="{{route('client.index')}}"  class="kt-menu__link ">
                         <img class="img-fluid" style="height: 100%" src="{{asset('/media/icons/pos/customer.png')}}"/>
                     </a>
                     <span style="text-align: center">{{trans('main.customer')}}</span>
-                </li>
 
-
-
-                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--bottom-2" aria-haspopup="true"
-                    data-ktmenu-submenu-toggle="click"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i
-                            class="kt-menu__link-icon flaticon2-gear"></i><span
-                            class="kt-menu__link-text">Settings</span><i
-                            class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                </li>
-                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--bottom-1" aria-haspopup="true"
-                    data-ktmenu-submenu-toggle="click"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i
-                            class="kt-menu__link-icon flaticon2-hourglass-1"></i><span
-                            class="kt-menu__link-text">Help</span><span class="kt-menu__link-badge"><span
-                                class="kt-badge kt-badge--brand kt-badge--rounded">2</span></span><i
-                            class="kt-menu__ver-arrow la la-angle-right"></i></a>
                 </li>
             </ul>
         </div>

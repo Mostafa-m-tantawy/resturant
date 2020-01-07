@@ -8,7 +8,9 @@
 
 
 @section('content')
-    <div class="row">
+    <div class="container-fluid" >
+
+<div class="row">
         <div class="col-12">
             <div class="kt-portlet">
                 <div class="kt-portlet__head-label">
@@ -130,7 +132,8 @@
 
         </div>
     </div>
-
+    </div>
+{{----}}
     <div class="modal fade transfer_modal" id="transfer_modal" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

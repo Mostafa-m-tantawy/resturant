@@ -1,3 +1,3 @@
 <?php
-Route::resource('client', 'clientController');;
-Route::resource('client-account', 'clientAccountController');;
+Route::resource('client', 'ClientController');;
+Route::resource('client-account', 'ClientAccountController');;

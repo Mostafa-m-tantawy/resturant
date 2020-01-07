@@ -102,6 +102,7 @@
                                         </div>
                                     </div>
                                 </a>
+                           @if($dish->type=='dish')
                                 <a class="kt-wizard-v1__nav-item" href="{{route('dish.size.index',[$dish->id])}}" data-ktwizard-type="step">
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
@@ -124,6 +125,8 @@
                                         </div>
                                     </div>
                                 </a>
+
+                               @endif
                             </div>
                         </div>
 

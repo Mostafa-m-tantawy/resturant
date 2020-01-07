@@ -90,6 +90,7 @@ class RestaurantController extends Controller
         $employee = new HrEmployee();
         $employee->user_id = $user->id;
         $employee->name = $user->name . ' (Super Admin)';
+        $employee->restaurant_id = $restaurant->id;
         $employee->save();
 
 

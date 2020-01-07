@@ -53,8 +53,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0;
   font-family: "Poppins";
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 4rem;
+  font-weight: bold;
   line-height: 1.5;
   color: #212529;
   text-align: left;
@@ -156,7 +156,7 @@ code,
 kbd,
 samp {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 1em; }
+  font-size: 2em; }
 
 pre {
   margin-top: 0;
@@ -11638,7 +11638,7 @@ canvas {
   -ms-user-select: none; }
 
 /* Customize website's scrollbar like Mac OS */
-/* 
+/*
 ::-webkit-scrollbar {
     background-color:#f6f6f6;
     width:14px;

@@ -10,9 +10,9 @@
 
     <!-- begin:: Aside -->
     <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
-        <div class="kt-aside__brand-logo">
+        <div class="kt-aside__brand-logo" style="margin-top: 50px;">
             <a href="{{url('/')}}">
-                <img alt="Logo"  class="img-fluid" style="padding-top: 10px" src="{{url('media/logos/logohome.png')}}"/>
+                <img alt="Logo"  class="img-fluid" src="{{url('media/logos/recipe2.png')}}"/>
             </a>
         </div>
         <div class="kt-aside__brand-tools">
@@ -56,7 +56,7 @@
     <!-- end:: Aside -->
 
     <!-- begin:: Aside Menu -->
-    <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
+    <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper" style="margin-top: 50px;">
         <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1"
              data-ktmenu-dropdown-timeout="500">
             <ul class="kt-menu__nav ">

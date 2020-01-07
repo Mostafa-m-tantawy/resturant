@@ -20,19 +20,13 @@
                     <div class="kt-login__wrapper">
                         <div class="kt-login__content">
                             <a class="kt-login__logo" href="#">
-                                <img class="img-fluid" height="200px" src="{{url('media/logos/logohome.png')}}">
+                                <img class="img-fluid" height="200px" src="{{url('media/logos/recipe2.png')}}">
                             </a>
                             <h3 class="kt-login__title">{{trans('main.System that Satisfies your needs.')}}</h3>
                             <span class="kt-login__desc">
                                 {{trans('main.Stock Management System , Cost Management System, Hr Management System and Point of sales all together for make it easy for you.' )}}
                             </span>
-                            <div class="kt-login__actions">
-                                <a href="{{route('register')}}">
-                                    <button type="button" id="kt_login_signup" class="btn btn-outline-brand btn-pill">
-                                        {{trans('main.Get An Account')}}
-                                    </button>
-                                </a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -121,7 +115,7 @@
                                                         <a href="{{route('dashboard.stock')}}" >
 
                                                             <img class="kt-widget__img kt-hidden-"
-                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                                 src="{{asset('/media/icons/warehouse.jpg')}}" alt="image">
                                                         </a> </div>
                                                     <div class="kt-widget__content">
                                                         <div class="kt-widget__section">
@@ -184,7 +178,7 @@
                                                         <a href="{{route('dashboard.cost')}}" >
 
                                                             <img class="kt-widget__img kt-hidden-"
-                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                                 src="{{asset('/media/icons/calculation.jpeg')}}" alt="image">
                                                         </a>
                                                     </div>
                                                     <div class="kt-widget__content">
@@ -250,7 +244,7 @@
                                                         <a href="{{route('dashboard.pos')}}" >
 
                                                             <img class="kt-widget__img kt-hidden-"
-                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                                 src="{{asset('/media/icons/pointofsales.png')}}" alt="image">
                                                         </a>
 
                                                     </div>
@@ -314,7 +308,7 @@
                                                         <a href="{{route('system-conf.index')}}" >
 
                                                             <img class="kt-widget__img kt-hidden-"
-                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                                 src="{{asset('/media/icons/configuration.png')}}" alt="image">
                                                         </a>
 
                                                     </div>
@@ -338,14 +332,11 @@
                                                                                 <div class="kt-widget2__info">
                                                                                     <a href="{{route('system-conf.index')}}"
                                                                                        class="kt-widget2__title">
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Configurations')}}
                                                                                     </a>
                                                                                     <a href="{{route('system-conf.index')}}"
                                                                                        class="kt-widget2__username">
-                                                                                        By Bob Make Metronic Great
-                                                                                       Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Hall , tables ,roles and system configuration')}}
 
                                                                                     </a>
                                                                                 </div>
@@ -381,7 +372,7 @@
                                                         <a href="{{route('cashier.request')}}" >
 
                                                             <img class="kt-widget__img kt-hidden-"
-                                                                 src="{{asset('/media/icons/hr.png')}}" alt="image">
+                                                                 src="{{asset('/media/icons/transfer.jpg')}}" alt="image">
                                                         </a>
 
                                                     </div>
@@ -405,16 +396,10 @@
                                                                                 <div class="kt-widget2__info">
                                                                                     <a href="{{route('cashier.request')}}"
                                                                                        class="kt-widget2__title">
-                                                                                        Make Metronic Great Again.Lorem
-                                                                                        Ipsum Amet
-                                                                                    </a>
-                                                                                    <a href="{{route('cashier.request')}}"
-                                                                                       class="kt-widget2__username">
-                                                                                        By Bob Make Metronic Great
-                                                                                       Great Again.Lorem
-                                                                                        Ipsum Amet
+                                                                                        {{trans('main.Money Transfer')}}
 
                                                                                     </a>
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>

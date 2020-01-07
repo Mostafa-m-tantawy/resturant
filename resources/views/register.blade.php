@@ -24,7 +24,7 @@
                     <div class="col-12" style=" text-align: center; padding: 10px;">
                         <div class="kt-login__logo">
                             <a href="{{url('/')}}">
-                                <img class="img-fluid" style="height: 200px" src="{{url('media/logos/logohome.png')}}">
+                                <img class="img-fluid" style="height: 200px" src="{{url('media/logos/recipe2.png')}}">
                             </a>
                         </div>
                     </div>

@@ -81,6 +81,7 @@
 <script src="{{asset('/vendors/custom/vendors/jquery-idletimer/idle-timer.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/waypoints/lib/jquery.waypoints.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/counterup/jquery.counterup.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('/vendors/general/es6-promise-polyfill/promise.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/sweetalert2/dist/sweetalert2.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/custom/js/vendors/sweetalert2.init.js')}}" type="text/javascript"></script>

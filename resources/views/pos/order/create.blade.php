@@ -52,7 +52,8 @@
             padding: unset;
         }
     </style>
-    <div class="row">
+    <div class="container-fluid" >
+        <div class="row">
         <div class="col-7">
             <div class="kt-portlet">
                 <div class="kt-portlet__head">
@@ -144,7 +145,8 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    invoice
+                                    {{trans('main.invoice')}}
+
                                 </h3>
                             </div>
                         </div>
@@ -173,6 +175,7 @@
             </div>
             <!-- end:: Content -->
         </div>
+    </div>
     </div>
 
 
