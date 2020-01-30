@@ -10,9 +10,9 @@
 
           @if(Request()->route()->getPrefix()=='/hr')
               @include('layouts.partials.hr_SideBar')
-              @elseif(Request()->route()->getPrefix()=='/stock')
+          @elseif(Request()->route()->getPrefix()=='/stock')
               @include('layouts.partials.stock_sidebar')
-              @elseif(Request()->route()->getPrefix()=='/cost')
+          @elseif(Request()->route()->getPrefix()=='/cost')
               @include('layouts.partials.cost_sidebar')
           @elseif(Request()->route()->getPrefix()=='/pos')
               @include('.pos.layout.partial.sidebar')

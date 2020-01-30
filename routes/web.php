@@ -11,6 +11,9 @@
 |
 */
 
+Route::domain('demo.'.env('APP_URL'))->group(function () {
+
+
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('states', 'SupplierController@states');
@@ -117,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-
+});
 
 
 //Route::get('/register', 'HomeController@register')->name('register');

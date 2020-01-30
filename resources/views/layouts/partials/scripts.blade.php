@@ -52,20 +52,12 @@
 <script src="{{asset('/vendors/general/bootstrap-select/dist/js/bootstrap-select.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/bootstrap-switch/dist/js/bootstrap-switch.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/custom/js/vendors/bootstrap-switch.init.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/select2/dist/js/select2.full.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/ion-rangeslider/js/ion.rangeSlider.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/typeahead.js/dist/typeahead.bundle.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/handlebars/dist/handlebars.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/inputmask/dist/jquery.inputmask.bundle.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/inputmask/dist/inputmask/inputmask.date.extensions.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/inputmask/dist/inputmask/inputmask.numeric.extensions.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/nouislider/distribute/nouislider.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/owl.carousel/dist/owl.carousel.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/autosize/dist/autosize.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/clipboard/dist/clipboard.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/dropzone/dist/dropzone.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/summernote/dist/summernote.js')}}" type="text/javascript"></script>
-<script src="{{asset('/vendors/general/markdown/lib/markdown.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/bootstrap-markdown/js/bootstrap-markdown.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/custom/js/vendors/bootstrap-markdown.init.js')}}" type="text/javascript"></script>
 <script src="{{asset('/vendors/general/bootstrap-notify/bootstrap-notify.min.js')}}" type="text/javascript"></script>
@@ -97,24 +89,10 @@
 
 <!--end::Global Theme Bundle -->
 
-<!--begin::Page Vendors(used by this page) -->
-<script src="{{asset('/vendors/custom/fullcalendar/fullcalendar.bundle.js')}}" type="text/javascript"></script>
-{{--<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>--}}
-<script src="{{asset('/vendors/custom/gmaps/gmaps.js')}}" type="text/javascript"></script>
-
 <!--end::Page Vendors -->
 
 <!--begin::Page Scripts(used by this page) -->
 <script src="{{asset('/js/demo1/pages/dashboard.js')}}" type="text/javascript"></script>
-{{--<script src=" {{asset('js/datatable/jquery.dataTables.min.js')}} "></script>--}}
-{{--<script src="{{asset('js/datatable/dataTables.buttons.min.js')}}   "></script>--}}
-{{--<script src=" {{asset('js/datatable/buttons.flash.min.js')}}     "></script>--}}
-{{--<script src=" {{asset('js/datatable/jszip.min.js')}}     "></script>--}}
-{{--<script src=" {{asset('js/datatable/pdfmake.min.js')}}     "></script>--}}
-{{--<script src=" {{asset('js/datatable/vfs_fonts.js')}}     ">   </script>--}}
-{{--<script src=" {{asset('js/datatable/buttons.html5.min.js')}}     ">     </script>--}}
-{{--<script src=" {{asset('js/datatable/buttons.print.min.js')}}     ">     </script>--}}
-{{--<script src=" {{asset('js/datatable/datatable_latest.js')}}     ">     </script>--}}
 
 <script type="text/javascript" src="{{asset('js/datatable/pdfmake.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/datatable/vsfonts.js')}}"></script>
@@ -131,23 +109,6 @@
     </script>
 
 <script>
-    // pdfMake.fonts = {
-    //     DroidKufi: {
-    //         normal: 'DroidKufi-Regular.ttf',
-    //         bold: 'DroidKufi-Regular.ttf',
-    //         italics: 'DroidKufi-Regular.ttf',
-    //         bolditalics: 'DroidKufi-Regular.ttf'
-    //     }
-    // }
-    // { extend: 'pdf', className: 'btn green btn-outline',  text: 'Export PDF',
-    //     customize: function (doc) {
-    //     doc.defaultStyle =
-    //         {
-    //             font: 'DroidKufi',
-    //         }
-    //
-    // }
-    // },
     $(document).ready(function() {
 
         $('table.display').DataTable( {
