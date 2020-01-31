@@ -51,32 +51,32 @@
                                 <div class="kt-portlet__body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h3>Personal Information</h3>
+                                            <h3>{{trans('main.Personal Information')}}</h3>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label>Full Name:</label>
+                                                    <label>{{trans('main.Full Name')}}:</label>
                                                     <input type="text" required name="name" class="form-control"
                                                            placeholder="Enter full name">
                                                     <span
-                                                        class="form-text text-muted">Please enter Restaurant full name</span>
+                                                        class="form-text text-muted">{{trans('main.Please enter Restaurant full name')}}</span>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label class="">Email:</label>
+                                                    <label class="">{{trans('main.Email')}}:</label>
                                                     <input type="email" required name="email" class="form-control"
                                                            placeholder="Enter email">
-                                                    <span class="form-text text-muted">Please enter your email</span>
+                                                    <span class="form-text text-muted">{{trans('main.Please enter your email')}}</span>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label>Password :</label>
+                                                    <label>{{trans('main.Password')}} :</label>
                                                     <input type="password" required name="password" class="form-control"
                                                            placeholder="********">
-                                                    <span class="form-text text-muted">Please enter password</span>
+                                                    <span class="form-text text-muted">{{trans('main.Please enter password')}}</span>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label>Password :</label>
+                                                    <label>{{trans('main.Password')}}" :</label>
                                                     <input type="password" required name="password_confirmation" class="form-control"
                                                            placeholder="********">
-                                                    <span class="form-text text-muted">Please enter password</span>
+                                                    <span class="form-text text-muted">{{trans('main.Please enter password again')}}</span>
                                                 </div>
 
                                             </div>
@@ -86,11 +86,11 @@
 {{--                                                    <div class="col-md-12">--}}
 {{--                                                       </div>--}}
                                                 <div class="col-md-12" id="kt_repeater_1">
-                                                    <h3>Contact    <a href="javascript:;"
+                                                    <h3>{{trans('main.Contact')}}   <a href="javascript:;"
                                                                                  style="clear: both"
                                                                                  data-repeater-create=""
                                                                                  class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                                            <i class="la la-plus"></i> Add
+                                                            <i class="la la-plus"></i> {{trans('main.Add')}}
                                                         </a></h3>
 
                                                     <div class="repeater" class="form-group  row">
@@ -98,7 +98,7 @@
                                                         <div data-repeater-list="phone_g" class="col-lg-12">
                                                             <div data-repeater-item class="row kt-margin-b-10">
                                                                 <div class="col-lg-5">
-                                                                    <label>Phone</label>
+                                                                    <label>{{trans('main.Phone')}}</label>
 
                                                                     <div class="input-group">
 
@@ -109,7 +109,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-5">
-                                                                    <label>Type</label>
+                                                                    <label>{{trans('main.Type')}}</label>
 
                                                                     <div class=" form-group input-group">
 
@@ -134,17 +134,17 @@
                                                 </div>
 
                                                 <div class="col-md-12" id="kt_repeater_2" class="repeater">
-                                                    <h3>Addresses
+                                                    <h3>{{trans('main.Addresses')}}
                                                         <a href="javascript:;"   style="clear: both"
                                                            data-repeater-create=""
                                                            class="btn btn-bold btn-sm btn-label-brand pull-right">
-                                                            <i class="la la-plus"></i> Add
+                                                            <i class="la la-plus"></i> {{trans('main.Add')}}
                                                         </a></h3>
                                                     <div data-repeater-list="address_g">
                                                         <div class="form-group form-group-last row" data-repeater-item>
 
                                                             <div class="col-lg-12">
-                                                                <label>Address:</label>
+                                                                <label>{{trans('main.Address')}}:</label>
                                                                 <div class="kt-input-icon kt-input-icon--right">
                                                                     <input type="text" name="address"
                                                                            class="form-control"
@@ -154,16 +154,16 @@
                                                                                 class="la la-map-marker"></i></span></span>
                                                                 </div>
                                                                 <span
-                                                                    class="form-text text-muted">Please enter your address</span>
+                                                                    class="form-text text-muted">{{trans('main.Please enter your address')}}"</span>
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <div class="row kt-margin-b-10">
                                                                     <div class="col-lg-5">
-                                                                        <label>Country</label>
+                                                                        <label>{{trans('main.Country')}}</label>
                                                                         <select class="form-control country"
                                                                                 name="country"
                                                                                 onchange="changecity(this)">
-                                                                            <option value="00">Select Country</option>
+                                                                            <option value="00">{{trans('main.Select Country')}}</option>
                                                                             @foreach($countries as $country)
                                                                                 <option
                                                                                     value="{{$country->id}}">{{$country->name}}</option>
@@ -171,10 +171,10 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <label>City</label>
+                                                                        <label>{{trans('main.City')}}</label>
 
                                                                         <select class="form-control" name="city">
-                                                                            <option value="00">Select City</option>
+                                                                            <option value="00">{{trans('main.Select City')}}</option>
 
                                                                         </select>
                                                                     </div>
@@ -200,9 +200,9 @@
                                 <div class="row kt-login__extra">
                                     <div class="col kt-align-left">
                                         <label class="kt-checkbox">
-                                            <input type="checkbox" name="agree">I Agree the <a href="#"
-                                                                                               class="kt-link kt-login__link kt-font-bold">terms
-                                                and conditions</a>.
+                                            <input type="checkbox" name="agree">{{trans('main.I Agree the')}} <a href="#"
+                                                                                               class="kt-link kt-login__link kt-font-bold">
+                                                {{trans('main.terms and conditions')}}</a>.
                                             <span></span>
                                         </label>
                                         <span class="form-text text-muted"></span>
@@ -210,10 +210,10 @@
                                 </div>
                                 <div class="kt-login__actions">
                                     <input id="kt_login_signup_submit" type="submit"
-                                            class="btn btn-brand btn-elevate kt-login__btn-primary" value="Sign Up">
+                                            class="btn btn-brand btn-elevate kt-login__btn-primary" value="{{trans('main.Sign Up')}}">
 
                                     <button id="kt_login_signup_cancel"
-                                            class="btn btn-light btn-elevate kt-login__btn-secondary">Cancel
+                                            class="btn btn-light btn-elevate kt-login__btn-secondary">{{trans('main.Cancel')}}
                                     </button>
                                 </div>
                             </form>

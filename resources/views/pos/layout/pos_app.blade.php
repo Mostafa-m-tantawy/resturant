@@ -27,7 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
     <div class="kt-header-mobile__logo">
         <a href="{{url('/')}}">
-            <img alt="Logo" src="{{asset('/media/logos/logo-6.png')}}" />
+            <img alt="Logo" style="max-width: 50px" class="img-fluid" src="{{url('media/logos/recipe2.png')}}" />
         </a>
     </div>
     <div class="kt-header-mobile__toolbar">
@@ -84,11 +84,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="kt-footer__copyright">
                     2019&nbsp;&copy;&nbsp;<a href="http://keenthemes.com/metronic" target="_blank" class="kt-link">Keenthemes</a>
                 </div>
-                <div class="kt-footer__menu">
-                    <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">About</a>
-                    <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Team</a>
-                    <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Contact</a>
-                </div>
+{{--                <div class="kt-footer__menu">--}}
+{{--                    <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">About</a>--}}
+{{--                    <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Team</a>--}}
+{{--                    <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Contact</a>--}}
+{{--                </div>--}}
             </div>
 
             <!-- end:: Footer -->

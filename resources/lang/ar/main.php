@@ -375,7 +375,37 @@ return [
     'clients' => 'العملاء',
     'new client' => 'عميل جديد',
     'Delete' => 'ازالة',
-    '' => '',
+    'Get An Account' => 'انشاء حساب',
+    'Login To Your Account' => 'الدخول الي حسابك',
+    'Sign In' => 'تسجيل دخول',
+    'Remember me' => 'تذكرني',
+    'Email' => 'بريد الكتروني',
+    'Password' => 'كلمة المرور',
+
+    'Cancel' => 'الغاء',
+    'Sign Up' => 'تسجيل',
+    'I Agree the' => 'انا اوافق علي ',
+    'terms and conditions' => 'الشروط و الاحكام',
+    'Select City' => 'اختر مدينة',
+    'City' => 'مدينة',
+    'Select Country' => 'اختار بلد',
+    'Country' => 'بلد',
+    'Please enter your address' => 'من فضلك ادخل عنوان',
+    'Address' => 'عنوان',
+    'Add' => 'اضافة',
+    'Addresses' => 'عناوين',
+    'Type' => 'نوع',
+    'Phone' => 'هاتف',
+
+    'Contact' => 'الاتصالات',
+    'Please enter password again' => 'من فضلك ادخل كلمه المرور مره اخرى',
+
+    'Please enter password' => 'من فضلك ادخل كلمه المرور',
+    'Please enter your email' => 'من فضلك ادخل البريد الالكتروني',
+
+    'Please enter Restaurant full name' => 'من فضلك ادخل اسم المطعم كاملا',
+    'Full Name' => 'الاسم كامل',
+    'Personal Information' => 'معلومات اساسية',
     '' => '',
 
 

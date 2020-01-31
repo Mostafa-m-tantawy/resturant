@@ -24,12 +24,12 @@
                             <a class="kt-login__logo" href="#">
                                 <img class="img-fluid" height="200px" src="{{url('media/logos/recipe2.png')}}">
                             </a>
-                            <h3 class="kt-login__title">JOIN OUR GREAT COMMUNITY</h3>
+                            <h3 class="kt-login__title">{{trans('main.System that Satisfies your needs.')}}</h3>
                             <span class="kt-login__desc">
-									The ultimate Bootstrap & Angular 6 admin theme framework for next generation web apps.
-								</span>
+                                {{trans('main.Stock Management System , Cost Management System, Hr Management System and Point of sales all together for make it easy for you.' )}}
+                            </span>
                             <div class="kt-login__actions">
-                                <a href="{{route('register')}}"> <button type="button" id="kt_login_signup" class="btn btn-outline-brand btn-pill">Get An Account</button></a>
+                                <a href="{{route('register')}}"> <button type="button" id="kt_login_signup" class="btn btn-outline-brand btn-pill">{{trans('main.Get An Account')}}</button></a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="kt-login__wrapper">
                         <div class="kt-login__signin">
                             <div class="kt-login__head">
-                                <h3 class="kt-login__title">Login To Your Account</h3>
+                                <h3 class="kt-login__title">{{trans('main.Login To Your Account')}}</h3>
 
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -57,22 +57,22 @@
                                 <form class="kt-form" method="post" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <input class="form-control" type="email" required placeholder="Email" name="email" >
+                                        <input class="form-control" type="email" required placeholder="{{trans('main.Email')}}" name="email" >
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control form-control-last" required type="Password" placeholder="Password" name="password">
+                                        <input class="form-control form-control-last" required type="Password" placeholder="{{trans('main.Password')}}" name="password">
                                     </div>
                                     <div class="row kt-login__extra">
                                         <div class="col kt-align-left">
                                             <label class="kt-checkbox">
-                                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember me
+                                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> {{trans('main.Remember me')}}
                                                 <span></span>
                                             </label>
                                         </div>
 
                                     </div>
                                     <div class="kt-login__actions">
-                                        <button id="kt_login_signin_submit" class="btn btn-brand btn-pill btn-elevate">Sign In</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-brand btn-pill btn-elevate">{{trans('main.Sign In')}}</button>
                                     </div>
                                 </form>
                             </div>

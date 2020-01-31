@@ -92,7 +92,7 @@
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
     <div class="kt-header-mobile__logo">
         <a href="{{url('/')}}">
-            <img alt="Logo" src="{{asset('/media/logos/logo-light.png')}}" />
+            <img alt="Logo" style="max-width: 50px" class="img-fluid" src="{{url('media/logos/recipe2.png')}}" />
         </a>
     </div>
     <div class="kt-header-mobile__toolbar">

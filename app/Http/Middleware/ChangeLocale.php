@@ -17,9 +17,6 @@ class ChangeLocale
      */
     public function handle( $request, Closure $next)
     {
-
-
-
         if ($request->session()->get('lang')) {
             //
 
@@ -32,10 +29,9 @@ class ChangeLocale
 
             }
         }else{
-            App::setLocale('en');
+            App::setLocale('ar');
 
         }
-
 
         return $next($request);
     }
