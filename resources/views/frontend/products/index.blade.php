@@ -47,7 +47,6 @@
                         <th>{{trans('main.unit')}}</th>
                         <th>{{trans('main.barcode')}}</th>
                         <th>{{trans('main.re-order point')}}</th>
-                        <th>{{trans('main.stockable')}}</th>
                         <th>{{trans('main.show')}}</th>
                         <th>{{trans('main.action')}}</th>
                     </tr>
@@ -64,7 +63,6 @@
                             <td>{{$product->unit->unit}}</td>
                             <td>{{$product->barcode}}</td>
                             <td>{{$product->reorder_point}}</td>
-                            <td>{{($product->is_stockable)?'Yes':'No'}}</td>
                             <td>
                                 <a href="{{url('stock/product/'.$product->id)}}" ><i class="flaticon-edit-1"></i></a>
 
@@ -115,7 +113,7 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label> {{trans('main.name')}}</label>
-                                    <input type="text"required name="name" class="form-control" placeholder="Enter full name">
+                                    <input type="text"required name="name" class="form-control" placeholder="{{trans('main.Enter full name')}}">
                                 </div>
 
                                 <div class="col-12">
@@ -132,7 +130,7 @@
                                 <div class="col-12">
                                     <label class="">{{trans('main.category')}} </label>
                                     <select name="category" class="form-control">
-                                        <option value="">select Category</option>
+                                        <option value="">{{trans('main.select Category')}}</option>
 
                                         @foreach($categories as $category )
                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -141,24 +139,14 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label  style="display: table-cell" class="">{{trans('main.stockable')}} </label>
-                                    <span class="kt-switch kt-switch--lg kt-switch--icon">
-											<label>
-											<input type="checkbox" checked="checked" name="is_stockable">
-												<span></span>
-												</label>
-											</span>
-                                </div>
-
-                                <div class="col-12">
                                     <label class="">{{trans('main.re-order point')}} :</label>
-                                    <input type="number" min="0" step=".001" name="reorder_point" class="form-control" placeholder="Enter description">
+                                    <input type="number" min="0" step=".001" name="reorder_point" class="form-control" placeholder="{{trans('main.reorder point')}} ">
 
                                 </div>
 
                                 <div class="col-12">
                                     <label class="">{{trans('main.barcode')}} </label>
-                                    <input type="text" name="barcode" class="form-control" placeholder="Enter barcode">
+                                    <input type="text" name="barcode" class="form-control" placeholder="{{trans('main.Enter barcode')}} ">
 
                                 </div>
 
@@ -198,7 +186,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label> {{trans('main.name')}}</label>
-                                    <input type="text"required name="name" class="form-control" placeholder="Enter full name">
+                                    <input type="text"required name="name" class="form-control" placeholder="{{trans('main.Enter full name')}}">
                                 </div>
 
                                 <div class="col-12">
@@ -215,7 +203,7 @@
                                 <div class="col-12">
                                     <label class="">{{trans('main.category')}} </label>
                                     <select name="category" class="form-control">
-                                        <option value="">select Category</option>
+                                        <option value="">{{trans('main.select Category')}}</option>
 
                                         @foreach($categories as $category )
                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -223,25 +211,16 @@
                                     </select>
                                 </div>
 
-                                <div class="col-12">
-                                    <label  style="display: table-cell" class="">{{trans('main.stockable')}} </label>
-                                    <span class="kt-switch kt-switch--lg kt-switch--icon">
-											<label>
-											<input type="checkbox" checked="checked" name="is_stockable">
-												<span></span>
-												</label>
-											</span>
-                                </div>
 
                                 <div class="col-12">
                                     <label class="">{{trans('main.re-order point')}} :</label>
-                                    <input type="number" min="0" step=".001" name="reorder_point" class="form-control" placeholder="Enter description">
+                                    <input type="number" min="0" step=".001" name="reorder_point" class="form-control" placeholder="{{trans('main.reorder point')}}">
 
                                 </div>
 
                                 <div class="col-12">
                                     <label class="">{{trans('main.barcode')}} </label>
-                                    <input type="text" name="barcode" class="form-control" placeholder="Enter barcode">
+                                    <input type="text" name="barcode" class="form-control" placeholder="{{trans('main.Enter barcode')}}">
 
                                 </div>
 
@@ -254,7 +233,8 @@
                         <div class="col-12 pull-left">
                             <button type="submit" class="btn btn-brand btn-elevate btn-icon-sm">{{trans('main.submit')}}</button>
                         </div>
-                    </div>                    </form>
+                    </div>
+                </form>
 
             </div>
         </div>

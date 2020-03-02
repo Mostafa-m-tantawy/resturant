@@ -11,10 +11,12 @@
 |
 */
 
-Route::domain('demo.'.env('APP_URL'))->group(function () {
+//Route::domain('demo.' .config('app.key'))->group(function () {
+Route::domain('demo.resturant.div')->group(function () {
+
+    Route::get('/', 'HomeController@index');
 
 
-Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('states', 'SupplierController@states');
 Auth::routes();
@@ -24,36 +26,51 @@ Route::resource('restaurant', 'RestaurantController')->only([
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::resource('labels','LabelsController');
+    Route::get('labels/get-data','LabelsController@getData');
+
     Route::resource('order-payment', 'OrderPaymentController');
 
     Route::get('download', 'DashboardController@download');
+
     Route::post('chang-lang', 'DashboardController@changLang');
 
     Route::post('address/update', 'SupplierController@updateAddress');
+
     Route::post('phone/update', 'SupplierController@updatePhone');
+
     Route::post('delete/address-phones', 'SupplierController@deleteAddressPhones');
 
-
     Route::prefix('stock')->middleware(['auth'])->group(function () {
+        Route::get('/profile', 'HomeController@profile');
+
 // -------------------------restaurant  routes--------------------------------
         Route::resource('restaurant', 'RestaurantController')->except(['store']);;
+
         Route::post('restaurant/{id}/stock', 'RestaurantController@stock')->name('restaurant.stock');
+
         Route::any('/dashboard', 'DashboardController@stockDashboard')->name('dashboard.stock');
+
         include('stock/department.php');
         include('stock/product.php');
         include('stock/supplier.php');
         include('stock/unit.php');
+
         Route::any('stock/index', 'StockController@index')->name('stock.index');
+
         include('stock/purchase.php');
         include('stock/assign.php');
         include('stock/payment.php');
         include('stock/refund.php');
         include('stock/ruined.php');
 
+
     });
 
 
     Route::prefix('hr')->middleware(['auth'])->group(function () {
+        Route::get('/profile', 'HomeController@profile');
 
         Route::any('/dashboard', 'DashboardController@hrDashboard')->name('dashboard.hr');
 
@@ -74,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::prefix('cost')->middleware(['auth'])->group(function () {
+        Route::get('/profile', 'HomeController@profile');
         Route::any('/dashboard', 'DashboardController@salesDashboard')->name('dashboard.cost');
 
         include('order/dish.php');
@@ -86,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('pos')->middleware(['auth'])->group(function () {
+        Route::get('/profile', 'HomeController@profile');
         Route::any('/dashboard', 'DashboardController@posDashboard')->name('dashboard.pos');
         include('pos/order.php');
         include('pos/hall.php');
@@ -95,12 +114,14 @@ Route::middleware(['auth'])->group(function () {
 
     });
     Route::prefix('cashier')->middleware(['auth'])->group(function () {
+        Route::get('/profile', 'HomeController@profile');
         Route::any('/dashboard', 'DashboardController@cashierDashboard')->name('dashboard.cashier');
 
         include('cashier/cashier.php');
 
     });
     Route::prefix('conf')->middleware(['auth'])->group(function () {
+        Route::get('/profile', 'HomeController@profile');
         include('conf/conf.php');
         include('conf/coupon.php');
         include('conf/hall.php');

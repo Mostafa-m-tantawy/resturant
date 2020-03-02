@@ -119,7 +119,7 @@ return [
     'staff' => 'العمال',
     'discount' => 'خصومات',
     'system configuration' => 'أعدادات النظام',
-    'dashboard' => 'صفحة رئيسية',
+    'dashboard' => 'لوحة التحكم',
     'Dashboard time' => 'تحديد وقت',
     'dish-ruined index' => 'الهوالك الاطباق',
     'is staff' => 'هل للعمال',

@@ -7,7 +7,7 @@ use App\OrderPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class clientAccountController extends Controller
+class ClientAccountController extends Controller
 {
     public function __construct()
     {

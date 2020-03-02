@@ -6,8 +6,10 @@ use App\Dish;
 use App\Order;
 use App\OrderDetails;
 use App\Product;
+use App\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -90,6 +92,13 @@ class DashboardController extends Controller
         $to = \Carbon\Carbon::today()->format('Y-m-d');
 
     }
+        $restaurant = Auth::user()->restaurant;
+        $payments = $restaurant->paySupplier()->whereDate('created_at', '>=',$from)
+            ->whereDate('created_at', '<=',$to)->get();
+        $purchases = $restaurant->purchases()->whereDate('created_at', '>=',$from)
+            ->whereDate('created_at', '<=',$to)->get();
+        $refunds = $restaurant->refunds()->whereDate('created_at', '>=',$from)
+            ->whereDate('created_at', '<=',$to)->get();
 
 
         /// stock
@@ -98,7 +107,8 @@ class DashboardController extends Controller
         });
 
         return view('frontend.stockDashboard')
-            ->with(compact('products','from','to'
+            ->with(compact('products','from','to','restaurant'
+            ,'payments','purchases','refunds'
 
         ));;
 

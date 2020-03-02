@@ -114,9 +114,12 @@
         $('table.display').DataTable( {
             responsive: true,
             "pagingType": "full_numbers",
-            dom: 'Bfrtip',
+            "processing": true,
+            "dom": '<"dt-buttons"Bf> lirtp',
+            "paging": true,
+            "autoWidth": true,
             buttons: [
-                'copy', 'excel', 'print'
+                'copy', 'excel', 'print','colvis'
             ],
 
             @if (App::isLocale('ar'))

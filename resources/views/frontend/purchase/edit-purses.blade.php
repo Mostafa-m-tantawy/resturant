@@ -37,7 +37,7 @@
                                             <option
                                                 value=""> {{ trans('main.select') }}  {{ trans('main.one') }}</option>
                                             @foreach($products as $product)
-                                                <option data-vat="{{$product->vat($purses->supplier)}}"
+                                                <option
                                                         value="{{$product->id}}">{{$product->name}}</option>
                                             @endforeach
                                         </select>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -26,6 +27,20 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         return view('home');
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function profile()
+    {
+
+        $user=Auth::user();
+        return view('profile')->with(compact('user'));
+
     }
 
 }

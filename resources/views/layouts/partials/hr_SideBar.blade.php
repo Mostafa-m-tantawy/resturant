@@ -61,7 +61,7 @@
              data-ktmenu-dropdown-timeout="500">
             <ul class="kt-menu__nav ">
                 <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="{{route('dashboard.pos')}}" class="kt-menu__link ">
+                    <a href="{{route('dashboard.hr')}}" class="kt-menu__link ">
                      <span class="kt-menu__link-icon">
                          <img class="img-fluid" src="{{url('media/icons/dasbaoard.png')}}" height="34"width="34">
                      </span>

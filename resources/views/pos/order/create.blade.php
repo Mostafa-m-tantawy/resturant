@@ -88,39 +88,30 @@
 
                                         <div class="col-2">
                                             <div class="kt-portlet kt-portlet--height-fluid">
-                                                <div class="kt-portlet__head kt-portlet__head--noborder"></div>
-                                                <div class="kt-portlet__body kt-portlet__body--fit-y">
+{{--                                                <div class="kt-portlet__body kt-portlet__body--fit-y">--}}
                                                     <!--begin::Widget -->
                                                     <div class="kt-widget kt-widget--user-profile-4">
                                                         <div class="kt-widget__head">
                                                             <a onclick="newDish({{$dish->id}})">
-                                                                <div class="kt-widget__media">
-                                                                    <img class="kt-widget__img kt-hidden-"
+                                                                    <img style="height: 100px" class="img-fluid"
                                                                          src="{{asset($dish->image)}}"
                                                                          alt="image">
-                                                                </div>
-                                                            </a>
+                                                               </a>
                                                             <div class="kt-widget__content">
                                                                 <div class="kt-widget__section">
                                                                     <a onclick="newDish({{$dish->id}})"
                                                                        class="kt-widget__username">
                                                                         {{$dish->name}}
                                                                     </a>
-                                                                    <div class="kt-widget__button">
-                                                                        <span class="btn btn-label-warning btn-sm">Active</span>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <!--end::Widget -->
-                                                </div>
+{{--                                                </div>--}}
                                             </div>
                                         </div>
-
-
-
                                     @endforeach
 
 
